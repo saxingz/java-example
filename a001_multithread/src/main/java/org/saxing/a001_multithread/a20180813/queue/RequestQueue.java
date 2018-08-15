@@ -1,6 +1,7 @@
 package org.saxing.a001_multithread.a20180813.queue;
 
-import org.saxing.study.a20180813.request2.Request;
+
+import org.saxing.a001_multithread.a20180813.request2.Request;
 
 import java.util.LinkedList;
 import java.util.Queue;
