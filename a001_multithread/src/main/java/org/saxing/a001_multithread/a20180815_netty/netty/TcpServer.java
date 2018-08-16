@@ -19,16 +19,16 @@ public class TcpServer {
     private static final int PORT = 9999;
 
     //默认
-    protected static final int BIZGROUPSIZE = Runtime.getRuntime().availableProcessors()*2;
+    protected static final int BIZ_GROUP_SIZE = Runtime.getRuntime().availableProcessors()*2;
 
-    protected static final int BIZTHREADSIZE = 4;
+    protected static final int BIZ_THREAD_SIZE = 4;
 
-    private static final EventLoopGroup bossGroup = new NioEventLoopGroup(BIZGROUPSIZE);
-    private static final EventLoopGroup workerGroup = new NioEventLoopGroup(BIZTHREADSIZE);
+    private static final EventLoopGroup BOSS_GROUP = new NioEventLoopGroup(BIZ_GROUP_SIZE);
+    private static final EventLoopGroup WORKER_GROUP = new NioEventLoopGroup(BIZ_THREAD_SIZE);
 
     protected static void run() throws Exception {
         ServerBootstrap b = new ServerBootstrap();
-        b.group(bossGroup, workerGroup);
+        b.group(BOSS_GROUP, WORKER_GROUP);
         b.channel(NioServerSocketChannel.class);
         b.childHandler(new ChannelInitializer() {
             @Override
@@ -43,14 +43,14 @@ public class TcpServer {
             }
         });
 
-        b.bind(IP, PORT).sync();
+        b.bind(PORT).sync();
 //        logger.info("TCP服务器已启动");
         System.out.println("TCP服务器已启动");
     }
 
     protected static void shutdown() {
-        workerGroup.shutdownGracefully();
-        bossGroup.shutdownGracefully();
+        WORKER_GROUP.shutdownGracefully();
+        BOSS_GROUP.shutdownGracefully();
     }
 
     public static void main(String[] args) throws Exception {

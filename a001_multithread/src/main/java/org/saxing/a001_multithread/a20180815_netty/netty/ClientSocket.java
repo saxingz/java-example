@@ -16,7 +16,7 @@ public class ClientSocket {
     private static final int PORT = 9999;
 
     public static void main(String[] args) {
-        String str = "abcdefg111";
+        String str = "abcdefg";
         sendMsgBySocket(str.getBytes());
     }
 
