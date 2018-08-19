@@ -13,10 +13,10 @@ import java.nio.ByteBuffer;
 public class ClientSocket {
 //    private static final Logger logger = Logger.getLogger(ClientSocket.class);
     private static final String HOST = "127.0.0.1";
-    private static final int PORT = 9999;
+    private static final int PORT = 8080;
 
     public static void main(String[] args) {
-        String str = "abcdefg111";
+        String str = "abcdefg";
         sendMsgBySocket(str.getBytes());
     }
 
