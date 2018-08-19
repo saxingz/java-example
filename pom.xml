@@ -12,6 +12,7 @@
 
     <modules>
         <module>a001_multithread</module>
+        <module>a0002_nettystudy</module>
     </modules>
 
    <properties>
