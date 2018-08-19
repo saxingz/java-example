@@ -11,7 +11,7 @@
     <description>Demo project for Spring Boot</description>
 
     <modules>
-        <module>a001_multithread</module>
+        <module>a0001_multithread</module>
         <module>a0002_nettystudy</module>
     </modules>
 
