@@ -13,6 +13,8 @@
     <modules>
         <module>a0001_multithread</module>
         <module>a0002_nettystudy</module>
+        <module>a0003_netty</module>
+        <module>a0004_netty2</module>
     </modules>
 
     <properties>
