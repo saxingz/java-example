@@ -16,7 +16,7 @@ public class TestA2P {
 
         byte[] newfile = PCMA.alaw2linear(bytes, length);
 
-        exportFile(newfile, "d:\\", "testnew2.pcm");
+        exportFile(newfile, "d:\\", "testnew3.pcm");
     }
 
 
