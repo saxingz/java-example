@@ -3,7 +3,7 @@ package org.saxing.audio_video.G711;
 import java.io.*;
 
 /**
- * 这里测试的是： 音频转码 8k 8bit aLaw(g711a) -> 8k pcm 立体声
+ * 这里测试的是： 音频转码 8k 8bit aLaw(g711a) 单声道 -> 8k pcm 立体声
  */
 public class TestA2P {
 
