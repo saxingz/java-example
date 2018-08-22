@@ -15,6 +15,7 @@
         <module>a0002_nettystudy</module>
         <module>a0003_netty</module>
         <module>a0004_netty2</module>
+        <module>a0005_avdio</module>
     </modules>
 
     <properties>
