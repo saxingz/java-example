@@ -35,6 +35,23 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!--&lt;!&ndash; https://mvnrepository.com/artifact/ws.schild/jave-native-win64 &ndash;&gt;-->
+        <!--<dependency>-->
+            <!--<groupId>ws.schild</groupId>-->
+            <!--<artifactId>jave-native-win64</artifactId>-->
+            <!--<version>2.4.2</version>-->
+        <!--</dependency>-->
+
+
+        <!-- https://mvnrepository.com/artifact/ws.schild/jave-native-win64 -->
+        <dependency>
+            <groupId>ws.schild</groupId>
+            <artifactId>jave-all-deps</artifactId>
+            <version>2.4.2</version>
+        </dependency>
+
+
     </dependencies>
 
     <build>
