@@ -18,6 +18,7 @@
         <module>a0005_avdio</module>
         <module>a0006_rocketmq</module>
         <module>a0007_rocketmq_receiver</module>
+        <module>a0008_rocketmq_receiver2</module>
     </modules>
 
     <properties>
