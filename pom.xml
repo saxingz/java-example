@@ -4,10 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.saxing</groupId>
-    <artifactId>java-helloworld</artifactId>
+    <artifactId>java-example</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
-    <name>java-helloworld</name>
+    <name>java-example</name>
     <description>Demo project for Spring Boot</description>
 
     <modules>
