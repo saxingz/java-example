@@ -17,6 +17,7 @@
         <module>a0004_netty2</module>
         <module>a0005_avdio</module>
         <module>a0006_rocketmq</module>
+        <module>a0007_rocketmq_receiver</module>
     </modules>
 
     <properties>
