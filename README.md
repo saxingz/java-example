@@ -1,4 +1,4 @@
-# java hello-world
-my name is saxing
+# java example
+java exercises and demo
 
 
