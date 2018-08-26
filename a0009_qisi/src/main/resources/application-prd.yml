@@ -1,0 +1,82 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /qisi
+spring:
+  datasource:
+    name: idea
+    url: jdbc:mysql://127.0.0.1:8806/idea?characterEncoding=utf8&useUnicode=true&useSSL=false&autoReconnect=true
+    username: root
+    password: xxxxx
+    #druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbType: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPrepardStatements: true
+    maxOpenPreparedStatements: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+  ## Freemarker 配置
+  ## 文件配置路径
+  freemarker:
+    template-loader-path: classpath:/templates/
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+#测试-迎宾大道
+wx:
+  corpId: wxc7082600641441af
+  agentId: 1000084
+  secret: m22-mgyp13GWll2oovpJ6DiA-4ne5uKAVkD9RGc-814
+  domain: //www.mmfei.info
+  access: "${wx.domain}${server.servlet.context-path}"
+  index: "${wx.domain}/oauth/oauth_noid"
+  messageImg: 2yjpNwG1mRVmmrBGI-7UDmVQMMZLDK5t719Z3_3pQpPKfgEryYg7QG9C45zAVe9GF
+  tucaoImg: 2lTgPE9LBG0elt-vJfGYj5dztfa0yeZ5bdhD9bs_PXWAR2V9IRhvbRQIR-1e1md3p
+  discussImg: 2ySpZaHe1RQ79b6tu1AZQblxoH9kFbdcNAYbiHY9bH1oD7ziUkbxjVEQ-5YiLeTwn
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#sql打印语句
+logging:
+  level:
+   org.saxing.dao.mapper: error
+
+#图片保存位置
+img:
+  saveLocation: c:\code\qisi\pic
+  readLocation: c:/code/qisi/pic/
+  imgAccess: "${wx.domain}${server.servlet.context-path}/images/"
+
+
+
+
+
+

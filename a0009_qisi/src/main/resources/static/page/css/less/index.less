@@ -1,0 +1,23 @@
+
+//引入待使用的less文件
+
+//初始化媒体查询
+//如果使用了js 控制的html font-size 无须预加载的媒体查询
+//@import './lib/reset.less';
+
+
+//基本样式
+@import './lib/base.less';
+
+
+//根据当前需求  自定义    宽度与基准值
+	//视觉搞宽度
+	@curWidth:375;
+	//定义html规则（font-size:初始值    即:当前宽度下对应的html默认值大小）
+	//可自定义 或 js动态计算获得,以下布局基于375视觉搞下的布局模式
+	//此次计算是否需要 （除以2）
+	@font_size:16.4063; 
+//定义了基本的less 函数
+@import './lib/func.less'; 
+
+

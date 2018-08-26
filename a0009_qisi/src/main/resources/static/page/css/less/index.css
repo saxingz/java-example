@@ -1,0 +1,26 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: "微软雅黑";
+  overflow-x: hidden;
+  background-color: #fff;
+  position: relative;
+}
+ul {
+  list-style: none;
+}
+.noscroll {
+  overflow: hidden;
+  position: relative;
+}
+.body_f2 {
+  background: #f2f2f2;
+}
+.preload {
+  display: none;
+}
+.none {
+  display: none !important;
+}

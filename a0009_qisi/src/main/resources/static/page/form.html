@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <link rel="stylesheet" href="css/swiper.css?v=1.6003">
+    <link rel="stylesheet" href="css/new-style.css?v=1.6003">
+    <link rel="stylesheet" href="css/index.css?v=1.6003">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1,user-scalable=no" />
+</head>
+<body>
+<div class="cx_formbg"></div>
+<div class="cx_formbgtc"></div>
+<div class="cx_form">
+	<div class="fit fit_flex">
+		<div class="dt">主题</div>
+		<div class="dd"><input id="topic" type="text" placeholder="请输入您的主题" maxlength="20" /></div>
+	</div>
+	<div class="fit">
+		<div class="dt">内容</div>
+		<div class="dd">
+			<div class="areawrap">
+				<textarea id="content" type="text" placeholder="请描述~" maxlength="1000"></textarea>
+				<span class="static_num"><b>0</b>/<em>1000</em></span>
+			</div>
+        </div>
+	</div>
+	<div class="fit">
+		<div class="dt">建议</div>
+		<div class="dd">
+			<div class="areawrap">
+				<textarea id="advice" type="text" placeholder="请描述~" maxlength="1000"></textarea>
+				<span class="static_num"><b>0</b>/<em>1000</em></span>
+			</div>
+		</div>
+	</div>
+    <div class="fit" style="padding-left:15px; padding-right:15px;">
+        <div class="dt">描述图片(最多5张)</div>
+        <div class="dd">
+            <div id="uploadArea">
+                <input type="file" name="pic" id="imageFile" accept="image/*" onchange="uploadPic();">
+                <a href="javascript:void(0);" class="btn_add">+</a>
+            </div>
+            <div class="uploadAreaWrap"></div>
+
+            <div class="btn commitbtn"><a href="javascript:void(0);" onclick="commit(this)">提交</a></div>
+        </div>
+    </div>
+</div>
+<div class="footernav">
+    <div class="ic1">
+        <a href="/qisi/page/index.html">
+            <span class="tb"></span>
+            <span>首页</span>
+        </a>
+    </div>
+    <div class="ic2">
+        <a href="form.html?relType=qs">
+            <span class="tb"></span>
+            <span>奇思妙想</span>
+        </a>
+    </div>
+    <div class="ic3">  
+        <a href="form.html?relType=tc">
+            <span class="tb"></span>
+            <span>我要吐槽</span>
+        </a>
+    </div>
+    <div class="ic4">
+        <a href="list.html">
+            <span class="tb"></span>
+            <span>创新动态</span>
+        </a>
+    </div>
+</div>
+
+    <script src="js/jquery.js?v=1.6003"></script>
+    <script src="js/saUtils.js?v=1.6003"></script>
+<script src="../old/js/wxlimit.js?v=1.6003"></script>
+    <script src="js/swiper.min.js?v=1.6003"></script>
+    <script src="js/form.js?v=1.6003"></script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>纯CSS制作三角形和小圆点</title>
+    <style>
+        .arrowbox{width:40px;height:30px;background: #000;padding:10px;position: relative;text-align:center;margin:20px;color:#fff;line-height:30px;font-size:12px;}
+        .arrowbox span{display: inline-block;overflow:hidden;vertical-align: middle;position:absolute;top:22px;right:5px;line-height:12px;font-size:12px;}
+        .arrowbox span em{display:block;font-family:"Simsun";font-style:normal;font-weight:normal;}
+        .arrowbox span.size1{width:7px;height:4px;}
+        .arrowbox span.w_e{width:4px;height:7px;}
+        .arrowbox span.size2{width:14px;height:8px;}
+        .arrowbox span em.north{color:#fff;margin:-7px 0 0 -2px;}
+        .arrowbox span em.south{color:#fff;margin:0 0 0 -2px;}
+        .arrowbox span.w_e em.east{color:blue;margin: -2px 0 0 -7px;}
+        .arrowbox span.w_e em.west{color:yellow;margin:-2px 0 0 0;}
+        .arrowbox span.size2 em.south{margin:-5px 0 0 0}
+        .arrowbox span.size2 em.north{margin:2px 0 0 0}
+        .round{width:16px;height:16px;display: inline-block;font-size:20px;line-heigth:16px;text-align:center;color:#f00;text-decoration:none}
+        .round:hover{color:blue;text-decoration:none}
+    </style>
+</head>
+<body>
+<div>http://www.999jiujiu.com/</div>
+<div class="arrowbox">首页<span class="size1"><em class="north">◆</em></div>
+<div class="arrowbox">首页<span class="size1"><em class="south">◆</em></div>
+<div class="arrowbox">首页<span class="w_e"><em class="east">◆</em></div>
+<div class="arrowbox">首页<span class="w_e"><em class="west">◆</em></div>
+<div class="arrowbox">首页<span class="size2"><em class="south">◆</em></div>
+<div class="arrowbox">首页<span class="size2"><em class="north">◆</em></div>
+用font-size控制圆点的大小
+<a href="#" class="round">●</a>
+</body>
+</html>

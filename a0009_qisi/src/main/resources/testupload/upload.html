@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js?v=1.6003"></script>
+<body>
+    <input type="file" name="pic" id="pic" accept="image/*">
+    <button onclick="upload()">upload</button>
+</body>
+<script>
+
+    function upload() {
+        var pic = $('#pic')[0].files[0];
+        var fd = new FormData();
+        fd.append('multipartFile', pic);
+        $.ajax({
+            url:"http://10.24.64.106:8081/qisi/article/imgUpload.action",
+            type:"PUT",
+            data: fd,
+            cache: false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                alert(data);
+            }
+        });
+    }
+
+</script>
+</html>

@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <title>奇思妙想 数据统计</title>
+    <link rel="stylesheet" type="text/css" href="/qisi/old/css/common.css?v=1.6003" />
+    <link rel="stylesheet" type="text/css" href="/qisi/old/css/style.css?v=1.6003" />
+    <link rel="stylesheet" type="text/css" href="/qisi/old/css/mobiscroll_date.css?v=1.6003" />
+    <link rel="stylesheet" href="/qisi/old/css/buttons.css?v=1.6003">
+    <link rel="stylesheet" href="/qisi/old/css/animate.min.css?v=1.6003">
+</head>
+<body>
+<div class="actionBar">
+    <em class="animated flipInX"></em><i></i>
+	<a href="/qisi/oauth/getOauth" class="backhome no"></a>
+</div>
+<div class="selectMode">
+    <a href="javascript:void(0);" class="bmbtn button button-block button-rounded button-action button-normal" style="margin-bottom: 0.2rem">部门统计</a>
+    <a href="javascript:void(0);" class="zhbtn button button-block button-rounded button-royal button-normal">支行统计</a>
+</div>
+<div class="staticWrap">
+    <div class="time-check animated bounceInLeft">
+        <div class="radio-check">
+            <input type="radio" name="time" id="year">
+            <label for="year" class>年度</label>
+        </div>
+        <div class="radio-check" style="margin-left: 3rem;">
+            <input type="radio" name="time" id="month">
+            <label for="month" class>月度</label>
+        </div>
+    </div>
+	<div class="date">
+        <label for="date_pic">日期选择：</label>
+        <input type="text" id="date_pic" name="date_pic" readonly />
+    </div>
+    <table class="dataTable">
+        <colgroup>
+            <col />
+            <col width="25%" />
+            <col width="25%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th class="dz">部门</th>
+                <th>奇思数量</th>
+                <th>吐槽数量</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="/qisi/old/js/jquery.min.js?v=1.6003"></script>
+<script type="text/javascript" src="/qisi/old/js/wxlimit.js?v=1.6003"></script>
+<script type="text/javascript" src="/qisi/old/js/custom.js?v=1.6003"></script>
+<script src="/qisi/old/js/mobiscroll_date.js?v=1.6003" charset="GB2312"></script>
+<script src="/qisi/old/js/mobiscroll.js?v=1.6003"></script>
+<script type="text/javascript">
+
+    var date_pic = $("#date_pic");
+    //支行，部门模式切换 depart  zhihang
+    var departMode = "depart";
+    var title = $(".actionBar em");
+    var dz = $(".dz");
+    var titleSel = $(".selectMode a");
+
+    var staticList = function (data) {
+        if (data.result) {
+            var _plen = data.result.length;
+            var linkName = '';
+            //年度查询， 不能查详情
+            if ('year' === getTimeMode()){
+                linkName = '';
+            }else{
+                //saxing todo 暂时都不查详情
+                //linkName = 'linkName';
+                linkName = '';
+
+            }
+            var trHtml = function (i) {
+                return ['<tr class="animated fadeIn">',
+                    '<td><em class="'+ linkName +'" departId='+ data.result[i].departId +'>' + data.result[i].departName + '</em> <i class="rank"></i></td>',
+                    '<td>' + data.result[i].goodNum + '</td>',
+                    '<td>' + data.result[i].badNum + '</td>',
+                    '</tr>'];
+            };
+            for (var i = 0; i < _plen; i++) {
+                var deptHtml = trHtml(i).join('');
+                $(".dataTable tbody").append(deptHtml);
+            }
+        } else {
+            $(".dataTable tbody").append('<tr><td colspan="3">暂无更多</td></tr>');
+        }
+
+        //查看部门点赞详情
+        $(".linkName").off().on("click",function(){
+            departClick(this, date_pic.val());
+        });
+        //个人排名绑定
+        $(".rank").off().on("click", function () {
+            rankClick(this, date_pic.val(), getTimeMode());
+        });
+    };
+
+    //获取当前选择的时间模式（年/月）
+    var getTimeMode = function () {
+        return $("[name='time']").filter(":checked").attr("id");
+    };
+
+    //插入数据
+    function insertData(yearMonthStr) {
+        var paramTime = 'year' === getTimeMode() ? yearMonthStr.substr(0, 4) : yearMonthStr;
+        $.ajax({
+            url: '/qisi/statistic/getDepartData.action?yearMonth='+paramTime+'&departMode=' + departMode,
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                sessionSave("reportData", data);
+                $(".dataTable tbody").html("");
+                staticList(data);
+            },
+            error: function (er) {
+                console.log(er);
+            }
+        });
+    }
+
+    function preDeal(){
+        date_pic.val(getSaYearMonthWithSep("-"));
+        sessionSave("selDate", getSaYearMonthWithSep("-"));
+
+        //渲染数据
+        insertData( getSaYearMonth());
+    }
+
+    //控制css伪类
+    var cssControl=function(t,s){
+        s=document.createElement('style');
+        s.innerText=t;
+        document.body.appendChild(s);
+    };
+
+    //选择部门、支行模式菜单开关
+    var modeSwitch = false;
+    var selectMode = $(".selectMode");
+    var departControlJs = function () {
+        if (modeSwitch){
+            selectMode.addClass("animated flipOutY");
+            cssControl(".actionBar em:after{transform: rotate(-90deg);}");
+            setTimeout(function () {
+                selectMode.hide();
+            }, 750);
+        }else{
+            selectMode.addClass("animated flipInY");
+            selectMode.show();
+            cssControl(".actionBar em:after{transform: rotate(0deg);}");
+        }
+
+        setTimeout(function () {
+            selectMode.removeClass("animated flipInY flipOutY");
+        }, 750);
+        modeSwitch = !modeSwitch;
+    };
+
+    //时间动画
+    function doDateAnim() {
+        $('.date').removeClass("animated pulse").addClass('pulse' + ' animated').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend', function(){
+            $(this).removeClass("animated pulse");
+        });
+    }
+
+    $(function () {
+        //绑定时间控件, 必须先清空
+        date_pic.val('');
+        bindDatePicker(date_pic, 'yyyy-mm');
+
+        //时间模式选择事件
+        $("[name='time']").off().on("change", function () {
+            sessionSave('timeMode', getTimeMode());
+            doDateAnim();
+            var selDate = $("#date_pic").val();
+            insertData(selDate);
+            if ('year' === getTimeMode()){
+                cssControl("#date_pic {width: 1.4rem;}");
+            }else{
+                cssControl("#date_pic {width: 3rem;}");
+            }
+        });
+
+        //从缓存取数据
+        getDataFromSession("reportData", function (obj) {
+            if (obj){
+                staticList(JSON.parse(obj));
+            }else{
+                preDeal();
+            }
+        });
+        //从缓存取时间
+        getDataFromSession("selDate", function (obj) {
+            if (obj){
+                date_pic.val(JSON.parse(obj));
+            }else{
+                date_pic.val(getSaYearMonthWithSep("-"));
+            }
+        });
+        //从缓存取年月状态
+        getDataFromSession('timeMode', function (obj) {
+            if (obj && 'year' === JSON.parse(obj)){
+                $('#year').click();
+            }else{
+                $('#month').click();
+            }
+        });
+        //从缓存取部门支行状态
+        getDataFromSession("departMode", function (obj) {
+            if (obj && 'zhihang' === JSON.parse(obj)){
+                departMode = 'zhihang';
+            }else{
+                departMode = 'depart';
+            }
+        });
+
+        //select选择
+        date_pic.change(function () {
+            var selDate = $(this).val();
+            sessionSave("selDate", selDate);
+            var fMonth = selDate.split("-").join("/");
+            insertData(fMonth);
+        });
+
+        //选择部门绑定
+        title.off().on("click", function () {
+            departControlJs();
+        });
+        title.text('depart' === departMode ? "部门统计" : "支行统计");
+        titleSel.off().on("click", function () {
+            departControlJs();
+            title.text($(this).text());
+            dz.text($(this).text().substr(0 ,2));
+            departMode = $(this).hasClass("bmbtn") ? 'depart' : "zhihang";
+            sessionSave("departMode", departMode);
+            //刷新数据
+            var selDate = $("#date_pic").val();
+            insertData(selDate);
+        });
+    });
+</script>
+</body>
+</html>

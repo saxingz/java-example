@@ -1,0 +1,82 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /qisi
+spring:
+  datasource:
+    name: idea
+    url: jdbc:mysql://127.0.0.1:3306/idea?characterEncoding=utf8&useUnicode=true&useSSL=false&autoReconnect=true
+    username: root
+    password: saxingroot
+    #druid
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbType: mysql
+    driver-class-name: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 5
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPrepardStatements: true
+    maxOpenPreparedStatements: 20
+    maxPoolPreparedStatementPerConnectionSize: 20
+  ## Freemarker 配置
+  ## 文件配置路径
+  freemarker:
+    template-loader-path: classpath:/templates/
+    cache: false
+    charset: UTF-8
+    check-template-location: true
+    content-type: text/html
+    expose-request-attributes: true
+    expose-session-attributes: true
+    request-context-attribute: request
+    suffix: .ftl
+
+
+#pagehelper分页插件
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+#测试-迎宾大道
+wx:
+  corpId: wx4d6e2a448c0f6e9a
+  agentId: 1000026
+  secret: O420vruBHvHm81cDeOKJEIJz5s136X6OtsjJVv-48Z4
+  domain: //saxing.natapp1.cc
+  access: "${wx.domain}${server.servlet.context-path}"
+  index: "${wx.domain}/oauth/oauth_noid"
+  messageImg: 2lM9gEfq0cQOm-eNAWmiS4rqPZunG4wBmtQasCpe2L5iS7A7QNpOvd4qNSAObFozS
+  tucaoImg: 2WwrdJRqIeFwEZgL6OHme4vvdETBrPAJNoFu6Ko3chbjGCH6T3R3DS0PTplFSOQh-
+  discussImg: 2gJFH3Zg5gGxDDyKB0j7hxa0i_15KxNubkRwtw6uC4cl6H5XoTkGLZxqP0AbZgch9
+
+mybatis:
+  mapper-locations: classpath:mapping/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#sql打印语句
+logging:
+  level:
+   org.saxing.dao.mapper: trace
+
+#图片保存位置
+img:
+  saveLocation: E:\code\Intellij\qisi\pic
+  readLocation: E:/code/Intellij/qisi/pic/
+  imgAccess: "${wx.domain}${server.servlet.context-path}/images/"
+
+
+
+
+
+

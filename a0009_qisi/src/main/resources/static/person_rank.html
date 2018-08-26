@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <title>个人排名</title>
+    <link rel="stylesheet" type="text/css" href="/qisi/old/css/common.css?v=1.6003" />
+    <link rel="stylesheet" type="text/css" href="/qisi/old/css/style.css?v=1.6003" />
+    <link rel="stylesheet" href="/qisi/old/css/animate.min.css?v=1.6003">
+</head>
+<body>
+<div class="actionBar">
+    <i class="pback"></i>
+    个人排名
+	<a href="/oauth/getOauth" class="backhome no"></a>
+</div>
+<div class="title animated bounceInDown">
+    <div class="txt"></div>
+</div>
+<div class="staticWrap animated bounceInDown">
+    <table class="dataTable">
+        <colgroup>
+            <col width="25%"/>
+            <col width="45%"/>
+            <col width="30%" />
+        </colgroup>
+        <thead>
+            <tr>
+                <th>名次</th>
+                <th>姓名</th>
+                <th>奇思妙想</th>
+            </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript" src="/qisi/old/js/jquery.min.js?v=1.6003"></script>
+<script type="text/javascript" src="/qisi/old/js/wxlimit.js?v=1.6003"></script>
+<script type="text/javascript" src="/qisi/old/js/custom.js?v=1.6003"></script>
+<script src="/qisi/old/js/mobiscroll_date.js?v=1.6003" charset="GB2312"></script>
+<script src="/qisi/old/js/mobiscroll.js?v=1.6003"></script>
+<script type="text/javascript">
+
+
+    var staticList = function (data) {
+        if (data.status === 200) {
+            var result = data.result;
+            var _plen = result.length;
+            if ( _plen > 0){
+                var trHtml = function (i) {
+                    return ['<tr >',
+                        '<td>' + (i+1) + '</td>',
+                        '<td>' + result[i].user_name + '</td>',
+                        '<td>' + result[i].num + '</td>',
+                        '</tr>'];
+                };
+                for (var i = 0; i < _plen; i++) {
+                    var deptHtml = trHtml(i).join('');
+                    $(".dataTable tbody").append(deptHtml);
+                }
+            }else {
+                $(".dataTable tbody").append('<tr><td colspan="3">暂无个人排名数据</td></tr>');
+            }
+        } else {
+            $(".dataTable tbody").append('<tr><td colspan="3">暂无个人排名数据</td></tr>');
+        }
+    };
+
+    function insertData(yearMonthStr, departId) {
+        $.ajax({
+            url: '/qisi/statistic/getPersonData.action?yearMonth=' + yearMonthStr + "&departId=" + departId,
+            type: "GET",
+            dataType: 'json',
+            success: function (data) {
+                $(".dataTable tbody").html("");
+                staticList(data);
+            },
+            error: function (er) {
+                console.log(er);
+            }
+        });
+    }
+
+    $(function () {
+        //返回按钮
+        $(".pback").off().on("click", function () {
+            location.href="/qisi/statistic.html";
+        });
+
+        //获取链接属性
+        var _href = window.location.href;
+        var departName = decodeURIComponent(getLinkParam(_href, "departName"));
+        var departId = getLinkParam(_href, "departId");
+        var timeMode = getLinkParam(_href, "timeMode");
+        var date = getLinkParam(_href, "date");
+        if ('year' === timeMode){
+            $(".txt").text(departName + '  ' + date.substring(0, 4) + '年');
+        }else{
+            $(".txt").text(departName + '  ' + date.substring(0, 4) + '年' + date.substr(-2) + '月');
+        }
+
+        insertData(date, departId);
+    });
+
+</script>
+</body>
+</html>

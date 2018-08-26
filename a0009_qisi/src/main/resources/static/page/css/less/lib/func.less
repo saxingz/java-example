@@ -1,0 +1,32 @@
+//750/50 缩放  &  640/50 缩放
+//750视觉搞(@flag=2) 375视觉搞(@flag=1)  ft=25
+//640视觉搞(@flag=2) 320视觉搞(@flag=1)  ft=21.333333333333332
+//@curWidth = 视觉搞宽度
+//.rem函数 针对px 转 rem这种情况,百分比的情况需自定义
+//多屏 (纵向rem)
+
+//视觉搞375 （店铺装修兼容版）
+.rem(@name, @px) { @{name} : (@px / @font_size)*1rem;} 
+
+//引入 reset.less的布局风格
+//reset.less 与  js文件中的 mediaCss.js 互斥
+//1 定义html规则（设置font-size:初始值）
+	//@font_size_750:25/2;
+	//@font_size_375:25/1;
+	//@font_size_640:21.333333333333332/2;
+	//@font_size_320:21.333333333333332/1;
+//2 定义rem函数
+.rem(@name, @px) when (@curWidth=750){ @{name}: @px / 25 / 2 * 1rem; }
+.rem(@name, @px) when (@curWidth=375){ @{name}: @px / 25 / 1 * 1rem; }
+.rem(@name, @px) when (@curWidth=640){ @{name}: @px / 21.333333333333332 / 2 * 1rem; }
+.rem(@name, @px) when (@curWidth=320){ @{name}: @px / 21.333333333333332 / 1 * 1rem; }
+ 
+.bgImg(@url){ background:url(@url) no-repeat; background-size: 99%; }
+.bgCover(@url){background:url(@url) no-repeat;background-size: cover;}
+.bgContain(@url){background:url(@url) no-repeat;background-size: contain;}
+.animation(@args){-webkit-animation:@args;animation:@args;-webkit-transform-origin: center center;transform-origin: center center;}
+.YMiddle(@args){ top:@args*1%; transform: translateY(-@args*1%); -webkit-transform: translateY(-@args*1%); }
+.fontSize(@a){.rem(font-size,@a);}
+
+//单屏 (纵向 建议百分比（%） 布局)
+//*{touch-action: none;-webkit-touch-callout: none;}
