@@ -23,6 +23,7 @@
         <module>a0010_netty_udp</module>
         <module>a0011_media_covert</module>
         <module>a0012_gateway</module>
+        <module>a0013_service1rest</module>
     </modules>
 
     <properties>

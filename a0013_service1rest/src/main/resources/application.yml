@@ -1,0 +1,19 @@
+server:
+  port: 8083
+  servlet:
+    context-path: /service1rest
+
+spring:
+    application:
+      name: service1rest
+    cloud:
+      consul:
+        host: 10.250.250.131
+        port: 8500
+        discovery:
+          health-check-path: ${server.servlet.context-path}/actuator/health
+          health-check-interval: 5s
+          tags: dev
+          instance-id: service1rest2
+          enabled: true
+          prefer-ip-address: true
