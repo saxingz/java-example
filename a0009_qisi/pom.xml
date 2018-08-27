@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
-    <name>a0009_qisi</name>
+    <name>qisi</name>
     <description>Demo project for Spring Boot</description>
 
     <parent>
