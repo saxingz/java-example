@@ -20,6 +20,7 @@
         <module>a0007_rocketmq_receiver</module>
         <module>a0008_rocketmq_receiver2</module>
         <module>a0009_qisi</module>
+        <module>a0010_netty_udp</module>
     </modules>
 
     <properties>
