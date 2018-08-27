@@ -1,0 +1,53 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /gateway
+
+listen:
+  filter:
+    skip:
+      path: "/oauth/1,/oauth/2,/dd"
+
+spring:
+    application:
+      name: gateway
+    cloud:
+      consul:
+        host: 10.250.250.131
+        port: 8500
+        discovery:
+          health-check-path: /actuator/health
+          health-check-interval: 5s
+          tags: dev
+          instance-id: gateway
+          enabled: true
+#          hostname: 10.250.251.166
+          prefer-ip-address: true
+      gateway:
+        globalcors:
+          corsConfigurations:
+            '[/**]':
+              maxAge: 3600
+              allowedOrigins: "*"
+              allowedMethods: "*"
+        routes:
+        - id: service1route
+          uri: lb://service1rest
+          predicates:
+          - Path=/service1rest/**
+
+        - id: service2route
+          uri: http://10.250.251.166:8083/service2flux/hi
+          predicates:
+          - Path=/service2/**
+
+
+
+
+
+
+
+
+
+
+

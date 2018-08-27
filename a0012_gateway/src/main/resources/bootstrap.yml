@@ -1,0 +1,38 @@
+#spring:
+#  cloud:
+#    gateway:
+#      default-filters:
+#      - name: AddResponseHeader
+#        args:
+#          name: Access-Control-Allow-Origin
+#          value: '*'
+#      - name: AddResponseHeader
+#        args:
+#          name: Access-Control-Allow-Methods
+#          value: '*'
+#      - name: AddResponseHeader
+#        args:
+#          name: Access-Control-Max-Age
+#          value: 3600
+#      - name: AddResponseHeader
+#        args:
+#          name: Access-Control-Allow-Headers
+#          value: x-requested-with,authorization,Content-Type,Authorization,credential,X-XSRF-TOKEN,token,username,client
+#      - name: AddResponseHeader
+#        args:
+#          name: Access-Control-Expose-Headers
+#          value: '*'
+#      - name: AddResponseHeader
+#        args:
+#          name: Access-Control-Allow-Credentials
+#          value: '*'
+
+##          - AddResponseHeader=X-Response-Default-Name, Default-Value
+##          - AddRequestHeader=X-Request-Name, Value
+#          - AddResponseHeader=Access-Control-Allow-Origin,*
+#          - AddResponseHeader=Access-Control-Allow-Methods,*
+#          - AddResponseHeader=Access-Control-Max-Age,3600
+#          - AddResponseHeader=Access-Control-Allow-Headers,x-requested-with
+#          - AddResponseHeader=Access-Control-Expose-Headers,*
+#          - AddResponseHeader=Access-Control-Allow-Credentials,true
+##          - AddRequestParameter=name, value
