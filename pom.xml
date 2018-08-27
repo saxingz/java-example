@@ -22,6 +22,7 @@
         <module>a0009_qisi</module>
         <module>a0010_netty_udp</module>
         <module>a0011_media_covert</module>
+        <module>a0012_gateway</module>
     </modules>
 
     <properties>
