@@ -24,6 +24,7 @@
         <module>a0011_media_covert</module>
         <module>a0012_gateway</module>
         <module>a0013_service1rest</module>
+        <module>a0014_dianzan</module>
     </modules>
 
     <properties>
