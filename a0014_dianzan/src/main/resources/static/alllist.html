@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+    <meta content="telephone=no" name="format-detection"/>
+    <title>点赞详情</title>
+    <link rel="stylesheet" type="text/css" href="/static/css/common.css?v=1.47" />
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css?v=1.47" />
+    <link rel="stylesheet" type="text/css" href="/static/css/mobiscroll_date.css?v=1.47" />
+    <link rel="stylesheet" href="/static/css/animate.min.css">
+</head>
+<body class="bodyBg animated bounceInRight" style="padding-top: 0.5rem;">
+    <div class="rencently likeTab">
+        <div class="head_t">
+            <div class="d_name">
+                <b class="depart_name"></b>
+            </div>
+            <div class="date" style="width: 50%">
+                <label for="date_pic">日期选择：</label>
+                <input type="text" id="date_pic" name="date_pic" readonly />
+            </div>
+        </div>
+        <div class="list_lh">
+            <ul>
+            </ul>
+        </div>
+    </div>
+
+
+<script type="text/javascript" src="/static/js/jquery.min.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/scroll.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/jquery.cookie.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/wxlimit.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/custom.js?v=1.47"></script>
+<script src="/static/js/mobiscroll_date.js?v=1.47" charset="GB2312"></script>
+<script src="/static/js/mobiscroll.js?v=1.47"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.2.0.js?v=1.47"></script>
+<script type="text/javascript">
+
+    window.onload = function () {
+        window.history.forward(1);
+    };
+
+    var date_pic = $("#date_pic");
+    var depart = $(".depart_name");
+    var staticDepartName;
+
+    /**
+     * 预处理数据
+     */
+    function preDeal() {
+        var _href = window.location.href;
+        var departId = getLinkParam(_href, "departId");
+        var queryDate = getLinkParam(_href, "date");
+        var departName = decodeURIComponent(getLinkParam(_href, "departName"));
+        date_pic.val(queryDate);
+        depart.attr("departId", departId);
+        depart.text((departName));
+        staticDepartName = departName;
+    }
+
+    /**
+     * 清除数据
+     */
+    function clearData() {
+        $(".list_lh ul").empty();
+    }
+
+    /**
+     * 插入数据
+     * @param data
+     */
+    function insertData(data) {
+        clearData();
+
+        var prodTpl =function(j){
+            return ['<li>',
+                '<p class="name"> 致&nbsp;&nbsp;<b>'+ data.result[j].toDepartmentName + '&nbsp;&nbsp;'+ data.result[j].toUserName+'</b></p>',
+                '<p class="nstatic">&nbsp;&nbsp;&nbsp;&nbsp;'+ data.result[j].reason +'</p>',
+                '<p class="nstatic-from"><span>'+ data.result[j].fromDepartName + '&nbsp;&nbsp;' + data.result[j].fromUserName +'</span></p>',
+                '<p class="nstatic-date"><span>'+ data.result[j].date +'</span></p>',
+                '</li>'];
+        };
+        var _len = data.result.length;
+        depart.text(staticDepartName + "(共" + _len + "条)");
+        for(var i=0; i < _len; i++){
+            var prodHtml = prodTpl(i).join('');
+            $(".list_lh ul").append(prodHtml);
+        }
+        var bodyH = $(document).height();
+        //62 一个li的高度
+        $(".list_lh").height(bodyH-62);
+    }
+
+    /**
+     * 请求数据
+     */
+    function getData(departId, date) {
+        $.ajax({
+            url: '/thumb/getGoodDetail' + '/' + departId + '/' + date,
+            type: "GET",
+            dataType:'json',
+            success:function(data){
+                insertData(data);
+            },
+            error:function(er){
+                console.log(er)
+                //BackErr(er);
+            }
+        });
+    }
+
+    $(function(){
+        //绑定时间控件, 必须先清空
+        date_pic.val('');
+        bindDatePicker(date_pic, 'yyyy-mm');
+
+        //预处理数据
+        preDeal();
+
+        date_pic.change(function () {
+            var fMonth = $(this).val().split("-").join("/");
+            var departId = depart.attr("departId");
+            getData(departId, fMonth);
+        });
+
+        var departId = depart.attr("departId");
+        var date = date_pic.val().split("-").join("/");
+        //获取数据
+        getData(departId, date);
+    });
+
+
+</script>
+</body>
+</html>

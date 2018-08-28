@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta content="telephone=no" name="format-detection"/>
+<title>评价</title>
+<link rel="stylesheet" type="text/css" href="/static/css/common.css?v=1.47" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css?v=1.47" />
+</head>
+<body>
+<div class="actionBar">
+	<a class="back no" href="javascript:history.back(-1)"><i></i></a>填写评价内容
+	<a href="/oauth/getOauth" class="backhome no"></a>
+</div>
+<div class="evaluteForm">
+	<h3><i></i><span></span></h3>
+    <div class="textarea">
+    	<p></p>
+        <textarea style="resize:none" id="textarea" placeholder="" maxlength="100" ></textarea>
+    </div>
+    <a href="javascript:void(0);" class="btngood no">提交</a>
+
+</div>
+<script type="text/javascript" src="/static/js/jquery.min.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/scroll.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/jquery.cookie.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/wxlimit.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/custom.js?v=1.47"></script>
+<script type="text/javascript">
+
+    var myname = sessionStorage.myname;
+    var nowDepart = sessionStorage.nowDepart;
+
+$(function(){
+	var _href = window.location.href;
+	var paras = _href.substring(_href.indexOf("?")+1);
+	var arr = paras.split("&");
+	var ref;
+	var departId;
+	var userId;
+	for(var i = 0; i < arr.length; i++) {
+		var para = arr[i].split("=");
+		if(para[0] == "ref") {
+			ref = parseInt(para[1]);
+		}
+		if(para[0] == "departId") {
+            departId = parseInt(para[1]);
+		}
+		if(para[0] == "name") {
+			name = decodeURI(para[1]); //中文转义
+			console.log(name)
+		}
+		if(para[0] == "userId") {
+            userId = para[1] || "";
+			console.log("userId", userId);
+		}
+	}
+
+    console.log("departId",departId);
+    console.log("userId",userId);
+    console.log("name",name);
+
+	if(ref==1){
+		$(".textarea p").text("点赞原因：");
+        $("#textarea").attr("placeholder", "最少20字，最多100字。")
+	}else{
+		$(".textarea p").text("差评原因：");
+        $("#textarea").attr("placeholder", "最少20字，最多100字，差评均为匿名提交。")
+	}
+
+    //当前是自己部门， 不可以点赞差评
+    if (nowDepart.indexOf("d" + departId + "d") > -1){
+        $("#textarea").attr("placeholder", "无法对自己部门点赞或差评");
+        $("#textarea").attr("readonly", "readonly");
+        $(".btngood").hide();
+    }
+
+	var _span = $(".evaluteForm h3 span");
+	_span.text(name);
+	_span.attr("userId",userId);
+	_span.attr("departId",departId);
+
+	$(".evaluteForm .btngood").bind("click", function(){
+        var teaTxt = $("#textarea").val().trim();
+        if (teaTxt && teaTxt.length > 100){
+            justTishi("字数超限");
+            return;
+        }
+        if(!teaTxt || teaTxt.length < 20){
+            justTishi("字数少于20字");
+            return;
+        }
+
+        $(this).unbind("click").text("提交中");
+        $(this).css({background:"#b2b2b2"});
+        var data = JSON.stringify({
+            "fromUserId":myname,
+            "toDepartmentId":departId,
+            "toUserId":userId,
+            "thumb":ref==1?1:-1,
+            "reason":teaTxt
+        });
+        $.ajax({
+            type: 'POST',
+            url: "/thumb/doThumb",
+            data: data,
+            dataType:"json",
+            contentType:'application/json;charset=UTF-8',
+            success: function () {
+                tishi(ref == 1?"点赞成功":"匿名差评成功", "/oauth/oauth_noid");
+            },
+            error:function () {
+                console.log("error");
+                tishi('操作失败, 请稍后重试');
+            }
+        });
+    });
+});
+</script>
+</body>
+</html>

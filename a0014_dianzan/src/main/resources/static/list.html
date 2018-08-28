@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<meta name="apple-mobile-web-app-status-bar-style" content="black"/>
+<meta content="telephone=no" name="format-detection"/>
+<title>选择</title>
+<link rel="stylesheet" type="text/css" href="/static/css/common.css?v=1.47" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css?v=1.47" />
+<link rel="stylesheet" href="/static/css/animate.min.css?v=1.47">
+</head>
+<body>
+<div class="actionBar">
+	<a class="back no" href="javascript:history.back(-1)"><i></i></a><span></span>
+	<a href="/oauth/getOauth" class="backhome no"></a>
+</div>
+<div class="evaluateWrap animated fadeIn">
+	<ul class="list">
+    </ul>
+</div>
+
+
+<script type="text/javascript" src="/static/js/jquery.min.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/scroll.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/wxlimit.js?v=1.47"></script>
+<script type="text/javascript">
+function item_click(id){
+	$(id).addClass("select").parents("li").siblings("li").find(".radio").removeClass("select");
+	$(".selectTips").remove();
+}
+
+//单击选中
+function structure(data, ref, departId){
+    if (data.department.length == 0 && data.userlist.length == 0){
+        $(".actionBar").after("<div style='text-align:center;margin-left:auto;margin-right:auto;margin-top:10%;color:#D8D8D8;font-size:20pt;'>部门无数据</div>");
+    }
+
+    var department =function(j){
+        return ['<li>',
+            '<a href="list.html?ref='+ref+'&departId='+data.department[j].id+'" class="name no"><i></i><span departId='+data.department[j].id+' class="sname">'+data.department[j].name+'</span></a>',
+            '<span class="radio" onclick="item_click(this)"><i></i>选择</span>',
+            '</li>'];
+    };
+    var user =function(k){
+        var avatar = data.userlist[k].avatar;
+        if (!avatar || avatar.length < 1){
+            avatar = '/static/css/images/icon_person.png';
+		}
+        return ['<li>',
+            '<span class="name"><div class="imgd"><img class="imgi" src="' + avatar + '" alt=""></div><span userId='+ data.userlist[k].userid+' departId='+departId+' class="sname">'+data.userlist[k].name+'</span></span>',
+            '<span class="radio" onclick="item_click(this)"><i></i>选择</span>',
+            '</li>'
+		];
+    };
+    var _plen = data.department.length;
+    var _ulen = data.userlist.length;
+    for(var i=0; i < _plen; i++){
+        var deptHtml = department(i).join('');
+        $(".evaluateWrap ul").append(deptHtml);
+    }
+    for(var j=0; j < _ulen; j++){
+        var userHtml = user(j).join('');
+        $(".evaluateWrap ul").append(userHtml);
+    }
+}
+
+$(function(){
+	var _href = window.location.href;
+	var paras = _href.substring(_href.indexOf("?")+1);
+	var arr = paras.split("&");
+	var ref;
+	var departId;
+	for(var i = 0; i < arr.length; i++) {
+		var para = arr[i].split("=");
+		if(para[0] == "ref") {
+			ref = parseInt(para[1]);
+		}
+		if(para[0] == "departId") {
+            departId = parseInt(para[1]);
+        }
+	}
+	var goodtxt = '给TA点赞';
+	var badtxt = '给TA差评';
+	if(ref==1){
+		var btn = '<a href="form.html?ref='+ref+'" class="btngood no">'+goodtxt+'</a>';
+		$(".actionBar span").text('我要点赞');
+	}else{
+		var btn = '<a href="form.html?ref='+ref+'" class="btngood no">'+badtxt+'</a>';
+		$(".actionBar span").text('我要差评');
+	}
+	$("body").append(btn);
+	
+	$(".btngood").live('click',function(){
+		var _radio = $(".evaluateWrap li .select");
+		if(_radio.length>0){
+			var name = _radio.parents("li").find(".sname").text();
+			var departId = _radio.parents("li").find(".sname").attr("departId");
+			var userId = _radio.parents("li").find(".sname").attr("userId");
+            $(this).attr("href","form.html?ref="+ref+"&name="+name+"&departId="+departId+"&userId="+(userId||''));
+		}else{
+			$(this).before('<p class="selectTips">请选择点赞对象</p>');
+			return false;
+		}
+	});
+
+	$.ajax({
+		url: '/organize/getDepartAndUser/'+departId,
+		type: "GET",
+		dataType:'json',        
+		success:function(data){
+			structure(data, ref, departId);
+		},
+		error:function(er){
+			console.log(er);
+			//BackErr(er);
+		}
+	});
+
+	//控制主体内容的高度
+	var bodyH = $(document).height();
+    var actionBarH = $(".actionBar").height();
+    var btngoodH = $(".btngood").height();
+    var h3H = $(".rencently h3").height();
+    var aminH = parseInt(actionBarH+btngoodH+69);
+    $(".evaluateWrap").height(bodyH-aminH);
+
+});
+</script>
+</body>
+</html>

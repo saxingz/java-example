@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>统计</title>
+<link rel="stylesheet" type="text/css" href="/static/css/common.css?v=1.47" />
+<link rel="stylesheet" type="text/css" href="/static/css/style.css?v=1.47" />
+</head>
+<body >
+<div class="actionBar">
+	<a class="back no" href="#">返回</a>XXX
+</div>
+<div class="evaluateWrap">
+	<ul class="list">
+    </ul>
+</div>
+<div class="evaluteBtn">
+    <a href="javascript:void(0);" class="like no">点赞<i></i></a>/
+    <a href="javascript:void(0);" class="dislike no">差评<i></i></a>
+</div>
+
+<script type="text/javascript" src="/static/js/jquery.min.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/scroll.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/like.js?v=1.47"></script>
+<script type="text/javascript" src="/static/js/wxlimit.js?v=1.47"></script>
+<script type="text/javascript">
+
+$(function(){
+	var _href = window.location.href;
+	console.log(_href)
+	var pId = parseInt(_href.substring(_href.indexOf("=")+1));
+	console.log(pId)
+	$.ajax({
+		url: '/organize/getDepartAndUser/'+pId,
+		type: "GET",
+		dataType:'json',
+		success:function(data){
+			
+            var prodTpl =function(j){
+                return ['<li class="pitem">',
+                    '<a href="childList.html?id='+data.department[j].id+'" class="name no" ref='+data.department[j].id+'>'+data.department[j].name+'</a>',
+                    '<span><input type="checkbox">选择</span>',
+                    '</li>'];
+            }
+			
+            var _len = data.department.length;
+            for(var i=0; i < _len; i++){
+                var prodHtml = prodTpl(i).join('');
+                $(".evaluateWrap ul").append(prodHtml);
+            }
+		},
+		error:function(er){
+			alert("error");
+			//BackErr(er);
+		}
+	});
+});
+</script>
+</body>
+</html>
