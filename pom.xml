@@ -25,6 +25,7 @@
         <module>a0012_gateway</module>
         <module>a0013_service1rest</module>
         <module>a0014_dianzan</module>
+        <module>a0015_java_design_pattern</module>
     </modules>
 
     <properties>
