@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.saxing.mybatis_code_helper.bean.PersonDao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="org.saxing.mybatis_code_helper.bean.Person">
+        <result column="age" property="age" jdbcType="INTEGER"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="birth" property="birth" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        age,
+        name,
+        birth
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="person.name">
+        INSERT INTO person (
+            age,
+            name,
+            birth
+        ) VALUES (
+            #{person.age,jdbcType=INTEGER},
+            #{person.name,jdbcType=VARCHAR},
+            #{person.birth,jdbcType=TIMESTAMP}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="person.name">
+        INSERT INTO person
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="person.age!=null"> age,</if>
+            <if test="person.name!=null"> name,</if>
+            <if test="person.birth!=null"> birth,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="person.age!=null">#{person.age,jdbcType=INTEGER},
+            </if>
+            <if test="person.name!=null">#{person.name,jdbcType=VARCHAR},
+            </if>
+            <if test="person.birth!=null">#{person.birth,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO person (
+            age,
+            name,
+            birth
+        )VALUES
+        <foreach collection="persons" item="person" index="index" separator=",">
+            (
+            #{person.age,jdbcType=INTEGER},
+            #{person.name,jdbcType=VARCHAR},
+            #{person.birth,jdbcType=TIMESTAMP}
+            )
+        </foreach>
+    </insert>
+
+
+</mapper>
+
