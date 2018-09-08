@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.saxing.mybatis_code_helper.bean.PermissionEntityDao">
+    <!--auto generated Code-->
+    <resultMap id="BaseResultMap" type="org.saxing.mybatis_code_helper.entity.PermissionEntity">
+        <result column="id" property="id" jdbcType="BIGINT"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="label" property="label" jdbcType="VARCHAR"/>
+        <result column="description" property="description" jdbcType="VARCHAR"/>
+        <result column="service_name" property="serviceName" jdbcType="VARCHAR"/>
+        <result column="create_owner" property="createOwner" jdbcType="VARCHAR"/>
+        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+        <result column="update_owner" property="updateOwner" jdbcType="VARCHAR"/>
+        <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+        <result column="type" property="type" jdbcType="VARCHAR"/>
+        <result column="resource" property="resource" jdbcType="VARCHAR"/>
+        <result column="bound_status" property="boundStatus" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <!--auto generated Code-->
+    <sql id="Base_Column_List">
+        id,
+        name,
+        label,
+        description,
+        service_name,
+        create_owner,
+        create_time,
+        update_owner,
+        update_time,
+        type,
+        resource,
+        bound_status
+    </sql>
+
+    <!--auto generated Code-->
+    <insert id="insert" useGeneratedKeys="true" keyProperty="permissionEntity.id">
+        INSERT INTO permission_entity (
+            id,
+            name,
+            label,
+            description,
+            service_name,
+            create_owner,
+            create_time,
+            update_owner,
+            update_time,
+            type,
+            resource,
+            bound_status
+        ) VALUES (
+            #{permissionEntity.id,jdbcType=BIGINT},
+            #{permissionEntity.name,jdbcType=VARCHAR},
+            #{permissionEntity.label,jdbcType=VARCHAR},
+            #{permissionEntity.description,jdbcType=VARCHAR},
+            #{permissionEntity.serviceName,jdbcType=VARCHAR},
+            #{permissionEntity.createOwner,jdbcType=VARCHAR},
+            #{permissionEntity.createTime,jdbcType=TIMESTAMP},
+            #{permissionEntity.updateOwner,jdbcType=VARCHAR},
+            #{permissionEntity.updateTime,jdbcType=TIMESTAMP},
+            #{permissionEntity.type,jdbcType=VARCHAR},
+            #{permissionEntity.resource,jdbcType=VARCHAR},
+            #{permissionEntity.boundStatus,jdbcType=VARCHAR}
+        )
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertSelective" useGeneratedKeys="true" keyProperty="permissionEntity.id">
+        INSERT INTO permission_entity
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionEntity.id!=null"> id,</if>
+            <if test="permissionEntity.name!=null"> name,</if>
+            <if test="permissionEntity.label!=null"> label,</if>
+            <if test="permissionEntity.description!=null"> description,</if>
+            <if test="permissionEntity.serviceName!=null"> service_name,</if>
+            <if test="permissionEntity.createOwner!=null"> create_owner,</if>
+            <if test="permissionEntity.createTime!=null"> create_time,</if>
+            <if test="permissionEntity.updateOwner!=null"> update_owner,</if>
+            <if test="permissionEntity.updateTime!=null"> update_time,</if>
+            <if test="permissionEntity.type!=null"> type,</if>
+            <if test="permissionEntity.resource!=null"> resource,</if>
+            <if test="permissionEntity.boundStatus!=null"> bound_status,</if>
+        </trim>
+        VALUES
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="permissionEntity.id!=null">#{permissionEntity.id,jdbcType=BIGINT},
+            </if>
+            <if test="permissionEntity.name!=null">#{permissionEntity.name,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.label!=null">#{permissionEntity.label,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.description!=null">#{permissionEntity.description,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.serviceName!=null">#{permissionEntity.serviceName,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.createOwner!=null">#{permissionEntity.createOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.createTime!=null">#{permissionEntity.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="permissionEntity.updateOwner!=null">#{permissionEntity.updateOwner,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.updateTime!=null">#{permissionEntity.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="permissionEntity.type!=null">#{permissionEntity.type,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.resource!=null">#{permissionEntity.resource,jdbcType=VARCHAR},
+            </if>
+            <if test="permissionEntity.boundStatus!=null">#{permissionEntity.boundStatus,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+
+    <!--auto generated Code-->
+    <insert id="insertList">
+        INSERT INTO permission_entity (
+            id,
+            name,
+            label,
+            description,
+            service_name,
+            create_owner,
+            create_time,
+            update_owner,
+            update_time,
+            type,
+            resource,
+            bound_status
+        )VALUES
+        <foreach collection="permissionEntitys" item="permissionEntity" index="index" separator=",">
+            (
+            #{permissionEntity.id,jdbcType=BIGINT},
+            #{permissionEntity.name,jdbcType=VARCHAR},
+            #{permissionEntity.label,jdbcType=VARCHAR},
+            #{permissionEntity.description,jdbcType=VARCHAR},
+            #{permissionEntity.serviceName,jdbcType=VARCHAR},
+            #{permissionEntity.createOwner,jdbcType=VARCHAR},
+            #{permissionEntity.createTime,jdbcType=TIMESTAMP},
+            #{permissionEntity.updateOwner,jdbcType=VARCHAR},
+            #{permissionEntity.updateTime,jdbcType=TIMESTAMP},
+            #{permissionEntity.type,jdbcType=VARCHAR},
+            #{permissionEntity.resource,jdbcType=VARCHAR},
+            #{permissionEntity.boundStatus,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <!--auto generated Code-->
+    <update id="update">
+        UPDATE permission_entity
+        <set>
+            <if test="permissionEntity.id != null"> id= #{permissionEntity.id,jdbcType=BIGINT},</if>
+            <if test="permissionEntity.name != null"> name= #{permissionEntity.name,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.label != null"> label= #{permissionEntity.label,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.description != null"> description= #{permissionEntity.description,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.serviceName != null"> service_name= #{permissionEntity.serviceName,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.createOwner != null"> create_owner= #{permissionEntity.createOwner,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.createTime != null"> create_time= #{permissionEntity.createTime,jdbcType=TIMESTAMP},</if>
+            <if test="permissionEntity.updateOwner != null"> update_owner= #{permissionEntity.updateOwner,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.updateTime != null"> update_time= #{permissionEntity.updateTime,jdbcType=TIMESTAMP},</if>
+            <if test="permissionEntity.type != null"> type= #{permissionEntity.type,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.resource != null"> resource= #{permissionEntity.resource,jdbcType=VARCHAR},</if>
+            <if test="permissionEntity.boundStatus != null"> bound_status= #{permissionEntity.boundStatus,jdbcType=VARCHAR}</if>
+        </set>
+        WHERE id = #{permissionEntity.id,jdbcType=BIGINT}
+    </update>
+</mapper>
+
