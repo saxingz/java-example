@@ -8,28 +8,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
-/**
- * 增加header 操作
- *
- * @author saxing
- *
- */
-//@Component
-public class AddHeaderFilter implements GlobalFilter, Ordered {
-
+@Component
+public class RemoveHeaderFilter implements GlobalFilter, Ordered {
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
-        String token = exchange.getRequest().getQueryParams().getFirst("authToken");
-        //向headers中放文件，记得build
-        ServerHttpRequest host = exchange.getRequest().mutate().header("a", "888").build();
+        ServerHttpRequest request = exchange.getRequest().mutate().headers(httpHeaders -> httpHeaders.remove("authorization")).build();
         //将现在的request 变成 change对象
-        ServerWebExchange build = exchange.mutate().request(host).build();
+        ServerWebExchange build = exchange.mutate().request(request).build();
         return chain.filter(build);
-
     }
 
     @Override
     public int getOrder() {
-        return -100;
+        return 0;
     }
 }
