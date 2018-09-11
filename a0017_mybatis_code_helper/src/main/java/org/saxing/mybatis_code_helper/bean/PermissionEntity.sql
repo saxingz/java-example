@@ -7,7 +7,7 @@ CREATE TABLE permission_entity(
 	description VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'description',
 	service_name VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'serviceName',
 	create_owner VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'createOwner',
-	create_time DATETIME NOT NULL DEFAULT '1000-01-01 00:00:00' COMMENT 'createTime',
+	create_time DATETIME NOT NULL DEFAULT '' COMMENT 'createTime',
 	update_owner VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'updateOwner',
 	update_time TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT 'updateTime',
 	type VARCHAR (50) NOT NULL DEFAULT '' COMMENT 'type',
