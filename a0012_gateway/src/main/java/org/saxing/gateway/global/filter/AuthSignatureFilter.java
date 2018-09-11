@@ -1,4 +1,4 @@
-package org.saxing.gateway.global;
+package org.saxing.gateway.global.filter;
 
 import org.saxing.gateway.global.common.StringConstant;
 import org.saxing.gateway.global.path.SkipPath;
