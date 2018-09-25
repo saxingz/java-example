@@ -26,6 +26,9 @@
         <module>a0013_service1rest</module>
         <module>a0014_dianzan</module>
         <module>a0015_java_design_pattern</module>
+        <module>a0016_cloud_gateway</module>
+        <module>a0017_mybatis_code_helper</module>
+        <module>a0018_openfeign</module>
     </modules>
 
     <properties>
