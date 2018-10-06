@@ -30,6 +30,7 @@
         <module>a0017_mybatis_code_helper</module>
         <module>a0018_openfeign</module>
         <module>a0019_syspro</module>
+        <module>a0020_java8</module>
     </modules>
 
     <properties>
