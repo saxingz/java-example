@@ -35,6 +35,6 @@ public interface Document {
      * @param <T>
      * @return
      */
-    <T> Stream<T> ChildRen(String key, Function<Map<String, Object>, T> constructor);
+    <T> Stream<T> childRen(String key, Function<Map<String, Object>, T> constructor);
 
 }

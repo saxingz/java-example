@@ -12,11 +12,11 @@ import java.util.stream.Stream;
  *
  * @author saxing  2018/10/6 10:49
  */
-public abstract class AbsctactDocument implements Document {
+public abstract class AbstractDocument implements Document {
 
     private final Map<String, Object> properties;
 
-    protected AbsctactDocument(Map<String, Object> properties) {
+    protected AbstractDocument(Map<String, Object> properties) {
         Objects.requireNonNull(properties, "properties map is required");
         this.properties = properties;
     }
@@ -33,7 +33,7 @@ public abstract class AbsctactDocument implements Document {
     }
 
     @Override
-    public <T> Stream<T> ChildRen(String key, Function<Map<String, Object>, T> constructor) {
+    public <T> Stream<T> childRen(String key, Function<Map<String, Object>, T> constructor) {
         Optional<List<Map<String, Object>>> any = Stream.of(get(key)).filter(el -> el != null)
                 .map(el -> (List<Map<String, Object>>)el).findAny();
         return any.isPresent() ? any.get().stream().map(constructor) : Stream.empty();
