@@ -10,10 +10,19 @@ import org.slf4j.LoggerFactory;
  */
 public class Zoom extends Modem {
 
-    private static Logger LOGGER = LoggerFactory.getLogger(Zoom.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ConfigForDosVisitor.class);
 
     @Override
     public void accept(ModemVisitor modemVisitor) {
-        
+        if (modemVisitor instanceof ZoomVisitor){
+            ((ZoomVisitor) modemVisitor).visit(this);
+        }else {
+            LOGGER.info("Only ZoomVisitor is allowed to visit Zoom modem");
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "Zoom modem";
     }
 }
