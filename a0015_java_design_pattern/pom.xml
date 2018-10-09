@@ -8,7 +8,7 @@
     <version>0.0.1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
-    <name>a0015_java_design_pattern</name>
+    <name>java_design_pattern</name>
     <description>Demo project for Spring Boot</description>
 
     <modules>
