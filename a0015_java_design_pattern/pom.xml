@@ -15,6 +15,7 @@
         <module>aa0015_01_abstract_document</module>
         <module>aa0015_02_abstract_factory</module>
         <module>aa0015_03_acyclicvisitor2</module>
+        <module>aa0015_04_adapter</module>
     </modules>
 
     <properties>
