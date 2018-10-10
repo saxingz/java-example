@@ -11,4 +11,10 @@
     <name>aa0015_05_aggregator-microservice</name>
     <description>Demo project for Spring Boot</description>
 
+    <modules>
+        <module>aa0015_05_01_aggregator-service</module>
+        <module>aa0015_05_01_information_microservice</module>
+        <module>aa0015_05_01_inventory-microservice</module>
+    </modules>
+
 </project>
