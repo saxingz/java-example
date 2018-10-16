@@ -17,6 +17,8 @@
         <module>aa0015_03_acyclicvisitor2</module>
         <module>aa0015_04_adapter</module>
         <module>aa0015_05_aggregator-microservice</module>
+        <module>aa0015_06_ambassador</module>
+        <module>aa0015_07_api_gateway</module>
     </modules>
 
 </project>
