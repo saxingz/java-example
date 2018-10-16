@@ -13,6 +13,8 @@
 
     <modules>
         <module>aa0015_07_01_api-gateway-service</module>
+        <module>aa0015_07_02_image-microservice</module>
+        <module>aa0015_07_03_price-microservice</module>
     </modules>
 
 
