@@ -24,7 +24,7 @@ public class LdapJNDI {
 
         Hashtable env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");//设置连接LDAP的实现工厂
-        env.put(Context.PROVIDER_URL, "ldap://listen.net:389/" + rootFilter);// 指定LDAP服务器的主机名和端口号
+        env.put(Context.PROVIDER_URL, "ldap://xxxx.net:389/" + rootFilter);// 指定LDAP服务器的主机名和端口号
         env.put(Context.SECURITY_AUTHENTICATION, "simple");//给环境提供认证方法,有SIMPLE、SSL/TLS和SASL
         env.put(Context.SECURITY_PRINCIPAL, username);//指定进入的目录识别名DN
         env.put(Context.SECURITY_CREDENTIALS, password); //进入的目录密码
@@ -39,7 +39,7 @@ public class LdapJNDI {
 //            Attributes attrs = ctx.getAttributes("uid=00012047,ou=Internal,ou=People");//获取到一个人员，
 
 
-            NamingEnumeration bindings = ctx.listBindings("dc=listen,dc=net");//列举 内部人员
+            NamingEnumeration bindings = ctx.listBindings("dc=xxxx,dc=net");//列举 内部人员
 
             while (bindings.hasMore()) {
                 Binding bd = (Binding)bindings.next();

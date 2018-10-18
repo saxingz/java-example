@@ -19,13 +19,13 @@ public class LdapTest2 {
 
     public static void main(String[] args) {
 
-        LdapContext ldapContext = new LdapTest2().adLogin("CN=Liu Han,OU=RD,DC=listen,DC=net", "Saxing123");
+        LdapContext ldapContext = new LdapTest2().adLogin("CN=Liu Han,OU=RD,DC=xxxx,DC=net", "Saxing123");
         System.out.println(ldapContext);
         //
     }
 
     public LdapContext adLogin(String username, String password) {
-        String server = "ldap://listen.net:389";
+        String server = "ldap://xxxx.net:389";
         try {
             Hashtable<String, String> env = new Hashtable<String, String>();
             //用户名称，cn,ou,dc 分别：用户，组，域
