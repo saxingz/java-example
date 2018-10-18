@@ -14,8 +14,8 @@ import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
 public class LdapHelper {
-    private final String URL = "ldap://listen.net:389/";
-    private final String BASEDN = "dc=listen,dc=net"; // 根据自己情况进行修改
+    private final String URL = "ldap://xxxx.net:389/";
+    private final String BASEDN = "dc=xxxx,dc=net"; // 根据自己情况进行修改
     private final String FACTORY = "com.sun.jndi.ldap.LdapCtxFactory";
     private LdapContext ctx = null;
     private final Control[] connCtls = null;
