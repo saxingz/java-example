@@ -31,6 +31,7 @@
         <module>a0018_openfeign</module>
         <module>a0019_syspro</module>
         <module>a0020_java8</module>
+        <module>a0021_ldap</module>
     </modules>
 
     <properties>
