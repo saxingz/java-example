@@ -19,6 +19,7 @@
         <module>aa0015_05_aggregator-microservice</module>
         <module>aa0015_06_ambassador</module>
         <module>aa0015_07_api_gateway</module>
+        <module>aa0015_08_async-method-invocation</module>
     </modules>
 
 </project>
