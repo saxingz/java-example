@@ -86,12 +86,18 @@ public class ThreadAsyncExecutor implements AsyncExecutor {
 
         @Override
         public boolean isComplete() {
-            return false;
+            return state > RUNNING;
         }
 
         @Override
         public T getValue() throws ExecutionException {
-            return null;
+            if (state == COMPLETED){
+                return value;
+            } else if (state == FAILED){
+                throw new ExecutionException(exception);
+            } else {
+                throw new IllegalStateException("Execution is not completed yet");
+            }
         }
 
         @Override
