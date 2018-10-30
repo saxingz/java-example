@@ -53,9 +53,35 @@ public class ThreadAsyncExecutor implements AsyncExecutor {
         T value;
         Exception exception;
 
-        public CompletableResult(Optional<AsyncCallback<T>> callback) {
+        public CompletableResult(AsyncCallback<T> callback) {
             lock = new Object();
-            this.callback = callback;
+            this.callback = Optional.ofNullable(callback);
+        }
+
+        /**
+         *
+         * @param value
+         */
+        void setValue(T value){
+            this.value = value;
+            this.state = COMPLETED;
+            this.callback.ifPresent(ac -> ac.onComplete(value, Optional.<Exception>empty()));
+            synchronized (lock){
+                lock.notifyAll();
+            }
+        }
+
+        /**
+         *
+         * @param exception
+         */
+        void setException(Exception exception){
+            this.exception = exception;
+            this.state = FAILED;
+            this.callback.ifPresent(ac -> ac.onComplete(null, Optional.of(exception)));
+            synchronized (lock){
+                lock.notifyAll();
+            }
         }
 
         @Override
