@@ -1,4 +1,4 @@
-package org.saxing.aa0015_08_asyncmethodinvocation;
+package org.saxing.asyncmethodinvocation;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
