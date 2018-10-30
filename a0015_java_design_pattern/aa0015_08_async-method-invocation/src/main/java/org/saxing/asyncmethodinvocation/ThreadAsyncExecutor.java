@@ -31,7 +31,7 @@ public class ThreadAsyncExecutor implements AsyncExecutor {
                 result.setException(e);
             }
         }, "executor-" + idx).start();
-        return null;
+        return result;
     }
 
     @Override
