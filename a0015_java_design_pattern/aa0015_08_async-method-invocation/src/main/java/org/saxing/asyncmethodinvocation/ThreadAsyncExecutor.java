@@ -23,13 +23,23 @@ public class ThreadAsyncExecutor implements AsyncExecutor {
 
     @Override
     public <T> AsyncResult<T> startProcess(Callable<T> task, AsyncCallback<T> callback) {
-        
+        CompletableResult<T> result = new CompletableResult<>(callback);
+        new Thread(() -> {
+            try {
+                result.setValue(task.call());
+            } catch (Exception e) {
+                result.setException(e);
+            }
+        }, "executor-" + idx).start();
         return null;
     }
 
     @Override
     public <T> T endProcess(AsyncResult<T> asyncResult) throws ExecutionException, InterruptedException {
-        return null;
+        if (!asyncResult.isComplete()){
+            asyncResult.await();
+        }
+        return asyncResult.getValue();
     }
 
     /**
