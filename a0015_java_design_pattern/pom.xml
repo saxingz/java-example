@@ -22,6 +22,7 @@
         <module>aa0015_08_async-method-invocation</module>
         <module>aa0015_09_balking</module>
         <module>aa0015_10_bridge</module>
+        <module>aa0015_11_builder</module>
     </modules>
 
 </project>
