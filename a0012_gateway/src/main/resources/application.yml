@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8085
   servlet:
     context-path: /gateway
 
@@ -13,16 +13,19 @@ spring:
       name: gateway
     cloud:
       consul:
-        host: 10.250.250.131
+        host: 192.168.31.2
         port: 8500
         discovery:
           health-check-path: /actuator/health
           health-check-interval: 5s
           tags: dev
-          instance-id: gateway
+          instance-id: gateway:${random.value}
           enabled: true
-#          hostname: 10.250.251.166
-          prefer-ip-address: true
+          hostname: 192.168.31.236
+          ip-address: 192.168.31.236
+#          prefer-ip-address: true
+          query-passing: true
+
       gateway:
         globalcors:
           corsConfigurations:
