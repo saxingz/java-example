@@ -23,6 +23,7 @@
         <module>aa0015_09_balking</module>
         <module>aa0015_10_bridge</module>
         <module>aa0015_11_builder</module>
+        <module>aa0015_12_business-delegate</module>
     </modules>
 
 </project>
