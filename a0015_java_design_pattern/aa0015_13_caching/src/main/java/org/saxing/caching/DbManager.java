@@ -3,6 +3,7 @@ package org.saxing.caching;
 import com.mongodb.MongoClient;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
 
 import java.text.ParseException;
@@ -81,6 +82,11 @@ public final class DbManager {
         return new UserAccount(userId, doc.getString("userName"), doc.getString("additionalInfo"));
     }
 
+    /**
+     * Write user account to DB
+     *
+     * @param userAccount
+     */
     public static void writeToDb(UserAccount userAccount){
         if (!userMongoDB){
             virtualDB.put(userAccount.getUserId(), userAccount);
@@ -96,6 +102,55 @@ public final class DbManager {
         db.getCollection("user_accounts").insertOne(
                 new Document("userID", userAccount.getUserId()).append("userName", userAccount.getUserName())
                 .append("additionalInfo", userAccount.getAdditionalInfo()));
+    }
+
+    /**
+     * Update DB
+     *
+     * @param userAccount
+     */
+    public static void updateDb(UserAccount userAccount){
+        if (!userMongoDB){
+            virtualDB.put(userAccount.getUserId(), userAccount);
+            return;
+        }
+        if (db == null){
+            try {
+                connect();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        db.getCollection("user_accounts").updateOne(
+                new Document("userID", userAccount.getUserId()),
+                new Document("$set", new Document("userName", userAccount.getUserName())
+                        .append("addinitionInfo", userAccount.getAdditionalInfo())));
+    }
+
+    /**
+     * Insert data into DB if it does not exist. Else, update it.
+     *
+     * @param userAccount
+     */
+    public static void upsertDb(UserAccount userAccount){
+        if (!userMongoDB){
+            virtualDB.put(userAccount.getUserId(), userAccount);
+            return;
+        }
+        if (db == null){
+            try {
+                connect();
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
+        db.getCollection("user_accounts")
+                .updateOne(new Document("userID", userAccount.getUserId()),
+                        new Document("$set",
+                                new Document("userID", userAccount.getUserId())
+                                    .append("userName", userAccount.getUserName())
+                                    .append("additionalInfo", userAccount.getAdditionalInfo())),
+                        new UpdateOptions().upsert(true));
     }
 
 }
