@@ -82,4 +82,24 @@ public class LruCache {
 
     }
 
+    public void set(String userId, UserAccount userAccount){
+        if (cache.containsKey(userId)){
+            Node old = cache.get(userId);
+            old.userAccount = userAccount;
+            remove(old);
+            setHead(old);
+        } else {
+            Node newNode = new Node(userId, userAccount);
+            if (cache.size() >= capacity){
+                LOGGER.info("#Cache is FULL ! Removing from cache...", end.userId);
+                cache.remove(end.userId);
+                remove(end);
+                setHead(newNode);
+            } else {
+                setHead(newNode);
+            }
+            cache.put(userId, newNode);
+        }
+    }
+
 }
