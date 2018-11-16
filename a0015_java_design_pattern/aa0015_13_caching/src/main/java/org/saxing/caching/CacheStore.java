@@ -7,6 +7,8 @@ import java.util.List;
 
 /**
  * The caching strategies are implemented in this class.
+ * 
+ * @author saxing  2018/11/16 16:22
  */
 public class CacheStore {
 
@@ -160,7 +162,7 @@ public class CacheStore {
      * @param userId
      * @param userAccount
      */
-    public void set(String userId, UserAccount userAccount){
+    public static void set(String userId, UserAccount userAccount){
         cache.set(userId, userAccount);
     }
 
@@ -168,7 +170,7 @@ public class CacheStore {
      *
      * @param userId
      */
-    public void invalidate(String userId){
+    public static void invalidate(String userId){
         cache.invalidate(userId);
     }
 
