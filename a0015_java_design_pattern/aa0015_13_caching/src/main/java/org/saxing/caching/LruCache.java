@@ -102,4 +102,35 @@ public class LruCache {
         }
     }
 
+    /**
+     *
+     * @param userId
+     * @return
+     */
+    public boolean contains(String userId){
+        return cache.containsKey(userId);
+    }
+
+    /**
+     *
+     * @param userId
+     */
+    public void invalidate(String userId){
+        Node toBeRemoved = cache.remove(userId);
+        if (toBeRemoved != null){
+            LOGGER.info("# {} has been updated! Removing older version from cache...", userId);
+            remove(toBeRemoved);
+        }
+    }
+
+    /**
+     *
+     * @return
+     */
+    public boolean isFull(){
+        return cache.size() >= capacity;
+    }
+
+
+
 }
