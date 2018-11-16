@@ -3,7 +3,9 @@ package org.saxing.caching;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -131,6 +133,46 @@ public class LruCache {
         return cache.size() >= capacity;
     }
 
+    public UserAccount getLruData(){
+        return end.userAccount;
+    }
+
+    /**
+     *
+     */
+    public void clear(){
+        head = null;
+        end = null;
+        cache.clear();
+    }
+
+    /**
+     *
+     * @return
+     */
+    public List<UserAccount> getCacheDataInListForm(){
+        List<UserAccount> listOfUserAccount = new ArrayList<>();
+        Node temp = head;
+        while (temp != null){
+            listOfUserAccount.add(temp.userAccount);
+            temp = temp.next;
+        }
+        return listOfUserAccount;
+    }
+
+
+    /**
+     *
+     * @param newCapacity
+     */
+    public void setCapacity(int newCapacity){
+        if (capacity > newCapacity){
+            clear();// Behavior can be modified to accommodate for decrease in cache size. For now, we'll
+            // just clear the cache.
+        } else {
+            this.capacity = newCapacity;
+        }
+    }
 
 
 }
