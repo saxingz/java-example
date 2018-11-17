@@ -16,7 +16,7 @@ import java.util.Map;
  * the data is moved to the front of the list to depict itself as the most-recently-used data. The
  * LRU data is always at the end of the list.
  * 
- * @author saxing  2018/11/16 16:22 
+ * @author saxing  2018/11/16 11:25
  *
  */
 public class LruCache {
