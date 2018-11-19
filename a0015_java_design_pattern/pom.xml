@@ -27,6 +27,7 @@
         <module>aa0015_13_caching</module>
         <module>aa0015_14_callback</module>
         <module>aa0015_15_chain</module>
+        <module>aa0015_16_collection-pipeline</module>
     </modules>
 
 </project>
