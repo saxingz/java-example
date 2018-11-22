@@ -40,6 +40,15 @@ public class FunctionalProgramming {
                 .map(Car::getModel).collect(Collectors.toList());
     }
 
+    /**
+     * Method to group cars by category using groupingBy
+     *
+     * @param cars
+     * @return
+     */
+    public static Map<Category, List<Car>> getGroupingOfCarsByCategory(List<Car> cars){
+        return cars.stream().collect(Collectors.groupingBy(Car::getCategory));
+    }
 
 
 
