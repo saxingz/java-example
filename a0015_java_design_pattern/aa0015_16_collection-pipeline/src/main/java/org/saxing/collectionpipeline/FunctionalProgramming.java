@@ -50,6 +50,21 @@ public class FunctionalProgramming {
         return cars.stream().collect(Collectors.groupingBy(Car::getCategory));
     }
 
+    /**
+     * Method to get all Sedan cars belonging to a group of persons sorted by year of manufacture
+     *
+     * @param persons
+     * @return
+     */
+    public static List<Car> getSedanCarsOwnedSortedByDate(List<Person> persons){
+//              System.out.println(persons.stream().map(Person::getCars).flatMap(List::stream)
+//                .filter(car -> Category.SEDAN.equals(car.getCategory()))
+//                .sorted(Comparator.comparing(Car::getYear)).collect(Collectors.toList()));
+
+        return persons.stream().map(Person::getCars).flatMap(List::stream)
+                .filter(car -> Category.SEDAN.equals(car.getCategory()))
+                .sorted(Comparator.comparing(Car::getYear)).collect(Collectors.toList());
+    }
 
 
 
