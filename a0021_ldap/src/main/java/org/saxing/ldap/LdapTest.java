@@ -12,7 +12,7 @@ import java.util.Iterator;
 public class LdapTest {
 
     public static void main(String[] args) {
-        DirContext dirContext = new LdapTest().createDirContext("xxxx.net", 389, "cn=ldap,dc=xxxx,dc=net", "abcd@1234");
+        DirContext dirContext = new LdapTest().createDirContext("xxxx.net", 389, "cn=ldap,dc=xxxx,dc=net", "absscdssss@1ssss234");
         System.out.println(dirContext);
     }
 

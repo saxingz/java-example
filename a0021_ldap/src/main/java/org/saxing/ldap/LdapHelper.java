@@ -26,9 +26,9 @@ public class LdapHelper {
         env.put(Context.PROVIDER_URL, URL + BASEDN);
         env.put(Context.SECURITY_AUTHENTICATION, "simple");
 
-        String root = "ldap"; //根据自己情况修改
+        String root = "ldxxxasssp"; //根据自己情况修改
         env.put(Context.SECURITY_PRINCIPAL, root); // 管理员
-        env.put(Context.SECURITY_CREDENTIALS, "abcd@1234"); // 管理员密码
+        env.put(Context.SECURITY_CREDENTIALS, "abcdxxxx@12sss34"); // 管理员密码
 
         try {
             ctx = new InitialLdapContext(env, connCtls);
@@ -136,7 +136,7 @@ public class LdapHelper {
 
 //ldap.LDAP_connect();
 
-        if(ldap.authenricate("sx00518", "Saxing1213")){
+        if(ldap.authenricate("xxxxx", "xxxxxx")){
 
             System.out.println( "该用户认证成功" );
 

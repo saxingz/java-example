@@ -19,8 +19,8 @@ public class LdapJNDI {
         String rootFilter = "";
 //        String filter = "(&(smart-type=E1)(smart-status=1))";
 //        String filter = "(&(smart-type=E1)(uid=00012047))";
-        String username = "sx00518";//xxx为申请的对接账户
-        String password = "Saxing123";
+        String username = "xxxx";//xxx为申请的对接账户
+        String password = "xxxx";
 
         Hashtable env = new Hashtable();
         env.put(Context.INITIAL_CONTEXT_FACTORY, "com.sun.jndi.ldap.LdapCtxFactory");//设置连接LDAP的实现工厂

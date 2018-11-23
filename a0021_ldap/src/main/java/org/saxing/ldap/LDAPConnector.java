@@ -45,7 +45,7 @@ public class LDAPConnector {
     }
 
     public static void main(String[] args) {
-        System.out.println(new LDAPConnector().validateUser("sx005ww18", "Saxing123"));;
+        System.out.println(new LDAPConnector().validateUser("xxxx", "xxxxx"));;
         System.out.println("dddddd");
     }
 
@@ -99,8 +99,8 @@ public class LDAPConnector {
         try {
             url = "ldap://xxxx.net:389/";
             baseDN = "dc=xxxx,dc=net";
-            bindDN = "ldap";
-            bindPassword = "abcd@1234";
+            bindDN = "ldxxxap";
+            bindPassword = "abssscdxxx@xxx12sss34";
             // set up environment for creating initial context  
             env.put(Context.PROVIDER_URL, url + baseDN);
             env.put(Context.SECURITY_PRINCIPAL, bindDN);

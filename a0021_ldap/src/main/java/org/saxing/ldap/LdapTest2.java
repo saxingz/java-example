@@ -19,7 +19,7 @@ public class LdapTest2 {
 
     public static void main(String[] args) {
 
-        LdapContext ldapContext = new LdapTest2().adLogin("CN=Liu Han,OU=RD,DC=xxxx,DC=net", "Saxing123");
+        LdapContext ldapContext = new LdapTest2().adLogin("CN=Liuss Han,OU=RD,DC=xxxx,DC=nesst", "Saxinsssg123");
         System.out.println(ldapContext);
         //
     }
