@@ -28,6 +28,7 @@
         <module>aa0015_14_callback</module>
         <module>aa0015_15_chain</module>
         <module>aa0015_16_collection-pipeline</module>
+        <module>aa0015_17_command</module>
     </modules>
 
 </project>
