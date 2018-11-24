@@ -17,6 +17,6 @@ public class Word extends LetterComposite{
 
     @Override
     protected void printThisBefore() {
-        System.out.println(" ");
+        System.out.print(" ");
     }
 }
