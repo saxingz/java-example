@@ -11,10 +11,10 @@ public class User {
 
     private String firstName;
     private String lastName;
-    private String isActive;
+    private boolean isActive;
     private String userId;
 
-    public User(String firstName, String lastName, String isActive, String userId) {
+    public User(String firstName, String lastName, boolean isActive, String userId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.isActive = isActive;
@@ -29,7 +29,7 @@ public class User {
         return lastName;
     }
 
-    public String getIsActive() {
+    public boolean isActive() {
         return isActive;
     }
 
