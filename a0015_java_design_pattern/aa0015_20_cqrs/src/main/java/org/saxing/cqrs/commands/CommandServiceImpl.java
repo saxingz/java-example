@@ -67,26 +67,56 @@ public class CommandServiceImpl implements ICommandService  {
 
     @Override
     public void authorNameUpdated(String username, String name) {
-
+        Author author = getAuthorByUsername(username);
+        author.setName(name);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(author);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
     public void authorUsernameUpdated(String oldUsername, String newUsername) {
-
+        Author author = getAuthorByUsername(oldUsername);
+        author.setUsername(newUsername);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(author);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
     public void authorEmailUpdated(String username, String email) {
-
+        Author author = getAuthorByUsername(username);
+        author.setEmail(email);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(author);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
     public void bookTitleUpdated(String oldTitle, String newTitle) {
-
+        Book book = getBookByTitle(oldTitle);
+        book.setTitle(newTitle);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(book);
+            session.getTransaction().commit();
+        }
     }
 
     @Override
     public void bookPriceUpdated(String title, double price) {
-
+        Book book = getBookByTitle(title);
+        book.setPrice(price);
+        try (Session session = sessionFactory.openSession()) {
+            session.beginTransaction();
+            session.update(book);
+            session.getTransaction().commit();
+        }
     }
 }
