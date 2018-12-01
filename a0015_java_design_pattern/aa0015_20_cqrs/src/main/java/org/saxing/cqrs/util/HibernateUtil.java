@@ -4,12 +4,13 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.mapping.MetadataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
  * This class simply returns one instance of {@link SessionFactory} initialized when the application is started
+ * 
+ * @author saxing 2018/12/1 21:10
  */
 public class HibernateUtil {
 
