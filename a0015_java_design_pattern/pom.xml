@@ -33,6 +33,7 @@
         <module>aa0015_19_converter</module>
         <module>aa0015_20_cqrs</module>
         <module>aa0015_21_dao</module>
+        <module>aa0015_22_data-bus</module>
     </modules>
 
 </project>
