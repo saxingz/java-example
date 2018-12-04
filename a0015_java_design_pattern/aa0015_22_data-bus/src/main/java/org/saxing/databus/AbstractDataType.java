@@ -5,7 +5,7 @@ package org.saxing.databus;
  * 
  * @author saxing 2018/12/4 9:53
  */
-public class AbstactDataType implements DataType {
+public class AbstractDataType implements DataType {
 
     private DataBus dataBus;
     

@@ -1,6 +1,6 @@
 package org.saxing.databus.data;
 
-import org.saxing.databus.AbstactDataType;
+import org.saxing.databus.AbstractDataType;
 import org.saxing.databus.DataType;
 
 /**
@@ -8,7 +8,7 @@ import org.saxing.databus.DataType;
  *
  * @author saxing 2018/12/4 10:27
  */
-public class MessageData extends AbstactDataType {
+public class MessageData extends AbstractDataType {
 
     private final String message;
 
