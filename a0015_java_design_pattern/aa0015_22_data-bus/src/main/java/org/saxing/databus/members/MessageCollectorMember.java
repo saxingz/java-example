@@ -27,8 +27,10 @@ public class MessageCollectorMember implements Member {
     }
 
     @Override
-    public void accept(DataType event) {
-        
+    public void accept(DataType data) {
+        if (data instanceof MessageData){
+            handleEvent((MessageData) data);
+        }
     }
 
     private void handleEvent(MessageData data){
