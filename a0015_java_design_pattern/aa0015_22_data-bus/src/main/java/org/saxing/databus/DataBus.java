@@ -24,11 +24,27 @@ public class DataBus {
      * @param member
      */
     public void subscribe(final Member member){
-        listeners.add(member);
+        this.listeners.add(member);
     }
 
+    /**
+     * Deregister a member to stop receiving events.
+     *
+     * @param member
+     */
     public void unsubscribe(final Member member){
+        this.listeners.remove(member);
+    }
 
+
+    /**
+     * Publish and event to all members.
+     *
+     * @param event
+     */
+    public void publish(final DataType event){
+        event.setDataBus(this);
+        listeners.forEach(listener -> listener.accept(event));
     }
 
 }
