@@ -35,6 +35,7 @@
         <module>aa0015_21_dao</module>
         <module>aa0015_22_data-bus</module>
         <module>aa0015_23_data-mapper</module>
+        <module>aa0015_24_data-transfer-object</module>
     </modules>
 
 </project>
