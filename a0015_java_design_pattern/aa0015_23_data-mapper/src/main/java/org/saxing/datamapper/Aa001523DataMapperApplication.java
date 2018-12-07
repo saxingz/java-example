@@ -11,7 +11,6 @@ import java.util.Optional;
  *
  * @author saxing 2018/12/5 22:10
  */
-//@SpringBootApplication
 public class Aa001523DataMapperApplication {
 
     private static Logger log = Logger.getLogger(Aa001523DataMapperApplication.class);
