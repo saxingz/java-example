@@ -23,8 +23,8 @@ public class CustomerResource {
         customerDtoList.add(customerDto);
     }
 
-    public void delete(CustomerDto customerDto){
-        customerDtoList.removeIf(customer -> customer.getId().equals(customerDto.getId()));
+    public void delete(String customerId){
+        customerDtoList.removeIf(customer -> customer.getId().equals(customerId));
     }
 
 }
