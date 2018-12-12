@@ -10,8 +10,12 @@ public class AdvancedSorceress implements Wizard {
 
     private Tobacco tobacco;
 
+    public AdvancedSorceress(Tobacco tobacco) {
+        this.tobacco = tobacco;
+    }
+
     @Override
     public void smoke() {
-        
+        tobacco.smoke(this);
     }
 }
