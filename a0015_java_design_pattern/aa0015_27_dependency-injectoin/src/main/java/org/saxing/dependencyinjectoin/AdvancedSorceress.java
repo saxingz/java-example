@@ -8,6 +8,8 @@ package org.saxing.dependencyinjectoin;
  */
 public class AdvancedSorceress implements Wizard {
 
+    private Tobacco tobacco;
+
     @Override
     public void smoke() {
         
