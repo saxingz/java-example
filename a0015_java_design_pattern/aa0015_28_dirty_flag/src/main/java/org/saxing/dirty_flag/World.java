@@ -19,7 +19,7 @@ public class World {
     }
 
     public List<String> fetch(){
-        List<String> data = new ArrayList<>();
+        List<String> data = dataFetcher.fetch();
 
         countries = data.isEmpty() ? countries : data;
 
