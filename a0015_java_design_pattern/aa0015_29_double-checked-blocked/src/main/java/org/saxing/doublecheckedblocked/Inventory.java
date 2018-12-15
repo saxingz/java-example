@@ -29,15 +29,15 @@ public class Inventory {
     public boolean addItem(Item item){
         if (items.size() < inventorySize){
             lock.lock();
-        }
-        try {
-            if (items.size() < inventorySize){
-                items.add(item);
-                LOGGER.info("{}: items.size()={}, inventorySize={}", Thread.currentThread(), items.size(), inventorySize);
-                return true;
+            try {
+                if (items.size() < inventorySize){
+                    items.add(item);
+                    LOGGER.info("{}: items.size()={}, inventorySize={}", Thread.currentThread(), items.size(), inventorySize);
+                    return true;
+                }
+            }finally {
+                lock.unlock();
             }
-        }finally {
-            lock.unlock();
         }
         return false;
     }
