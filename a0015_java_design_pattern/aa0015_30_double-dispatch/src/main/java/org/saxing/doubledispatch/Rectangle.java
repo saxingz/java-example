@@ -1,5 +1,10 @@
 package org.saxing.doubledispatch;
 
+/**
+ * ractangle 
+ * 
+ * @author saxing 2018/12/16 13:33
+ */
 public class Rectangle {
 
     private int left;
