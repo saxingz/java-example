@@ -32,6 +32,7 @@
         <module>a0019_syspro</module>
         <module>a0020_java8</module>
         <module>a0021_ldap</module>
+        <module>a0022_gatewaycodegenerate</module>
     </modules>
 
     <properties>
