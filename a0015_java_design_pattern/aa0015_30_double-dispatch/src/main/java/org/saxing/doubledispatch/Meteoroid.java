@@ -18,7 +18,27 @@ public class Meteoroid extends GameObject {
 
     @Override
     public void collision(GameObject gameObject) {
+        gameObject.collisionResolve(this);
+    }
 
+    @Override
+    public void collisionResolve(FlamingAsteroid asteroid) {
+        LOGGER.info("{} hits {}.", asteroid.getClass().getSimpleName(), this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void collisionResolve(Meteoroid meteoroid) {
+        LOGGER.info("{} hits {}.", meteoroid.getClass().getSimpleName(), this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void collisionResolve(SpaceStationMir mir) {
+        LOGGER.info("{} hits {}.", mir.getClass().getSimpleName(), this.getClass().getSimpleName());
+    }
+
+    @Override
+    public void collisionResolve(SpaceStationIss iss) {
+        LOGGER.info("{} hits {}.", iss.getClass().getSimpleName(), this.getClass().getSimpleName());
     }
 
 

@@ -31,4 +31,12 @@ public abstract class GameObject extends Rectangle {
     }
 
     public abstract void collision(GameObject gameObject);
+
+    public abstract void collisionResolve(FlamingAsteroid asteroid);
+
+    public abstract void collisionResolve(Meteoroid meteoroid);
+
+    public abstract void collisionResolve(SpaceStationMir mir);
+
+    public abstract void collisionResolve(SpaceStationIss iss);
 }
