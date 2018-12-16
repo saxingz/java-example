@@ -1,6 +1,11 @@
 package org.saxing.doubledispatch;
 
-public class GameObject extends Rectangle {
+/**
+ * GameObject
+ * 
+ * @author saxing 2018/12/16 13:38
+ */
+public abstract class GameObject extends Rectangle {
 
     private boolean damaged;
     private boolean onFire;
@@ -24,4 +29,6 @@ public class GameObject extends Rectangle {
     public void setOnFire(boolean onFire) {
         this.onFire = onFire;
     }
+
+    public abstract void collision(GameObject gameObject);
 }
