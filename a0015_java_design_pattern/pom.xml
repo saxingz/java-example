@@ -39,6 +39,11 @@
         <module>aa0015_25_decorator</module>
         <module>aa0015_26_delegation</module>
         <module>aa0015_27_dependency-injectoin</module>
+        <module>aa0015_28_dirty_flag</module>
+        <module>aa0015_29_double-checked-blocked</module>
+        <module>aa0015_30_double-dispatch</module>
+        <module>aa0015_31_eip-aggregator</module>
+        <module>aa0015_32_eip-message-channel</module>
     </modules>
 
 </project>
