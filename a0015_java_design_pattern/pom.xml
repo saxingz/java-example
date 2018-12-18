@@ -38,6 +38,7 @@
         <module>aa0015_24_data-transfer-object</module>
         <module>aa0015_25_decorator</module>
         <module>aa0015_26_delegation</module>
+        <module>aa0015_27_dependency-injectoin</module>
     </modules>
 
 </project>
