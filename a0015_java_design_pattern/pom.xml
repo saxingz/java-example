@@ -44,6 +44,7 @@
         <module>aa0015_30_double-dispatch</module>
         <module>aa0015_31_eip-aggregator</module>
         <module>aa0015_32_eip-message-channel</module>
+        <module>aa0015_33_eip-publish-subscribe</module>
     </modules>
 
 </project>
