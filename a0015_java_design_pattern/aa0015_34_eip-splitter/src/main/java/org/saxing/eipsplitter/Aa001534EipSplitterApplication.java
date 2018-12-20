@@ -3,11 +3,17 @@ package org.saxing.eipsplitter;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+/**
+ * main
+ *
+ * @author saxing 2018/12/20 23:44
+ */
 public class Aa001534EipSplitterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Aa001534EipSplitterApplication.class, args);
+
+
+
     }
 
 }
