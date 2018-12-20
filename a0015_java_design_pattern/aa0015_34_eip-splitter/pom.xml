@@ -16,6 +16,7 @@
 
     <properties>
         <java.version>1.8</java.version>
+        <camel.version>2.16.1</camel.version>
     </properties>
 
     <dependencies>
@@ -28,6 +29,18 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-core</artifactId>
+            <version>${camel.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.camel</groupId>
+            <artifactId>camel-spring-boot</artifactId>
+            <version>${camel.version}</version>
         </dependency>
     </dependencies>
 
