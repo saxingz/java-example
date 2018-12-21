@@ -46,6 +46,7 @@
         <module>aa0015_32_eip-message-channel</module>
         <module>aa0015_33_eip-publish-subscribe</module>
         <module>aa0015_34_eip-splitter</module>
+        <module>aa0015_35_eip-wire-tap</module>
     </modules>
 
 </project>
