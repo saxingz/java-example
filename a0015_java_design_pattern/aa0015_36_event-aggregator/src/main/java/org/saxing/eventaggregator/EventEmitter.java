@@ -31,4 +31,5 @@ public abstract class EventEmitter {
         }
     }
 
+    public abstract void timePasses(Weekday weekday);
 }
