@@ -5,6 +5,8 @@ import java.util.List;
 
 /**
  * EventEmitter
+ *
+ * EventEmitter is the base class for event producers that can be observed.
  * 
  * @author saxing 2018/12/23 17:19
  */
@@ -31,5 +33,5 @@ public abstract class EventEmitter {
         }
     }
 
-    public abstract void timePasses(Weekday weekday);
+    public abstract void timePasses(Weekday day);
 }
