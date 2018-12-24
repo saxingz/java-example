@@ -31,7 +31,31 @@ public class Event implements IEvent, Runnable {
 
     @Override
     public void run() {
+        long currentTime = System.currentTimeMillis();
+        long endTime = currentTime + (eventTime * 1000);
+        while (System.currentTimeMillis() < endTime){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                return ;
+            }
+        }
+        isComplete = true;
+        completed();
+    }
 
+    public final void addListener(final ThreadCompleteListener listener){
+        this.eventListener = listener;
+    }
+
+    public final void removeListener(final ThreadCompleteListener listener){
+        this.eventListener = null;
+    }
+
+    private final void completed(){
+        if (eventListener != null){
+            eventListener.completedEventHandler(eventId);
+        }
     }
 
     @Override
