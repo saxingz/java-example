@@ -164,6 +164,28 @@ public class EventManager implements ThreadCompleteListener {
 
     @Override
     public void completedEventHandler(int eventId) {
+        eventPool.get(eventId).status();
+        if (eventPool.get(eventId).isSynchronous()){
+            currentlyRunningSyncEvent = -1;
+        }
+        eventPool.remove(eventId);
+    }
 
+    /**
+     *  getEventPool
+     *
+     * @return
+     */
+    public Map<Integer, Event> getEventPool(){
+        return eventPool;
+    }
+
+    /**
+     * numOfCurrentlyRunningSyncEvent
+     *
+     * @return
+     */
+    public int numOfCurrentlyRunningSyncEvent(){
+        return currentlyRunningSyncEvent;
     }
 }
