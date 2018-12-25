@@ -47,6 +47,18 @@ public class EventManager implements ThreadCompleteListener {
     }
 
     /**
+     * create async
+     *
+     * @param eventTime
+     * @return
+     * @throws MaxNumOfEventsAllowedException
+     * @throws LongRunningEventException
+     */
+    public int createAsync(int eventTime) throws MaxNumOfEventsAllowedException, LongRunningEventException{
+        return createEvent(eventTime, false);
+    }
+
+    /**
      * create event
      *
      * @param eventTime
@@ -72,6 +84,8 @@ public class EventManager implements ThreadCompleteListener {
 
         return newEventId;
     }
+
+
 
     /**
      * generateId
