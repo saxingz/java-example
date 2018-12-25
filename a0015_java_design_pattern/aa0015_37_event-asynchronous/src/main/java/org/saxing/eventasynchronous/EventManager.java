@@ -85,7 +85,37 @@ public class EventManager implements ThreadCompleteListener {
         return newEventId;
     }
 
+    /**
+     * start
+     *
+     * @param eventId
+     * @throws EventDoesNotExistException
+     */
+    public void start(int eventId) throws EventDoesNotExistException{
+        if (!eventPool.containsKey(eventId)){
+            throw new EventDoesNotExistException(eventId + " does not exist.");
+        }
+        eventPool.get(eventId).start();
+    }
 
+    /**
+     * stop event
+     *
+     * @param eventId
+     * @throws EventDoesNotExistException
+     */
+    public void cancel(int eventId) throws EventDoesNotExistException{
+        if (!eventPool.containsKey(eventId)) {
+            throw new EventDoesNotExistException(eventId + " does not exist.");
+        }
+
+        if (eventId == currentlyRunningSyncEvent){
+            currentlyRunningSyncEvent = -1;
+        }
+
+        eventPool.get(eventId).stop();
+        eventPool.remove(eventId);
+    }
 
     /**
      * generateId
