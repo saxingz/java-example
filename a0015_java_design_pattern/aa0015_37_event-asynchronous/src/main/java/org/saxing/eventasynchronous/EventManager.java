@@ -1,5 +1,6 @@
 package org.saxing.eventasynchronous;
 
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.ConcurrentHashMap;
@@ -115,6 +116,37 @@ public class EventManager implements ThreadCompleteListener {
 
         eventPool.get(eventId).stop();
         eventPool.remove(eventId);
+    }
+
+    /**
+     * status
+     *
+     * @param eventId
+     * @throws EventDoesNotExistException
+     */
+    public void status(int eventId) throws EventDoesNotExistException{
+        if (!eventPool.containsKey(eventId)){
+            throw new EventDoesNotExistException(eventId + " does not exist.");
+        }
+        eventPool.get(eventId).status();
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void statusOfAllEvents(){
+        Iterator it = eventPool.entrySet().iterator();
+        while (it.hasNext()){
+            Map.Entry pair = (Map.Entry) it.next();
+            ((Event)pair.getValue()).status();
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
+    public void shutdown(){
+        Iterator it = eventPool.entrySet().iterator();
+        while (it.hasNext()){
+            Map.Entry pair = (Map.Entry) it.next();
+            ((Event)pair.getValue()).stop();
+        }
     }
 
     /**
