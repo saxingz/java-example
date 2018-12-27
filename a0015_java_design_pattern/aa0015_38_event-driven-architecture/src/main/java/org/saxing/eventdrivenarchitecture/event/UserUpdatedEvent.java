@@ -7,7 +7,7 @@ import org.saxing.eventdrivenarchitecture.model.User;
  *
  * @author saxing 2018/12/27 22:30
  */
-public class UserUpdatedEvent {
+public class UserUpdatedEvent extends AbstractEvent {
 
     private User user;
 
