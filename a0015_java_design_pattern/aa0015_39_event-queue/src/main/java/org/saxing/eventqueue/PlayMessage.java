@@ -2,6 +2,11 @@ package org.saxing.eventqueue;
 
 import javax.sound.sampled.AudioInputStream;
 
+/**
+ * play message
+ *
+ * @author saxing 2018/12/30 22:01
+ */
 public class PlayMessage {
 
     private AudioInputStream stream;
