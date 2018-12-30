@@ -1,6 +1,5 @@
 package org.saxing.eventqueue;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.BufferedReader;
 import java.io.IOException;
