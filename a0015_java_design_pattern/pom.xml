@@ -47,6 +47,10 @@
         <module>aa0015_33_eip-publish-subscribe</module>
         <module>aa0015_34_eip-splitter</module>
         <module>aa0015_35_eip-wire-tap</module>
+        <module>aa0015_36_event-aggregator</module>
+        <module>aa0015_37_event-asynchronous</module>
+        <module>aa0015_38_event-driven-architecture</module>
+        <module>aa0015_39_event-queue</module>
     </modules>
 
 </project>
