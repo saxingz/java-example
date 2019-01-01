@@ -51,6 +51,7 @@
         <module>aa0015_37_event-asynchronous</module>
         <module>aa0015_38_event-driven-architecture</module>
         <module>aa0015_39_event-queue</module>
+        <module>aa0015_40_event_sourcing</module>
     </modules>
 
 </project>
