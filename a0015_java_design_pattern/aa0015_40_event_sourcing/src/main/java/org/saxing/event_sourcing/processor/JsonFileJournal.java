@@ -1,5 +1,9 @@
 package org.saxing.event_sourcing.processor;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import org.saxing.event_sourcing.event.DomainEvent;
+
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,5 +44,11 @@ public class JsonFileJournal {
      */
     public void reset(){
         aFile.delete();
+    }
+
+    public void write(DomainEvent domainEvent){
+        Gson gson = new Gson();
+        JsonElement jsonElement;
+        // todo
     }
 }
