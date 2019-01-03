@@ -1,5 +1,6 @@
 package org.saxing.domain;
 
+import org.saxing.state.AccountAggregate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -77,7 +78,21 @@ public class Account {
 
     private void handleDeposit(BigDecimal money, boolean realTime){
         depositMoney(money);
-        // todo
+        AccountAggregate.putAccount(this);
+        if (realTime){
+            LOGGER.info("Some external api for only realtime execution could be called here.");
+        }
+    }
+
+    private void handleWithdrawal(BigDecimal money, boolean realTime){
+        if (this.money.compareTo(money) == -1){
+            throw new RuntimeException("Insufficient Account Balance");
+        }
+        withdrawMoney(money);
+        AccountAggregate.putAccount(this);
+        if (realTime){
+            LOGGER.info("Some external api for only realtime execution could be called here.");
+        }
     }
 
 }
