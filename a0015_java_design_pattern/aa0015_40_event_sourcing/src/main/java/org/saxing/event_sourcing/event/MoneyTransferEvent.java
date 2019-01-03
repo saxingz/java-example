@@ -62,7 +62,6 @@ public class MoneyTransferEvent extends DomainEvent {
         }
         accountFrom.handleTransferFromEvent(this);
         accountTo.handleTransferToEvent(this);
-
-
     }
+
 }
