@@ -1,4 +1,4 @@
-package org.saxing.domain;
+package org.saxing.event_sourcing.domain;
 
 import org.saxing.event_sourcing.event.AccountCreateEvent;
 import org.saxing.event_sourcing.event.MoneyDepositEvent;

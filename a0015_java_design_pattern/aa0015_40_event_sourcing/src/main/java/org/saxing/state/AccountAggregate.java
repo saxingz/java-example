@@ -1,6 +1,6 @@
 package org.saxing.state;
 
-import org.saxing.domain.Account;
+import org.saxing.event_sourcing.domain.Account;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,6 +1,6 @@
 package org.saxing.event_sourcing.event;
 
-import org.saxing.domain.Account;
+import org.saxing.event_sourcing.domain.Account;
 import org.saxing.state.AccountAggregate;
 
 import java.math.BigDecimal;
