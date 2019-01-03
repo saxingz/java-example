@@ -56,7 +56,7 @@ public class JsonFileJournal {
         if (domainEvent instanceof AccountCreateEvent){
             jsonElement = gson.toJsonTree(domainEvent, AccountCreateEvent.class);
         } else if (domainEvent instanceof MoneyDepositEvent){
-            jsonElement = gson.toJsonTree(domainEvent, AccountCreateEvent.class);
+            jsonElement = gson.toJsonTree(domainEvent, MoneyDepositEvent.class);
         } else if (domainEvent instanceof MoneyTransferEvent){
             jsonElement = gson.toJsonTree(domainEvent, MoneyTransferEvent.class);
         } else {
