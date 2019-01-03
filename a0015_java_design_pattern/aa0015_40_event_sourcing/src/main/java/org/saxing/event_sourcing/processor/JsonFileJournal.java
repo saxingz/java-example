@@ -2,7 +2,9 @@ package org.saxing.event_sourcing.processor;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+import org.saxing.event_sourcing.event.AccountCreateEvent;
 import org.saxing.event_sourcing.event.DomainEvent;
+import org.saxing.event_sourcing.event.MoneyDepositEvent;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -49,6 +51,10 @@ public class JsonFileJournal {
     public void write(DomainEvent domainEvent){
         Gson gson = new Gson();
         JsonElement jsonElement;
-        // todo
+        if (domainEvent instanceof AccountCreateEvent){
+            jsonElement = gson.toJsonTree(domainEvent, AccountCreateEvent.class);
+        } else if (domainEvent instanceof MoneyDepositEvent){
+            jsonElement = gson.toJsonTree(domainEvent, AccountCreateEvent.class);
+        }
     }
 }

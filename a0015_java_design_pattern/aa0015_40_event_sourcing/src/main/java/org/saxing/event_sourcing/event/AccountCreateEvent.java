@@ -1,6 +1,5 @@
 package org.saxing.event_sourcing.event;
 
-import org.saxing.event_sourcing.domain.Account;
 import org.saxing.state.AccountAggregate;
 
 /**
