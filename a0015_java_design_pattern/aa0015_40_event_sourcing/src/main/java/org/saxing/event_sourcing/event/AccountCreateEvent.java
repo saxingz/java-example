@@ -1,5 +1,8 @@
 package org.saxing.event_sourcing.event;
 
+import org.saxing.domain.Account;
+import org.saxing.state.AccountAggregate;
+
 /**
  * account create event
  *
@@ -26,6 +29,11 @@ public class AccountCreateEvent extends DomainEvent {
 
     @Override
     public void process() {
-
+        Account account = AccountAggregate.getAccount(accountNo);
+        if (account != null){
+            throw new RuntimeException("Account already exists");
+        }
+        account = new Account(accountNo, owner);
+        account.handleEvent(this);
     }
 }

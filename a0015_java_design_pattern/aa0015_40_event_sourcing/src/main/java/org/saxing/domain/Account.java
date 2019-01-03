@@ -1,5 +1,6 @@
 package org.saxing.domain;
 
+import org.saxing.event_sourcing.event.AccountCreateEvent;
 import org.saxing.state.AccountAggregate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -95,4 +96,35 @@ public class Account {
         }
     }
 
+    public void handleEvent(AccountCreateEvent accountCreateEvent){
+        AccountAggregate.putAccount(this);
+        if (accountCreateEvent.isRealTime()){
+            LOGGER.info("Some external api for only realtime execution could be called here.");
+        }
+    }
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
