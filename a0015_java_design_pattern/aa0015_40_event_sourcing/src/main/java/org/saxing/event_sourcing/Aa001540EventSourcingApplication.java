@@ -50,10 +50,10 @@ public class Aa001540EventSourcingApplication {
         LOGGER.info("Do some money operations............");
 
         eventProcessor.process(new MoneyDepositEvent(
-                2, new Date().getTime(),  new BigDecimal("100000"), ACCOUNT_OF_DAENERYS));
+                2, new Date().getTime(), ACCOUNT_OF_DAENERYS, new BigDecimal("100000")));
 
         eventProcessor.process(new MoneyDepositEvent(
-                3, new Date().getTime(), new BigDecimal("100"), ACCOUNT_OF_JON));
+                3, new Date().getTime(), ACCOUNT_OF_JON, new BigDecimal("100")));
 
         eventProcessor.process(new MoneyTransferEvent(
                 4, new Date().getTime(), new BigDecimal("10000"), ACCOUNT_OF_DAENERYS,

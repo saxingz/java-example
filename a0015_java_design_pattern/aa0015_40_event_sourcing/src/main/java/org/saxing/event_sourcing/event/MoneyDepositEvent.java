@@ -15,7 +15,7 @@ public class MoneyDepositEvent extends DomainEvent {
     private final BigDecimal money;
     private final int accountNo;
 
-    public MoneyDepositEvent(long sequenceId, long createdTime, BigDecimal money, int accountNo) {
+    public MoneyDepositEvent(long sequenceId, long createdTime, int accountNo, BigDecimal money) {
         super(sequenceId, createdTime, "MoneyDepositEvent");
         this.money = money;
         this.accountNo = accountNo;
