@@ -1,6 +1,7 @@
 package org.saxing.extensionobjects.units;
 
 import org.saxing.extensionobjects.abstractextensions.UnitExtension;
+import org.saxing.extensionobjects.concreteextensions.Soldier;
 
 /**
  * Class defining SoldierUnit
@@ -17,8 +18,9 @@ public class SoldierUnit extends Unit {
     public UnitExtension getUnitExtension(String extensionName) {
         if (extensionName.equals("SoldierExtension")){
             if (unitExtension == null){
-
+                unitExtension = new Soldier(this);
             }
+            return unitExtension;
         }
         return super.getUnitExtension(extensionName);
     }
