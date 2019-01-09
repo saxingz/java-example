@@ -7,6 +7,6 @@ package org.saxing.factorymethod;
  */
 public interface Weapon {
 
-
+    WeaponType getWeaponType();
 
 }
