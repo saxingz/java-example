@@ -54,6 +54,9 @@
         <module>aa0015_40_event_sourcing</module>
         <module>aa0015_41_execute-around</module>
         <module>aa0015_42_extension-objects</module>
+        <module>aa0015_43_facade</module>
+        <module>aa0015_44_factory-kit</module>
+        <module>aa0015_45_factory-method</module>
     </modules>
 
 </project>
