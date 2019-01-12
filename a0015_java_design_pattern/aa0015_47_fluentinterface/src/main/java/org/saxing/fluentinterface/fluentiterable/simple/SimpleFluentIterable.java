@@ -131,4 +131,10 @@ public class SimpleFluentIterable<E> implements FluentIterable<E> {
     public Spliterator<E> spliterator() {
         return iterable.spliterator();
     }
+
+    public static <E> FluentIterable<E> fromCopyOf(Iterable<E> iterable) {
+        List<E> copy = FluentIterable.copyToList(iterable);
+        return new SimpleFluentIterable<>(copy);
+    }
+
 }

@@ -1,11 +1,13 @@
 package org.saxing.fluentinterface;
 
+import org.saxing.fluentinterface.fluentiterable.simple.SimpleFluentIterable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 /**
  * main
@@ -23,8 +25,15 @@ public class Aa001547FluentinterfaceApplication {
 
         prettyPrint("The initial list contains: ", integerList);
 
+        List<Integer> firstFiveNegatives =
+                SimpleFluentIterable.fromCopyOf(integerList).filter(negatives()).first(3).asList();
+        prettyPrint("The first three negative values are: ", firstFiveNegatives);
+
     }
 
+    private static Predicate<? super Integer> negatives() {
+        return integer -> integer < 0;
+    }
 
     private static <E> void prettyPrint(String prefix, Iterable<E> iterable){
         prettyPrint(", ", prefix, iterable);
