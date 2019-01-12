@@ -64,7 +64,24 @@ public class LazyFluentIterable<E> implements FluentIterable<E> {
 
     @Override
     public FluentIterable<E> first(int count) {
-        return null;
+        return new LazyFluentIterable<E>(){
+            @Override
+            public Iterator<E> iterator() {
+                return new DecoratingIterator<E>(iterable.iterator()) {
+                    int currentIndex;
+
+                    @Override
+                    public E computeNext() {
+                        if (currentIndex < count && fromIterator.hasNext()){
+                            E candicate = fromIterator.next();
+                            currentIndex++;
+                            return candicate;
+                        }
+                        return null;
+                    }
+                };
+            }
+        };
     }
 
     @Override
