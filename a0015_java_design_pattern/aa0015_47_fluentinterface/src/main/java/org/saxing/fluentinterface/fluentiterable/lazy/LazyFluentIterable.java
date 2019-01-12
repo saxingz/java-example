@@ -136,12 +136,30 @@ public class LazyFluentIterable<E> implements FluentIterable<E> {
 
     @Override
     public <T> FluentIterable<T> map(Function<? super E, T> function) {
-        return null;
+        return new LazyFluentIterable<T>(){
+            @Override
+            public Iterator<T> iterator() {
+                return new DecoratingIterator<T>(null) {
+
+                    Iterator<E> oldTypeIterator = iterable.iterator();
+
+                    @Override
+                    public T computeNext() {
+                        if (oldTypeIterator.hasNext()){
+                            E candicate = oldTypeIterator.next();
+                            return function.apply(candicate);
+                        }else{
+                            return null;
+                        }
+                    }
+                };
+            }
+        };
     }
 
     @Override
     public List<E> asList() {
-        return null;
+        return FluentIterable.copyToList(iterable);
     }
 
     @Override
