@@ -164,6 +164,15 @@ public class LazyFluentIterable<E> implements FluentIterable<E> {
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return new DecoratingIterator<E>(iterable.iterator()) {
+            @Override
+            public E computeNext() {
+                return fromIterator.hasNext() ? fromIterator.next() : null;
+            }
+        };
+    }
+
+    public static final <E> FluentIterable<E> from(Iterable<E> iterable){
+        return new LazyFluentIterable<>(iterable);
     }
 }
