@@ -2,6 +2,7 @@ package org.saxing.fluentinterface.fluentiterable.lazy;
 
 import org.saxing.fluentinterface.fluentiterable.FluentIterable;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
@@ -86,12 +87,51 @@ public class LazyFluentIterable<E> implements FluentIterable<E> {
 
     @Override
     public Optional<E> last() {
-        return Optional.empty();
+        Iterator<E> resultIterator = last(1).iterator();
+        return resultIterator.hasNext() ? Optional.of(resultIterator.next()) : Optional.empty();
     }
 
     @Override
     public FluentIterable<E> last(int count) {
-        return null;
+        return new LazyFluentIterable<E>(){
+            @Override
+            public Iterator<E> iterator() {
+                return new DecoratingIterator<E>(iterable.iterator()) {
+
+                    private int stopIndex;
+                    private int totalElementsCount;
+                    private List<E> list;
+                    private int currentIndex;
+
+                    @Override
+                    public E computeNext() {
+                        initialize();
+
+                        E candicate = null;
+                        while (currentIndex < stopIndex && fromIterator.hasNext()){
+                            currentIndex++;
+                            fromIterator.next();
+                        }
+                        if (currentIndex >= stopIndex && fromIterator.hasNext() ){
+                            candicate = fromIterator.next();
+                        }
+                        return candicate;
+                    }
+
+                    private void initialize(){
+                        if (list == null){
+                            list = new ArrayList<>();
+                            Iterator<E> newIterator = iterable.iterator();
+                            while (newIterator.hasNext()){
+                                list.add(newIterator.next());
+                            }
+                            totalElementsCount = list.size();
+                            stopIndex = totalElementsCount - count;
+                        }
+                    }
+                };
+            }
+        };
     }
 
     @Override
