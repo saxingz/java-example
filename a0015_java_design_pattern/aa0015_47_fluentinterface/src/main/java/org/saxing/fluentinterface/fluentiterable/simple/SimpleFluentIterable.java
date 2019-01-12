@@ -2,9 +2,8 @@ package org.saxing.fluentinterface.fluentiterable.simple;
 
 import org.saxing.fluentinterface.fluentiterable.FluentIterable;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -93,16 +92,43 @@ public class SimpleFluentIterable<E> implements FluentIterable<E> {
 
     @Override
     public <T> FluentIterable<T> map(Function<? super E, T> function) {
-        return null;
+        List<T> temporaryList = new ArrayList<>();
+        Iterator<E> iterator = iterator();
+        while (iterator.hasNext()){
+            temporaryList.add(function.apply(iterator.next()));
+        }
+        return from(temporaryList);
+    }
+
+    private <T> FluentIterable<T> from(List<T> temporaryList) {
+        return new SimpleFluentIterable<>(temporaryList);
     }
 
     @Override
     public List<E> asList() {
-        return null;
+        return toList(iterable.iterator());
+    }
+
+    private static <E> List<E> toList(Iterator<E> iterator) {
+        List<E> copy = new ArrayList<>();
+        while (iterator.hasNext()){
+            copy.add(iterator.next());
+        }
+        return copy;
     }
 
     @Override
     public Iterator<E> iterator() {
-        return null;
+        return iterable.iterator();
+    }
+
+    @Override
+    public void forEach(Consumer<? super E> action) {
+        iterable.forEach(action);
+    }
+
+    @Override
+    public Spliterator<E> spliterator() {
+        return iterable.spliterator();
     }
 }
