@@ -1,5 +1,6 @@
 package org.saxing.fluentinterface;
 
+import org.saxing.fluentinterface.fluentiterable.lazy.LazyFluentIterable;
 import org.saxing.fluentinterface.fluentiterable.simple.SimpleFluentIterable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -7,7 +8,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.*;
+import java.util.function.Function;
 import java.util.function.Predicate;
+
+import static java.lang.String.valueOf;
 
 /**
  * main
@@ -29,10 +33,46 @@ public class Aa001547FluentinterfaceApplication {
                 SimpleFluentIterable.fromCopyOf(integerList).filter(negatives()).first(3).asList();
         prettyPrint("The first three negative values are: ", firstFiveNegatives);
 
+        List<Integer> lastTwoPositives =
+                SimpleFluentIterable.fromCopyOf(integerList).filter(positives()).last(2).asList();
+        prettyPrint("The last two positive values are: ", lastTwoPositives);
+
+        SimpleFluentIterable
+                .fromCopyOf(integerList)
+                .filter(number -> number % 2 == 0)
+                .first()
+                .ifPresent(evenNumber -> LOGGER.info("The first even number is: {}", evenNumber));
+
+        List<String> transformedList =
+                SimpleFluentIterable.fromCopyOf(integerList).filter(negatives()).map(transformToString())
+                        .asList();
+        prettyPrint("A string-mapped list of negative numbers contains: ", transformedList);
+
+        List<String> lastTwoOfFirstFourStringMapped =
+                LazyFluentIterable.from(integerList).filter(positives()).first(4).last(2)
+                        .map(number -> "String[" + valueOf(number) + "]").asList();
+        prettyPrint(
+                "The lazy list contains the last two of the first four positive numbers mapped to Strings: ",
+                lastTwoOfFirstFourStringMapped);
+
+        LazyFluentIterable
+                .from(integerList)
+                .filter(negatives())
+                .first(2)
+                .last()
+                .ifPresent(lastOfFirstTwo -> LOGGER.info("The last of the first two negatives is: {}", lastOfFirstTwo));
+    }
+
+    private static Function<Integer, String> transformToString() {
+        return integer -> "String[" + valueOf(integer) + "]";
     }
 
     private static Predicate<? super Integer> negatives() {
         return integer -> integer < 0;
+    }
+
+    private static Predicate<? super Integer> positives(){
+        return integer -> integer > 0;
     }
 
     private static <E> void prettyPrint(String prefix, Iterable<E> iterable){
