@@ -58,7 +58,8 @@ public class LazyFluentIterable<E> implements FluentIterable<E> {
 
     @Override
     public Optional<E> first() {
-        return Optional.empty();
+        Iterator<E> resultIterator = first(1).iterator();
+        return resultIterator.hasNext() ? Optional.of(resultIterator.next()) : Optional.empty();
     }
 
     @Override
