@@ -59,6 +59,7 @@
         <module>aa0015_45_factory-method</module>
         <module>aa0015_46_feature-toggle</module>
         <module>aa0015_47_fluentinterface</module>
+        <module>aa0015_48_flux</module>
     </modules>
 
 </project>
