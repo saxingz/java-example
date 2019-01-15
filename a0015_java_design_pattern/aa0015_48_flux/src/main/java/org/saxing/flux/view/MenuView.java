@@ -1,6 +1,7 @@
 package org.saxing.flux.view;
 
 import org.saxing.flux.action.MenuItem;
+import org.saxing.flux.dispatcher.Dispatcher;
 import org.saxing.flux.store.MenuStore;
 import org.saxing.flux.store.Store;
 import org.slf4j.Logger;
@@ -36,6 +37,6 @@ public class MenuView implements View {
     }
 
     public void itemClicked(MenuItem item) {
-
+        Dispatcher.getInstance().menuItemSelected(item);
     }
 }
