@@ -11,8 +11,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Aa001550FrontControllerApplication {
 
     public static void main(String[] args) {
-
-
+        FrontController controller = new FrontController();
+        controller.handleRequest("Archer");
+        controller.handleRequest("Catapult");
+        controller.handleRequest("foobar");
     }
 
 }
