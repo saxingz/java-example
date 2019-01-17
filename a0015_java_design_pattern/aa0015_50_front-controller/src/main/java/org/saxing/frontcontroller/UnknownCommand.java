@@ -6,4 +6,5 @@ public class UnknownCommand implements Command {
     public void process() {
         new ErrorView().display();
     }
+
 }
