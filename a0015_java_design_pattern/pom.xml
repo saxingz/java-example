@@ -61,6 +61,7 @@
         <module>aa0015_47_fluentinterface</module>
         <module>aa0015_48_flux</module>
         <module>aa0015_49_flyweight</module>
+        <module>aa0015_50_front-controller</module>
     </modules>
 
 </project>
