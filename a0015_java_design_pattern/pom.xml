@@ -62,6 +62,7 @@
         <module>aa0015_48_flux</module>
         <module>aa0015_49_flyweight</module>
         <module>aa0015_50_front-controller</module>
+        <module>aa0015_51_guarded-suspension</module>
     </modules>
 
 </project>
