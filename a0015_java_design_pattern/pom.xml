@@ -63,6 +63,7 @@
         <module>aa0015_49_flyweight</module>
         <module>aa0015_50_front-controller</module>
         <module>aa0015_51_guarded-suspension</module>
+        <module>aa0015_52_half-sync-half-async</module>
     </modules>
 
 </project>
