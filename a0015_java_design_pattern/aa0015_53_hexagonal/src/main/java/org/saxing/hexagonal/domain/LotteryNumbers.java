@@ -1,9 +1,8 @@
 package org.saxing.hexagonal.domain;
 
-import java.util.HashSet;
-import java.util.PrimitiveIterator;
-import java.util.Random;
-import java.util.Set;
+import com.google.common.base.Joiner;
+
+import java.util.*;
 
 /**
  * Value object representing lottery numbers. This lottery uses sets of 4 numbers. The numbers must be unique and
@@ -27,10 +26,57 @@ public class LotteryNumbers {
         generateRandomNumbers();
     }
 
+    /**
+     * Constructor. Uses given numbers.
+     */
+    private LotteryNumbers(Set<Integer> givenNumbers) {
+        numbers = new HashSet<>();
+        numbers.addAll(givenNumbers);
+    }
+
+    /**
+     * @return random LotteryNumbers
+     *
+     * @return
+     */
+    public static LotteryNumbers createRandom(){
+        return new LotteryNumbers();
+    }
+
+    /**
+     * @return given LotteryNumbers
+     */
+    public static LotteryNumbers create(Set<Integer> givenNumbers) {
+        return new LotteryNumbers(givenNumbers);
+    }
+
+    /**
+     *
+     * @return lottery numbers
+     */
+    public Set<Integer> getNumbers(){
+        return Collections.unmodifiableSet(numbers);
+    }
+
+    /**
+     * @return numbers as comma separated string
+     */
+    public String getNumbersAsString() {
+        return Joiner.on(',').join(numbers);
+    }
+
     private void generateRandomNumbers() {
         numbers.clear();
+        RandomNumberGenerator generator = new RandomNumberGenerator(MIN_NUMBER, MAX_NUMBER);
+        while (numbers.size() < NUM_NUMBERS) {
+            int num = generator.nextInt();
+            numbers.add(num);
+        }
+    }
 
-
+    @Override
+    public String toString() {
+        return "LotteryNumbers{" + "numbers=" + numbers + '}';
     }
 
     /**
@@ -53,13 +99,6 @@ public class LotteryNumbers {
          */
         public int nextInt(){
             return randomIterator.nextInt();
-        }
-
-    }
-
-    public static void main(String[] args) {
-        for (int i = 0; i < 10; i++) {
-            System.out.println(new RandomNumberGenerator(10, 20).nextInt());
         }
 
     }
