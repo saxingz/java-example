@@ -2,6 +2,8 @@ package org.saxing.hexagonal.domain;
 
 import org.saxing.hexagonal.database.LotteryTicketRepository;
 
+import java.util.Optional;
+
 /**
  * Lottery utilities
  *
@@ -14,7 +16,7 @@ public class LotteryUtils {
 
     public static LotteryTicketCheckResult checkTicketForPrize(LotteryTicketRepository repository, LotteryTicketId id,
                                                                LotteryNumbers winningNumbers){
-
+        // saxing todo
     }
 
 }
