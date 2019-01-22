@@ -1,7 +1,12 @@
 package org.saxing.a0023_search.mapper;
 
 import org.saxing.a0023_search.domain.entity.AnsDO;
+import org.saxing.a0023_search.domain.param.SearchParam;
+import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
+@Repository
 public interface AnsDOMapper {
     /**
      *  根据主键删除数据库的记录,ans
@@ -44,4 +49,12 @@ public interface AnsDOMapper {
      * @param record
      */
     int updateByPrimaryKey(AnsDO record);
+
+    /**
+     * 条件查找
+     *
+     * @param searchParam
+     * @return
+     */
+    List<AnsDO> selectTitleByCondition(SearchParam searchParam);
 }
