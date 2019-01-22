@@ -1,3 +1,23 @@
+spring:
+    #数据库连接配置
+    datasource:
+      name: turtle
+      url: jdbc:mysql://10.20.0.163:3306/aatest?useUnicode=true&characterEncoding=utf-8&useSSL=false
+      username: root
+      password: 123456
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      druid:
+        initial-size: 2
+        min-idle: 1
+        max-active: 5
+        max-wait: 60000
+        pool-prepared-statements: true
+        max-pool-prepared-statement-per-connection-size: 20
+        validationQuery: select 'x'
+        filters: stat,wall,slf4j
+        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+
 mybatis:
     #类别名包的位置
     type-aliases-package: com.listenrobot.boss.domain.entity
@@ -8,3 +28,9 @@ mybatis:
         mapUnderscoreToCamelCase: true
         #打印myBatis的sql
         log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+pagehelper:
+    helper-dialect: mysql
+    reasonable: true
+    support-methods-arguments: true
+    params: count=countSql
