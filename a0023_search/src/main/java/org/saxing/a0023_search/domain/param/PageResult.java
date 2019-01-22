@@ -1,4 +1,4 @@
-package org.saxing.a0023_search.domain.entity;
+package org.saxing.a0023_search.domain.param;
 
 
 import java.io.Serializable;

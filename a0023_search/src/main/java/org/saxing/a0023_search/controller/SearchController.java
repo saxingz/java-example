@@ -1,7 +1,7 @@
 package org.saxing.a0023_search.controller;
 
 import org.saxing.a0023_search.domain.entity.AnsDO;
-import org.saxing.a0023_search.domain.entity.PageResult;
+import org.saxing.a0023_search.domain.param.PageResult;
 import org.saxing.a0023_search.domain.param.SearchParam;
 import org.saxing.a0023_search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;

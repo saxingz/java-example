@@ -3,7 +3,7 @@ package org.saxing.a0023_search.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.saxing.a0023_search.domain.entity.AnsDO;
-import org.saxing.a0023_search.domain.entity.PageResult;
+import org.saxing.a0023_search.domain.param.PageResult;
 import org.saxing.a0023_search.domain.param.SearchParam;
 import org.saxing.a0023_search.mapper.AnsDOMapper;
 import org.springframework.beans.factory.annotation.Autowired;

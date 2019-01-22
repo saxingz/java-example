@@ -1,10 +1,11 @@
 
 
 spring:
-    application:
-        name: search
-    profiles:
-      active: DEV
+  application:
+    name: search
+  profiles:
+    active: dev
+
 server:
   servlet:
-    context-path: search
+    context-path: /search

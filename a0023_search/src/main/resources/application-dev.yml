@@ -1,36 +1,39 @@
+server:
+  port: 8086
+
 spring:
-    #Êı¾İ¿âÁ¬½ÓÅäÖÃ
-    datasource:
-      name: turtle
-      url: jdbc:mysql://10.20.0.163:3306/aatest?useUnicode=true&characterEncoding=utf-8&useSSL=false
-      username: root
-      password: 123456
-      type: com.alibaba.druid.pool.DruidDataSource
-      driver-class-name: com.mysql.jdbc.Driver
-      druid:
-        initial-size: 2
-        min-idle: 1
-        max-active: 5
-        max-wait: 60000
-        pool-prepared-statements: true
-        max-pool-prepared-statement-per-connection-size: 20
-        validationQuery: select 'x'
-        filters: stat,wall,slf4j
-        connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
+  #æ•°æ®åº“è¿æ¥é…ç½®
+  datasource:
+    name: turtle
+    url: jdbc:mysql://10.20.0.163:3306/aatest?useUnicode=true&characterEncoding=utf-8&useSSL=false
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.jdbc.Driver
+    druid:
+      initial-size: 2
+      min-idle: 1
+      max-active: 5
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      validationQuery: select 'x'
+      filters: stat,wall,slf4j
+      connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=500
 
 mybatis:
-    #Àà±ğÃû°üµÄÎ»ÖÃ
-    type-aliases-package: com.listenrobot.boss.domain.entity
-    mapper-locations: classpath:mapper/*Mapper.xml
-    configuration:
-        #È«¾ÖµØ¿ªÆô»ò¹Ø±ÕÅäÖÃÎÄ¼şÖĞµÄËùÓĞÓ³ÉäÆ÷ÒÑ¾­ÅäÖÃµÄÈÎºÎ»º´æ
-        cache-enabled: true
-        mapUnderscoreToCamelCase: true
-        #´òÓ¡myBatisµÄsql
-        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  #ç±»åˆ«ååŒ…çš„ä½ç½®
+  type-aliases-package: org.saxing.a0023_search.domain.entity
+  mapper-locations: classpath:mapper/*Mapper.xml
+  configuration:
+    #å…¨å±€åœ°å¼€å¯æˆ–å…³é—­é…ç½®æ–‡ä»¶ä¸­çš„æ‰€æœ‰æ˜ å°„å™¨å·²ç»é…ç½®çš„ä»»ä½•ç¼“å­˜
+    cache-enabled: true
+    mapUnderscoreToCamelCase: true
+    #æ‰“å°myBatisçš„sql
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 pagehelper:
-    helper-dialect: mysql
-    reasonable: true
-    support-methods-arguments: true
-    params: count=countSql
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
