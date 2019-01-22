@@ -1,5 +1,6 @@
 package org.saxing.a0023_search.domain.vo;
 
+import lombok.Data;
 import org.saxing.a0023_search.domain.entity.PageParam;
 
 /**
