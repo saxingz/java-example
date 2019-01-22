@@ -1,0 +1,10 @@
+mybatis:
+    #类别名包的位置
+    type-aliases-package: com.listenrobot.boss.domain.entity
+    mapper-locations: classpath:mapper/*Mapper.xml
+    configuration:
+        #全局地开启或关闭配置文件中的所有映射器已经配置的任何缓存
+        cache-enabled: true
+        mapUnderscoreToCamelCase: true
+        #打印myBatis的sql
+        log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
