@@ -36,4 +36,7 @@ public class SearchService {
         return pageResult;
     }
 
+    public AnsDO searchById(Long id) {
+        return ansDOMapper.selectByPrimaryKey(id);
+    }
 }

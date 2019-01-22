@@ -6,6 +6,7 @@ import org.saxing.a0023_search.domain.param.SearchParam;
 import org.saxing.a0023_search.service.SearchService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,11 @@ public class SearchController {
     @GetMapping("/keyword")
     public PageResult<AnsDO> queryByKeyWork(SearchParam searchParam){
         return searchService.searchByKeyword(searchParam);
+    }
+
+    @GetMapping("/id/{id}")
+    public AnsDO searchById(@PathVariable (value = "id") Long id){
+        return searchService.searchById(id);
     }
 
 }
