@@ -16,7 +16,7 @@ public class LotteryUtils {
 
     public static LotteryTicketCheckResult checkTicketForPrize(LotteryTicketRepository repository, LotteryTicketId id,
                                                                LotteryNumbers winningNumbers){
-        // saxing todo
+        return null;
     }
 
 }
