@@ -1,5 +1,10 @@
+
+
 spring:
     application:
         name: search
     profiles:
       active: DEV
+server:
+  servlet:
+    context-path: search
