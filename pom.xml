@@ -33,6 +33,7 @@
         <module>a0020_java8</module>
         <module>a0021_ldap</module>
         <module>a0022_gatewaycodegenerate</module>
+        <module>a0023_search</module>
     </modules>
 
     <properties>
