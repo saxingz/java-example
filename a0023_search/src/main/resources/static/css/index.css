@@ -28,7 +28,7 @@ input::-webkit-inner-spin-button{ -webkit-appearance:none;}
 html,body{height: 100%;}
 body{background:url('../images/body_bg.jpg') 100% 100% no-repeat; background-size:cover; -webkit-background-size:cover;}
 body.list-body{box-sizing: border-box; padding:150px 0 10px 0; position:relative;}
-body.detail-body{padding-top:88px;}
+body.detail-body{padding-top:64px;}
 
 /*头部*/
 .section-top{position:fixed; top:0; left:0; width:100%; box-sizing: border-box;}
