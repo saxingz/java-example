@@ -4,9 +4,9 @@ server:
 spring:
   #数据库连接配置
   datasource:
-    url: jdbc:mysql://10.20.0.163:3306/aatest?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
+    url: jdbc:mysql://127.0.0.1:8806/search?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=UTC
     username: root
-    password: 123456
+    password:
     type: com.alibaba.druid.pool.DruidDataSource
     driver-class-name: com.mysql.jdbc.Driver
     druid:
