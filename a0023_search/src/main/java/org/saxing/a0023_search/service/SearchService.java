@@ -2,13 +2,16 @@ package org.saxing.a0023_search.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.util.StringUtil;
 import org.saxing.a0023_search.domain.entity.AnsDO;
 import org.saxing.a0023_search.domain.param.PageResult;
 import org.saxing.a0023_search.domain.param.SearchParam;
 import org.saxing.a0023_search.mapper.AnsDOMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,10 +36,17 @@ public class SearchService {
         }
         PageResult<AnsDO> pageResult = new PageResult<>();
         Page<Object> page = PageHelper.startPage(pageNumber, pageSize, true);
-        List<AnsDO> ansDOList =  ansDOMapper.selectTitleByCondition(searchParam);
+        List<AnsDO> ansDOList = new ArrayList<>();
+        String keyword = searchParam.getKeyword();
+        if (StringUtils.isEmpty(keyword.trim())){
+            pageResult.setTotal(0);
+        }else{
+            ansDOList = ansDOMapper.selectTitleByCondition(searchParam);
+            pageResult.setTotal((int) page.getTotal());
+        }
         pageResult.setPage(pageNumber);
         pageResult.setPageSize(pageSize);
-        pageResult.setTotal((int) page.getTotal());
+
         pageResult.setList(ansDOList);
         return pageResult;
     }
