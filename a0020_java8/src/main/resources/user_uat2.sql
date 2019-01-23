@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : 10.20.0.163
+Source Server         : 10.20.12.23 (UAT uatsdf1234)
 Source Server Version : 50723
-Source Host           : 10.20.0.163:3306
-Source Database       : user4
+Source Host           : 10.20.12.23:3306
+Source Database       : user
 
 Target Server Type    : MYSQL
 Target Server Version : 50723
 File Encoding         : 65001
 
-Date: 2019-01-22 16:46:42
+Date: 2019-01-22 16:46:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -54,21 +54,6 @@ CREATE TABLE `department` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='部门信息';
 
 -- ----------------------------
--- Table structure for department_line
--- ----------------------------
-DROP TABLE IF EXISTS `department_line`;
-CREATE TABLE `department_line` (
-  `id` bigint(20) NOT NULL COMMENT '主键',
-  `ent_id` bigint(20) NOT NULL COMMENT '企业id',
-  `department_id` bigint(20) NOT NULL COMMENT '部门id',
-  `calling_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '主叫号码',
-  `left_line` int(11) NOT NULL DEFAULT '0' COMMENT '主叫号码剩余线路数',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='部门主叫号码，线路表';
-
--- ----------------------------
 -- Table structure for department_user
 -- ----------------------------
 DROP TABLE IF EXISTS `department_user`;
@@ -103,10 +88,8 @@ CREATE TABLE `developer` (
   `is_delete` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除（0：未删除1：已删除）',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`),
-  KEY `idx_ent_id` (`ent_id`),
-  KEY `idx_apply_user_id` (`apply_user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for developer_app
@@ -118,7 +101,6 @@ CREATE TABLE `developer_app` (
   `developer_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '开发者编号',
   `app_type` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT 'app类型(0:一般类型;1:私有化部署)',
   `ent_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '企业编号',
-  `apply_user_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '申请者user_id',
   `user_id` bigint(20) NOT NULL COMMENT '关联的user id',
   `client_id` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'oauth client_id',
   `client_secret` varchar(64) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT 'oauth client_secret',
@@ -131,10 +113,10 @@ CREATE TABLE `developer_app` (
   `is_delete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否已删除（0：未删除1：已删除）',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `uk_client_id` (`client_id`),
-  KEY `idx_ent_id_type` (`ent_id`,`app_type`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `uk_client_id` (`client_id`) USING BTREE,
+  KEY `idx_ent_id_type` (`ent_id`,`app_type`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for employee
@@ -161,14 +143,13 @@ CREATE TABLE `enterprise` (
   `ent_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '企业id',
   `admin_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '管理员的user_id',
   `ent_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '企业名称',
-  `agent_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '代理商id',
+  `agent_id` bigint(20) NOT NULL DEFAULT '0' COMMENT '代理商id',
   `agent_name` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '杭州声讯网络科技有限公司' COMMENT '代理商名字',
-  `is_developer` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '是否是开发者',
-  `developer_type` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '开发者类型(0:企业，1：ISV)',
-  `ai_number` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '机器人数',
+  `is_developer` tinyint(4) NOT NULL DEFAULT '0' COMMENT '是否是开发者',
+  `developer_type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '开发者类型(0:企业，1：ISV)',
   `private_clue_number` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '企业私有线索数',
   `public_clue_number` int(11) unsigned NOT NULL DEFAULT '0' COMMENT '企业共享线索数',
-  `valid_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '生效时间',
+  `valid_time` datetime NOT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT '生效时间',
   `expire_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '失效日期',
   `active` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '0:未激活，1已激活',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -177,9 +158,9 @@ CREATE TABLE `enterprise` (
   `left_public_clue` int(11) NOT NULL DEFAULT '0' COMMENT '企业私有线索数剩余量',
   `is_delete` int(4) unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除（0：未删除1：已删除）',
   `create_by` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '创建人',
-  `update_by` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '更新人',
-  PRIMARY KEY (`ent_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=74596870223077394 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='企业信息';
+  `update_by` bigint(20) NOT NULL DEFAULT '0' COMMENT '更新人',
+  PRIMARY KEY (`ent_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=100009 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='企业信息';
 
 -- ----------------------------
 -- Table structure for enterprise_config
@@ -196,40 +177,9 @@ CREATE TABLE `enterprise_config` (
   `is_delete` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除(0:未删除;1:已删除)',
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`),
+  PRIMARY KEY (`id`) USING BTREE,
   UNIQUE KEY `uk_entid_code` (`ent_id`,`code`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- ----------------------------
--- Table structure for enterprise_line
--- ----------------------------
-DROP TABLE IF EXISTS `enterprise_line`;
-CREATE TABLE `enterprise_line` (
-  `id` bigint(20) NOT NULL COMMENT '主键',
-  `ent_id` bigint(20) NOT NULL COMMENT '企业id',
-  `calling_number` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '主叫号码',
-  `line_number` int(11) NOT NULL DEFAULT '0' COMMENT '号码线路数',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='企业主叫号码，线路表';
-
--- ----------------------------
--- Table structure for inbound_router
--- ----------------------------
-DROP TABLE IF EXISTS `inbound_router`;
-CREATE TABLE `inbound_router` (
-  `id` bigint(20) NOT NULL COMMENT '主键编号',
-  `enterprise_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '企业编号',
-  `inbounds` varchar(255) NOT NULL COMMENT '接入号码，以,分隔',
-  `agent_group_id` bigint(20) unsigned NOT NULL DEFAULT '0' COMMENT '坐席组主键编号',
-  `description` varchar(100) NOT NULL DEFAULT '' COMMENT '业务说明',
-  `is_delete` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '是否已删除,0: 未删除; 1: 已删除',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`),
-  KEY `idx_enterprise_id` (`enterprise_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='呼入路由配置表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci ROW_FORMAT=DYNAMIC;
 
 -- ----------------------------
 -- Table structure for permission
@@ -293,20 +243,6 @@ CREATE TABLE `role` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
--- Table structure for role_data
--- ----------------------------
-DROP TABLE IF EXISTS `role_data`;
-CREATE TABLE `role_data` (
-  `id` bigint(20) NOT NULL COMMENT '主键',
-  `role_id` bigint(20) NOT NULL COMMENT '角色id',
-  `range` int(1) NOT NULL DEFAULT '1' COMMENT '数据范围 0=无数据权限 1=仅自己 2=当前部门 3=当前部门及以下 4=指定部门 5=所有权限',
-  `specific` varchar(2000) COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '具体部门',
-  `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='角色数据权限';
-
--- ----------------------------
 -- Table structure for role_permission
 -- ----------------------------
 DROP TABLE IF EXISTS `role_permission`;
@@ -352,7 +288,7 @@ CREATE TABLE `user` (
   `create_by` bigint(20) DEFAULT NULL COMMENT '创建人',
   `update_by` bigint(20) DEFAULT NULL COMMENT '更新人',
   `create_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
-  `update_time` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '更新时间',
+  `update_time` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci COMMENT='用户信息';
 
@@ -372,6 +308,6 @@ CREATE TABLE `user_role` (
   `create_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '更新者',
   `update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `id` (`user_id`,`role_id`)
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE KEY `id` (`user_id`,`role_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
