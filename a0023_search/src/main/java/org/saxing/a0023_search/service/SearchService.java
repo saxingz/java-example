@@ -2,7 +2,6 @@ package org.saxing.a0023_search.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.github.pagehelper.util.StringUtil;
 import org.saxing.a0023_search.domain.entity.AnsDO;
 import org.saxing.a0023_search.domain.param.PageResult;
 import org.saxing.a0023_search.domain.param.SearchParam;
@@ -38,7 +37,7 @@ public class SearchService {
         Page<Object> page = PageHelper.startPage(pageNumber, pageSize, true);
         List<AnsDO> ansDOList = new ArrayList<>();
         String keyword = searchParam.getKeyword();
-        if (StringUtils.isEmpty(keyword.trim())){
+        if (StringUtils.isEmpty(keyword) || StringUtils.isEmpty(keyword.trim())){
             pageResult.setTotal(0);
         }else{
             ansDOList = ansDOMapper.selectTitleByCondition(searchParam);
