@@ -14,7 +14,7 @@
 		<header class="clearfix animated bounce">
 			<img src="../images/logo.png" width="120px" />
 		</header>
-		<p class="section-title">反洗钱智能导师</p>
+		<p class="section-title animated bounceInLeft">反洗钱智能导师</p>
 		<form class="searchbar clearfix animated bounceInLeft">
 			<input type="text" id="search-val" class="search" placeholder="请输入您要查找的关键词"/>
 			<input type="text"  class="submit"  value="搜索" readonly/>
@@ -41,17 +41,17 @@
  	<script type="text/javascript" src="../js/jquery1.9.1.min.js"></script>
     <script type="text/javascript">
     	$(function(){
-    		$(".searchbar").fadeIn();
     		var searchVal='',
     			currentPage = 1,
     			pageSize = 10,
     			off_on = true,
     			totalPage=0,
     			options = [];
-			// fecthList(searchVal,10,1)
-
     		$(".submit").click(function(){
-    			fecthList(searchVal,10,1,true)
+    			if($.trim($("#search-val").val()) !== ''){
+    				fecthList(searchVal,10,1,true)
+    			}
+    			
     		})
     		$("#search-val").blur(function(){
     			searchVal = $.trim($(this).val())
