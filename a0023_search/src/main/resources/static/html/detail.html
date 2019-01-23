@@ -1,0 +1,67 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,minimum-scale=1">	
+	<title>详情页</title>
+	<link href="../css/index.css" rel="stylesheet" />
+	<link href="../css/animate.min.css" rel="stylesheet"/>
+</head>
+<body class="list-body detail-body">
+	<div class="section-top">
+		<header class="clearfix animated fadeInUp">
+			<span class="back">返回</span>
+			<img src="../images/logo.png" width="200px"  />
+		</header>
+	</div>
+	<div id="detail" class="mobile section-detail">
+		
+	</div>
+	<div class="section-null">
+		<p>暂无详情数据</p>
+	</div>
+    <script type="text/javascript" src="../js/jquery1.9.1.min.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		fecthDetail()
+    		$(".back").click(function(){
+    			window.location.replace("./index.html");
+    		})
+    	})
+    	function getQueryString(name) {
+	        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+	        var r = window.location.search.substr(1).match(reg);
+	        if (r != null) return unescape(r[2]);
+	        return null;
+	    }
+	    function fecthDetail() {
+	    	var id = getQueryString('id')
+			$.ajax({
+	            type: 'GET',
+	            url: 'http://www.mmfei.info/search/ans/id/' + id,
+	            dataType: 'json',
+	            success: function(res){
+	                var result = '';
+		    		result = '<h3 class="title animated fadeInUp">'+res.title + '</h3><div class="content animated fadeInUp">'+res.article+'</div>'
+		    		if (result != ''){
+		    			$("#detail").html(result)
+		    		} else{
+		    			$("#detail").html('')
+		    			$(".section-null").addClass('active')
+		    		}        
+	            },
+	            error: function(xhr, type){
+	                alert('Ajax error!');
+	                
+	            }
+	        });
+	    }
+
+    </script>
+</body>
+</html>
+
+
+

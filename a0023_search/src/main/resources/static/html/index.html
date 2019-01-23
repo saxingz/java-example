@@ -1,0 +1,136 @@
+<!DOCTYPE html> 
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta content="telephone=no" name="format-detection" />
+	<meta name="viewport" content="width=device-width,user-scalable=no,maximum-scale=1,minimum-scale=1">	
+	<title>首页</title>
+	<link href="../css/index.css" rel="stylesheet" />
+	<link href="https://unpkg.com/animate.css@3.5.2/animate.min.css" rel="stylesheet"/>
+</head>
+<body class="list-body">
+	<div class="section-top">
+		<header class="clearfix animated bounce">
+			<img src="../images/logo.png" width="200px"  />
+		</header>
+		<form class="searchbar clearfix animated bounceInLeft">
+			<input type="text" id="search-val" class="search" placeholder="请输入您要查找的关键词"/>
+			<input type="text"  class="submit"  value="搜索" readonly/>
+		</form>
+	</div>
+	<!-- 推荐 -->
+	<section class="section mobile mobile-list">
+		<ul id="mobile-ul">
+		</ul>
+		<!-- <p class="null">请搜索数据</p> -->
+		<div class="empty">
+	 		<p>抱歉，没找到相关结果</p>
+	 	</div>
+		<!-- 加载文字 -->
+		<div class="loading-more">
+			<p class="loading-ring">正在加载</p>
+		</div>
+		<div class="no-more">
+			<p>没有更多了</p>
+		</div>
+	</section>
+ 	
+ 	
+ 	<script type="text/javascript" src="../js/jquery1.9.1.min.js"></script>
+    <script type="text/javascript">
+    	$(function(){
+    		$(".searchbar").fadeIn();
+    		var searchVal='',
+    			currentPage = 1,
+    			pageSize = 10,
+    			off_on = true,
+    			totalPage=0,
+    			options = [];
+			// fecthList(searchVal,10,1)
+
+    		$(".submit").click(function(){
+    			fecthList(searchVal,10,1,true)
+    		})
+    		$("#search-val").blur(function(){
+    			searchVal = $.trim($(this).val())
+    		})
+    		$("#mobile-ul").delegate("li","click",function(){
+    			var itemId = $(this).attr("role-id")
+			  	window.location.replace("./detail.html?id=" + itemId);
+			});
+			$(window).scroll(function () {
+	            var s = $(window).scrollTop(),
+	                h = $(window).height(),
+	                documentH = $(document).height()
+	            if ((s + h + 100) >= documentH) {
+	                if (off_on) {
+	                    off_on = false;
+	                    $(".loading-more").addClass('active')
+	                    $(".no-more").removeClass('active')
+	                    // currentPage++
+	                    // fecthList(searchVal,10,currentPage++)
+	                    clearTimeout(timers);
+				        //这里还可以用 [ 延时执行 ] 来控制是否加载 （这样就解决了 当上页的条件满足时，一下子加载多次的问题啦）
+				        var timers = setTimeout(function() {
+				        	
+				            currentPage++;
+				            fecthList(searchVal,10,currentPage)
+				        }, 200);           
+            		}
+	        	}
+	        })
+			function fecthList(keyword,pageSize,page,isSearch) {
+				$.ajax({
+		            type: 'GET',
+		            url: 'http://www.mmfei.info/search/ans/keyword',
+		            dataType: 'json',
+		            data: {
+		            	'keyword': keyword,
+						'pageSize': pageSize,
+						'page': page
+		            },
+		            success: function(res){
+		            	$('.empty').removeClass('active');
+		            	// $(".null").addClass('hidden')
+		            	totalPage = Math.ceil(res.total / res.pageSize)
+		            	if (currentPage>=totalPage) {
+		            		off_on = false;
+		            		$(".no-more").addClass('active')
+		            	} else {
+		            		off_on = true;
+		            	}
+		            	
+                    	$(".loading-more").removeClass('active');
+		                if (isSearch) {
+		                	options=[]
+		                }
+						$.each(res.list, function (index, item) {
+							options.push('<li class="animated fadeInUpBig" role-id="'+item.id +'"><h3>'+item.title+'</h3><p class="detail">'+item.article + '</p>'+'</li>');
+						});
+						if (options.length > 0) {
+							$(".no-more").removeClass('active')
+							$('#mobile-ul').html(options.join(''));
+						} else {
+							$(".no-more").removeClass('active')
+							$('#mobile-ul').html('')
+							$('.empty').addClass('active');
+						}	               
+		            },
+		            error: function(xhr, type){
+		            	$(".no-more").removeClass('active')
+		            	$('.empty').addClass('active');
+		                alert('Ajax error!');
+		                
+		            }
+		        });
+			}
+    	})
+
+    	
+    </script>
+</body>
+</html>
+
+
+
