@@ -24,32 +24,6 @@ public class SearchController {
 
     @GetMapping("/keyword")
     public PageResult<AnsDO> queryByKeyWork(SearchParam searchParam){
-        String keyword = searchParam.getKeyword();
-        switch (keyword){
-            case "制裁":
-                searchParam.setKeyword("什么是制裁及金融制裁");
-                break;
-            case "制裁风险":
-                searchParam.setKeyword("什么是制裁风险");
-                break;
-            case "制裁合规":
-                searchParam.setKeyword("什么是制裁合规");
-                break;
-            case "客户准入":
-                searchParam.setKeyword("客户准入环节管控要点有哪些");
-                break;
-            case "业务办理":
-                searchParam.setKeyword("客户业务办理环节管控要点有哪些");
-                break;
-            case "客户重检":
-                searchParam.setKeyword("客户重检环节管控要点有哪些");
-                break;
-            case "客户退出":
-                searchParam.setKeyword("客户退出环节管控要点有哪些");
-                break;
-            default:
-                break;
-        }
         return searchService.searchByKeyword(searchParam);
     }
 
