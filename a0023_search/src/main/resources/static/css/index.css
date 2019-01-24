@@ -141,8 +141,8 @@ header .menu li{color:#333; float: left; width: 19%; font-size: 12px; line-heigh
 
 /*详情页*/
 
-.section-detail .title{font-weight: 700; font-size:30px; line-height: 1.4; color:#2f2f2f; margin:0 0 15px 0;}
-.section-detail .content{font-size:16px; line-height: 28px; text-align:justify;}
+.section-detail .title{font-weight: 700; font-size:32px; line-height: 1.4; color:#2f2f2f; margin:0 0 15px 0;}
+.section-detail .content{font-size:18px; line-height: 30px; text-align:justify;}
 .section-detail{padding:0 10px;}
 .section-null{display: none; margin-top: 30%;}
 .section-null p{font-size:16px; text-align: center; color:#C0C4CC;}
