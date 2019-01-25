@@ -1,11 +1,46 @@
 package org.saxing.java8.optional;
 
+import org.springframework.util.StringUtils;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ListTest {
 
+    public static void main4(String[] args) {
+        String str = "/boss/v1/enterprises";
+        System.out.println(str.split("/")[1]);
+    }
+
     public static void main(String[] args) {
+        Set<Integer> set1 = new HashSet<>();
+        set1.add(1);
+        set1.add(2);
+        set1.add(3);
+        set1.add(4);
+        set1.add(5);
+
+        String res = org.apache.commons.lang3.StringUtils.join(set1, ",");
+        System.out.println(res);
+        String res2 = org.apache.commons.lang3.StringUtils.join(new HashSet<>(), ",");
+        System.out.println(res2);
+
+        Set<Integer> set2 = new HashSet<>();
+        set2.add(2);
+        set2.add(3);
+        set2.add(4);
+        set2.add(5);
+        set2.add(6);
+        set2.add(7);
+
+        set1.retainAll(set2);
+
+        System.out.println(set1);
+    }
+
+    public static void main2(String[] args) {
         List<String> list = new ArrayList<>();
         list.add("A1");
         list.add("A2");
