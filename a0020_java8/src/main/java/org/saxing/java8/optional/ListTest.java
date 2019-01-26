@@ -1,7 +1,5 @@
 package org.saxing.java8.optional;
 
-import org.springframework.util.StringUtils;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,12 +7,16 @@ import java.util.Set;
 
 public class ListTest {
 
+    public static void main(String[] args) {
+
+    }
+
     public static void main4(String[] args) {
         String str = "/boss/v1/enterprises";
         System.out.println(str.split("/")[1]);
     }
 
-    public static void main(String[] args) {
+    public static void main5(String[] args) {
         Set<Integer> set1 = new HashSet<>();
         set1.add(1);
         set1.add(2);
@@ -34,7 +36,6 @@ public class ListTest {
         set2.add(5);
         set2.add(6);
         set2.add(7);
-
         set1.retainAll(set2);
 
         System.out.println(set1);
