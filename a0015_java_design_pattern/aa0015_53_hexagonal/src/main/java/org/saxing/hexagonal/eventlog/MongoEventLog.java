@@ -20,6 +20,8 @@ public class MongoEventLog implements LotteryEventLog  {
     private MongoDatabase database;
     private MongoCollection<Document> eventsCollection;
 
+    private StdOutEventLog stdOutEventLog = new StdOutEventLog();
+
     @Override
     public void ticketSubmitted(PlayerDetails details) {
 
