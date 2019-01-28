@@ -26,6 +26,13 @@ public class MongoEventLog implements LotteryEventLog  {
         connect();
     }
 
+    /**
+     * Constructor accepting parameters
+     */
+    public MongoEventLog(String dbName, String eventsCollectionName) {
+        connect(dbName, eventsCollectionName);
+    }
+
     @Override
     public void ticketSubmitted(PlayerDetails details) {
 
@@ -64,4 +71,29 @@ public class MongoEventLog implements LotteryEventLog  {
         database = mongoClient.getDatabase(dbName);
         eventsCollection = database.getCollection(eventsCollectionName);
     }
+
+
+    /**
+     * @return mongo client
+     */
+    public MongoClient getMongoClient() {
+        return mongoClient;
+    }
+
+    /**
+     *
+     * @return mongo database
+     */
+    public MongoDatabase getMongoDatabase() {
+        return database;
+    }
+
+    /**
+     *
+     * @return accounts collection
+     */
+    public MongoCollection<Document> getEventsCollection() {
+        return eventsCollection;
+    }
+
 }
