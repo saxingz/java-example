@@ -22,6 +22,10 @@ public class MongoEventLog implements LotteryEventLog  {
 
     private StdOutEventLog stdOutEventLog = new StdOutEventLog();
 
+    public MongoEventLog() {
+        connect();
+    }
+
     @Override
     public void ticketSubmitted(PlayerDetails details) {
 
@@ -45,5 +49,19 @@ public class MongoEventLog implements LotteryEventLog  {
     @Override
     public void prizeError(PlayerDetails details, int prizeAmount) {
 
+    }
+
+    private void connect() {
+        connect(DEFAULT_DB, DEFAULT_EVENTS_COLLECTION);
+    }
+
+    private void connect(String dbName, String eventsCollectionName) {
+        if (mongoClient != null){
+            mongoClient.close();
+        }
+        mongoClient = new MongoClient(System.getProperty("mongo-host"),
+                Integer.parseInt(System.getProperty("mongo-port")));
+        database = mongoClient.getDatabase(dbName);
+        eventsCollection = database.getCollection(eventsCollectionName);
     }
 }
