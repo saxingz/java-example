@@ -1,5 +1,6 @@
 package org.saxing.hexagonal.administration;
 
+import org.saxing.hexagonal.domain.LotteryAdministration;
 import org.slf4j.Logger;
 
 /**
@@ -9,6 +10,13 @@ import org.slf4j.Logger;
  */
 public class ConsoleAdministrationSrvImpl implements ConsoleAdministrationSrv {
 
+    private final LotteryAdministration administration;
+    private final Logger logger;
+
+    public ConsoleAdministrationSrvImpl(LotteryAdministration administration, Logger logger) {
+        this.administration = administration;
+        this.logger = logger;
+    }
 
     @Override
     public void getAllSubmittedTickets() {
