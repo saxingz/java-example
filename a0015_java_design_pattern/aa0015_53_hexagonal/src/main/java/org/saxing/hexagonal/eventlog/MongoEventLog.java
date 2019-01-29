@@ -35,7 +35,12 @@ public class MongoEventLog implements LotteryEventLog  {
 
     @Override
     public void ticketSubmitted(PlayerDetails details) {
-
+        Document document = new Document("email", details.getEmail());
+        document.put("phone", details.getPhoneNumber());
+        document.put("bank", details.getBankAccount());
+        document.put("message", "Lottery ticket was submitted and bank account was charged for 3 credits.");
+        eventsCollection.insertOne(document);
+        stdOutEventLog.ticketSubmitted(details);
     }
 
     @Override
