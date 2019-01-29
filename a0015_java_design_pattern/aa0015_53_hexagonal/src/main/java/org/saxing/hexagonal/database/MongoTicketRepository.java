@@ -4,11 +4,16 @@ import com.mongodb.MongoClient;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import org.bson.Document;
+import org.saxing.hexagonal.domain.LotteryNumbers;
 import org.saxing.hexagonal.domain.LotteryTicket;
 import org.saxing.hexagonal.domain.LotteryTicketId;
+import org.saxing.hexagonal.domain.PlayerDetails;
 
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Mongo lottery ticket database
@@ -104,5 +109,15 @@ public class MongoTicketRepository implements LotteryTicketRepository {
     @Override
     public void deleteAll() {
 
+    }
+
+    private LotteryTicket docToTicket(Document doc){
+        PlayerDetails playerDetails = new PlayerDetails(doc.getString("email"), doc.getString("bank"),
+                doc.getString("phone"));
+        Set<Integer> numbers = Arrays.stream(doc.getString("numbers").split(","))
+                .map(Integer::parseInt)
+                .collect(Collectors.toSet());
+        LotteryNumbers lotteryNumbers = LotteryNumbers.create(numbers);
+        return new LotteryTicket(new LotteryTicketId(doc.getInteger("ticketId")), playerDetails, lotteryNumbers);
     }
 }
