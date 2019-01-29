@@ -5,7 +5,6 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.UpdateOptions;
 import org.bson.Document;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -73,7 +72,6 @@ public class MongoBank implements WireTransfers {
     public MongoCollection<Document> getAccountsCollection() {
         return accountsCollection;
     }
-
 
     @Override
     public void setFunds(String bankAccount, int amount) {
