@@ -10,7 +10,6 @@ import org.saxing.hexagonal.database.LotteryTicketRepository;
  */
 public class LotteryModule extends AbstractModule {
 
-
     @Override
     protected void configure() {
 
