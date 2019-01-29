@@ -1,5 +1,7 @@
 package org.saxing.hexagonal.banking;
 
+import org.saxing.hexagonal.domain.LotteryConstants;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,16 +20,22 @@ public class InMemoryBank implements WireTransfers  {
 
     @Override
     public void setFunds(String bankAccount, int amount) {
-
+        accounts.put(bankAccount, amount);
     }
 
     @Override
     public int getFunds(String bankAccount) {
-        return 0;
+        return accounts.getOrDefault(bankAccount, 0);
     }
 
     @Override
     public boolean transferFunds(int amount, String sourceBackAccount, String destinationBankAccount) {
-        return false;
+        if (accounts.getOrDefault(sourceBackAccount, 0) >= amount) {
+            accounts.put(sourceBackAccount, accounts.get(sourceBackAccount) - amount);
+            accounts.put(destinationBankAccount, accounts.get(destinationBankAccount) + amount);
+            return true;
+        } else {
+            return false;
+        }
     }
 }
