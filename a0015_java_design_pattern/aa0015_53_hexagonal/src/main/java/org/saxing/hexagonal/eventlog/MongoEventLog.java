@@ -45,22 +45,44 @@ public class MongoEventLog implements LotteryEventLog  {
 
     @Override
     public void ticketSubmitError(PlayerDetails details) {
-
+        Document document = new Document("email", details.getEmail());
+        document.put("phone", details.getPhoneNumber());
+        document.put("bank", details.getBankAccount());
+        document.put("message", "Lottery ticket could not be submitted because lack of funds.");
+        eventsCollection.insertOne(document);
+        stdOutEventLog.ticketSubmitError(details);
     }
 
     @Override
     public void ticketDidNotWin(PlayerDetails details) {
-
+        Document document = new Document("email", details.getEmail());
+        document.put("phone", details.getPhoneNumber());
+        document.put("bank", details.getBankAccount());
+        document.put("message", "Lottery ticket was checked and unfortunately did not win this time.");
+        eventsCollection.insertOne(document);
+        stdOutEventLog.ticketDidNotWin(details);
     }
 
     @Override
     public void ticketWon(PlayerDetails details, int prizeAmount) {
-
+        Document document = new Document("email", details.getEmail());
+        document.put("phone", details.getPhoneNumber());
+        document.put("bank", details.getBankAccount());
+        document.put("message", String.format("Lottery ticket won! The bank account was deposited with %d credits.",
+                prizeAmount));
+        eventsCollection.insertOne(document);
+        stdOutEventLog.ticketWon(details, prizeAmount);
     }
 
     @Override
     public void prizeError(PlayerDetails details, int prizeAmount) {
-
+        Document document = new Document("email", details.getEmail());
+        document.put("phone", details.getPhoneNumber());
+        document.put("bank", details.getBankAccount());
+        document.put("message", String.format("Lottery ticket won! Unfortunately the bank credit transfer of %d failed.",
+                prizeAmount));
+        eventsCollection.insertOne(document);
+        stdOutEventLog.prizeError(details, prizeAmount);
     }
 
     private void connect() {
