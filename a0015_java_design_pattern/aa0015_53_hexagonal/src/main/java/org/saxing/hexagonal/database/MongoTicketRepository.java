@@ -54,6 +54,38 @@ public class MongoTicketRepository implements LotteryTicketRepository {
         }
     }
 
+    private void initCounters() {
+        Document doc = new Document("_id", "ticketId").append("seq", 1);
+        countersCollection.insertOne(doc);
+    }
+
+    /**
+     * @return next ticket id
+     */
+    public int getNextId() {
+        Document find = new Document("_id", "ticketId");
+        Document increase = new Document("seq", 1);
+        Document update = new Document("$inc", increase);
+        Document result = countersCollection.findOneAndUpdate(find, update);
+        return result.getInteger("seq");
+    }
+
+    /**
+     *
+     * @return tickets collection
+     */
+    public MongoCollection<Document> getTicketsCollection() {
+        return ticketsCollection;
+    }
+
+    /**
+     *
+     * @return counters collection
+     */
+    public MongoCollection<Document> getCountersCollection() {
+        return countersCollection;
+    }
+
     @Override
     public Optional<LotteryTicket> findById(LotteryTicketId id) {
         return Optional.empty();
