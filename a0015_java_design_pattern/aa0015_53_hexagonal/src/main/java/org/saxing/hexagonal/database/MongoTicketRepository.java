@@ -9,10 +9,7 @@ import org.saxing.hexagonal.domain.LotteryTicket;
 import org.saxing.hexagonal.domain.LotteryTicketId;
 import org.saxing.hexagonal.domain.PlayerDetails;
 
-import java.util.Arrays;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -93,22 +90,42 @@ public class MongoTicketRepository implements LotteryTicketRepository {
 
     @Override
     public Optional<LotteryTicket> findById(LotteryTicketId id) {
-        return Optional.empty();
+        Document find = new Document("ticketId", id.getId());
+        List<Document> results = ticketsCollection.find(find).limit(1).into(new ArrayList<>());
+        if (results.size() > 0) {
+            LotteryTicket lotteryTicket = docToTicket(results.get(0));
+            return Optional.of(lotteryTicket);
+        } else {
+            return Optional.empty();
+        }
     }
 
     @Override
     public Optional<LotteryTicketId> save(LotteryTicket ticket) {
-        return Optional.empty();
+        int ticketId = getNextId();
+        Document doc = new Document("ticketId", ticketId);
+        doc.put("email", ticket.getPlayerDetails().getEmail());
+        doc.put("bank", ticket.getPlayerDetails().getBankAccount());
+        doc.put("phone", ticket.getPlayerDetails().getPhoneNumber());
+        doc.put("numbers", ticket.getNumbers().getNumbersAsString());
+        ticketsCollection.insertOne(doc);
+        return Optional.of(new LotteryTicketId(ticketId));
     }
 
     @Override
     public Map<LotteryTicketId, LotteryTicket> findAll() {
-        return null;
+        Map<LotteryTicketId, LotteryTicket> map = new HashMap<>();
+        List<Document> docs = ticketsCollection.find(new Document()).into(new ArrayList<>());
+        for (Document doc: docs) {
+            LotteryTicket lotteryTicket = docToTicket(doc);
+            map.put(lotteryTicket.getId(), lotteryTicket);
+        }
+        return map;
     }
 
     @Override
     public void deleteAll() {
-
+        ticketsCollection.deleteMany(new Document());
     }
 
     private LotteryTicket docToTicket(Document doc){
