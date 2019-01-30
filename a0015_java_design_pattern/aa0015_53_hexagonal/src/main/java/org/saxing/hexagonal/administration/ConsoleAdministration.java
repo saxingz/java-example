@@ -6,7 +6,7 @@ import org.saxing.hexagonal.domain.LotteryAdministration;
 import org.saxing.hexagonal.domain.LotteryService;
 import org.saxing.hexagonal.module.LotteryModule;
 import org.saxing.hexagonal.mongo.MongoConnectionPropertiesLoader;
-import org.saxing.hexagonal.simpledata.SampleData;
+import org.saxing.hexagonal.sampledata.SampleData;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

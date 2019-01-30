@@ -1,4 +1,4 @@
-package org.saxing.hexagonal.simpledata;
+package org.saxing.hexagonal.sampledata;
 
 import org.saxing.hexagonal.banking.InMemoryBank;
 import org.saxing.hexagonal.domain.*;
