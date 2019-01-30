@@ -52,4 +52,11 @@ public class LotteryAdministration {
         }
         return numbers;
     }
+
+    /**
+     * Begin new lottery round
+     */
+    public void resetLottery(){
+        repository.deleteAll();
+    }
 }
