@@ -60,3 +60,13 @@ public class LotteryAdministration {
         repository.deleteAll();
     }
 }
+
+
+
+
+
+
+
+
+
+
