@@ -4,12 +4,11 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ListTest {
 
-    public static void main(String[] args) {
-
-    }
 
     public static void main4(String[] args) {
         String str = "/boss/v1/enterprises";
@@ -41,7 +40,24 @@ public class ListTest {
         System.out.println(set1);
     }
 
-    public static void main2(String[] args) {
+    public static void main(String[] args) {
+        testThread();
+    }
+
+    public static void testThread(){
+        ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
+        singleThreadExecutor.execute(() -> {
+            try {
+                Thread.sleep(3000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("bbbbb");
+        });
+        System.out.println("aaaaa");
+    }
+
+    public static void testList() {
         List<String> list = new ArrayList<>();
         list.add("A1");
         list.add("A2");
@@ -55,15 +71,23 @@ public class ListTest {
         list2.add("A4");
         list2.add("A5");
         list2.add("A6");
+        list2.add("A7");
 
-        list.retainAll(list2);
+        List<String> res1 = new ArrayList<>(list);
+        res1.removeAll(list2);
 
         System.out.println(list);
+        System.out.println(res1);
 
-        System.out.println(list.size() / 4);
 
-        List<String> strings = list.subList(0, 3);
-        System.out.println(strings);
+//        list.retainAll(list2);
+//
+//        System.out.println(list);
+//
+//        System.out.println(list.size() / 4);
+//
+//        List<String> strings = list.subList(0, 3);
+//        System.out.println(strings);
 
     }
 
