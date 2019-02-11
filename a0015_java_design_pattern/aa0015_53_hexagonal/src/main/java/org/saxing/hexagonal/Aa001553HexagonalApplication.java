@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class Aa001553HexagonalApplication {
 
     public static void main(String[] args) {
+
         Injector injector = Guice.createInjector(new LotteryTestingModule());
 
         // start new lottery round
