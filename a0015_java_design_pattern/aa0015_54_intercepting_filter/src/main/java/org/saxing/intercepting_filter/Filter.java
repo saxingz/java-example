@@ -8,7 +8,6 @@ package org.saxing.intercepting_filter;
  */
 public interface Filter {
 
-
     /**
      * Execute order processing filter.
      */
