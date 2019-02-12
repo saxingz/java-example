@@ -1,13 +1,22 @@
 package org.saxing.intercepting_filter;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
-@SpringBootApplication
+/**
+ * main
+ *
+ * @author saxing 2019/2/12 17:48
+ */
 public class Aa001554InterceptingFilterApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(Aa001554InterceptingFilterApplication.class, args);
+        FilterManager filterManager = new FilterManager();
+        filterManager.addFilter(new NameFilter());
+        filterManager.addFilter(new ContactFilter());
+        filterManager.addFilter(new AddressFilter());
+        filterManager.addFilter(new DepositFilter());
+        filterManager.addFilter(new OrderFilter());
+
+        Client client = new Client();
+        client.setFilterManager(filterManager);
     }
 
 }
