@@ -1,5 +1,10 @@
 package org.saxing.interpreter;
 
+/**
+ * NumberExpression
+ *
+ * @author saxing 2019/2/13 21:34
+ */
 public class NumberExpression extends Expression {
 
     private int number;
