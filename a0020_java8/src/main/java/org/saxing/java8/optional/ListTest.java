@@ -1,5 +1,7 @@
 package org.saxing.java8.optional;
 
+import org.apache.commons.collections4.CollectionUtils;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -41,10 +43,52 @@ public class ListTest {
     }
 
     public static void main(String[] args) {
-        testThread();
+        listTest2();
     }
 
-    public static void testThread(){
+    public static void listTest2(){
+        List<String> list = new ArrayList<>();
+        list.add("1");
+        list.add("2");
+        list.add("3");
+        list.add("4");
+        list.add("5");
+        list.add("6");
+        list.add("7");
+        list.add("8");
+        list.add("9");
+        list.add("10");
+        list.add("11");
+        list.add("12");
+        list.add("13");
+        list.add("14");
+        list.add("15");
+        list.add("16");
+
+        int page = 3;
+        int pageSize = 10;
+
+        // 手动分页
+        if (page <= 0){
+            page = 1;
+        }
+        if (pageSize <= 0){
+            pageSize = 10;
+        }
+
+
+        List<String> us = new ArrayList<>();
+        if (CollectionUtils.isNotEmpty(list)){
+            if (page * pageSize < list.size()){
+                us = list.subList((page-1)*pageSize, page*pageSize);
+            } else if (page * pageSize > list.size() && (page - 1) * pageSize < list.size()){
+                us = list.subList((page - 1) * pageSize, list.size());
+            }
+        }
+        System.out.println(us);
+    }
+
+   public static void testThread(){
         ExecutorService singleThreadExecutor = Executors.newSingleThreadExecutor();
         singleThreadExecutor.execute(() -> {
             try {
