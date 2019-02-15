@@ -76,7 +76,6 @@ public class ListTest {
             pageSize = 10;
         }
 
-
         List<String> us = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(list)){
             if (page * pageSize < list.size()){
