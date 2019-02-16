@@ -66,6 +66,7 @@
         <module>aa0015_52_half-sync-half-async</module>
         <module>aa0015_53_hexagonal</module>
         <module>aa0015_54_intercepting_filter</module>
+        <module>aa0015_55_interpreter</module>
     </modules>
 
 </project>
