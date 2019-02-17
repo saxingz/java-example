@@ -5,6 +5,11 @@ import org.saxing.aa0015_56_iterator.Iterator;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * TreasureChest, the collection class.
+ *
+ * @author saxing 2019/2/17 20:55
+ */
 public class TreasureChest {
 
     private List<Item> items;
