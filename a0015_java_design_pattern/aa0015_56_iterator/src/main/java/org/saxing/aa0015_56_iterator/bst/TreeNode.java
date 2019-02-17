@@ -64,6 +64,11 @@ public class TreeNode<T extends Comparable<T>> {
         return this.right;
     }
 
+    /**
+     * 添加给定值的新Child。
+     *
+     * @param valToInsert
+     */
     private void insertNewChild(T valToInsert) {
         if (this.isLessThanOrEqualTo(valToInsert)) {
             this.setRight(new TreeNode<>(valToInsert));
