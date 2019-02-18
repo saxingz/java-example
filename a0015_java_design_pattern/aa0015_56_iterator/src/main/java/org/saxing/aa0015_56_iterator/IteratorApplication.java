@@ -41,7 +41,6 @@ public class IteratorApplication {
 
     private static TreeNode<Integer> buildIntegerBst() {
         TreeNode<Integer> root = new TreeNode<>(8);
-
         root.insert(3);
         root.insert(10);
         root.insert(1);
@@ -50,7 +49,6 @@ public class IteratorApplication {
         root.insert(4);
         root.insert(7);
         root.insert(13);
-
         return root;
     }
 
@@ -64,7 +62,6 @@ public class IteratorApplication {
         demonstrateTreasureChestIteratorForType(POTION);
         demonstrateTreasureChestIteratorForType(WEAPON);
         demonstrateTreasureChestIteratorForType(ANY);
-
         demonstrateBstIterator();
     }
 
