@@ -53,7 +53,6 @@ public class TreeNode<T extends Comparable<T>> {
             parent = curr;
             curr = curr.traverseOneLevelDown(valToInsert);
         }
-
         return parent;
     }
 
