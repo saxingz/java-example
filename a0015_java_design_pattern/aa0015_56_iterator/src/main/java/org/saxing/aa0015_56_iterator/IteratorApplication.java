@@ -44,10 +44,10 @@ public class IteratorApplication {
         root.insert(3);
         root.insert(10);
         root.insert(1);
-        root.insert(6);
+        root.insert(7);
         root.insert(14);
         root.insert(4);
-        root.insert(7);
+        root.insert(8);
         root.insert(13);
         return root;
     }
