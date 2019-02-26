@@ -2,6 +2,11 @@ package org.saxing.rec_xml;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * test bean
+ *
+ * @author saxing 2019/2/26 15:15
+ */
 @XmlRootElement(name = "xml")
 public class TestBean {
 
