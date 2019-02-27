@@ -14,6 +14,8 @@ public class TestBean {
 
     public String FromUserName;
 
+    public String content;
+
     public String getToUserName() {
         return ToUserName;
     }
@@ -28,5 +30,13 @@ public class TestBean {
 
     public void setFromUserName(String fromUserName) {
         FromUserName = fromUserName;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
     }
 }
