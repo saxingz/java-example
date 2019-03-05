@@ -2,10 +2,7 @@ package org.saxing.java8.optional;
 
 import org.apache.commons.collections4.CollectionUtils;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -43,7 +40,13 @@ public class ListTest {
     }
 
     public static void main(String[] args) {
-        listTest2();
+        listtest3();
+    }
+
+    public static void listtest3(){
+        String[] split = "".split(",");
+        List<String> list = Arrays.asList(split);
+        System.out.println(split);
     }
 
     public static void listTest2(){
