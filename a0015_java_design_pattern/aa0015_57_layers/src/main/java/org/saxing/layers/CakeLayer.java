@@ -1,14 +1,16 @@
 package org.saxing.layers;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 /**
- * cake topping
+ * CakeLayer entity
  *
- * @author saxing 2019/3/6 23:30
+ * @author saxing 2019/3/6 23:34
  */
-@Entity
-public class CakeTopping {
+public class CakeLayer {
 
     @Id
     @GeneratedValue
@@ -18,12 +20,12 @@ public class CakeTopping {
 
     private int calories;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     private Cake cake;
 
-    public CakeTopping() {}
+    public CakeLayer() {}
 
-    public CakeTopping(String name, int calories) {
+    public CakeLayer(String name, int calories) {
         this.setName(name);
         this.setCalories(calories);
     }
@@ -44,11 +46,11 @@ public class CakeTopping {
         this.name = name;
     }
 
-    public final int getCalories() {
+    public int getCalories() {
         return calories;
     }
 
-    public void setCalories(int calories) {
+    public final void setCalories(int calories) {
         this.calories = calories;
     }
 
