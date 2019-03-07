@@ -39,37 +39,23 @@ public class ListTest {
         System.out.println(set1);
     }
 
-    public static void main(String[] args) {
-        listtest3();
-    }
-
     public static void listtest3(){
         String[] split = "".split(",");
         List<String> list = Arrays.asList(split);
         System.out.println(split);
     }
 
+    public static void main(String[] args) {
+        listTest2();
+    }
+
     public static void listTest2(){
         List<String> list = new ArrayList<>();
-        list.add("1");
-        list.add("2");
-        list.add("3");
-        list.add("4");
-        list.add("5");
-        list.add("6");
-        list.add("7");
-        list.add("8");
-        list.add("9");
-        list.add("10");
-        list.add("11");
-        list.add("12");
-        list.add("13");
-        list.add("14");
-        list.add("15");
-        list.add("16");
+        list.add("1");list.add("2");list.add("3");list.add("4");list.add("5");list.add("6");list.add("7");list.add("8");
+        list.add("9");list.add("10");list.add("11");list.add("12");list.add("13");list.add("14");list.add("15");list.add("16");
 
         int page = 3;
-        int pageSize = 10;
+        int pageSize = 8;
 
         // 手动分页
         if (page <= 0){
@@ -81,7 +67,7 @@ public class ListTest {
 
         List<String> us = new ArrayList<>();
         if (CollectionUtils.isNotEmpty(list)){
-            if (page * pageSize < list.size()){
+            if (page * pageSize <= list.size()){
                 us = list.subList((page-1)*pageSize, page*pageSize);
             } else if (page * pageSize > list.size() && (page - 1) * pageSize < list.size()){
                 us = list.subList((page - 1) * pageSize, list.size());
