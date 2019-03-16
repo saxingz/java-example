@@ -5,6 +5,7 @@ import org.saxing.qisi.service.OrganizeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -39,6 +40,12 @@ public class OrganizeController {
         ExecutorService cachedThreadPool = Executors.newCachedThreadPool();
         cachedThreadPool.execute(organizeService::refreshAllDepart);
         return "success";
+    }
+
+    @GetMapping("/department/{id}")
+    @ResponseBody
+    public String getDepart(@PathVariable (value = "id") Integer id){
+        return organizeService.downLoadDepartFromWx(id).toString();
     }
 
 }
