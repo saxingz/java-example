@@ -34,6 +34,11 @@
 			</div>
 		</div>
 	</div>
+    <div class="fit">
+        <div class="dt">相关部门</div>
+        <select class="dept" id="depart" data-placeholder="" readonly="true" style="width: 100%">
+        </select>
+    </div>
     <div class="fit" style="padding-left:15px; padding-right:15px;">
         <div class="dt">描述图片(最多5张)</div>
         <div class="dd">
@@ -79,5 +84,12 @@
 <script src="../old/js/wxlimit.js?v=1.6003"></script>
     <script src="js/swiper.min.js?v=1.6003"></script>
     <script src="js/form.js?v=1.6003"></script>
+    <script src="js/chosen.jquery.js?v=1.6003"></script>
+<script>
+
+    $(document).ready(function(){
+        getDepart();
+    });
+</script>
 </body>
 </html>
