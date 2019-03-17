@@ -5,10 +5,10 @@
 
 
 $(function () {
-    // if (sessionStorage.userId === undefined){
-    //     alert("未授权访问");
-    //     window.location.href='/qisi/getOauth';
-    // }
+    if (sessionStorage.userId === undefined){
+        alert("未授权访问");
+        window.location.href='/qisi/getOauth';
+    }
 
     var ua = navigator.userAgent.toLowerCase();
      if(ua.match(/MicroMessenger/i)=="micromessenger") {
