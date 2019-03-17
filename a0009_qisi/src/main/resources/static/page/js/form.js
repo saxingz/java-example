@@ -146,10 +146,9 @@ function commit(el) {
     }
 
     //检测部门
-    var serverDepartments = JSON.parse(sessionStorage.getItem("departments"));
     var correctDepart = false;
-    serverDepartments.department.forEach(function(d){
-        if (d.name == departContent){
+    alldepartments.forEach(function(d){
+        if (d == departContent){
             correctDepart = true;
         } 
     });
@@ -239,27 +238,34 @@ function pushHistory() {
 }
 
 
+var alldepartments = [
+    "行长室",
+    "工会办公室",
+    "公司金融部",
+    "个人金融部",
+    "财务管理部",
+    "监察部",
+    "法律与合规部",
+    "风险管理部",
+    "综合管理部",
+    "运营部",
+    "市行营业部",
+    "宿豫支行",
+    "城中支行",
+    "泗阳支行",
+    "泗洪支行",
+    "沭阳支行"
+];
+
 function getSelectOption(optionArray){
     var html = '<option value="" class="depart">请选择部门</option>';
     for(var i = 0, length = optionArray.length; i < length; i++){
-        html += '<option class="depart" value="' + optionArray[i].name + '">' + optionArray[i].name + '</option>';
+        html += '<option class="depart" value="' + optionArray[i] + '">' + optionArray[i] + '</option>';
     }
     return html;
 }
 
 function getDepart(){
-
-    $.ajax({
-        url: '/qisi/organize/department/1',
-        type: "GET",
-        dataType:'json',
-        success:function(data){
-            sessionStorage.setItem("departments", JSON.stringify(data));
-            $('.dept').html(getSelectOption(data.department));
-            $('.dept').chosen();
-        },
-        error:function(er){
-            console.log(er);
-        }
-    });
+    $('.dept').html(getSelectOption(alldepartments));
+    $('.dept').chosen();
 }
