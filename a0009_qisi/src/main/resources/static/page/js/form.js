@@ -59,6 +59,7 @@ var uploadAreaWrap = $(".fit .uploadAreaWrap");
 var content = $("#content");
 var topic = $("#topic");
 var advice = $("#advice");
+var depart = $("#depart");
 
 /**
  * 删除图片
@@ -131,6 +132,7 @@ function commit(el) {
     var topicContent = topic.val().trim();
     var contentContent = content.val().trim();
     var adviceContent = advice.val().trim();
+    var departContent = depart.val().trim();
 
     //检测字数
     if (topicContent.length > 20 || contentContent.length > 1000 || adviceContent.length > 1000){
@@ -143,12 +145,27 @@ function commit(el) {
         return;
     }
 
+    //检测部门
+    var serverDepartments = JSON.parse(sessionStorage.getItem("departments"));
+    var correctDepart = false;
+    serverDepartments.department.forEach(function(d){
+        if (d.name == departContent){
+            correctDepart = true;
+        } 
+    });
+    
+    if (!correctDepart){
+        tishi("请选择正确部门！");
+        return;
+    }
+
     var params = {
         "wxUserId": sessionStorage.userId,
         "content": content.val(),
         "title": topic.val(),
         "advice":advice.val(),
-        "type": articleType
+        "type": articleType,
+        "relateDepart": departContent
     };
 
     var imageParams = [];
@@ -219,4 +236,30 @@ function pushHistory() {
         url: "#"
     };
     window.history.pushState(state, "title", "#");
+}
+
+
+function getSelectOption(optionArray){
+    var html = '<option value="" class="depart">请选择部门</option>';
+    for(var i = 0, length = optionArray.length; i < length; i++){
+        html += '<option class="depart" value="' + optionArray[i].name + '">' + optionArray[i].name + '</option>';
+    }
+    return html;
+}
+
+function getDepart(){
+
+    $.ajax({
+        url: '/qisi/organize/department/1',
+        type: "GET",
+        dataType:'json',
+        success:function(data){
+            sessionStorage.setItem("departments", JSON.stringify(data));
+            $('.dept').html(getSelectOption(data.department));
+            $('.dept').chosen();
+        },
+        error:function(er){
+            console.log(er);
+        }
+    });
 }
