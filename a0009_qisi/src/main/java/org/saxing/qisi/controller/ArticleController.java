@@ -82,6 +82,7 @@ public class ArticleController {
                 new String[]{StringConstant.ARTICLE_TITLE, StringConstant.STRING},
                 new String[]{StringConstant.ARTICLE_CONTENT, StringConstant.STRING},
                 new String[]{StringConstant.ARTICLE_ADVICE, StringConstant.STRING},
+                new String[]{StringConstant.RELATE_DEPART, StringConstant.STRING},
                 new String[]{StringConstant.ARTICLE_TYPE, StringConstant.STRING})) {
             return JsonResult.fillResultString(-1, "wrong params", null );
         }
