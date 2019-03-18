@@ -34,6 +34,7 @@
         <module>a0021_ldap</module>
         <module>a0022_gatewaycodegenerate</module>
         <module>a0023_search</module>
+        <module>a0024_rec_xml</module>
     </modules>
 
     <properties>
