@@ -42,10 +42,4 @@ public class OrganizeController {
         return "success";
     }
 
-    @GetMapping("/department/{id}")
-    @ResponseBody
-    public String getDepart(@PathVariable (value = "id") Integer id){
-        return organizeService.downLoadDepartFromWx(id).toString();
-    }
-
 }
