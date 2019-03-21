@@ -39,6 +39,8 @@ public class StringConstant {
     public static final String ARTICLE_ADVICE = "advice";
     //0=奇思妙想  1=吐槽
     public static final String ARTICLE_TYPE = "type";
+    // 相关部门
+    public static final String RELATE_DEPART = "relateDepart";
     //主图
     public static final String ARTICLE_MAIN_IMG = "mainImg";
     //作者wx id

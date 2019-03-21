@@ -133,3 +133,11 @@ CREATE TABLE `wx_user` (
   `avatar` varchar(255) DEFAULT NULL COMMENT '用户头像',
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='所有微信用户';
+
+
+
+-- 2019-03-17加入
+
+ALTER TABLE `article`
+ADD COLUMN `relate_depart`  varchar(50) NOT NULL DEFAULT '' COMMENT '相关部门' AFTER `advice`;
+

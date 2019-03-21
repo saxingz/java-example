@@ -59,6 +59,7 @@ var uploadAreaWrap = $(".fit .uploadAreaWrap");
 var content = $("#content");
 var topic = $("#topic");
 var advice = $("#advice");
+var depart = $("#depart");
 
 /**
  * 删除图片
@@ -131,6 +132,7 @@ function commit(el) {
     var topicContent = topic.val().trim();
     var contentContent = content.val().trim();
     var adviceContent = advice.val().trim();
+    var departContent = depart.val().trim();
 
     //检测字数
     if (topicContent.length > 20 || contentContent.length > 1000 || adviceContent.length > 1000){
@@ -143,12 +145,26 @@ function commit(el) {
         return;
     }
 
+    //检测部门
+    var correctDepart = false;
+    alldepartments.forEach(function(d){
+        if (d == departContent){
+            correctDepart = true;
+        } 
+    });
+    
+    if (!correctDepart){
+        tishi("请选择正确部门！");
+        return;
+    }
+
     var params = {
         "wxUserId": sessionStorage.userId,
         "content": content.val(),
         "title": topic.val(),
         "advice":advice.val(),
-        "type": articleType
+        "type": articleType,
+        "relateDepart": departContent
     };
 
     var imageParams = [];
@@ -219,4 +235,37 @@ function pushHistory() {
         url: "#"
     };
     window.history.pushState(state, "title", "#");
+}
+
+
+var alldepartments = [
+    "行长室",
+    "工会办公室",
+    "公司金融部",
+    "个人金融部",
+    "财务管理部",
+    "监察部",
+    "法律与合规部",
+    "风险管理部",
+    "综合管理部",
+    "运营部",
+    "市行营业部",
+    "宿豫支行",
+    "城中支行",
+    "泗阳支行",
+    "泗洪支行",
+    "沭阳支行"
+];
+
+function getSelectOption(optionArray){
+    var html = '<option value="" class="depart">请选择部门</option>';
+    for(var i = 0, length = optionArray.length; i < length; i++){
+        html += '<option class="depart" value="' + optionArray[i] + '">' + optionArray[i] + '</option>';
+    }
+    return html;
+}
+
+function getDepart(){
+    $('.dept').html(getSelectOption(alldepartments));
+    $('.dept').chosen();
 }

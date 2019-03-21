@@ -63,7 +63,6 @@ function judgeBackType() {
  */
 var detailsId = getLinkParam(document.location.href, "id");
 $.ajax({
-    type: 'POST',
     url: "/qisi/article/showDetail.action?id="+detailsId,
     type: "GET",
     dataType:'json',
@@ -89,7 +88,10 @@ $.ajax({
         var contstr =
             '<div class="title"><h3>' + hheader + data.result.title+'</h3><em class="close" onclick="history.back(-1);"></em>'+
             '<p style="word-break:break-all; " class="date"><span class="name">' + authorstr + '</span>' +
-            '<span class="time">'+data.result.create_time+'</span></p></div>'+
+            '<span class="time">'+data.result.create_time+'</span>' +
+            '</p>' +
+            '</div>'+
+            '<span style="font-size: 0.96rem;color: #999;">相关部门: '+ data.result.relateDepart + '</span>' +
             '<xmp style="word-break:break-all; white-space: pre-wrap;" class="content">'+data.result.content+'</xmp>'+
             '<xmp style="word-break:break-all; white-space: pre-wrap;" class="advice"  >'+data.result.advice+'</xmp>';
 

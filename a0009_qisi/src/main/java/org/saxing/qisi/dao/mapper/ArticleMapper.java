@@ -21,9 +21,9 @@ public interface ArticleMapper {
      * @return
      */
     @Insert("INSERT INTO `idea`.`article`" +
-            " (`type`, `title`, `content`, `advice`, `author_wxid`, `del`) " +
+            " (`type`, `title`, `content`, `advice`, `relate_depart`, `author_wxid`, `del`) " +
             " VALUES (#{type, jdbcType=VARCHAR}, #{title, jdbcType=VARCHAR}, #{content, jdbcType=VARCHAR}," +
-            " #{advice, jdbcType=VARCHAR}, #{wxUserId, jdbcType=VARCHAR}, 0);")
+            " #{advice, jdbcType=VARCHAR}, #{relateDepart, jdbcType=VARCHAR}, #{wxUserId, jdbcType=VARCHAR}, 0);")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int insertArticle(Map<String, Object> article);
 
@@ -113,15 +113,17 @@ public interface ArticleMapper {
      * @param id
      * @return
      */
-    @Select("SELECT `id`, `type`, `title`, `content`, `advice`, `author_wxid`, `create_time`, `update_time`, `close`" +
+    @Select("SELECT `id`, `type`, `title`, `content`, `advice`, `relate_depart`, `author_wxid`, `create_time`, `update_time`, `close`" +
             " FROM article WHERE id=#{id, jdbcType=INTEGER} AND del=0")
     @Results({
             @Result(column = "title", property = StringConstant.ARTICLE_TITLE),
             @Result(column = "type", property = StringConstant.ARTICLE_TYPE),
             @Result(column = "content", property = StringConstant.ARTICLE_CONTENT),
             @Result(column = "advice", property = StringConstant.ARTICLE_ADVICE),
+            @Result(column = "relate_depart", property = StringConstant.RELATE_DEPART),
             @Result(column = "author_wxid", property = StringConstant.ARTICLE_AUTHOR_ID),
             @Result(column = "close", property = StringConstant.ARTICLE_CLOSE)
+
     })
     Map<String,Object> queryArticleDetail(int id);
 
