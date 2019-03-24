@@ -23,6 +23,13 @@ public class EncryptUtils {
 
     private static BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 
+    /**
+     * 加密
+     *
+     * @param entId
+     * @param secret
+     * @return
+     */
     public static String getPassword(Long entId, String secret){
         LocalDateTime localDateTime = LocalDateTime.now();
         String time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(localDateTime);
