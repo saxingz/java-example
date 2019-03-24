@@ -44,7 +44,6 @@ public class EncryptUtils {
     }
 
     public static Boolean verify(Long entId, String secret, String password){
-
         boolean valid = false;
         Set<String> probable = new HashSet<>();
         String entIdStr = entId + "";
