@@ -12,6 +12,7 @@ import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
 import java.net.URLEncoder;
+import java.util.UUID;
 
 @SuppressWarnings({ "restriction" })
 public class ThreeDES {
@@ -116,10 +117,16 @@ public class ThreeDES {
         return new String(retByte);
     }
 
+    public static long timeIntecept(){
+        long current = System.currentTimeMillis();
+        System.out.println(current);
+        return (current+12)*7+234;
+    }
+
     public static void main(String[] args) throws Exception {
-        final String key = "cf410f84904a44cc8a7f48fc4134e8f9";
+        final String key = "61990364-80ae-45da-b0d6-29bbb123ddbb";
         // 加密流程
-        String telePhone = "15629551180";
+        String telePhone = String.valueOf(timeIntecept());
         String telePhone_encrypt = "";
         telePhone_encrypt = encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
         System.out.println(telePhone_encrypt);// nWRVeJuoCrs8a+Ajn/3S8g==
@@ -129,18 +136,23 @@ public class ThreeDES {
         System.out.println("模拟代码解密:" + tele_decrypt);
 
         long start = System.currentTimeMillis();
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 1000; i++) {
             telePhone_encrypt = encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
         }
         long end = System.currentTimeMillis();
         System.out.println("加密时间： " + (end -  start));
 
-        for (int i = 0; i < 1000000; i++) {
+        for (int i = 0; i < 1000; i++) {
             tele_decrypt = decryptThreeDESECB(telePhone_encrypt, key);
         }
 
         long end2 = System.currentTimeMillis();
         System.out.println("解密时间： " + (end2 - end));
+
+        System.out.println("解密结果： " + tele_decrypt);
+        System.out.println("最终结果： " + ((Long.valueOf(tele_decrypt) - 234)/7-12));
+
+        System.out.println(UUID.randomUUID().toString());
     }
 
 }
