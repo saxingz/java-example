@@ -8,6 +8,7 @@ import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
+import org.apache.commons.lang3.StringUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
@@ -150,9 +151,26 @@ public class ThreeDES {
         System.out.println("解密时间： " + (end2 - end));
 
         System.out.println("解密结果： " + tele_decrypt);
-        System.out.println("最终结果： " + ((Long.valueOf(tele_decrypt) - 234)/7-12));
+        long res = 0;
+        if (StringUtils.isNumeric(tele_decrypt)){
+            res = ((Long.valueOf(tele_decrypt) - 234)/7-12);
+        }
+        System.out.println("最终结果： " + res);
 
-        System.out.println(UUID.randomUUID().toString());
+        Thread.sleep(2000);
+
+        long current = System.currentTimeMillis();
+        long abs = Math.abs(current - res);
+        System.out.println("abs: " + abs);
+        abs = Math.abs(res - current);
+        System.out.println("abs: " + abs);
+
+        if (abs < 2000){
+            System.out.println(true);
+        }else{
+            System.out.println(false);
+        }
+
     }
 
 }
