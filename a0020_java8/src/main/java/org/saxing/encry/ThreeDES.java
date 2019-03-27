@@ -116,5 +116,35 @@ public class ThreeDES {
         return new String(retByte);
     }
 
+    public static void main(String[] args) throws Exception {
+        final String key = "cf410f84904a44cc8a7f48fc4134e8f9";
+        // 加密流程
+        String telePhone = "15629551180";
+        ThreeDES threeDES = new ThreeDES();
+        String telePhone_encrypt = "";
+        telePhone_encrypt = threeDES.encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
+        System.out.println(telePhone_encrypt);// nWRVeJuoCrs8a+Ajn/3S8g==
+
+        // 解密流程
+        String tele_decrypt = threeDES.decryptThreeDESECB(telePhone_encrypt, key);
+        System.out.println("模拟代码解密:" + tele_decrypt);
+
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < 1000000; i++) {
+            telePhone_encrypt = threeDES.encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println("加密时间： " + (end -  start));
+
+        for (int i = 0; i < 1000000; i++) {
+            tele_decrypt = threeDES.decryptThreeDESECB(telePhone_encrypt, key);
+        }
+
+        long end2 = System.currentTimeMillis();
+        System.out.println("解密时间： " + (end2 - end));
+
+
+
+    }
 
 }
