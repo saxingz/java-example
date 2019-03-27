@@ -29,7 +29,7 @@ public class ThreeDES {
      * @return 返回加密后的数据
      * @throws Exception
      */
-    public String encryptDESCBC(final String src, final String key) throws Exception {
+    public static String encryptDESCBC(final String src, final String key) throws Exception {
 
         // --生成key,同时制定是des还是DESede,两者的key长度要求不同
         final DESKeySpec desKeySpec = new DESKeySpec(key.getBytes("UTF-8"));
@@ -60,7 +60,7 @@ public class ThreeDES {
      * @return 返回解密后的原始数据
      * @throws Exception
      */
-    public String decryptDESCBC(final String src, final String key) throws Exception {
+    public static String decryptDESCBC(final String src, final String key) throws Exception {
         // --通过base64,将字符串转成byte数组
         final BASE64Decoder decoder = new BASE64Decoder();
         final byte[] bytesrc = decoder.decodeBuffer(src);
@@ -84,7 +84,7 @@ public class ThreeDES {
     }
 
     // 3DESECB加密,key必须是长度大于等于 3*8 = 24 位哈
-    public String encryptThreeDESECB(final String src, final String key) throws Exception {
+    public static String encryptThreeDESECB(final String src, final String key) throws Exception {
         final DESedeKeySpec dks = new DESedeKeySpec(key.getBytes("UTF-8"));
         final SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DESede");
         final SecretKey securekey = keyFactory.generateSecret(dks);
@@ -99,7 +99,7 @@ public class ThreeDES {
     }
 
     // 3DESECB解密,key必须是长度大于等于 3*8 = 24 位哈
-    public String decryptThreeDESECB(final String src, final String key) throws Exception {
+    public static String decryptThreeDESECB(final String src, final String key) throws Exception {
         // --通过base64,将字符串转成byte数组
         final BASE64Decoder decoder = new BASE64Decoder();
         final byte[] bytesrc = decoder.decodeBuffer(src);
@@ -120,31 +120,27 @@ public class ThreeDES {
         final String key = "cf410f84904a44cc8a7f48fc4134e8f9";
         // 加密流程
         String telePhone = "15629551180";
-        ThreeDES threeDES = new ThreeDES();
         String telePhone_encrypt = "";
-        telePhone_encrypt = threeDES.encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
+        telePhone_encrypt = encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
         System.out.println(telePhone_encrypt);// nWRVeJuoCrs8a+Ajn/3S8g==
 
         // 解密流程
-        String tele_decrypt = threeDES.decryptThreeDESECB(telePhone_encrypt, key);
+        String tele_decrypt = decryptThreeDESECB(telePhone_encrypt, key);
         System.out.println("模拟代码解密:" + tele_decrypt);
 
         long start = System.currentTimeMillis();
         for (int i = 0; i < 1000000; i++) {
-            telePhone_encrypt = threeDES.encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
+            telePhone_encrypt = encryptThreeDESECB(URLEncoder.encode(telePhone, "UTF-8"), key);
         }
         long end = System.currentTimeMillis();
         System.out.println("加密时间： " + (end -  start));
 
         for (int i = 0; i < 1000000; i++) {
-            tele_decrypt = threeDES.decryptThreeDESECB(telePhone_encrypt, key);
+            tele_decrypt = decryptThreeDESECB(telePhone_encrypt, key);
         }
 
         long end2 = System.currentTimeMillis();
         System.out.println("解密时间： " + (end2 - end));
-
-
-
     }
 
 }
