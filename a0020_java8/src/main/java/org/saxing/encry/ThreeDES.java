@@ -15,6 +15,11 @@ import sun.misc.BASE64Encoder;
 import java.net.URLEncoder;
 import java.util.UUID;
 
+/**
+ * 3des加密
+ *
+ * @author saxing 2019/3/29 21:54
+ */
 @SuppressWarnings({ "restriction" })
 public class ThreeDES {
 
