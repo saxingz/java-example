@@ -212,6 +212,9 @@ public class ThreeDES {
 
         System.out.println(result);
 
+        result = md5_3("fdjsalkvjcslkjflsdkjvlcxk;jfa;lskvjcx;lkfsd", "fldksj");
+        System.out.println(result);
+
     }
 
 
