@@ -7,7 +7,6 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;
 import sun.misc.BASE64Decoder;
@@ -128,7 +127,7 @@ public class ThreeDES {
         return (current+12)*7+234;
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main2(String[] args) throws Exception {
         final String key = "61990364-80ae-45da-b0d6-29bbb123ddbb";
         // 加密流程
         String telePhone = String.valueOf(timeIntecept());
@@ -181,9 +180,35 @@ public class ThreeDES {
      * MD5方法
      * 669ms / 100000次
      */
+    public static String md5_2(String text, String key) {
+        String k = "78cdabb3-5a8f-4899-9214-cf37b6e7caab";
+        return org.apache.commons.codec.digest.DigestUtils.md5Hex(text + key + k);
+    }
+
+    /**
+     * MD5方法
+     * 197ms / 100000次
+     */
     public static String md5(String text, String key) {
         String k = "78cdabb3-5a8f-4899-9214-cf37b6e7caab";
-        return DigestUtils.md5Hex(text + key + k);
+        String r =DigestUtils.md5DigestAsHex(text.getBytes());
+        return r;
+    }
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 10000; i++) {
+            md5("fds;lkvcx;ljkflwjelfkvjcxlkfjlaksvmcxlkjflsdkjlkvcfdsvcxdf", "fff");
+        }
+        String result = "";
+        long l1 = System.currentTimeMillis();
+        for (int i = 0; i < 100000; i++) {
+            result = md5("fds;lkvcx;ljkflwjelfkvjcxlkfjlaksvmcxlkjflsdkjlkvcfdsvcxdf", "fff");
+        }
+        long l2 = System.currentTimeMillis();
+        System.out.println(l2 - l1);
+
+        System.out.println(result);
+
     }
 
 }
