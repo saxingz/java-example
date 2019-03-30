@@ -11,7 +11,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.DigestUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
+
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.util.UUID;
 
 /**
  * 3des加密
@@ -209,6 +212,20 @@ public class ThreeDES {
 
         System.out.println(result);
 
+    }
+
+
+    /**
+     * MD5方法
+     * 149ms / 100000次
+     */
+    public static String md5_3(String text, String key) {
+        String k = "78cdabb3-5a8f-4899-9214-cf37b6e7caab";
+        try {
+            return DigestUtils.md5DigestAsHex((text + k + key).getBytes("UTF-8"));
+        } catch (UnsupportedEncodingException e) {
+            return "error md5 sign" + UUID.randomUUID().toString();
+        }
     }
 
 }
