@@ -58,6 +58,12 @@
             <artifactId>spring-security-crypto</artifactId>
             <version>5.0.7.RELEASE</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.6</version>
+        </dependency>
     </dependencies>
 
     <build>
