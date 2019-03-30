@@ -9,11 +9,10 @@ import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.DigestUtils;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
-
 import java.net.URLEncoder;
-import java.util.UUID;
 
 /**
  * 3des加密
@@ -175,6 +174,16 @@ public class ThreeDES {
         }else{
             System.out.println(false);
         }
+    }
+
+
+    /**
+     * MD5方法
+     * 669ms / 100000次
+     */
+    public static String md5(String text, String key) {
+        String k = "78cdabb3-5a8f-4899-9214-cf37b6e7caab";
+        return DigestUtils.md5Hex(text + key + k);
     }
 
 }
