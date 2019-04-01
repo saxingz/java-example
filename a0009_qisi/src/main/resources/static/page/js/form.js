@@ -239,7 +239,6 @@ function pushHistory() {
 
 
 var alldepartments = [
-    "行长室",
     "工会办公室",
     "公司金融部",
     "个人金融部",
