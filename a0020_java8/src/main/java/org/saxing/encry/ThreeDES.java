@@ -178,7 +178,7 @@ public class ThreeDES {
         }
     }
 
-
+    // test fork
     /**
      * MD5方法
      * 669ms / 100000次
