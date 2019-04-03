@@ -215,6 +215,9 @@ public class ThreeDES {
         result = md5_3("fdjsalkvjcslkjflsdkjvlcxk;jfa;lskvjcx;lkfsd", "fldksj");
         System.out.println(result);
 
+        System.out.println(UUID.randomUUID().toString());
+        System.out.println(UUID.randomUUID().toString().replaceAll("-", ""));
+
     }
 
 
@@ -230,5 +233,6 @@ public class ThreeDES {
             return "error md5 sign" + UUID.randomUUID().toString();
         }
     }
+
 
 }
