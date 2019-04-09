@@ -9,8 +9,8 @@ import java.util.*;
 public class EncryptUtils {
 
     public static void main(String[] args) {
-        Long entId = 100001L;
-        String secret = "ljggedgighlfjidd%3A5fed369aecb34f009e95fae57003393e";
+        Long entId = 1000004L;
+        String secret = "68NcszZBEoYM66rQ";
 
         String password = getPassword(entId, secret);
 
