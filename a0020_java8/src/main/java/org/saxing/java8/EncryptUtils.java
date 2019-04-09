@@ -32,7 +32,7 @@ public class EncryptUtils {
      */
     public static String getPassword(Long entId, String secret){
         LocalDateTime localDateTime = LocalDateTime.now();
-        String time = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss").format(localDateTime);
+        String time = DateTimeFormatter.ofPattern("yyyyMMddHHmmss").format(localDateTime);
 
         String entIdStr = entId + "";
         int length = (entIdStr).length();
@@ -40,7 +40,7 @@ public class EncryptUtils {
         for (int i = 0; i < 10 - length; i++) {
             entIdStr = "0" + entIdStr;
         }
-        return encoder.encode(entIdStr + secret + time);
+        return encoder.encode(entIdStr + time + secret);
     }
 
     public static Boolean verify(Long entId, String secret, String password){
