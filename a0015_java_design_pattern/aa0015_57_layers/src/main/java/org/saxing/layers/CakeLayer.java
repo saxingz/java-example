@@ -1,15 +1,13 @@
 package org.saxing.layers;
 
-import javax.persistence.CascadeType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 /**
  * CakeLayer entity
  *
  * @author saxing 2019/3/6 23:34
  */
+@Entity
 public class CakeLayer {
 
     @Id
