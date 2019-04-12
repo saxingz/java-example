@@ -9,6 +9,7 @@ import java.util.Set;
  *
  * @author saxing 2019/3/6 23:30
  */
+@Entity
 public class Cake {
 
     @Id
