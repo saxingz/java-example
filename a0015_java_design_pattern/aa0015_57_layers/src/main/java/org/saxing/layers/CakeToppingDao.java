@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
  * @author saxing 2019/3/3 22:20
  */
 @Repository
-public interface CakeToppingDao extends CrudRepository<CakeLayer, Long> {
+public interface CakeToppingDao extends CrudRepository<CakeTopping, Long> {
 
 
 
