@@ -12,7 +12,4 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface CakeToppingDao extends CrudRepository<CakeTopping, Long> {
-
-
-
 }
