@@ -1,4 +1,4 @@
-package org.saxing.maker;
+package org.saxing.makrer;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
