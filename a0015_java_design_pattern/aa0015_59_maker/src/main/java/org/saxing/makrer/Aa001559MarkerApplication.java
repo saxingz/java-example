@@ -8,10 +8,10 @@ import org.slf4j.LoggerFactory;
  *
  * @author saxing 2019/4/17 20:59
  */
-public class Aa001559MakerApplication {
+public class Aa001559MarkerApplication {
 
     public static void main(String[] args) {
-        final Logger logger = LoggerFactory.getLogger(Aa001559MakerApplication.class);
+        final Logger logger = LoggerFactory.getLogger(Aa001559MarkerApplication.class);
         Guard guard = new Guard();
         Thief thief = new Thief();
 
