@@ -70,7 +70,8 @@
         <module>aa0015_56_iterator</module>
         <module>aa0015_57_layers</module>
         <module>aa0015_58_lazy-loading</module>
-        <module>aa0015_59_maker</module>
+        <module>aa0015_59_marker</module>
+
     </modules>
 
 </project>
