@@ -71,6 +71,7 @@
         <module>aa0015_57_layers</module>
         <module>aa0015_58_lazy-loading</module>
         <module>aa0015_59_marker</module>
+        <module>aa0015_60_mediator</module>
 
     </modules>
 
