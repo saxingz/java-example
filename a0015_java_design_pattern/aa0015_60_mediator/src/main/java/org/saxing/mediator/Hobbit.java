@@ -5,5 +5,10 @@ package org.saxing.mediator;
  *
  * @author saxing 2019/4/18 13:08
  */
-public class Hobbit  {
+public class Hobbit extends PartyMemberBase {
+
+    @Override
+    public String toString() {
+        return "Hobbit";
+    }
 }
