@@ -12,7 +12,7 @@ public class PartyImpl implements Party {
 
     private final List<PartyMember> members;
 
-    public PartyImpl(List<PartyMember> members) {
+    public PartyImpl() {
         this.members = new ArrayList<>();
     }
 
