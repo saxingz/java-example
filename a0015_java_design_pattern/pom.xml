@@ -72,6 +72,7 @@
         <module>aa0015_58_lazy-loading</module>
         <module>aa0015_59_marker</module>
         <module>aa0015_60_mediator</module>
+        <module>aa0015_61_memento</module>
 
     </modules>
 
