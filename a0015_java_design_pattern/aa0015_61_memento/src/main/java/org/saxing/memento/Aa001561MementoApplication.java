@@ -14,9 +14,7 @@ public class Aa001561MementoApplication {
     private static final Logger LOGGER = LoggerFactory.getLogger(Aa001561MementoApplication.class);
 
     public static void main(String[] args) {
-
-
-
+        
         Stack<StarMemento> states = new Stack<>();
 
         Star star = new Star(StarType.SUN, 10000000, 500000);
