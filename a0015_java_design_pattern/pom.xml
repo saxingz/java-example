@@ -74,7 +74,7 @@
         <module>aa0015_60_mediator</module>
         <module>aa0015_61_memento</module>
         <module>aa0015_62_model-view-controller</module>
-
+        <module>aa0015_63_model-view-presenter</module>
     </modules>
 
 </project>
