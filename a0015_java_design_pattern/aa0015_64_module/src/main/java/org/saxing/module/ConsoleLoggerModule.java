@@ -89,6 +89,4 @@ public final class ConsoleLoggerModule {
         this.error.println(value);
     }
 
-
-
 }
