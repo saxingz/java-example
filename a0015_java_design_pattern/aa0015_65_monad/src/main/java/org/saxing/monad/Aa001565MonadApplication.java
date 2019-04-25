@@ -3,7 +3,6 @@ package org.saxing.monad;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
 public class Aa001565MonadApplication {
 
     public static void main(String[] args) {
