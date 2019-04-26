@@ -3,6 +3,11 @@ package org.saxing.monostate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Server
+ *
+ * @author saxing 2019/4/26 13:28
+ */
 public class Server {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Server.class);
