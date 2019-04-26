@@ -1,7 +1,5 @@
 package org.saxing.monostate;
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
 /**
  * main
  *
