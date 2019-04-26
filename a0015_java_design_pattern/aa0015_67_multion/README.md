@@ -13,8 +13,7 @@ tags:
 Registry
 
 ## Intent
-Ensure a class only has limited number of instances, and provide a
-global point of access to them.
+Ensure a class only has limited number of instances, and provide a global point of access to them.
 
 ![alt text](./etc/multiton.png "Multiton")
 
