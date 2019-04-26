@@ -75,6 +75,8 @@
         <module>aa0015_61_memento</module>
         <module>aa0015_62_model-view-controller</module>
         <module>aa0015_63_model-view-presenter</module>
+        <module>aa0015_64_module</module>
+        <module>aa0015_65_monad</module>
     </modules>
 
 </project>
