@@ -78,6 +78,7 @@
         <module>aa0015_64_module</module>
         <module>aa0015_65_monad</module>
         <module>aa0015_66_monostate</module>
+        <module>aa0015_67_multion</module>
     </modules>
 
 </project>
