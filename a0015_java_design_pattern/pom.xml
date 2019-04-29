@@ -79,6 +79,7 @@
         <module>aa0015_65_monad</module>
         <module>aa0015_66_monostate</module>
         <module>aa0015_67_multion</module>
+        <module>aa0015_68_mute-idiom</module>
     </modules>
 
 </project>
