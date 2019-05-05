@@ -20,7 +20,6 @@ public class Aa001568MuteIdiomApplication {
 
     public static void main(String[] args) throws SQLException {
         useOfLoggedMute();
-
         useOfMute();
     }
 
