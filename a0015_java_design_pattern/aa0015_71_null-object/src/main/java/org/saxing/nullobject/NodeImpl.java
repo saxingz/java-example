@@ -3,6 +3,11 @@ package org.saxing.nullobject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Implementation for binary tree's normal nodes.
+ *
+ * @author saxing 2019/5/5 15:09
+ */
 public class NodeImpl implements Node {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NodeImpl.class);
