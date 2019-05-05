@@ -31,6 +31,13 @@
         </dependency>
     </dependencies>
 
+    <modules>
+        <module>dom</module>
+        <module>fixture</module>
+        <module>integtest</module>
+        <module>webapp</module>
+    </modules>
+
     <build>
         <plugins>
             <plugin>
