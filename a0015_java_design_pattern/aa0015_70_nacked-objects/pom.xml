@@ -9,9 +9,9 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.saxing</groupId>
-    <artifactId>nacked-objects</artifactId>
+    <artifactId>naked-objects</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>aa0015_70_nacked-objects</name>
+    <name>aa0015_70_naked-objects</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>

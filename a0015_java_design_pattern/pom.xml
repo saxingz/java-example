@@ -81,7 +81,7 @@
         <module>aa0015_67_multion</module>
         <module>aa0015_68_mute-idiom</module>
         <module>aa0015_69_mutex</module>
-        <module>aa0015_70_nacked-objects</module>
+        <module>aa0015_70_naked-objects</module>
     </modules>
 
 </project>
