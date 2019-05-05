@@ -1,7 +1,9 @@
 package org.saxing.nullobject;
 
 /**
+ * node
  *
+ * @author saxing 2019/5/5 15:08
  */
 public interface Node {
 
