@@ -6,6 +6,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+/**
+ * test
+ *
+ * @author saxing 2019/5/6 11:36
+ */
 public class Aa001572ObjectMotherApplicationTests {
 
     @Test
