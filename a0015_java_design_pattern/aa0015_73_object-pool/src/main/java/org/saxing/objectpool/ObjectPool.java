@@ -22,7 +22,7 @@ public abstract class ObjectPool<T> {
      *
      * @return
      */
-    public synchronized T checkout(){
+    public synchronized T checkOut(){
         if (available.isEmpty()) {
             available.add(create());
         }
