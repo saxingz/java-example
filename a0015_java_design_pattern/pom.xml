@@ -84,6 +84,7 @@
         <module>aa0015_70_nacked-objects</module>
         <module>aa0015_71_null-object</module>
         <module>aa0015_72_object-mother</module>
+        <module>aa0015_73_object-pool</module>
     </modules>
 
 </project>
