@@ -17,7 +17,7 @@ import java.util.UUID;
 
 public class Aa0025PdfApplication {
 
-    static final String WECHAT_STR = "diyicaizi";
+    static final String WECHAT_STR = "";
     static final String READER_PATH = "D:\\D_desktop\\book\\small1.pdf";
     static final String OUT_PATH = "D:\\D_desktop\\book\\small3.pdf";
 
