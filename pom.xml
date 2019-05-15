@@ -35,6 +35,7 @@
         <module>a0022_gatewaycodegenerate</module>
         <module>a0023_search</module>
         <module>a0024_rec_xml</module>
+        <module>aa0025_pdf</module>
     </modules>
 
     <properties>
