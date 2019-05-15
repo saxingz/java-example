@@ -17,9 +17,17 @@ import java.util.UUID;
 
 public class Aa0025PdfApplication {
 
+
     static final String WECHAT_STR = "hello";
-    static final String READER_PATH = "E:\\D_Desktop\\test\\1.pdf";
-    static final String OUT_PATH = "E:\\D_Desktop\\test\\2.pdf";
+    static final String IN_DIR = "E:\\D_Desktop\\test\\";
+    static final String IN_BOOK = "1";
+
+    static final String OUT_DIR = "E:\\D_Desktop\\test\\";
+    static final String OUT_BOOK = "2";
+
+
+    static final String INPATH = IN_DIR + IN_BOOK + ".pdf";;
+    static final String OUTPATH = OUT_DIR + OUT_BOOK + ".pdf";;
 
     static final Integer WATER_TIMES_RANGE = 4;
     static final Integer WATER_POSITION_RANGE = 6;
@@ -41,8 +49,8 @@ public class Aa0025PdfApplication {
 //                                                EncryptionConstants.ENCRYPTION_AES_256)));
 
         PdfDocument pdfDoc =
-                new PdfDocument(new PdfReader(READER_PATH),
-                        new PdfWriter(OUT_PATH));
+                new PdfDocument(new PdfReader(INPATH),
+                        new PdfWriter(OUTPATH));
 
         Document document = new Document(pdfDoc);
 
