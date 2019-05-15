@@ -17,14 +17,14 @@ import java.util.UUID;
 
 public class Aa0025PdfApplication {
 
-    static final String WECHAT_STR = "";
-    static final String READER_PATH = "D:\\D_desktop\\book\\small1.pdf";
-    static final String OUT_PATH = "D:\\D_desktop\\book\\small3.pdf";
+    static final String WECHAT_STR = "hello";
+    static final String READER_PATH = "E:\\D_Desktop\\test\\1.pdf";
+    static final String OUT_PATH = "E:\\D_Desktop\\test\\2.pdf";
 
     static final Integer WATER_TIMES_RANGE = 4;
     static final Integer WATER_POSITION_RANGE = 6;
     static final Integer WATER_FONT_SIZE_RANGE = 60;
-    static final Float WATER_OPACITY = 0.1f;
+    static final Float WATER_OPACITY = 0.05f;
 
 
     public static void main(String[] args)  throws IOException  {
@@ -95,11 +95,40 @@ public class Aa0025PdfApplication {
                     pageSize.getHeight() / WATER_POSITION_RANGE * randomInt(WATER_POSITION_RANGE),
                     pdfDoc.getPageNumber(page),
                     TextAlignment.CENTER, VerticalAlignment.MIDDLE, randomInt(360));
+            // add random char
+            Paragraph p2 = new Paragraph(getRandomWechat(WECHAT_STR)).setFontSize(randomInt(WATER_FONT_SIZE_RANGE));
+            PdfExtGState gs2 = new PdfExtGState().setFillOpacity(WATER_OPACITY);
+            canvas.setExtGState(gs2);
+            document.showTextAligned(p2,
+                    pageSize.getWidth() / WATER_POSITION_RANGE * randomInt(WATER_POSITION_RANGE) ,
+                    pageSize.getHeight() / WATER_POSITION_RANGE * randomInt(WATER_POSITION_RANGE),
+                    pdfDoc.getPageNumber(page),
+                    TextAlignment.CENTER, VerticalAlignment.MIDDLE, randomInt(360));
+
+            // transparent
+            Paragraph p3 = new Paragraph(WECHAT_STR).setFontSize(randomInt(WATER_FONT_SIZE_RANGE));
+            PdfExtGState gs3 = new PdfExtGState().setFillOpacity(0);
+            canvas.setExtGState(gs3);
+            document.showTextAligned(p3,
+                    pageSize.getWidth() / WATER_POSITION_RANGE * randomInt(WATER_POSITION_RANGE) ,
+                    pageSize.getHeight() / WATER_POSITION_RANGE * randomInt(WATER_POSITION_RANGE),
+                    pdfDoc.getPageNumber(page),
+                    TextAlignment.CENTER, VerticalAlignment.MIDDLE, randomInt(360));
         }
 
 
         canvas.saveState();
         canvas.restoreState();
+    }
+
+    private static String getRandomWechat(String wechatChar){
+        String[] split = wechatChar.split("");
+        String result = "";
+        for (String s : split){
+            result += randomChar();
+            result += s;
+        }
+        return result;
     }
 
     private static String randomStr(){
@@ -108,6 +137,11 @@ public class Aa0025PdfApplication {
 
     private static Integer randomInt(Integer range){
         return new Random().nextInt(range) + 1;
+    }
+
+    private static String randomChar(){
+        String str = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        return str.split("")[new Random().nextInt(str.length())];
     }
 
 
