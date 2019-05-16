@@ -69,4 +69,20 @@ public class LoginPage extends Page {
         return this;
     }
 
+    /**
+     * Clicking on the login button to 'login'
+     *
+     * @return {@link AlbumListPage}
+     *        - this is the page that user gets navigated to once successfully logged in
+     */
+    public AlbumListPage login() {
+        HtmlSubmitInput loginButton = (HtmlSubmitInput) page.getElementById("loginButton");
+        try {
+            loginButton.click();
+        } catch (IOException e) {
+            LOGGER.error("An error occured on login.", e);
+        }
+        return new AlbumListPage(webClient);
+    }
+
 }
