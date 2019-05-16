@@ -86,7 +86,7 @@
         <module>aa0015_72_object-mother</module>
         <module>aa0015_73_object-pool</module>
         <module>aa0015_75_observer</module>
-
+        <module>aa0015_76_page-object</module>
     </modules>
 
 </project>
