@@ -6,9 +6,9 @@ import java.util.concurrent.CopyOnWriteArrayList;
 /**
  * Generic observer inspired by Java Generics and Collection by {@literal Naftalin & Wadler}
  *
- * @param <S>
- * @param <O>
- * @param <A>
+ * @param <S> Subject
+ * @param <O> Observer
+ * @param <A> Argument type
  *
  *     @author saxing 2019/5/16 14:40
  */
