@@ -12,7 +12,9 @@ import org.slf4j.LoggerFactory;
 import java.io.IOException;
 
 /**
+ * login page
  *
+ * @author saxing 2019/5/16 17:04
  */
 public class LoginPage extends Page {
 
