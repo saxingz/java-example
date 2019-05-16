@@ -13,7 +13,7 @@ public abstract class Page {
      * Application Under Test path
      * This directory location is where html web pages are located
      */
-    public static final String AUT_PATH = "../sample-application/src/main/resources/sample-ui/";
+    public static final String AUT_PATH = "../aa0015_76_01_sample-application/src/main/resources/sample-ui/";
 
     protected final WebClient webClient;
 
