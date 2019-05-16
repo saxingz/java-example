@@ -42,5 +42,4 @@ public abstract class ObjectPool<T> {
         return String.format("Pool available=%d inUse=%d", available.size(), inUse.size());
     }
 
-
 }
