@@ -28,7 +28,7 @@ public class Aa0026HlsdownloadApplication {
 
     private static void download(String originUrlpath, String fileName){
         String preUrlPath = originUrlpath.substring(0, originUrlpath.lastIndexOf("/")+1);
-        String rootPath = "E:\\videodir";
+        String rootPath = "e:\\test22";
         HlsDownloader downLoader = new HlsDownloader(originUrlpath, preUrlPath, rootPath, fileName);
         downLoader.setThreadQuantity(4);
         try{
@@ -43,7 +43,7 @@ public class Aa0026HlsdownloadApplication {
             System.err.println("下载失败");
             System.err.println(" --------------------------------- ");
         }else{
-            System.out.println("下载成功: " + rootPath + fileName);
+            System.out.println("下载成功: " + rootPath + "\\" + fileName);
         }
     }
 
