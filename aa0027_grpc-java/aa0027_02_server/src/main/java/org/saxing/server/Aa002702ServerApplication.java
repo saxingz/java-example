@@ -7,6 +7,11 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.io.IOException;
 
+/**
+ * main
+ *
+ * @author saxing 2019/5/20 23:41
+ */
 public class Aa002702ServerApplication {
 
     private static final int port = 8180;
