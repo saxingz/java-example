@@ -31,10 +31,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.saxing.</groupId>
-            <artifactId>grpc-api</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
+        <groupId>org.saxing.</groupId>
+        <artifactId>grpc-api</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </dependency>
         <dependency>
             <groupId>io.grpc</groupId>
             <artifactId>grpc-all</artifactId>
