@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+option java_package = "org.saxing.grpc.api";
+option java_outer_classname = "RPCDateServiceApi";
+option java_multiple_files = true;
+
+package org.saxing.grpc.api;
+
+service RPCDateService {
+  rpc getDate (RPCDateRequest) returns (RPCDateResponse) {}
+}
+
+message RPCDateRequest {
+  string userName = 1;
+}
+
+message RPCDateResponse {
+  string serverDate = 1;
+}
