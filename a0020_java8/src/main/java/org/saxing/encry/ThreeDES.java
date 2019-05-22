@@ -185,8 +185,7 @@ public class ThreeDES {
      */
     public static String md5_2(String text, String key) {
         String k = "78cdabb3-5a8f-4899-9214-cf37b6e7caab";
-//        return org.apache.commons.codec.digest.DigestUtils.md5Hex(text + key + k);
-        return null;
+        return org.apache.commons.codec.digest.DigestUtils.md5Hex(text + key + k);
     }
 
     /**
