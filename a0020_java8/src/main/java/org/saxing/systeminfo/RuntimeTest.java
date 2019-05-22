@@ -32,6 +32,8 @@ public class RuntimeTest {
     }
 
     public static void systemInfo() {
+        System.out.println(System.getProperty("java.library.path"));
+
         try {
             // System信息，从jvm获取
             property();
