@@ -37,6 +37,7 @@
         <module>a0024_rec_xml</module>
         <module>aa0025_pdf</module>
         <module>aa0026_hlsdownload</module>
+        <module>aa0027_grpc-java</module>
     </modules>
 
     <properties>
