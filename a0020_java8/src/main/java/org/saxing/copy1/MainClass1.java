@@ -41,10 +41,10 @@ class Resume  {
 
 public class MainClass1 {
     public static void main(String[] args) {
-        org.saxing.copy2.Resume zhangsan = new org.saxing.copy2.Resume("zhangsan","男",24);
+        Resume zhangsan = new Resume("zhangsan","男",24);
         zhangsan.setExperience("2009-2013就读于家里蹲大学，精通JAVA,C,C++,C#等代码复制");
         zhangsan.displayResume();
-        org.saxing.copy2.Resume zhangsan1 = zhangsan;
+        Resume zhangsan1 = zhangsan;
         zhangsan1.setExperience("2009-2013就读于家里蹲大学，精通JAVA,C,C++,C#等");
         zhangsan.displayResume();
         zhangsan1.displayResume();
