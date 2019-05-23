@@ -58,7 +58,16 @@ class Resume  implements Cloneable{
 public class MainClass2 {
 
     public static void main(String[] args) {
-
+        Resume zhangsan = new Resume("zhangsan","男",24);
+        zhangsan.setExperience("2009-2013就读于家里蹲大学，精通JAVA,C,C++,C#等代码拷贝和粘贴");
+        zhangsan.displayResume();
+        Resume zhangsan1 = (Resume)zhangsan.clone();
+        zhangsan1.setAge(23);
+        zhangsan1.displayResume();
+        Resume zhangsan2 = (Resume)zhangsan.clone();
+        zhangsan2.setExperience("2009-2013就读于家里蹲大学，精通JAVA,C,C++,C#等代码");
+        zhangsan2.displayResume();
+        zhangsan.displayResume();
     }
 
 }
