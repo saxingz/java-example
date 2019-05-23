@@ -1,6 +1,14 @@
 package org.saxing.copy3;
 
 
+/**
+ * 看一下上面两段程序差异在哪儿，第一段程序的工作经历是作为Resume类的一个普通的成员变量，也就是值属性。
+ * 而后面一段程序中，工作经历Experience是一个类。结合上面程序的运行结果，我们再来理解“如果该字段是引用类型的话，
+ * 则复制引用但不复制引用的对象。因此，原始对象及其副本引用同一个对象。”
+ * 其实也就是说，zhangsan和zhangsan2里面的Experience类指向的是同一个对象嘛！那不管是zhangsan里面的Experience变化，
+ * 还是zhangsan2里面的Experience变化都会影响另外一个啊。
+ *
+ */
 class Experience {
 
     private String educationBackground;
