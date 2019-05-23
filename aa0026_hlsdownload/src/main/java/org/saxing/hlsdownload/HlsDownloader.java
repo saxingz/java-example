@@ -56,7 +56,7 @@ public class HlsDownloader {
 
         List urlList = analysisIndex(indexStr);
 
-        ConcurrentHashMap<Integer,String> keyFileMap = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Integer,String> keyFileMap = new ConcurrentHashMap<Integer, String>();
 
         if(isAsync){
             downLoadIndexFileAsync(urlList, keyFileMap);
