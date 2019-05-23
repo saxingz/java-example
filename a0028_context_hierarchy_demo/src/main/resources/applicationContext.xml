@@ -12,5 +12,5 @@
         <constructor-arg name="context" value="Bar" />
     </bean>
 
-    <!--<bean id="fooAspect" class="geektime.spring.web.foo.FooAspect" />-->
+<!--    <bean id="fooAspect" class="org.saxing.a0028_context_hierarchy_demo.foo.FooAspect" />-->
 </beans>
