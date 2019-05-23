@@ -8,7 +8,7 @@
 
     <aop:aspectj-autoproxy/>
 
-    <bean id="testBeanX" class="geektime.spring.web.context.TestBean">
+    <bean id="testBeanX" class="org.saxing.a0028_context_hierarchy_demo.context.TestBean">
         <constructor-arg name="context" value="Bar" />
     </bean>
 
