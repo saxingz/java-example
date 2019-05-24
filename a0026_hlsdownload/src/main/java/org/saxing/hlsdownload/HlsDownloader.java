@@ -56,7 +56,7 @@ public class HlsDownloader {
 
         List urlList = analysisIndex(indexStr);
 
-        ConcurrentHashMap<Integer,String> keyFileMap = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Integer,String> keyFileMap = new ConcurrentHashMap<Integer, String>();
 
         if(isAsync){
             downLoadIndexFileAsync(urlList, keyFileMap);
@@ -105,7 +105,7 @@ public class HlsDownloader {
 
     /* 下载视频片段 */
     public ConcurrentHashMap downLoadIndexFile(List<String> urlList){
-        ConcurrentHashMap<Integer,String> keyFileMap = new ConcurrentHashMap<>();
+        ConcurrentHashMap<Integer,String> keyFileMap = new ConcurrentHashMap<Integer,String>();
 
         for(int i =0;i<urlList.size();i++){
             String subUrlPath = urlList.get(i);

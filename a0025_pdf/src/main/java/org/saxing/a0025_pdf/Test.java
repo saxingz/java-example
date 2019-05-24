@@ -1,4 +1,4 @@
-package org.saxing.pdf;
+package org.saxing.a0025_pdf;
 
 import java.util.Random;
 

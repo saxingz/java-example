@@ -1,22 +1,27 @@
-package org.saxing.pdf;
+package org.saxing.a0025_pdf;
 
 import com.itextpdf.io.font.FontConstants;
 import com.itextpdf.kernel.color.Color;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.geom.Rectangle;
-import com.itextpdf.kernel.pdf.*;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfPage;
+import com.itextpdf.kernel.pdf.PdfReader;
+import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.kernel.pdf.canvas.PdfCanvas;
 import com.itextpdf.kernel.pdf.extgstate.PdfExtGState;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.VerticalAlignment;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import java.io.IOException;
 import java.util.Random;
 import java.util.UUID;
 
-public class Aa0025PdfApplication {
-
+public class A0025PdfApplication {
 
     static final String WECHAT_STR = "hello";
     static final String IN_DIR = "E:\\D_Desktop\\test\\";
@@ -35,7 +40,7 @@ public class Aa0025PdfApplication {
     static final Float WATER_OPACITY = 0.05f;
 
 
-    public static void main(String[] args)  throws IOException  {
+    public static void main(String[] args)  throws IOException {
 
         byte[] user = "".getBytes();
         byte[] owner = "xyz".getBytes();
