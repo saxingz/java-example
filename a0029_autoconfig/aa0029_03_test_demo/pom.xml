@@ -38,7 +38,7 @@
 
         <dependency>
             <groupId>org.saxing</groupId>
-            <artifactId>aa0029_02_test_greet</artifactId>
+            <artifactId>aa0029_01_test_autoconfig</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
     </dependencies>
