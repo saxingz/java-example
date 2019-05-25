@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.saxing.aa0029_01_test_autoconfig.GreetingAutoConfiguration
