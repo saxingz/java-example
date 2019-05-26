@@ -1,0 +1,28 @@
+https://media001.geekbang.org/08680b38a1444d54815bba6cfd1069ff/190264130c734619abf1351ffd09c77a-51a6d786fefe66b22846738ae8e73919-hd.m3u8
+110 深入理解Spring Cloud的配置抽象
+https://media001.geekbang.org/30ce250e9ab044d6991c4f0665c3d85f/9eeda48f6bb94a56a30eec7b6ecd9cf7-be0ab9babef659ae2d38cbfb75c7830a-hd.m3u8
+111 基于Consul的配置中心
+https://media001.geekbang.org/ad789e209ca749f7b7eb8405b21f8bd7/84de660565234acebe09d54457f2a34a-ba1928cd447a861df24e4850cd3b32d6-hd.m3u8
+112 基于Nacos的配置中心
+https://media001.geekbang.org/1e572803508d43f69d18aca8b9d8a1e2/616a9ad7c42341838cfa598a1572927f-bb7379c93dc3d47537545c18af223d68-hd.m3u8
+113 SpringBucks实战项目进度小结
+https://media001.geekbang.org/72dbec6d8ba14f97abc7e5ad182e8144/8b5a8be2fd4545cebbff7dcbf1c4ed21-da56e7885bc1588aca0292ceb64ade9c-hd.m3u8
+114 认识Spring Cloud Stream
+https://media001.geekbang.org/5dc6656cf86d48c7baaf50c2f5d0e1fc/02a24601acca44c7b556b3dccbc3968c-08951465a431d7ae644c05c8e5f69fc9-hd.m3u8
+115 通过Spring Cloud Stream访问RabbitMQ
+https://media001.geekbang.org/2971f00200c64c12b582f2924ab4baeb/f30a4a0bc7cc46bfbe303d99cde24f3e-2488dd3bd89d0d805cdcc73d63e76584-hd.m3u8
+116 通过Spring Cloud Stream访问Kafka
+https://media001.geekbang.org/6ea0f568998e46bbbe9d560a6792e634/da191ddc43b7468eb7fa37683b97a111-799d2e8f2b91693ea340aac41e8bf40c-hd.m3u8
+117 SpringBucks实战项目进度小结
+https://media001.geekbang.org/e76bb2dd92ba4d8885a42d93fabacf5a/f23030426eab4b849253adf161a2faec-065a421b7ca1d5de861d5f3380f9cbd9-hd.m3u8
+118 通过Dapper理解链路治理
+https://media001.geekbang.org/486576a21b2a40308dcbaed76fbc9d7b/276af5797a814fdcbcdd518bc431845a-81cac8b58516a259a5896f468119f7ab-hd.m3u8
+119 使用Spring Cloud Sleuth实现链路追踪
+https://media001.geekbang.org/7c9efa7d035e4e8da25bb85a6286369e/f54402609d8b4905a01f1a33ea10a56e-ca01885ef251dd0462fb1af047f1f6ae-hd.m3u8
+120 如何追踪消息链路
+https://media001.geekbang.org/18247feef120479590e250afaac2b1f1/a38f6518784c4ab8a450521487537db0-960c9f88877f20467b5d5e9d1db10d6b-hd.m3u8
+121 除了链路还要治理什么
+https://media001.geekbang.org/8ff286cc4bd84dc8bbe770293f74426e/e0fb98802d7c4bf384c51a55a845b39a-1f98bdee6b92f6a23d3fca7d2bff409c-hd.m3u8
+122 SpringBucks实战项目进度小结
+https://media001.geekbang.org/de8ce4aedcb1428baec8389a658a6bb4/856e99903aaf4f8ab2e0ba37f7691b30-be67beb6b9275f7fe1b2a18fe3d997ff-hd.m3u8
+123 结束语
