@@ -11,8 +11,8 @@ public class Down026 {
 
     public static String[] getResourceArray(){
         return new String[]{
-                "https://res001.geekbang.org/media/audio/a0/77/a0434e68bf102953824a7f3cdd595877/ld/ld.m3u8",
-                "009",
+                "http://asp.cntv.kcdnvip.com/asp/hls/2000/0303000a/3/default/12c6ea75185d454fb8e5c79b77b5a2e1/2000.m3u8",
+                "2019.05.28",
         };
     }
 
