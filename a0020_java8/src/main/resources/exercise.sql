@@ -38,4 +38,8 @@ show index from t;
 -- 重新统计索引信息
 analyze table t;
 
+-- 查不同的值
+select count(distinct email) as L from SUser;
+
+
 
