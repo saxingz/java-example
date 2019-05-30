@@ -44,4 +44,8 @@ select count(distinct email) as L from SUser;
 -- 倒序存储
 mysql> select field_list from t where id_card = reverse('input_id_card_string');
 
+-- 增加hash
+mysql> select field_list from t where id_card_crc=crc32('input_id_card_string') and id_card='input_id_card_string'
+
+
 
