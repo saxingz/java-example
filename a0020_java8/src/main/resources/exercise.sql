@@ -47,5 +47,7 @@ mysql> select field_list from t where id_card = reverse('input_id_card_string');
 -- 增加hash
 mysql> select field_list from t where id_card_crc=crc32('input_id_card_string') and id_card='input_id_card_string'
 
+-- 测试磁盘IO
+ fio -filename=$filename -direct=1 -iodepth 1 -thread -rw=randrw -ioengine=psync -bs=16k -size=500M -numjobs=10 -runtime=10 -group_reporting -name=mytest
 
 
