@@ -33,15 +33,65 @@ public class ReverseTest {
 //        return id;
 //    }
 
+//    public static ListNode swapPairs(ListNode head){
+//        if (head == null || head.next == null){
+//            return head;
+//        }
+//        ListNode n = head.next;
+//        head.next = swapPairs(head.next.next);
+//        n.next = head;
+//        return n;
+//    }
+
+
     public static ListNode swapPairs(ListNode head){
         if (head == null || head.next == null){
             return head;
         }
-        ListNode n = head.next;
-        head.next = swapPairs(head.next.next);
-        n.next = head;
-        return n;
+        ListNode curr = head;
+        ListNode newHead = head.next;
+        while (curr != null && curr.next != null){
+            ListNode temp = curr;
+            curr = curr.next;
+            temp.next = curr.next;
+            curr.next = temp;
+            curr = temp.next;
+            if (curr != null && curr.next != null){
+                temp.next = curr.next;
+            }
+        }
+        return newHead;
     }
+
+
+
+
+
+
+
+
+
+
+
+//    public static ListNode swapPairs(ListNode head){
+//        if (head == null || head.next == null){
+//            return head;
+//        }
+//        ListNode curr = head;
+//        ListNode newHead = head.next;
+//        while (curr != null && curr.next != null){
+//            ListNode temp = curr;
+//            curr = curr.next;
+//            temp.next = curr.next;
+//            curr.next = temp;
+//            curr = temp.next;
+//            if (curr != null && curr.next != null){
+//                temp.next = curr.next;
+//                System.out.println();
+//            }
+//        }
+//        return newHead;
+//    }
 
 
 //    public static ListNode swapPairs(ListNode head) {
