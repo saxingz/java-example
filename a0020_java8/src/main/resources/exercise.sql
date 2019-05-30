@@ -41,5 +41,7 @@ analyze table t;
 -- 查不同的值
 select count(distinct email) as L from SUser;
 
+-- 倒序存储
+mysql> select field_list from t where id_card = reverse('input_id_card_string');
 
 
