@@ -21,5 +21,9 @@ end;;
 delimiter ;
 call idata();
 
+-- explain
+explain select * from t where a between 10000 and 20000;
+
+
 
 
