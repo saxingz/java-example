@@ -35,6 +35,7 @@ select * from t force index(a) where a between 10000 and 20000;/*Q2*/
 -- 查看索引
 show index from t;
 
-
+-- 重新统计索引信息
+analyze table t;
 
 
