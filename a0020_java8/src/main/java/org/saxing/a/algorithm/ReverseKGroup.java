@@ -14,7 +14,7 @@ public class ReverseKGroup {
         listNode3.next = listNode4;
         listNode4.next = listNode5;
 
-        ListNode listNode = reverseKGroup(listNode1, 2);
+        ListNode listNode = reverseKGroup2(listNode1, 3);
         System.out.println(listNode);
     }
 
@@ -76,8 +76,8 @@ public class ReverseKGroup {
      *dummy   3    2    1     4    5  null
      *----------------------------
      */
-    public ListNode reverseKGroup2(ListNode head, int k) {
-        if(head==null||head.next==null||k<2) return head;
+    public static ListNode reverseKGroup2(ListNode head, int k) {
+        if (head == null || head.next == null || k < 2) return head;
         ListNode dummy = new ListNode(-1);
         dummy.next = head;
 
@@ -85,16 +85,16 @@ public class ReverseKGroup {
         ListNode tail = dummy;
         ListNode cur;
         int n;
-        while(true) {
+        while (true) {
             n = k;
-            while(n>0 && tail != null) {
+            while (n > 0 && tail != null) {
                 n--;
                 tail = tail.next;
             }
-            if(tail == null)
+            if (tail == null)
                 break;
             head = prev.next;
-            while(prev.next != tail) {
+            while (prev.next != tail) {
                 cur = prev.next;// 保存待处理的节点
                 prev.next = cur.next;// 断开prev与待处理节点的连接
                 cur.next = tail.next;//2步完成头插法 a. 将待处理节点尾部接上tail之后的节点
