@@ -1,5 +1,7 @@
 package org.saxing.a.algorithm;
 
+import org.saxing.a.algorithm.base.ListNode;
+
 import java.util.HashSet;
 import java.util.Set;
 

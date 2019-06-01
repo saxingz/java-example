@@ -1,5 +1,7 @@
 package org.saxing.a.algorithm;
 
+import org.saxing.a.algorithm.base.ListNode;
+
 public class LinkedListCycle2 {
 
     public ListNode detectCycle(ListNode head){

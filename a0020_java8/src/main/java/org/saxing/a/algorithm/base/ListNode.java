@@ -1,4 +1,4 @@
-package org.saxing.a.algorithm;
+package org.saxing.a.algorithm.base;
 
 public class ListNode {
 
