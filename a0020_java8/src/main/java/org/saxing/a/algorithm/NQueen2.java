@@ -9,13 +9,20 @@ public class NQueen2 {
 
 
     public static void main(String[] args) {
-        List<List<String>> lists = solveNQueens(9);
+        List<List<String>> lists = solveNQueens(4);
         System.out.println(lists);
     }
 
+    public static List<List<String>> solveNQueens(int n) {
+        List<List<String>> res = new ArrayList<>();
+        helper(0, new boolean[n], new boolean[2*n], new boolean[2*n],
+                new String[n], res);
+        return res;
+    }
+
     private static void helper(int r, boolean[] cols, boolean[] d1, boolean[] d2,
-                        String[] board, List<String[]> res) {
-        if (r == board.length) res.add(board.clone());
+                        String[] board, List<List<String>> res) {
+        if (r == board.length) res.add(new ArrayList<>(Arrays.asList(board)));
         else {
             for (int c = 0; c < board.length; c++) {
                 int id1 = r - c + board.length, id2 = 2*board.length - r - c - 1;
@@ -29,15 +36,5 @@ public class NQueen2 {
                 }
             }
         }
-    }
-
-    public static List<List<String>> solveNQueens(int n) {
-        List<String[]> res = new ArrayList<>();
-        helper(0, new boolean[n], new boolean[2*n], new boolean[2*n],
-                new String[n], res);
-
-        List<List<String>> real = new ArrayList<>();
-        res.forEach(r -> real.add(Arrays.asList(r)));
-        return real;
     }
 }
