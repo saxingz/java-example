@@ -16,7 +16,7 @@ public class NQueen1 {
 
     public static int totalNQueens(int n) {
         List<String[]> res = new ArrayList<>();
-        helper(0, new boolean[n], new boolean[2*n], new boolean[2*n],
+        helper2(0, new boolean[n], new boolean[2*n], new boolean[2*n],
                 new String[n], res);
         return res.size();
     }
@@ -36,8 +36,7 @@ public class NQueen1 {
      * @param res
      */
 
-    private static void helper(int r, boolean[] cols, boolean[] d1, boolean[] d2,
-                        String[] board, List<String[]> res) {
+    private static void helper(int r, boolean[] cols, boolean[] d1, boolean[] d2, String[] board, List<String[]> res) {
         if (r == board.length) res.add(board.clone());
         else {
             for (int c = 0; c < board.length; c++) {//考察每一列
@@ -50,6 +49,29 @@ public class NQueen1 {
                     cols[c] = true; d1[id1] = true; d2[id2] = true;
                     helper(r+1, cols, d1, d2, board, res);
                     cols[c] = false; d1[id1] = false; d2[id2] = false; //递归之后还原
+                }
+            }
+        }
+    }
+
+
+    private static void helper2(int r, boolean[] cols, boolean[] d1, boolean[] d2, String[] board, List<String[]> res) {
+        if (r == board.length) res.add(board.clone());
+        else{
+            for (int c = 0; c < board.length; c++) {
+                int id1 = r - c + board.length, id2 = 2 * board.length - r -c -1;
+                System.out.println("id1 " + id1);
+                System.out.println("id2 " + id2);
+                System.out.println("d1[0] " + d1[0]);
+                System.out.println("d2[0] " + d2[0]);
+                System.out.println("----------------------------------------------");
+                if (!cols[c] && !d1[id1] && !d2[id2]){
+                    char[] row = new char[board.length];
+                    Arrays.fill(row, '.'); row[c] = 'Q';
+                    board[r] = new String(row);
+                    cols[c] = true; d1[id1] = true; d2[id2] = true;
+                    helper2(r + 1, cols, d1, d2, board, res);
+                    cols[c] = false; d1[id1] = false; d2[id2] = false;
                 }
             }
         }
