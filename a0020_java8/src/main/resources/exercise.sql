@@ -74,4 +74,8 @@ select VARIABLE_VALUE into @b from performance_schema.session_status where varia
 /* 计算 Innodb_rows_read 差值 */
 select @b-@a;
 
+-- 配置排序的行数据长度参数
+SET max_length_for_sort_data = 16;
+
+
 
