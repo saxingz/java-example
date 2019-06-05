@@ -77,5 +77,7 @@ select @b-@a;
 -- 配置排序的行数据长度参数
 SET max_length_for_sort_data = 16;
 
+-- 打开redo log 时间监控
+update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/io/file/innodb/innodb_log_file%';
 
 
