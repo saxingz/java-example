@@ -82,3 +82,6 @@ update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/i
 
 -- 查死锁
 show engine innodb status;
+
+-- 开启bka优化
+set optimizer_switch='mrr=on,mrr_cost_based=off,batched_key_access=on';
