@@ -82,3 +82,7 @@ update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/i
 
 -- 查死锁
 show engine innodb status;
+
+-- 导出库
+mysqldump -h$host -P$port -u$user --add-locks=0 --no-create-info --single-transaction  --set-gtid-purged=OFF db1 t --where="a>900" --result-file=/client_tmp/t.sql
+
