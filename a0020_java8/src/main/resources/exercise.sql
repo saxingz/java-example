@@ -101,3 +101,5 @@ grant all privileges on *.* to 'ua'@'%' with grant option;
 -- 回收用户权限
 revoke all privileges on *.* from 'ua'@'%';
 
+-- db 权限
+grant all privileges on db1.* to 'ua'@'%' with grant option;
