@@ -98,3 +98,6 @@ load data infile '/server_tmp/t.csv' into table db2.t;
 -- 赋予最高权限
 grant all privileges on *.* to 'ua'@'%' with grant option;
 
+-- 回收用户权限
+revoke all privileges on *.* from 'ua'@'%';
+
