@@ -83,5 +83,26 @@ update setup_instruments set ENABLED='YES', Timed='YES' where name like '%wait/i
 -- 查死锁
 show engine innodb status;
 
+-- 导出库 mysqldump
+mysqldump -h$host -P$port -u$user --add-locks=0 --no-create-info --single-transaction  --set-gtid-purged=OFF db1 t --where="a>900" --result-file=/client_tmp/t.sql
+
+-- 导入库 mysqldump
+mysql -h127.0.0.1 -P13000  -uroot db2 -e "source /client_tmp/t.sql"
+
+-- 导出为csv
+select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
+
+-- 导入库 from csv
+load data infile '/server_tmp/t.csv' into table db2.t;
+
+-- 赋予最高权限
+grant all privileges on *.* to 'ua'@'%' with grant option;
+
+-- 回收用户权限
+revoke all privileges on *.* from 'ua'@'%';
+
+-- db 权限
+grant all privileges on db1.* to 'ua'@'%' with grant option;
+
 -- 开启bka优化
 set optimizer_switch='mrr=on,mrr_cost_based=off,batched_key_access=on';
