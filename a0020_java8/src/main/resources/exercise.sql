@@ -89,4 +89,6 @@ mysqldump -h$host -P$port -u$user --add-locks=0 --no-create-info --single-transa
 -- 导入库 mysqldump
 mysql -h127.0.0.1 -P13000  -uroot db2 -e "source /client_tmp/t.sql"
 
+-- 导出为csv
+select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
 
