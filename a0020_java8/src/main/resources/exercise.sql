@@ -95,3 +95,6 @@ select * from db1.t where a>900 into outfile '/server_tmp/t.csv';
 -- 导入库 from csv
 load data infile '/server_tmp/t.csv' into table db2.t;
 
+-- 赋予最高权限
+grant all privileges on *.* to 'ua'@'%' with grant option;
+
