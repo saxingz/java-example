@@ -1,15 +1,26 @@
 package org.saxing.a.reflect2;
 
+import java.io.InputStream;
 import java.lang.reflect.Field;
 
 public class ReflectionTest {
 
     public static void main(String[] args) throws ClassNotFoundException {
-        testClassLoader();
+        new ReflectionTest().testClassLoader4();
+    }
+
+    public void testClassLoader4(){
+        //src目录下，直接加载
+        InputStream in1 = null;
+        in1 = this.getClass().getClassLoader().getResourceAsStream("test1.txt");
+
+        //放在内部文件夹，要写全路径
+        InputStream in2 = null;
+        in2 = this.getClass().getClassLoader().getResourceAsStream("org/saxing/a/reflect2/test2.txt");
     }
 
 
-    public static void testClassLoader() throws ClassNotFoundException {
+    public void testClassLoader3() throws ClassNotFoundException {
         //1. 获取一个系统的类加载器(可以获取，当前这个类PeflectTest就是它加载的)
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         System.out.println(classLoader);
@@ -34,7 +45,7 @@ public class ReflectionTest {
     }
 
 
-    public static void testClass2() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
+    public void testClass2() throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         //1.获取Class对象
         String className="org.saxing.a.reflect2.Person";
         Class clazz = Class.forName(className);
@@ -44,7 +55,7 @@ public class ReflectionTest {
         System.out.println(obj);
     }
 
-    public static void testClass1() throws ClassNotFoundException {
+    public void testClass1() throws ClassNotFoundException {
         Class clazz = null;
 
         clazz = Person.class;
