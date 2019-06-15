@@ -2,11 +2,48 @@ package org.saxing.a.reflect2;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 public class ReflectionTest {
 
-    public static void main(String[] args) throws ClassNotFoundException {
-        new ReflectionTest().testClassLoader4();
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException {
+        new ReflectionTest().testMethod5();
+    }
+
+    public void testMethod5() throws ClassNotFoundException, NoSuchMethodException {
+        Class clazz = Class.forName("org.saxing.a.reflect2.Person");
+
+        //
+        //1.获取方法
+        //  1.1 获取取clazz对应类中的所有方法--方法数组（一）
+        //     不能获取private方法,且获取从父类继承来的所有方法
+        Method[] methods = clazz.getMethods();
+        for(Method method:methods){
+            System.out.print(" "+method.getName());
+        }
+        System.out.println();
+
+        //
+        //  1.2.获取所有方法，包括私有方法 --方法数组（二）
+        //  所有声明的方法，都可以获取到，且只获取当前类的方法
+        methods = clazz.getDeclaredMethods();
+        for(Method method:methods){
+            System.out.print(" "+method.getName());
+        }
+        System.out.println();
+
+        //
+        //  1.3.获取指定的方法
+        //  需要参数名称和参数列表，无参则不需要写
+        //  对于方法public void setName(String name) {  }
+        Method method = clazz.getDeclaredMethod("setName", String.class);
+        System.out.println(method);
+        //  而对于方法public void setAge(int age) {  }
+        method = clazz.getDeclaredMethod("setAge", int.class);
+        System.out.println(method);
+        //  这样写是获取不到的，如果方法的参数类型是int型
+        //  如果方法用于反射，那么要么int类型写成Integer： public void setAge(Integer age) {  }
+        //  要么获取方法的参数写成int.class
     }
 
     public void testClassLoader4(){
