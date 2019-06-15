@@ -3,8 +3,12 @@ package org.saxing.a.reflect;
 public class ReflectTest {
 
     public static void main(String[] args) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        Class<?> clazz = Class.forName("org.saxing.a.reflect.User");
-        User user = (User) clazz.newInstance();
+        // method 1
+//        Class<?> clazz = Class.forName("org.saxing.a.reflect.User");
+//        User user = (User) clazz.newInstance();
+
+        // method 2
+        User user = User.class.newInstance();
 
     }
 
