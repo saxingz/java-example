@@ -25,4 +25,8 @@ public class Person {
     public Person() {
         super();
     }
+
+    public void test(String name, Integer age){
+        System.out.println("调用成功");
+    }
 }

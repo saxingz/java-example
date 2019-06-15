@@ -7,8 +7,13 @@ import java.lang.reflect.Method;
 
 public class ReflectionTest {
 
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
-        new ReflectionTest().testMethod5();
+    public static void main(String[] args) throws Exception {
+        new ReflectionTest().testTools6();
+    }
+
+    public void testTools6() throws Exception {
+        Object obj = new Person();
+        new ReflectTools().invoke(obj, "test", "wang", 1);
     }
 
     public void testMethod5() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
