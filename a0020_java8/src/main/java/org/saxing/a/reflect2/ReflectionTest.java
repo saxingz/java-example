@@ -4,11 +4,19 @@ import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.Date;
 
 public class ReflectionTest {
 
     public static void main(String[] args) throws Exception {
-        new ReflectionTest().testInvoke7();
+        new ReflectionTest().testInvoke8();
+    }
+
+    // 使用系统方法（前提是此类有一个无参的构造器（查看API））
+    public void testInvoke8(){
+        Object result =
+                new ReflectTools().invoke("java.text.SimpleDateFormat", "format", new Date());
+        System.out.println(result);
     }
 
     public void testInvoke7() throws Exception {
