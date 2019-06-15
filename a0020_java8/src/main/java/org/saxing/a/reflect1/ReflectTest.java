@@ -1,4 +1,4 @@
-package org.saxing.a.reflect;
+package org.saxing.a.reflect1;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -30,14 +30,14 @@ public class ReflectTest {
 
         //	Field field=user2.getClass().getDeclaredField("number");
         //	Field field=User.class.getDeclaredField("number");
-        Field field=Class.forName("org.saxing.a.reflect.User").getDeclaredField("id");
+        Field field=Class.forName("org.saxing.a.reflect1.User").getDeclaredField("id");
         field.setAccessible(true);
         field.set(user2, 3333);
         System.out.println("user2对象的值为:"+user2);
         Method method=User.class.getDeclaredMethod("setUserName",String.class);
         method.invoke(user2,"小浩爷爷");
         System.out.println("user2对象的值为:"+user2);
-        Class<?> component=Class.forName("org.saxing.a.reflect.User").getDeclaredField("password").get(user2).getClass().getComponentType();
+        Class<?> component=Class.forName("org.saxing.a.reflect1.User").getDeclaredField("password").get(user2).getClass().getComponentType();
         User.class.getDeclaredField("password").setAccessible(true);
         int length=((String[])User.class.getDeclaredField("password").get(user2)).length;
         System.out.println("user2中原始的数组的长度为:"+length);
