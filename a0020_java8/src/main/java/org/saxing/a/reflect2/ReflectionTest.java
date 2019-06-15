@@ -8,7 +8,12 @@ import java.lang.reflect.Method;
 public class ReflectionTest {
 
     public static void main(String[] args) throws Exception {
-        new ReflectionTest().testTools6();
+        new ReflectionTest().testInvoke7();
+    }
+
+    public void testInvoke7() throws Exception {
+        Object obj = new Person();
+        new ReflectTools().invoke(obj, "test", "wang", 1);
     }
 
     public void testTools6() throws Exception {
