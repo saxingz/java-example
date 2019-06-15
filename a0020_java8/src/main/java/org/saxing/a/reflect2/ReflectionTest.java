@@ -12,8 +12,8 @@ public class ReflectionTest {
     }
 
     public void testInvoke7() throws Exception {
-        Object obj = new Person();
-        new ReflectTools().invoke(obj, "test", "wang", 1);
+        new ReflectTools().invoke("org.saxing.a.reflect2.Person",
+                "test", "zhagn", 12);
     }
 
     public void testTools6() throws Exception {
