@@ -30,6 +30,15 @@ public class ReflectionTest {
         String className="org.saxing.a.reflect2.Person";
         clazz = Class.forName(className);
 
+        //字符串的例子
+        clazz = String.class;
+
+        clazz = "javaTest".getClass();
+
+        clazz = Class.forName("java.lang.String");
+
+
+
         System.out.println();
     }
 
