@@ -4,6 +4,14 @@ import java.lang.reflect.Method;
 
 public class ReflectTools {
 
+    /**
+     *
+     * @param obj: 方法执行的那个对象.
+     * @param methodName: 类的一个方法的方法名. 该方法也可能是私有方法.
+     * @param args: 调用该方法需要传入的参数
+     * @return: 调用方法后的返回值
+     *
+     */
     public Object invoke(Object obj, String methodName, Object ... args) throws Exception{
         //1. 获取 Method 对象
         //   因为getMethod的参数为Class列表类型，所以要把参数args转化为对应的Class类型。
@@ -21,6 +29,25 @@ public class ReflectTools {
         //2. 执行 Method 方法
         //3. 返回方法的返回值
         return method.invoke(obj, args);
+    }
+
+    /**
+     * @param className: 某个类的全类名
+     * @param methodName: 类的一个方法的方法名. 该方法也可能是私有方法.
+     * @param args: 调用该方法需要传入的参数
+     * @return: 调用方法后的返回值
+     */
+    public Object invoke(String className, String methodName, Object ... args){
+        Object obj = null;
+
+        try {
+            obj = Class.forName(className).newInstance();
+            //调用上一个方法
+            return invoke(obj, methodName, args);
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
