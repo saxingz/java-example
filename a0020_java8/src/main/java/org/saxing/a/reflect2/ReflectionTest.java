@@ -2,15 +2,16 @@ package org.saxing.a.reflect2;
 
 import java.io.InputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 public class ReflectionTest {
 
-    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException {
+    public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InvocationTargetException, InstantiationException {
         new ReflectionTest().testMethod5();
     }
 
-    public void testMethod5() throws ClassNotFoundException, NoSuchMethodException {
+    public void testMethod5() throws ClassNotFoundException, NoSuchMethodException, IllegalAccessException, InstantiationException, InvocationTargetException {
         Class clazz = Class.forName("org.saxing.a.reflect2.Person");
 
         //
@@ -44,6 +45,15 @@ public class ReflectionTest {
         //  这样写是获取不到的，如果方法的参数类型是int型
         //  如果方法用于反射，那么要么int类型写成Integer： public void setAge(Integer age) {  }
         //  要么获取方法的参数写成int.class
+
+
+        //2.执行方法
+        //  invoke第一个参数表示执行哪个对象的方法，剩下的参数是执行方法时需要传入的参数
+        Object obje = clazz.newInstance();
+        method.invoke(obje,2);
+
+        //如果一个方法是私有方法，第三步是可以获取到的，但是这一步却不能执行
+        //私有方法的执行，必须在调用invoke之前加上一句method.setAccessible（true）;
     }
 
     public void testClassLoader4(){
