@@ -2,6 +2,8 @@ package org.saxing.a.reflect2;
 
 public class DAO<T> {
 
+    private Class<T> clazz;
+
     //根据id获取一个对象
     T get(Integer id){
         return null;
