@@ -27,5 +27,18 @@ public class Singleton {
         }
         return instance;
     }
+
+
+    // 1.5之前的逸出
+    // 以下代码来源于【参考 1】
+//    final int x;
+//    // 错误的构造函数
+//    public FinalFieldExample() {
+//        x = 3;
+//        y = 4;
+//        // 此处就是讲 this 逸出，
+//        global.obj = this;
+//    }
+
 }
 
