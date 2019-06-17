@@ -33,3 +33,52 @@ class Point {
     }
 }
 
+/**
+ * stampedlock 读模版
+ * final StampedLock sl =
+ *   new StampedLock();
+ *
+ * // 乐观读
+ * long stamp =
+ *   sl.tryOptimisticRead();
+ * // 读入方法局部变量
+ * ......
+ * // 校验 stamp
+ * if (!sl.validate(stamp)){
+ *   // 升级为悲观读锁
+ *   stamp = sl.readLock();
+ *   try {
+ *     // 读入方法局部变量
+ *     .....
+ *   } finally {
+ *     // 释放悲观读锁
+ *     sl.unlockRead(stamp);
+ *   }
+ * }
+ * // 使用方法局部变量执行业务操作
+ * ......
+ *
+ *
+ * StampedLock 写模版
+ * private double x, y;
+ * final StampedLock sl = new StampedLock();
+ * // 存在问题的方法
+ * void moveIfAtOrigin(double newX, double newY){
+ *  long stamp = sl.readLock();
+ *  try {
+ *   while(x == 0.0 && y == 0.0){
+ *     long ws = sl.tryConvertToWriteLock(stamp);
+ *     if (ws != 0L) {
+ *       x = newX;
+ *       y = newY;
+ *       break;
+ *     } else {
+ *       sl.unlockRead(stamp);
+ *       stamp = sl.writeLock();
+ *     }
+ *   }
+ *  } finally {
+ *   sl.unlock(stamp);
+ * }
+ */
+
