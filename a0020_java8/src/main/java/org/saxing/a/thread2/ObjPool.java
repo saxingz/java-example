@@ -2,6 +2,8 @@ package org.saxing.a.thread2;
 
 import java.util.List;
 import java.util.Vector;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Semaphore;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.function.Function;
@@ -39,17 +41,25 @@ class ObjPool<T, R> {
         // 创建对象池
         ObjPool<Long, String> pool =
                 new ObjPool<Long, String>(2, 10L);
+        ExecutorService executor = Executors.newCachedThreadPool();
         // 通过对象池获取 t，之后执行
         for (int i = 0; i < 10; i++) {
-            pool.exec(t -> {
+            executor.submit(() -> {
                 try {
-                    Thread.sleep(2000);
+                    pool.exec(t -> {
+                        try {
+                            Thread.sleep(2000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        System.out.println(t);
+                        return t.toString();
+                    });
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                System.out.println(t);
-                return t.toString();
             });
+
         }
 
     }
