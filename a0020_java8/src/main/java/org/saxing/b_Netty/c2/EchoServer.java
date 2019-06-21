@@ -1,4 +1,4 @@
-package org.saxing.b_Netty;
+package org.saxing.b_Netty.c2;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -12,22 +12,18 @@ import java.net.InetSocketAddress;
 
 public class EchoServer {
 
-    private final int port;
-
-    public EchoServer(int port) {
-        this.port = port;
-    }
+    private final int port = 9000;
 
     public static void main(String[] args)
             throws Exception {
-        if (args.length != 1) {
-            System.err.println("Usage: " + EchoServer.class.getSimpleName() +
-                    " <port>"
-            );
-            return;
-        }
-        int port = Integer.parseInt(args[0]);
-        new EchoServer(port).start();
+//        if (args.length != 1) {
+//            System.err.println("Usage: " + EchoServer.class.getSimpleName() +
+//                    " <port>"
+//            );
+//            return;
+//        }
+//        int port = Integer.parseInt(args[0]);
+        new EchoServer().start();
     }
 
     public void start() throws Exception {
