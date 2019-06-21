@@ -1,4 +1,4 @@
-package org.saxing.b_Netty.c2;
+package org.saxing.b_Netty.c2.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
