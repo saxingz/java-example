@@ -13,8 +13,6 @@ public class ThreadLocalDemo {
 
 }
 
-
-
 class MyThreadLocal<T> extends ThreadLocal<T> {
 
     @Override
