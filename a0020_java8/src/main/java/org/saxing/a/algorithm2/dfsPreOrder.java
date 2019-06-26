@@ -14,7 +14,7 @@ import java.util.Stack;
  */
 public class dfsPreOrder {
 
-    private List<TreeNode> dfsPre(TreeNode root){
+    private List<Integer> dfsPre(TreeNode root){
 
         List<Integer> results = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
@@ -31,6 +31,8 @@ public class dfsPreOrder {
                 cur = cur.right;
             }
         }
+
+        return results;
     }
 
 
