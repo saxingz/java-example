@@ -24,6 +24,20 @@ public class dfsInOrder {
 
         List<Integer> list = new dfsInOrder().dfsInOrder11(root);
         System.out.println(list);
+
+        List<Integer> recursionResult = new ArrayList<>();
+        new dfsInOrder().dfsInOrderWithRecursion(recursionResult, root);
+        System.out.println(recursionResult);
+
+        System.out.println(list.equals(recursionResult));
+    }
+
+    private void dfsInOrderWithRecursion(List<Integer> result, TreeNode root){
+        if (root == null) return;
+        dfsInOrderWithRecursion(result, root.left);
+        result.add(root.val);
+        dfsInOrderWithRecursion(result, root.right);
+
     }
 
     private List<Integer> dfsInOrder11(TreeNode root) {
