@@ -14,13 +14,27 @@ import java.util.Stack;
  */
 public class dfsPreOrder {
 
+
+    public static void main(String[] args) {
+        TreeNode node = new TreeNode(1);
+        node.left = new TreeNode(2);
+        node.left.left = new TreeNode(3);
+        node.left.right = new TreeNode(4);
+
+        node.right = new TreeNode(5);
+        node.right.left = new TreeNode(6);
+
+        List<Integer> list = new dfsPreOrder().dfsPre(node);
+        System.out.println(list);
+    }
+
     private List<Integer> dfsPre(TreeNode root){
 
         List<Integer> results = new ArrayList<>();
         Stack<TreeNode> stack = new Stack<>();
 
         TreeNode cur = root;
-        while (cur != null && !stack.empty()){
+        while (cur != null || !stack.empty()){
             while (cur != null){
                 results.add(cur.val);
                 stack.push(cur);
@@ -34,7 +48,5 @@ public class dfsPreOrder {
 
         return results;
     }
-
-
 
 }
