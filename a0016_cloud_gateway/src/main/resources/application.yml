@@ -14,18 +14,18 @@ listen:
 spring:
     application:
       name: gateway
-    cloud:
-      consul:
-        host: 10.250.250.131
-        port: 8500
-        discovery:
-          health-check-path: /actuator/health
-          health-check-interval: 5s
-          tags: dev
-          instance-id: gateway
-          enabled: true
-#          hostname: 10.250.251.166
-          prefer-ip-address: true
+#    cloud:
+#      consul:
+#        host: 10.250.250.131
+#        port: 8500
+#        discovery:
+#          health-check-path: /actuator/health
+#          health-check-interval: 5s
+#          tags: dev
+#          instance-id: gateway
+#          enabled: true
+##          hostname: 10.250.251.166
+#          prefer-ip-address: true
       gateway:
         globalcors:
           corsConfigurations:

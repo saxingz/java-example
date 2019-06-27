@@ -22,7 +22,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <java.version>1.8</java.version>
-        <consule.discovery.version>2.0.0.RELEASE</consule.discovery.version>
+<!--        <consule.discovery.version>2.0.0.RELEASE</consule.discovery.version>-->
         <jjwt.version>0.7.0</jjwt.version>
         <spring.cloud.version>Finchley.SR1</spring.cloud.version>
     </properties>
@@ -52,12 +52,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- consul discovery -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-consul-discovery</artifactId>
-            <version>${consule.discovery.version}</version>
-        </dependency>
+<!--        &lt;!&ndash; consul discovery &ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.cloud</groupId>-->
+<!--            <artifactId>spring-cloud-starter-consul-discovery</artifactId>-->
+<!--            <version>${consule.discovery.version}</version>-->
+<!--        </dependency>-->
 
         <!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->
         <dependency>
