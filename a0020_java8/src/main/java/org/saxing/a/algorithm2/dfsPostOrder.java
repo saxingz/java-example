@@ -27,7 +27,7 @@ public class dfsPostOrder {
         root.right = new TreeNode(5);
         root.right.left = new TreeNode(6);
 
-        List<Integer> list = new dfsPostOrder().dfsPostOrder1(root);
+        List<Integer> list = new dfsPostOrder().dfsPostOrder11(root);
         System.out.println(list);
     }
 
@@ -56,6 +56,8 @@ public class dfsPostOrder {
                 }
             }
         }
+
+        return result;
 
     }
 
