@@ -42,6 +42,7 @@ public class dfsPostOrder {
             }
 
             if (!stack.empty()){
+                // 只返回栈顶，不删除
                 cur = stack.peek();
                 if (cur.right == null || cur.right == last){
                     result.add(cur.val);
