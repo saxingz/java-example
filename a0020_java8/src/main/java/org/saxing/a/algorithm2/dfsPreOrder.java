@@ -1,6 +1,5 @@
 package org.saxing.a.algorithm2;
 
-import org.saxing.a.algorithm.base.ListNode;
 import org.saxing.a.algorithm.base.TreeNode;
 
 import java.util.ArrayList;
