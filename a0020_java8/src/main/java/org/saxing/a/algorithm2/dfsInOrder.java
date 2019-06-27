@@ -6,9 +6,8 @@ import java.util.List;
 import java.util.Stack;
 
 /**
- * lint code 66
  *
- * 给出一棵二叉树，返回其节点值的前序遍历。
+ * 给出一棵二叉树，返回其节点值的中序遍历。
  * 非递归
  */
 public class dfsInOrder {
