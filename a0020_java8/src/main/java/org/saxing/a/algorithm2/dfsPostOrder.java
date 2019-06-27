@@ -34,6 +34,8 @@ public class dfsPostOrder {
         new dfsPostOrder().dfsPostOrder2WithRecursion(recursionResult, root);
         System.out.println(recursionResult);
 
+        System.out.println(list.equals(recursionResult));
+
     }
 
     private void dfsPostOrder2WithRecursion(List<Integer> result, TreeNode root){
