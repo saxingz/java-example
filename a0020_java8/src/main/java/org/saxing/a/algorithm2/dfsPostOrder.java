@@ -27,8 +27,20 @@ public class dfsPostOrder {
         root.right = new TreeNode(5);
         root.right.left = new TreeNode(6);
 
-        List<Integer> list = new dfsPostOrder().dfsPostOrder11(root);
-        System.out.println(list);
+//        List<Integer> list = new dfsPostOrder().dfsPostOrder11(root);
+//        System.out.println(list);
+
+        List<Integer> result = new ArrayList<>();
+        new dfsPostOrder().dfsPostOrder2WithRecursion(result, root);
+        System.out.println(result);
+
+    }
+
+    private void dfsPostOrder2WithRecursion(List<Integer> result, TreeNode root){
+        if (root == null) return;
+        dfsPostOrder2WithRecursion(result, root.left);
+        dfsPostOrder2WithRecursion(result, root.right);
+        result.add(root.val);
     }
 
     private List<Integer> dfsPostOrder11(TreeNode root) {
