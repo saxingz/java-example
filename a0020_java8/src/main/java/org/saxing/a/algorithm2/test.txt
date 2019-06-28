@@ -1,1 +1,1 @@
-LowestCommonAncestorofaBinaryTree
+LowestCommonAncestorofaBinarySearchTree
