@@ -20,7 +20,7 @@ public class FindNumInTwoArray {
 
     public static void main(String[] args) {
 
-        int target = 7;
+        int target = 13;
         long start=System.nanoTime();
         boolean res1 = find1(target, getArray());
         long end=System.nanoTime();
