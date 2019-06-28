@@ -7,7 +7,18 @@ import org.saxing.a.algorithm2.base.ListNode;
  */
 public class SwapNodesinPairs {
 
-    public ListNode swapPairs(ListNode head) {
+    public static void main(String[] args) {
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
+
+        ListNode listNode = swapPairs(head);
+        System.out.println(listNode);
+    }
+
+    public static ListNode swapPairs(ListNode head) {
         if (head == null || head.next == null){
             return head;
         }
