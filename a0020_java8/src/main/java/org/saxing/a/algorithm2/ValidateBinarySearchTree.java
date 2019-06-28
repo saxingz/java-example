@@ -25,20 +25,22 @@ public class ValidateBinarySearchTree {
 
 
     public static void main(String[] args) {
-        System.out.println(isValid(getTreeNode1(), null, null));
-        System.out.println(isValid(getTreeNode2(), null, null));
+
+        System.out.println(isValidBST1(getTreeNode1()));
+        System.out.println(isValidBST1(getTreeNode2()));
+
     }
 
-    public static boolean isValidBST(TreeNode root) {
-        return isValid(root, null, null);
+    public static boolean isValidBST1(TreeNode root) {
+        return isValid1(root, null, null);
     }
 
-    public static boolean isValid(TreeNode root, Integer min, Integer max){
+    public static boolean isValid1(TreeNode root, Integer min, Integer max){
         if (root == null) return true;
         if (min != null && root.val <= min) return false;
         if (max != null && root.val >= max) return false;
-        return isValid(root.left, min, root.val)
-                && isValid(root.right, root.val, max);
+        return isValid1(root.left, min, root.val)
+                && isValid1(root.right, root.val, max);
     }
 
 }
