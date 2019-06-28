@@ -35,10 +35,31 @@ public class LowestCommonAncestorofaBinarySearchTree {
             System.out.println(node);
         }
 
-
+        TreeNode node2 = lowestCommonAncestor2(getTreeNode(), p, q);
+        if (node2 != null){
+            System.out.println(node2.val);
+        }else{
+            System.out.println(node2);
+        }
 
     }
 
+    public static TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        int pVal = p.val;
+        int qVal = q.val;
+        TreeNode cur = root;
+        while (cur != null){
+            int parentVal = cur.val;
+            if (pVal > parentVal && qVal > parentVal){
+                cur = cur.right;
+            }else if (pVal < parentVal && qVal < parentVal){
+                cur = cur.left;
+            }else{
+                return cur;
+            }
+        }
+        return null;
+    }
 
 
 
