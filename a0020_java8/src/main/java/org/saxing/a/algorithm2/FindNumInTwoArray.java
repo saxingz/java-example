@@ -13,19 +13,49 @@ package org.saxing.a.algorithm2;
  */
 public class FindNumInTwoArray {
 
+    public static int[][] getArray(){
+        int[][] array = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
+        return array;
+    }
+
     public static void main(String[] args) {
 
-        int[][] array = {{1, 2, 8, 9}, {2, 4, 9, 12}, {4, 7, 10, 13}, {6, 8, 11, 15}};
         int target = 7;
         long start=System.nanoTime();
-        boolean res1 = find1(target, array);
+        boolean res1 = find1(target, getArray());
         long end=System.nanoTime();
         System.out.println(res1);
         System.out.println(end - start);
 
+        start=System.nanoTime();
+        boolean res2 = find2(target, getArray());
+        end=System.nanoTime();
+        System.out.println(res2);
+        System.out.println(end - start);
     }
 
 
+    /**
+     * 方案二
+     * 思路
+     * 矩阵是有序的，从左下角来看，向上数字递减，向右数字递增，
+     * 因此从左下角开始查找，当要查找数字比左下角数字大时。右移
+     * 要查找数字比左下角数字小时，上移
+     */
+    private static boolean find2(int target, int[][] array){
+        int len = array.length - 1;
+        int i = 0;
+        while (len >= 0 && array[0].length > i){
+            if (array[len][i] > target){
+                len --;
+            }else if (array[len][i] < target){
+                i++;
+            }else{
+                return true;
+            }
+        }
+        return false;
+    }
 
     /**
      * 1 暴力
