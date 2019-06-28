@@ -2,6 +2,8 @@ package org.saxing.a.algorithm2;
 
 import org.saxing.a.algorithm2.base.ListNode;
 
+import java.util.Objects;
+
 /**
  * leetcode 24
  */
@@ -24,6 +26,27 @@ public class SwapNodesinPairs {
         System.out.println(listNode2);
         ListNode listNode3 = swapPairs3(getNode());
         System.out.println(listNode3);
+
+        ListNode listNode4 = swapPairs4(getNode());
+        System.out.println(listNode4);
+
+    }
+
+    public static ListNode swapPairs4(ListNode head) {
+        if (head == null || head.next == null) return head;
+        ListNode cur = head;
+        ListNode newHead = cur.next;
+        while (cur != null && cur.next != null){
+            ListNode temp = cur;
+            cur = cur.next;
+            temp.next = cur.next;
+            cur.next = temp;
+            cur = temp.next;
+            if (cur != null && cur.next != null){
+                temp.next = cur.next;
+            }
+        }
+        return newHead;
     }
 
     public static ListNode swapPairs(ListNode head) {
