@@ -33,9 +33,42 @@ public class SlidingWindow {
         List<Integer> res3List = Arrays.stream(res3).boxed().collect(Collectors.toList());
         System.out.println(res3List);
 
+        int[] res4 = maxSlidingWindow2(getNums(), k);
+        List<Integer> res4List = Arrays.stream(res4).boxed().collect(Collectors.toList());
+        System.out.println(res4List);
+
 
 
     }
+
+    public static int[] maxSlidingWindow4(int[] nums, int k) {
+        if (nums == null || k <= 0) return new int[0];
+        ArrayDeque<Integer> deque = new ArrayDeque<>();
+        int index = 0;
+        int[] res = new int[nums.length - k + 1];
+        for (int i = 0; i < nums.length; i++) {
+            while (!deque.isEmpty() && deque.peek() < i - k + 1){
+                deque.poll();
+            }
+
+            while (!deque.isEmpty() && nums[deque.peekLast()] < nums[i]){
+                deque.pollLast();
+            }
+            deque.offer(i);
+            if (i >= k - 1){
+                res[index++] = nums[deque.peek()];
+            }
+        }
+        return res;
+    }
+
+
+
+
+
+
+
+
 
     public static int[] maxSlidingWindow3(int[] nums, int k) {
         if (nums == null || k <= 0) return new int[0];
