@@ -5,7 +5,7 @@ import org.saxing.a.algorithm2.base.ListNode;
 /**
  * leetcode 24
  */
-public class SwapNodesinPairs2 {
+public class SwapNodesinPairs3 {
 
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
@@ -31,7 +31,6 @@ public class SwapNodesinPairs2 {
             if (cur != null && cur.next != null){
                 temp.next = cur.next;
             }
-
         }
         return newHead;
     }
