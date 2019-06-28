@@ -29,16 +29,28 @@ public class LowestCommonAncestorofaBinaryTree {
         TreeNode p = new TreeNode(5);
         TreeNode q = new TreeNode(1);
 
-        TreeNode treeNode = lowestCommonAncestor(getTreeNode(), p, q);
+        TreeNode treeNode = lowestCommonAncestor1(getTreeNode(), p, q);
         System.out.println(treeNode.val);
+
+        TreeNode treeNode2 = lowestCommonAncestor1(getTreeNode(), p, q);
+        System.out.println(treeNode2.val);
 
     }
 
+    public static TreeNode lowestCommonAncestor2(TreeNode root, TreeNode p, TreeNode q) {
+        if (root == null || root.val == p.val || root.val == q.val){
+            return root;
+        }
+        TreeNode left = lowestCommonAncestor2(root.left, p, q);
+        TreeNode right = lowestCommonAncestor2(root.right, p, q);
+        return left == null ? right : right == null ? left : root;
+    }
 
-    public static TreeNode lowestCommonAncestor(TreeNode root, TreeNode p, TreeNode q) {
+
+    public static TreeNode lowestCommonAncestor1(TreeNode root, TreeNode p, TreeNode q) {
         if (root == null || root.val == p.val || root.val == q.val) return root;
-        TreeNode left = lowestCommonAncestor(root.left, p, q);
-        TreeNode right = lowestCommonAncestor(root.right, p, q);
+        TreeNode left = lowestCommonAncestor1(root.left, p, q);
+        TreeNode right = lowestCommonAncestor1(root.right, p, q);
         return left == null ? right : right == null ? left : root;
     }
 }
