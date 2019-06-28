@@ -1,7 +1,6 @@
 package org.saxing.a.algorithm2;
 
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -19,7 +18,6 @@ public class TwoSum {
     public static void main(String[] args) {
         int[] ints = twoSum(getArray(), 17);
         System.out.println(Arrays.stream(ints).boxed().collect(Collectors.toList()));
-
     }
 
     public static int[] twoSum(int[] nums, int target) {
