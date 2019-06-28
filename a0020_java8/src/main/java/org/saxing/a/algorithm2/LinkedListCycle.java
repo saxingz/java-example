@@ -15,13 +15,46 @@ public class LinkedListCycle {
         head.next.next.next.next = new ListNode(5);
         head.next.next.next.next.next = temp;
 
-
         return head;
     }
 
     public static void main(String[] args) {
         boolean res1 = hasCycle(getNode());
         System.out.println(res1);
+
+        boolean res2 = hasCycle2(getNode());
+        System.out.println(res2);
+
+        boolean res3 = hasCycle3(getNode());
+        System.out.println(res3);
+    }
+
+    public static boolean hasCycle3(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast){
+            if (fast == null || fast.next == null){
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return true;
+    }
+
+    public static boolean hasCycle2(ListNode head) {
+        if (head == null || head.next == null) return false;
+        ListNode slow = head;
+        ListNode fast = head.next;
+        while (slow != fast){
+            if (fast == null || fast.next == null){
+                return false;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        return true;
     }
 
     public static boolean hasCycle(ListNode head) {
