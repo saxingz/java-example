@@ -32,9 +32,33 @@ public class BinaryTreeLevelOrderTraversal {
         List<List<Integer>> res2 = levelOrder2(getTreeNode());
         System.out.println(res2);
 
+
+        List<List<Integer>> result1 = dfsOrder1(getTreeNode());
+        System.out.println(result1);
     }
 
 
+
+    // DFS 1
+    public static List<List<Integer>> dfsOrder1(TreeNode root) {
+        List<List<Integer>> result = new ArrayList<>();
+        dfs1(root, result, 0);
+        return result;
+    }
+    public static void dfs1(TreeNode root, List<List<Integer>> res, int level){
+        if (root == null) return;
+
+        if (level >= res.size()){
+            res.add(new ArrayList<>());
+        }
+
+        res.get(level).add(root.val);
+
+        dfs1(root.left, res, level + 1);
+        dfs1(root.right, res, level + 1);
+    }
+
+    //  BFS
     public static List<List<Integer>> levelOrder2(TreeNode root) {
         List<List<Integer>> res = new ArrayList<>();
         if (root == null) return res;
