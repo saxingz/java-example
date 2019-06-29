@@ -16,9 +16,48 @@ public class MajorityElement {
         int res2 = new MajorityElement().majorityElement2(getArray());
         System.out.println(res2);
 
-        int res3 = new MajorityElement().majorityElement2(getArray());
+        int res3 = new MajorityElement().majorityElement3(getArray());
         System.out.println(res3);
+
+        int res4 = new MajorityElement().majorityElement4(getArray());
+        System.out.println(res4);
     }
+
+    // exec 4 ----------------------------------------------------------
+    public int majorityElement4(int[] nums) {
+        return majorityElementRec4(nums, 0, nums.length - 1);
+    }
+
+    private int countInRange4(int[] nums, int num, int lo, int hi) {
+        int count = 0;
+        for (int n : nums){
+            if (n == num){
+                count++;
+            }
+        }
+        return count;
+    }
+
+    private int majorityElementRec4(int[] nums, int lo, int hi) {
+        if (lo == hi){
+            return nums[lo];
+        }
+
+        int mid = (lo + hi) / 2;
+        int left = majorityElementRec4(nums, lo, mid);
+        int right = majorityElementRec4(nums, mid + 1, hi);
+
+        if (left == right){
+            return left;
+        }
+
+        int leftCount = countInRange4(nums, left, lo, hi);
+        int rightCount = countInRange4(nums, right, lo, hi);
+
+        return leftCount > rightCount ? left : right;
+    }
+
+
 
     // exec 3 ----------------------------------------------------------
     public int majorityElement3(int[] nums) {
