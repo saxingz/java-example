@@ -13,9 +13,21 @@ public class BestTimetoBuyandSellStockII {
 
         System.out.println(maxProfit1(getArray()));
 
+        System.out.println(maxProfit2(getArray()));
 
     }
 
+    public static int maxProfit2(int[] prices) {
+        if (prices.length <= 1){
+            return 0;
+        }
+        int profit = 0;
+        for (int i = 0; i < prices.length - 1; i++) {
+            int diff = prices[i + 1] - prices[i];
+            profit += diff > 0 ? diff : 0;
+        }
+        return profit;
+    }
 
     public static int maxProfit1(int[] prices) {
         if (prices.length <= 1){
