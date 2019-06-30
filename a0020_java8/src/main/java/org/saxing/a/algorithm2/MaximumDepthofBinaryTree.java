@@ -16,19 +16,35 @@ public class MaximumDepthofBinaryTree {
         return root;
     }
 
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+
     public static void main(String[] args) {
-        int result1 = maxDepth(getTreeNode());
+
+        int result1 = maxDepth1(getTreeNode());
         System.out.println(result1);
+
+        int result2 = maxDepth2(getTreeNode());
+        System.out.println(result2);
+
     }
 
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
 
+    public static int maxDepth2(TreeNode root) {
+        return root == null ? 0 : 1 + Math.max(maxDepth2(root.left), maxDepth2(root.right));
+    }
 
 //==================================================================================================
 //==================================================================================================
 //==================================================================================================
 
-    public static int maxDepth(TreeNode root) {
-        return root == null ? 0 : 1 + Math.max(maxDepth(root.left), maxDepth(root.right));
+    public static int maxDepth1(TreeNode root) {
+        return root == null ? 0 : 1 + Math.max(maxDepth1(root.left), maxDepth1(root.right));
     }
 
 }
