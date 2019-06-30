@@ -2,6 +2,9 @@ package org.saxing.a.algorithm2;
 
 import org.saxing.a.algorithm2.base.TreeNode;
 
+import java.util.LinkedList;
+import java.util.Queue;
+
 /**
  * leet code 111
  */
@@ -27,8 +30,72 @@ public class MinimumDepthofBinaryTree {
         System.out.println(res2);
 
 
+        int res3 = bfsMinDepth1(getTreeNode());
+        System.out.println(res3);
+
+
+        int res4 = bfsMinDepth2(getTreeNode());
+        System.out.println(res4);
+
+
     }
 
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+    public static int bfsMinDepth2(TreeNode root) {
+        if (root == null) return 0;
+        int count = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            count++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = queue.poll();
+                if (temp.left != null){
+                    queue.offer(temp.left);
+                }
+                if (temp.right != null){
+                    queue.offer(temp.right);
+                }
+                if (temp.left == null && temp.right == null){
+                    return count;
+                }
+            }
+        }
+        return count;
+    }
+
+
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+    public static int bfsMinDepth1(TreeNode root) {
+        if (root == null) return 0;
+        int count = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            count++;
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = queue.poll();
+                if (temp.left != null){
+                    queue.offer(temp.left);
+                }
+                if (temp.right != null){
+                    queue.offer(temp.right);
+                }
+                if (temp.left == null && temp.right == null){
+                    return count;
+                }
+            }
+        }
+        return count;
+    }
 
 //==================================================================================================
 //==================================================================================================
