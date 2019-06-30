@@ -27,9 +27,40 @@ public class MaximumDepthofBinaryTree {
         int result2 = dfsMaxDepth2(getTreeNode());
         System.out.println(result2);
 
-        int result3 = bfsMaxDepth3(getTreeNode());
+        int result3 = bfsMaxDepth21(getTreeNode());
         System.out.println(result3);
 
+        int result4 = bfsMaxDepth22(getTreeNode());
+        System.out.println(result4);
+
+    }
+
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+
+
+    // 方案二 bfs
+    public static int bfsMaxDepth22(TreeNode root) {
+        if (root == null) return 0;
+        int count = 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                TreeNode temp = queue.poll();
+                if (temp.left != null){
+                    queue.add(temp.left);
+                }
+                if (temp.right != null){
+                    queue.add(temp.right);
+                }
+            }
+            count++;
+        }
+        return count;
     }
 
 
@@ -38,7 +69,7 @@ public class MaximumDepthofBinaryTree {
 //==================================================================================================
 
     // 方案二 bfs
-    public static int bfsMaxDepth3(TreeNode root) {
+    public static int bfsMaxDepth21(TreeNode root) {
         if (root == null) return 0;
         int count = 0;
         Queue<TreeNode> queue = new LinkedList<>();
@@ -59,8 +90,6 @@ public class MaximumDepthofBinaryTree {
         }
         return count;
     }
-
-
 
 
 //==================================================================================================
