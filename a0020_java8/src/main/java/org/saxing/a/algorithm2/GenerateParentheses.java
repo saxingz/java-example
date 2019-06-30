@@ -11,8 +11,37 @@ public class GenerateParentheses {
 
 
     public static void main(String[] args) {
+
         List<String> res1 = generateParenthesis1(3);
         System.out.println(res1);
+
+
+        List<String> res2 = generateParenthesis2(3);
+        System.out.println(res2);
+
+    }
+
+
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+    public static List<String> generateParenthesis2(int n) {
+        List<String> result = new ArrayList<>();
+        gen1("", result, n, n);
+        return result;
+    }
+    public static void gen2(String sub, List<String> result, int left, int right){
+        if (left == 0 && right == 0){
+            result.add(sub);
+            return;
+        }
+        if (left > 0){
+            gen2(sub + "(", result, left - 1, right);
+        }
+        if (right > left){
+            gen2(sub + ")", result, left, right - 1);
+        }
     }
 
 
