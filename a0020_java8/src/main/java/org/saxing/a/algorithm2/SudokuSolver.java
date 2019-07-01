@@ -20,11 +20,57 @@ public class SudokuSolver {
     }
 
     public static void main(String[] args) {
+
         char[][] arr1 = getArray();
-        solve(arr1);
+        solveSudoku1(arr1);
         System.out.println(arr1);
+
+
+        char[][] arr2 = getArray();
+        solveSudoku2(arr2);
+        System.out.println(arr2);
+
     }
 
+
+
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+    public static void solveSudoku2(char[][] board) {
+        if (board == null || board.length == 0) return;
+        solve2(board);
+    }
+    public static boolean solve2(char[][] board){
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[0].length; j++) {
+                if (board[i][j] == '.'){
+                    for (char c = '1'; c <= '9'; c++) {
+                        if (isValid2(board, i, j, c)){
+                            board[i][j] = c;
+                            if (solve2(board)){
+                                return true;
+                            }else {
+                                board[i][j] = '.';
+                            }
+                        }
+                    }
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+    private static boolean isValid2(char[][] board, int row, int col, char c){
+        for (int i = 0; i < 9; i++) {
+            if (board[row][i] != '.' && board[row][i] == c) return false;
+            if (board[i][col] != '.' && board[i][col] == c) return false;
+            if (board[row / 3 * 3 + i / 3][col / 3 * 3 + i % 3] != '.'
+                    && board[row / 3 * 3 + i / 3][col / 3 * 3 + i % 3] == c) return false;
+        }
+        return true;
+    }
 
 
 //==================================================================================================
@@ -56,7 +102,6 @@ public class SudokuSolver {
         }
         return true;
     }
-
     private static boolean isValid1(char[][] board, int row, int col, char c){
         for (int i = 0; i < board.length; i++) {
             if (board[i][col] != '.' && board[i][col] == c) return false;
