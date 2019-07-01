@@ -27,7 +27,38 @@ public class NQueensII {
         int res4 = bitNQueens1(4);
         System.out.println(res4);
 
+
+        int res5 = bitNQueens2(4);
+        System.out.println(res5);
+
     }
+
+
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+    static int count2 = 0;
+    public static int bitNQueens2(int n) {
+        if (n <= 0) return 0;
+        dfsBit2(n, 0, 0, 0, 0);
+        return count2;
+    }
+    public static void dfsBit2(int n, int row, int col, int pie, int na){
+        if (row >= n){
+            count2++;
+            return;
+        }
+        int bit = (~(col | pie | na)) & ((1 << n) - 1);
+        while (bit > 0){
+            int p = bit & -bit;
+            dfsBit2(n, row + 1, col | p, (pie | p) << 1, (na | p) >> 1);
+            bit &= (bit - 1);
+        }
+
+
+    }
+
 
 
 //==================================================================================================
@@ -38,6 +69,7 @@ public class NQueensII {
     static int count1 = 0;
     // 方案二，位运算
     public static int bitNQueens1(int n) {
+        if (n <= 0) return 0;
         dfsBit(n, 0, 0, 0, 0);
         return count1;
     }
