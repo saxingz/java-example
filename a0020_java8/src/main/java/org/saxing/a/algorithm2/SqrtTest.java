@@ -10,7 +10,6 @@ public class SqrtTest {
         int res = mySqrt1(8);
         System.out.println(res);
 
-
         int res2 = mySqrt2(8);
         System.out.println(res2);
 
