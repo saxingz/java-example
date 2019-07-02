@@ -6,7 +6,7 @@ package org.saxing.a.algorithm2;
 public class SqrtTest {
 
     public static void main(String[] args) {
-        int res = mySqrt(144);
+        int res = mySqrt(8);
         System.out.println(res);
     }
 
@@ -22,11 +22,11 @@ public class SqrtTest {
             int mid = (l + r) / 2;
             if (mid == x / mid){
                 return mid;
-            } else if (mid < x / mid){
-                l = mid + 1;
-            } else {
+            } else if (mid > x / mid){
                 r = mid - 1;
-                res = mid;
+            } else {
+                l = mid + 1;
+                res = l;
             }
         }
         return res;
