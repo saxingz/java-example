@@ -14,8 +14,8 @@ public class SqrtTest {
         System.out.println(res2);
 
 
-//        int res3 = mySqrt22(16);
-//        System.out.println(res3);
+        int res3 = mySqrt22(16);
+        System.out.println(res3);
 
     }
 
@@ -24,14 +24,16 @@ public class SqrtTest {
 //==================================================================================================
 
     // 方案二 牛顿迭代法
-//    public static int mySqrt22(int x) {
-//        int res = x;
-//        while (res * res > x){
-//            res = (res + x / 2) / 2;
-//            System.out.println(res);
-//        }
-//        return res;
-//    }
+    public static int mySqrt22(int x) {
+        if (x == 0) return 0;
+        double last = 0;
+        double res = 1;
+        while (res != last){
+            last = res;
+            res = (res + x / res) / 2;
+        }
+        return (int) res;
+    }
 
 //==================================================================================================
 //==================================================================================================
