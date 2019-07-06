@@ -1,11 +1,7 @@
 package org.saxing.hlsdownload;
 
 
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceTransactionManagerAutoConfiguration;
-import org.springframework.boot.autoconfigure.jdbc.JdbcTemplateAutoConfiguration;
-
+import org.springframework.util.StringUtils;
 import java.util.List;
 import java.util.Random;
 
@@ -43,7 +39,7 @@ public class Aa0026HlsdownloadApplication {
             e.printStackTrace();
         }
 
-        if(fileName.isEmpty()){
+        if(StringUtils.isEmpty(fileName)){
             System.err.println(" --------------------------------- ");
             System.err.println("下载失败");
             System.err.println(" --------------------------------- ");
