@@ -33,8 +33,8 @@ public class MajorityElement {
 
     private int countInRange5(int[] nums, int num, int lo, int hi) {
         int count = 0;
-        for (int n : nums){
-            if (n == num){
+        for (int i = lo; i <= hi; i++){
+            if (nums[i] == num){
                 count++;
             }
         }
@@ -64,8 +64,8 @@ public class MajorityElement {
 
     private int countInRange4(int[] nums, int num, int lo, int hi) {
         int count = 0;
-        for (int n : nums){
-            if (n == num){
+        for (int i = lo; i <= hi; i++){
+            if (nums[i] == num){
                 count++;
             }
         }
@@ -100,8 +100,8 @@ public class MajorityElement {
 
     private int countInRange3(int[] nums, int num, int lo, int hi) {
         int count = 0;
-        for (int n : nums){
-            if (n == num){
+        for (int i = lo; i <= hi; i++){
+            if (nums[i] == num){
                 count++;
             }
         }
@@ -136,8 +136,8 @@ public class MajorityElement {
 
     private int countInRange2(int[] nums, int num, int lo, int hi) {
         int count = 0;
-        for (int n : nums){
-            if (n == num){
+        for (int i = lo; i <= hi; i++){
+            if (nums[i] == num){
                 count++;
             }
         }
