@@ -27,6 +27,37 @@ public class MajorityElement {
 
         int res6 = new MajorityElement().majorityElement6(getArray());
         System.out.println(res6);
+
+        int res7 = new MajorityElement().majorityElement7(getArray());
+        System.out.println(res7);
+    }
+
+    // exec 7 ----------------------------------------------------------
+    public int majorityElement7(int[] nums) {
+        return majorityElementRec7(nums, 0, nums.length - 1);
+    }
+    private int countInRange7(int[] nums, int num, int lo, int hi) {
+        int count = 0;
+        for (int i = lo; i <= hi; i++) {
+            if (nums[i] == num){
+                count++;
+            }
+        }
+        return count;
+    }
+    private int majorityElementRec7(int[] nums, int lo, int hi) {
+        if (lo == hi){
+            return nums[lo];
+        }
+        int mid = (lo + hi) / 2;
+        int left = majorityElementRec7(nums, lo, mid);
+        int right = majorityElementRec7(nums, mid + 1, hi);
+        if (left == right){
+            return left;
+        }
+        int leftCount = countInRange7(nums, left, lo, hi);
+        int rightCount = countInRange7(nums, right, lo, hi);
+        return leftCount > rightCount ? left : right;
     }
 
     // exec 6 ----------------------------------------------------------
