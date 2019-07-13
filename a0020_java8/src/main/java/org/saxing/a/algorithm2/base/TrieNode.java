@@ -7,7 +7,7 @@ public class TrieNode {
 
     public char val;
     public boolean isWord;
-    public TreeNode[] children = new TreeNode[26];
+    public TrieNode[] children = new TrieNode[26];
     public TrieNode() {
     }
 
