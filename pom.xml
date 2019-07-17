@@ -40,6 +40,7 @@
         <module>a0027_grpc-java</module>
         <module>a0028_context_hierarchy_demo</module>
         <module>a0029_autoconfig</module>
+        <module>a0030_sba</module>
     </modules>
 
     <properties>
