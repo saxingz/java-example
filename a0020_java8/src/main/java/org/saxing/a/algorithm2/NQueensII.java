@@ -40,10 +40,21 @@ public class NQueensII {
 
     static int count3 = 0;
     public static int bitNQueens3(int n) {
-
+        if (n <= 0) return 0;
+        dfsBit2(n, 0, 0, 0, 0);
+        return count3;
     }
     public static void dfsBit3(int n, int row, int col, int pie, int na){
-
+        if (row >= n){
+            count2++;
+            return;
+        }
+        int bit = (~(col | pie | na)) & ((1 << n) - 1);
+        while (bit > 0){
+            int p = bit & -bit;
+            dfsBit3(n, row + 1, col | p, (pie | p) << 1, (na | p) >> 1);
+            bit &= (bit - 1);
+        }
     }
 
 
