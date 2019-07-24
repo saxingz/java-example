@@ -39,6 +39,9 @@ public class NQueensII {
 
         int res8 = bitNQueues5(4);
         System.out.println(res8);
+
+        int res9 = bitNQueue6(4);
+        System.out.println(res9);
     }
 
 
