@@ -18,13 +18,11 @@ public class NQueensII {
         int res2 = totalNQueens1(4);
         System.out.println(res2);
 
-
         int res3 = totalNQueens2(4);
         System.out.println(res3);
 
         int res4 = bitNQueens1(4);
         System.out.println(res4);
-
 
         int res5 = bitNQueens2(4);
         System.out.println(res5);
@@ -43,6 +41,36 @@ public class NQueensII {
 
         int res10 = bitNQueues8(4);
         System.out.println(res10);
+
+        int res11 = bitNQueues9(4);
+        System.out.println(res11);
+    }
+
+
+
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+    static int count9 = 0;
+    public static int bitNQueues9(int n){
+        if (n <= 0){
+            return 0;
+        }
+        dfsBit9(n, 0, 0, 0, 0);
+        return count9;
+    }
+    public static void dfsBit9(int n, int row, int col, int pie, int na){
+        if (row >= n){
+            count9++;
+            return;
+        }
+        int bit = (~(col | pie | na) & ((1 << n) - 1));
+        while (bit > 0){
+            int p = bit & -bit;
+            dfsBit9(n, row + 1, col | p, (pie | p) << 1, (na | p) >> 1);
+            bit &= (bit - 1);
+        }
     }
 
 
