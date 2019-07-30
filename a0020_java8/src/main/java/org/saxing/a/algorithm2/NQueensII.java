@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
+ * queue 最佳解法
+ *
  * leet code 52
  */
 public class NQueensII {
