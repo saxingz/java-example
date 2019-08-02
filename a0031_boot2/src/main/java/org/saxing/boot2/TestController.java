@@ -16,4 +16,11 @@ public class TestController {
         return res;
     }
 
+    @GetMapping("/getb")
+    public String getB(){
+        String res = "b  " + new Random().nextFloat();
+        System.out.println(res);
+        return res;
+    }
+
 }
