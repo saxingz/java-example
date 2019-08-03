@@ -52,8 +52,37 @@ public class NQueensII {
 
         int res13 = bitNQueues11(4);
         System.out.println(res13);
+
+        int res14 = bitNQueues12(4);
+        System.out.println(res14);
     }
 
+
+
+//==================================================================================================
+//==================================================================================================
+//==================================================================================================
+
+    static int count12 = 0;
+    public static int bitNQueues12(int n){
+        if (n <= 0){
+            return 0;
+        }
+        dfsBit12(n, 0, 0, 0, 0);
+        return count12;
+    }
+    public static void dfsBit12(int n, int row, int col, int pie, int na){
+        if (row >= n){
+            count12++;
+            return;
+        }
+        int bit = (~(col | pie | na) & ((1 << n) - 1));
+        while (bit > 0){
+            int p = bit & -bit;
+            dfsBit12(n, row + 1, col | p, (pie | p) << 1, (na | p) >> 1);
+            bit &= (bit - 1);
+        }
+    }
 
 
 //==================================================================================================
