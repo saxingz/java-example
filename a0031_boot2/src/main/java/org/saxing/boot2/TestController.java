@@ -23,4 +23,11 @@ public class TestController {
         return res;
     }
 
+    @GetMapping("/getc")
+    public String getC(){
+        String res = "c  " + new Random().nextFloat();
+        System.out.println(res);
+        return res;
+    }
+
 }
