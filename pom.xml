@@ -41,6 +41,8 @@
         <module>a0028_context_hierarchy_demo</module>
         <module>a0029_autoconfig</module>
         <module>a0030_sba</module>
+        <module>a0031_boot2</module>
+        <module>a0032_gateway2_test</module>
     </modules>
 
     <properties>
