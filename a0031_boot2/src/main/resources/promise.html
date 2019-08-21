@@ -1,0 +1,31 @@
+<html>
+<script>
+    console.log("1");
+    function search(term) {
+        var url = 'http://localhost:8083/get3s?q=' + term;
+        var xhr = new XMLHttpRequest();
+        var result;
+        console.log("4");
+        var p = new Promise(function (resolve, reject) {
+            xhr.open('GET', url, false);
+            xhr.onload = function (e) {
+                if (this.status === 200) {
+                    result = this.responseText;
+                    resolve(result);
+                }
+            };
+            xhr.onerror = function (e) {
+                reject(e);
+            };
+            xhr.send();
+        });
+
+        return p;
+    }
+    console.log("2");
+    search('Hello World').then(console.log, console.error);
+    console.log("3");
+
+</script>
+
+</html>
