@@ -6,7 +6,8 @@ package org.saxing.a.algorithm2;
 public class BestTimetoBuyandSellStockwithCooldown {
 
     public static void main(String[] args) {
-
+        int[] prices = new int[]{1,2,3,0,2};
+        System.out.println(new BestTimetoBuyandSellStockwithCooldown().maxProfit(prices));
     }
 
     public int maxProfit(int[] prices) {
