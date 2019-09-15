@@ -2,8 +2,19 @@ package org.saxing.a.algorithm2;
 
 /**
  * leetcode 547
+ *
+ * @author saxing 2019/9/15 23:19
  */
 public class FriendCircles {
+
+    public static void main(String[] args) {
+        int[][] M = new int[][]
+                {{1,1,0},
+                {1,1,0},
+                {0,0,1}};
+
+        System.out.println(new FriendCircles().findCircleNum(M));
+    }
 
     class UnionFind547_2 {
         private int count = 0;
