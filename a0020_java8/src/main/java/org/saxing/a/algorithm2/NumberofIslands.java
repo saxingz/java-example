@@ -6,7 +6,14 @@ package org.saxing.a.algorithm2;
 public class NumberofIslands {
 
     public static void main(String[] args) {
+        char[][] grid = new char[][]{
+                {'1','1','0','0','0'},
+                {'1','1','0','0','0'},
+                {'0','0','1','0','0'},
+                {'0','0','0','1','1'},
+        };
 
+        System.out.println(new NumberofIslands().numIslands(grid));
     }
 
     int[][] distance = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
