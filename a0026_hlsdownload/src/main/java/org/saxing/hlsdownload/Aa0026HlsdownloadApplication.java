@@ -29,7 +29,7 @@ public class Aa0026HlsdownloadApplication {
 
     private static void download(String originUrlpath, String fileName){
         String preUrlPath = originUrlpath.substring(0, originUrlpath.lastIndexOf("/")+1);
-        String rootPath = "e:\\test22";
+        String rootPath = "d:\\downvideo";
         HlsDownloader downLoader = new HlsDownloader(originUrlpath, preUrlPath, rootPath, fileName);
         downLoader.setThreadQuantity(4);
         try{
