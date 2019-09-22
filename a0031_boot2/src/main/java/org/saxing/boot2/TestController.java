@@ -30,4 +30,14 @@ public class TestController {
         return res;
     }
 
+    @GetMapping("/get3s")
+    public String get3s(){
+        try {
+            Thread.sleep(3000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return "ddd";
+    }
+
 }

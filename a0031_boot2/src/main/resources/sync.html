@@ -1,0 +1,41 @@
+<html>
+<script>
+    console.log("1");
+
+    function search(term, onload, onerror) {
+        var xhr, results, url;
+        url = 'http://localhost:8083/get3s?q=' + term;
+
+        xhr = new XMLHttpRequest();
+        xhr.open('GET', url, true);
+        console.log("4");
+        xhr.onload = function (e) {
+            if (this.status === 200) {
+                results = this.responseText;
+                onload(results);
+            }
+        };
+        console.log("5");
+        xhr.onerror = function (e) {
+            onerror(e);
+        };
+
+        xhr.send();
+    }
+    console.log("2");
+
+    search('Hello World', console.log, console.error);
+    setTimeout(function () {console.log("6")}, 0);
+    console.log("3");
+
+
+    function sleep(delay) {
+        var start = (new Date()).getTime();
+        while ((new Date()).getTime() - start < delay) {
+            continue;
+        }
+    }
+
+</script>
+
+</html>
