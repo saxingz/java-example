@@ -63,6 +63,11 @@ public class LRUCache {
         return res;
     }
 
+    /**
+     * constructor
+     *
+     * @param capacity
+     */
     public LRUCache(int capacity) {
         this.count = 0;
         this.capacity = capacity;
@@ -77,6 +82,11 @@ public class LRUCache {
         tail.pre = head;
     }
 
+    /**
+     * get key
+     * @param key
+     * @return
+     */
     public int get(int key){
         DLinkedNode node = cache.get(key);
         if (node == null){
@@ -87,8 +97,34 @@ public class LRUCache {
         return node.value;
     }
 
+    /**
+     * put value
+     * @param key
+     * @param value
+     */
+    public void put(int key, int value){
+        DLinkedNode node = cache.get(key);
+        if (node == null){
+            DLinkedNode newNode = new DLinkedNode();
+            newNode.key = key;
+            newNode.value = value;
 
+            this.cache.put(key, newNode);
+            this.addNode(newNode);
 
+            ++count;
 
+            if (count > capacity){
+                // pop the tail
+                DLinkedNode tail = this.popTail();
+                this.cache.remove(tail.key);
+                --count;
+            }
+        } else {
+            // update the value
+            node.value = value;
+            this.moveToHead(node);
+        }
+    }
 
 }
