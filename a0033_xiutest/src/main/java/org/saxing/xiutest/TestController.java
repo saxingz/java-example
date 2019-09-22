@@ -1,0 +1,119 @@
+package org.saxing.xiutest;
+
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Random;
+
+/**
+ *
+ * test data
+ *
+ * @author saxing 2019/9/21 15:23
+ */
+@RestController
+public class TestController {
+
+    public static void main(String[] args) {
+        for (int i = 0; i < 100; i++) {
+            System.out.println(new Random().nextInt(100));
+            System.out.println(new Random().nextFloat());
+        }
+    }
+
+    @GetMapping(value = "/api/large_screen/total/get_data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String totalGetData(){
+        return "[\n" +
+                "    {\n" +
+                "        \"id\": 1,\n" +
+                "        \"large_screen_id\": 1,\n" +
+                "        \"output_yd\": 25.92,\n" +
+                "        \"output_cr_d\": " + new Random().nextInt(100) + ",\n" +
+                "        \"output_cr_m\": " + new Random().nextInt(100) + ",\n" +
+                "        \"sales_cm\": 2052.9,\n" +
+                "        \"sales_cm_yoy\": 1.14,\n" +
+                "        \"sales_cm_cc\": 1,\n" +
+                "        \"cs_cra\": 49.06,\n" +
+                "        \"sales_area_cm\": 494.63,\n" +
+                "        \"sales_area_cm_yoy\": 0.86,\n" +
+                "        \"sales_area_cm_cc\": 1.01,\n" +
+                "        \"cr_cra\": null,\n" +
+                "        \"bp_rep_tv\": 2651.11,\n" +
+                "        \"bp_rep_tw\": 7013,\n" +
+                "        \"fp_rep_tv\": 714.87,\n" +
+                "        \"fp_rep_ta\": 178.93\n" +
+                "    }\n" +
+                "]";
+    }
+
+    @GetMapping(value = "/api/large_screen/plant/get_data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String plantGetData(){
+        return "[\n" +
+                "    {\n" +
+                "        \"id\": 1,\n" +
+                "        \"plant_id\": 1,\n" +
+                "        \"large_screen_id\": 1,\n" +
+                "        \"plant_name\": \"杭州胜铭\",\n" +
+                "        \"output_cr_cm\": 60.32,\n" +
+                "        \"output_cm\": 302.86,\n" +
+                "        \"output_lm\": 9.12,\n" +
+                "        \"output_value_cm\": 1384.89,\n" +
+                "        \"output_value_target_cm\": 2600,\n" +
+                "        \"sales_incr_rank\": 1,\n" +
+                "        \"sales\": 1378.31,\n" +
+                "        \"sales_cr\": 53.51,\n" +
+                "        \"sales_area\": 298.95,\n" +
+                "        \"sales_area_cr\": 59.79,\n" +
+                "        \"sales_y\": 16892.51,\n" +
+                "        \"sales_target_y\": 32000,\n" +
+                "        \"output_rank_y\": 2,\n" +
+                "        \"fp_rep_tr_mean\": 6.14,\n" +
+                "        \"fp_rep_tr_cm\": 19.68,\n" +
+                "        \"bp_rep_tr_mean\": 0.63,\n" +
+                "        \"bp_rep_tr_cm\": 0.81,\n" +
+                "        \"fp_rep_value\": 357.67,\n" +
+                "        \"fp_rep_area\": 72.41,\n" +
+                "        \"output_pc\": 18.31,\n" +
+                "        \"pro_pc\": 7.07,\n" +
+                "        \"bpr\": 90.42,\n" +
+                "        \"return_lr\": 0.15,\n" +
+                "        \"electricity\": 461.3,\n" +
+                "        \"water\": 4.09\n" +
+                "    },\n" +
+                "    {\n" +
+                "        \"id\": 2,\n" +
+                "        \"plant_id\": 4,\n" +
+                "        \"large_screen_id\": 1,\n" +
+                "        \"plant_name\": \"预印厂\",\n" +
+                "        \"output_cr_cm\": 36.69,\n" +
+                "        \"output_cm\": 184.93,\n" +
+                "        \"output_lm\": 0.23,\n" +
+                "        \"output_value_cm\": 630.35,\n" +
+                "        \"output_value_target_cm\": 1700,\n" +
+                "        \"sales_incr_rank\": 2,\n" +
+                "        \"sales\": 659.09,\n" +
+                "        \"sales_cr\": 38.77,\n" +
+                "        \"sales_area\": 190.82,\n" +
+                "        \"sales_area_cr\": 38.16,\n" +
+                "        \"sales_y\": 9784.5,\n" +
+                "        \"sales_target_y\": 18000,\n" +
+                "        \"output_rank_y\": 1,\n" +
+                "        \"fp_rep_tr_mean\": 3.16,\n" +
+                "        \"fp_rep_tr_cm\": 23.24,\n" +
+                "        \"bp_rep_tr_mean\": 0.44,\n" +
+                "        \"bp_rep_tr_cm\": 0.54,\n" +
+                "        \"fp_rep_value\": 359.73,\n" +
+                "        \"fp_rep_area\": 108.21,\n" +
+                "        \"output_pc\": 15.59,\n" +
+                "        \"pro_pc\": 7.87,\n" +
+                "        \"bpr\": 90.54,\n" +
+                "        \"return_lr\": 0.23,\n" +
+                "        \"electricity\": 514.87,\n" +
+                "        \"water\": 3.5\n" +
+                "    }\n" +
+                "]";
+    }
+
+
+}
