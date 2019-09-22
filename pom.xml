@@ -43,6 +43,7 @@
         <module>a0030_sba</module>
         <module>a0031_boot2</module>
         <module>a0032_gateway2_test</module>
+        <module>a0033_xiutest</module>
     </modules>
 
     <properties>
