@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+<script>
+    //get
+    function get() {
+        //创建XMLHttpRequest
+        let xhr = new XMLHttpRequest();
+        //监听响应
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4 && (xhr.status === 200 || xhr.status === 304)) {
+                console.log(xhr.responseText);
+            }
+        };
+        xhr.open("GET","http://localhost:8088/api/large_screen/total/get_data",true);
+        xhr.send();
+    }
+
+    get();
+</script>
+</html>
