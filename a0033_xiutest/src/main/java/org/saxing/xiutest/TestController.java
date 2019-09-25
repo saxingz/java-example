@@ -112,6 +112,9 @@ public class TestController {
 
     @GetMapping(value = "/api/intelp/machine/get_data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public String testMachineData(){
+
+        String[] colors = new String[]{"Y", "G", "R", ""};
+
         int max = getIntRandom(10);
         StringBuilder sb = new StringBuilder();
         sb.append("[");
@@ -126,7 +129,7 @@ public class TestController {
                     "        \"plant_id\": 8,\n" +
                     "        \"machine_name\": \"BHS"+ getIntRandom(9999) +"\",\n" +
                     "        \"cu_machine\": 0.2411,\n" +
-                    "        \"speed\": 153,\n" +
+                    "        \"speed\": 0,\n" +
                     "        \"speed_unit\": \"m/min\",\n" +
                     "        \"average_speed\": 46,\n" +
                     "        \"average_speed_unit\": \"m/min\",\n" +
@@ -136,7 +139,7 @@ public class TestController {
                     "        \"stop_duration_unit\": \"h\",\n" +
                     "        \"order_id_in_prod\": \"X1909210015\",\n" +
                     "        \"order_section\": 1,\n" +
-                    "        \"machine_status\": \"R\",\n" +
+                    "        \"machine_status\": \""+ colors[getIntRandom(4) - 1] +"\",\n" +
                     "        \"customer_name\": \"杭州优哈箱包有限公司\",\n" +
                     "        \"product_name\": \"物料代码150100030\",\n" +
                     "        \"step_start_tm\": \"2019-09-23T15:02:05Z\",\n" +
