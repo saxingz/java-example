@@ -209,6 +209,50 @@ public class TestController {
 //                "]";
     }
 
+    @GetMapping(value = "/api/intelp/stat/get_data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String getStatData(){
+        return "[\n" +
+                "  {\n" +
+                "        \"id\": 1,\n" +
+                "      \"plant_id\": 8,\n" +
+                "      \"plant_name\": \"智能工厂\",\n" +
+                "      \"output_td\": 3.160887,\n" +
+                "      \"output_plan_td\": 20.67,\n" +
+                "      \"output_pc_td\": null,\n" +
+                "      \"output_pc_w\": null,\n" +
+                "      \"output_pc_m\": null,\n" +
+                "      \"bp_rep_weight\": 3236.47,\n" +
+                "      \"fp_rep_area\": 87.27,\n" +
+                "      \"starch_rep_weight\": 40.58,\n" +
+                "      \"steam_d\": null,\n" +
+                "      \"steam_w\": null,\n" +
+                "      \"steam_m\": null,\n" +
+                "      \"electricity_d\": 1676704.01,\n" +
+                "      \"electricity_w\": null,\n" +
+                "      \"electricity_m\": null,\n" +
+                "      \"water_d\": null,\n" +
+                "      \"water_w\": null,\n" +
+                "      \"water_m\": null,\n" +
+                "      \"insert_tm\": \"2019-09-25T14:56:18Z\"\n" +
+                "  }\n" +
+                "]";
+    }
+
+    @GetMapping(value = "/api/intelp/stat_week/get_data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String getStatWeekData(){
+        return "[\n" +
+                "  {\n" +
+                "   \"id\":\n" +
+                "   \"plant_id\": \n" +
+                "   \"plant_name\": \n" +
+                "   \"fp_rep_area\": \n" +
+                "   \"pipeline_lr\": \n" +
+                "   \"stat_d\": \n" +
+                "   \"insert_tm\"\n" +
+                "  }\n" +
+                "]";
+    }
+
     public static void main(String[] args) {
         for (int i = 0; i < 100; i++) {
             System.out.println(new Random().nextInt(10) + 1);
