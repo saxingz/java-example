@@ -44,6 +44,7 @@
         <module>a0031_boot2</module>
         <module>a0032_gateway2_test</module>
         <module>a0033_xiutest</module>
+        <module>a0034_validate</module>
     </modules>
 
     <properties>
