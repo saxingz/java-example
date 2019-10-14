@@ -45,6 +45,7 @@
         <module>a0032_gateway2_test</module>
         <module>a0033_xiutest</module>
         <module>a0034_validate</module>
+        <module>a0035_service-validator</module>
     </modules>
 
     <properties>
