@@ -16,6 +16,7 @@ import javax.validation.Validator;
 import javax.validation.ValidatorFactory;
 import java.lang.reflect.Method;
 import java.lang.reflect.Parameter;
+import java.util.List;
 import java.util.Set;
 
 @Aspect
@@ -47,27 +48,36 @@ public class ServiceValidationAspectImpl {
 
         if (serviceValidation.javaxValidation()) {
             for (int argIndex = 0; argIndex < args.length; argIndex++) {
-
                 ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
                 Validator validator = factory.getValidator();
                 Object arg = args[argIndex];
-
                 if (arg != null) {
-                    Set<ConstraintViolation<Object>> violations = validator.validate(arg);
-                    if (!violations.isEmpty()) {
-                        String parameterName = resolveParameterName(joinPoint, argIndex);
-                        for (ConstraintViolation violation : violations) {
-                            String valuePath = String.format("%s.%s", parameterName, violation.getPropertyPath());
-                            errors.addError(valuePath, violation.getMessage());
+                    doValidate(arg, argIndex, validator, joinPoint, errors);
+                    if (arg instanceof List){
+                        List argList = (List) arg;
+                        if (argList.size() > 0){
+                            for (int i = 0; i < argList.size(); i++) {
+                                doValidate(argList.get(i), i, validator, joinPoint, errors);
+                            }
                         }
                     }
                 }
-
             }
         }
 
         if (!errors.isEmpty()) {
             throw new ServiceValidationException(errors);
+        }
+    }
+
+    private void doValidate(Object arg, int argIndex, Validator validator, JoinPoint joinPoint, ServiceValidationErrorCollection errors){
+        Set<ConstraintViolation<Object>> violations = validator.validate(arg);
+        if (!violations.isEmpty()) {
+            String parameterName = resolveParameterName(joinPoint, argIndex);
+            for (ConstraintViolation violation : violations) {
+                String valuePath = String.format("%s.%s", parameterName, violation.getPropertyPath());
+                errors.addError(valuePath, violation.getMessage());
+            }
         }
     }
 

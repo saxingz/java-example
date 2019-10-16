@@ -11,4 +11,6 @@ public @interface ServiceValidation {
 
     boolean nullSafe() default true;
     boolean javaxValidation() default true;
+
+    int layer() default 20;
 }

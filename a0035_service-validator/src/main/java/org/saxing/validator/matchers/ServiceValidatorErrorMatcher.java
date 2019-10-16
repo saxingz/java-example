@@ -1,9 +1,9 @@
 package org.saxing.validator.matchers;
 
-import io.github.opensanca.exception.ServiceValidationErrorCollection;
-import io.github.opensanca.exception.ServiceValidationException;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
+import org.saxing.validator.exception.ServiceValidationErrorCollection;
+import org.saxing.validator.exception.ServiceValidationException;
 
 public class ServiceValidatorErrorMatcher extends TypeSafeMatcher<ServiceValidationException> {
 
