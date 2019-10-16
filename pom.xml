@@ -46,6 +46,7 @@
         <module>a0033_xiutest</module>
         <module>a0034_validate</module>
         <module>a0035_service-validator</module>
+        <module>a0036_baidu_face</module>
     </modules>
 
     <properties>
