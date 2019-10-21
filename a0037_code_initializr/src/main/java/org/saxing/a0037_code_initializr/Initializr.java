@@ -14,14 +14,22 @@ public class Initializr {
     public static final String DES_PATH = "D:\\code\\au\\au-initializr-destination";
     public static final String VARIABLE_PROJECT_NAME = "\\{project-name\\}";
     public static final String VARIABLE_ROOT_PACKAGE_NAME = "\\{root-package-name\\}";
+    public static final String VARIABLE_DATASOURCE_NAME = "\\{datasource-name\\}";
     public static final String VARIABLE_DESCRIPTION = "\\{project-description\\}";
     public static final String VARIABLE_README_MD = "\\{readme.md\\}";
     public static final String VARIABLE_APOLLO_APPID = "\\{apollo.appid\\}";
 
+
+    /**
+     * 注意 ：
+     * 类似 kid-arch项目， 在apollo要手动指定以下
+     * spring.datasource.name=kidarch
+     */
     // 待输入
     public static final String PROJECT_NAME = "file";
-    public static final String ROOT_PACKAGE_NAME = "file";
-    public static final String PROJECT_DESCRIPTION = "file";
+    public static final String PROJECT_ROOT_PACKAGE_NAME = "file";
+    public static final String PROJECT_DATASOURCE_NAME = PROJECT_ROOT_PACKAGE_NAME;
+    public static final String PROJECT_DESCRIPTION = "file系统";
     public static final String PROJECT_README = "文件系统";
     public static final String PROJECT_APOLLO_APPID = "100003";
 
@@ -57,9 +65,10 @@ public class Initializr {
     public static String getDestinationPath(String originPath){
         originPath = originPath
                 .replaceAll(VARIABLE_PROJECT_NAME, PROJECT_NAME)
-                .replaceAll(VARIABLE_ROOT_PACKAGE_NAME, ROOT_PACKAGE_NAME)
+                .replaceAll(VARIABLE_ROOT_PACKAGE_NAME, PROJECT_ROOT_PACKAGE_NAME)
                 .replaceAll(VARIABLE_DESCRIPTION, PROJECT_DESCRIPTION)
                 .replaceAll(VARIABLE_README_MD, PROJECT_README)
+                .replaceAll(VARIABLE_DATASOURCE_NAME, PROJECT_DATASOURCE_NAME)
                 .replaceAll(VARIABLE_APOLLO_APPID, PROJECT_APOLLO_APPID);
         return DES_PATH + originPath.replaceAll(SOURCE_PATH.replaceAll("\\\\", "\\\\\\\\"), "");
     }
@@ -73,9 +82,10 @@ public class Initializr {
             while ((line = reader.readLine()) != null) {
                 line = line
                         .replaceAll(VARIABLE_PROJECT_NAME, PROJECT_NAME)
-                        .replaceAll(VARIABLE_ROOT_PACKAGE_NAME, ROOT_PACKAGE_NAME)
+                        .replaceAll(VARIABLE_ROOT_PACKAGE_NAME, PROJECT_ROOT_PACKAGE_NAME)
                         .replaceAll(VARIABLE_DESCRIPTION, PROJECT_DESCRIPTION)
                         .replaceAll(VARIABLE_README_MD, PROJECT_README)
+                        .replaceAll(VARIABLE_DATASOURCE_NAME, PROJECT_DATASOURCE_NAME)
                         .replaceAll(VARIABLE_APOLLO_APPID, PROJECT_APOLLO_APPID);
                 writer.write(line);
                 writer.newLine();
