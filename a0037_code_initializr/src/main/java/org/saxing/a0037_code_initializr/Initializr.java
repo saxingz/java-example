@@ -22,11 +22,12 @@ public class Initializr {
 
     /**
      * 注意 ：
-     * 初始化前先到apollo建立项目
-     * 添加spring.application.name
-     * 添加namespace: common, common-mysql, common-redis, common-consul
+     * 1. 初始化前先到apollo建立项目
+     * 2. 添加spring.application.name
+     * 3. 添加namespace: common, common-mysql, common-redis, common-consul
+     * 4. 建立数据库
      *
-     * 类似 kid-arch项目， 在apollo要手动指定以下
+     * 5. 类似 kid-arch项目， 在apollo要手动指定以下
      * spring.datasource.name=kidarch
      *
      * see the {@link ProjectList}
