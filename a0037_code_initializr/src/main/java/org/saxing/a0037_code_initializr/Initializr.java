@@ -22,8 +22,14 @@ public class Initializr {
 
     /**
      * 注意 ：
+     * 初始化前先到apollo建立项目
+     * 添加spring.application.name
+     * 添加namespace: common, common-mysql, common-redis, common-consul
+     *
      * 类似 kid-arch项目， 在apollo要手动指定以下
      * spring.datasource.name=kidarch
+     *
+     * see the {@link ProjectList}
      */
     // 待输入
     public static final String PROJECT_NAME = "file";
