@@ -35,11 +35,11 @@ public class BaiduFaceExample {
         client.setSocketTimeoutInMillis(60000);
 
         // 可选：设置代理服务器地址, http和socket二选一，或者均不设置
-//        client.setHttpProxy("proxy_host", proxy_port);  // 设置http代理
+        client.setHttpProxy("192.168.50.2", 3128);  // 设置http代理
 //        client.setSocketProxy("proxy_host", proxy_port);  // 设置socket代理
 
 
-        byte[] fileContent = FileUtils.readFileToByteArray(new File("D:\\temp\\face\\test3-half-face.jpg"));
+        byte[] fileContent = FileUtils.readFileToByteArray(new File("D:\\temp\\temp_1day\\face\\test1.jpg"));
 
         // 调用接口
 //        String image = "取决于image_type参数，传入BASE64字符串或URL字符串或FACE_TOKEN字符串";

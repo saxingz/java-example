@@ -1,6 +1,9 @@
 package org.saxing.aa0035_01_validatedemo.demo.service;
 
+import org.saxing.aa0035_01_validatedemo.demo.dto.DO;
 import org.saxing.aa0035_01_validatedemo.demo.dto.DTO;
+import org.saxing.aa0035_01_validatedemo.demo.valid.DTOValidGroup;
+import org.saxing.validator.annotation.ParamValidation;
 import org.saxing.validator.annotation.ServiceValidation;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +24,13 @@ public class MyServiceImpl implements MyService {
     @ServiceValidation
     public void test2(@NotNull(message = "dtos 不能为空") List<DTO> dtos) {
         System.out.println(dtos);
+    }
+
+    @Override
+    public boolean testParam(@ParamValidation(groups = DTOValidGroup.add.class) DTO dto,
+                             @ParamValidation(groups = DTOValidGroup.update.class) DO doo) {
+        System.out.println(dto);
+        System.out.println(doo);
+        return false;
     }
 }
