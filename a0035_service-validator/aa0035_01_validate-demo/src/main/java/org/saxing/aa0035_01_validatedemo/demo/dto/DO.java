@@ -8,11 +8,14 @@ import javax.validation.constraints.NotNull;
 
 public class DO {
 
+    public interface add{}
+    public interface update{}
+
     @NotNull(message = "textvalue 不为空")
     String textValue;
 
-    @Max(value = 5, message = "numberValue 最大值为5", groups = DTOValidGroup.add.class)
-    @Min(value = 5, message = "numberValue 最小值为5", groups = DTOValidGroup.update.class)
+    @Max(value = 5, message = "numberValue 最大值为5", groups = add.class)
+    @Min(value = 5, message = "numberValue 最小值为5", groups = update.class)
     Integer numberValue;
 
 

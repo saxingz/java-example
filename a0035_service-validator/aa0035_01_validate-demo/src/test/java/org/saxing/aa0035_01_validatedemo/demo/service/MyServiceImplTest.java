@@ -52,4 +52,11 @@ public class MyServiceImplTest {
         boolean res = myService.testParam(dto, doo);
         System.out.println(res);
     }
+
+    @Test
+    public void testVoid(){
+        boolean res = myService.testVoid();
+        System.out.println(res);
+    }
+
 }

@@ -7,6 +7,7 @@ import org.saxing.validator.annotation.ParamValidation;
 import org.saxing.validator.annotation.ServiceValidation;
 import org.springframework.stereotype.Service;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -27,10 +28,16 @@ public class MyServiceImpl implements MyService {
     }
 
     @Override
-    public boolean testParam(@ParamValidation(groups = DTOValidGroup.add.class) DTO dto,
-                             @ParamValidation(groups = DTOValidGroup.update.class) DO doo) {
+    @ServiceValidation
+    public boolean testParam(@ParamValidation(groups = {DTO.update.class}, nullAble = false) DTO dto,
+                             @ParamValidation  DO doo) {
         System.out.println(dto);
         System.out.println(doo);
+        return false;
+    }
+
+    @Override
+    public boolean testVoid() {
         return false;
     }
 }

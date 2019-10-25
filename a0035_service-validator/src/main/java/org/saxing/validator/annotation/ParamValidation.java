@@ -9,8 +9,11 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ParamValidation {
 
-    boolean nullSafe() default true;
-    boolean javaxValidation() default true;
+    // 是否可为空
+    boolean nullAble() default true;
+    // 是否可为empty 主要用于List判断
+    boolean emptyAble() default true;
+    // 分组校验
     Class<?>[] groups() default {};
 
 }

@@ -13,4 +13,6 @@ public interface MyService {
     void test2(List<DTO> dtos);
 
     boolean testParam(DTO dto, DO doo);
+
+    boolean testVoid();
 }
