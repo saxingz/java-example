@@ -33,12 +33,12 @@ public class Initializr {
      * see the {@link ProjectList}
      */
     // 待输入
-    public static final String PROJECT_NAME = "file";
-    public static final String PROJECT_ROOT_PACKAGE_NAME = "file";
+    public static final String PROJECT_NAME = "testiam";
+    public static final String PROJECT_ROOT_PACKAGE_NAME = "testiam";
     public static final String PROJECT_DATASOURCE_NAME = PROJECT_ROOT_PACKAGE_NAME;
-    public static final String PROJECT_DESCRIPTION = "file系统";
-    public static final String PROJECT_README = "文件系统";
-    public static final String PROJECT_APOLLO_APPID = "100003";
+    public static final String PROJECT_DESCRIPTION = "testiam system";
+    public static final String PROJECT_README = "testiam system";
+    public static final String PROJECT_APOLLO_APPID = "100012";
 
     public static void main(String[] args) {
         getFile(SOURCE_PATH);
