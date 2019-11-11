@@ -51,23 +51,23 @@ public class BaiduFaceExample {
 
         // 调用接口
 //        String image = "取决于image_type参数，传入BASE64字符串或URL字符串或FACE_TOKEN字符串";
-        String image = Base64.getEncoder().encodeToString(fileContent);
-        String imageType = "BASE64";
+//        String image = Base64.getEncoder().encodeToString(fileContent);
+//        String imageType = "BASE64";
 
         // 人脸检测
 //        JSONObject res = client.detect(image, imageType, options);
-        String groupIdList = "group1";
-        JSONObject res = client.multiSearch(image, imageType, groupIdList, options);
-        if (res.toString().contains("songsenhai")){
-            System.out.println("========== true =============");
-        }
-        if (res.toString().contains("niumingliang")){
-            System.out.println("------- niumingliang ------------");
-        }
-        if (res.toString().contains("xushuai")){
-            System.out.println("#########################");
-        }
-        System.out.println(res.toString(2));
+//        String groupIdList = "group1";
+//        JSONObject res = client.multiSearch(image, imageType, groupIdList, options);
+//        if (res.toString().contains("songsenhai")){
+//            System.out.println("========== true =============");
+//        }
+//        if (res.toString().contains("niumingliang")){
+//            System.out.println("------- niumingliang ------------");
+//        }
+//        if (res.toString().contains("xushuai")){
+//            System.out.println("#########################");
+//        }
+//        System.out.println(res.toString(2));
     }
 
 }
