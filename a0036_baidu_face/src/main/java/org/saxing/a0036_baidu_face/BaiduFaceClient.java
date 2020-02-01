@@ -13,7 +13,19 @@ import java.util.Objects;
 
 public class BaiduFaceClient {
 
-    public static AipFace getAipFace(){
+    public static AipFace getAipFaceFat(){
+        String APP_ID = "17975453";
+        String API_KEY = "y7TdQhG9tpnCO37Ub9wjL48w";
+        String SECRET_KEY = "S8jXVrKm5fS1TzPiBXiAH1qDnYz7HFLz";
+        // 初始化一个AipFace
+        AipFace client = new AipFace(APP_ID, API_KEY, SECRET_KEY);
+        // 可选：设置网络连接参数
+        client.setConnectionTimeoutInMillis(2000);
+        client.setSocketTimeoutInMillis(60000);
+        return client;
+    }
+
+    public static AipFace getAipFaceDev(){
         String APP_ID = "17539254";
         String API_KEY = "zFr5OLa3PbMwN2qg9iNdq1GP";
         String SECRET_KEY = "1pQg3II3RGcr2zi4CGL4dS6BNQtHoUot";
@@ -25,29 +37,36 @@ public class BaiduFaceClient {
         return client;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
 //        testQuery();
-        testDetect();
+//        testDetect();
 //        testGetFaceList();
 //        testyu();
 //        testMultiSearch();
 //        deleteGroup("16");
+
+//        AipFace aipFace = getAipFaceDev();
+        AipFace aipFace = getAipFaceFat();
+
+        for (int i = 0; i < 10; i++) {
+            Thread.sleep(600);
+            deleteGroup("group" + i, aipFace);
+        }
+        
     }
 
-    public static void deleteGroup(String groupId){
-
-        AipFace aipFace = getAipFace();
+    public static void deleteGroup(String groupId, AipFace aipFace){
         // 传入可选参数调用接口
         HashMap<String, String> options = new HashMap<String, String>();
 
 
         // 删除用户组
         JSONObject res = aipFace.groupDelete(groupId, options);
-        System.out.println(res.toString(2));
+        System.out.println(res.toString().contains("SUCCESS"));
     }
 
     public static void testMultiSearch() throws IOException {
-        AipFace aipFace = getAipFace();
+        AipFace aipFace = getAipFaceDev();
 
         HashMap<String, String> options = new HashMap<>();
         options.put("max_face_num", "10");
@@ -85,7 +104,7 @@ public class BaiduFaceClient {
     }
 
     public static void testGetFaceList(){
-        AipFace aipFace = getAipFace();
+        AipFace aipFace = getAipFaceDev();
 
         HashMap<String, String> options = new HashMap<String, String>();
         JSONObject jsonObject = aipFace.faceGetlist("liuhan2", "group1", options);
@@ -102,7 +121,7 @@ public class BaiduFaceClient {
     }
 
     public static void testDetect(){
-        AipFace aipFace = getAipFace();
+        AipFace aipFace = getAipFaceDev();
         HashMap<String, String> options;
         options = new HashMap<String, String>();
         options.put("face_field", "age");
@@ -127,7 +146,7 @@ public class BaiduFaceClient {
     }
 
     public static void testQuery(){
-        AipFace aipFace = getAipFace();
+        AipFace aipFace = getAipFaceDev();
         JSONObject user = aipFace.getUser("liuhan2", "group1", new HashMap<>());
         System.out.println(user.toString(2));
     }
