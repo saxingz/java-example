@@ -12,9 +12,9 @@ import java.util.HashMap;
 public class BaiduFaceExample {
 
     //设置APPID/AK/SK
-    public static final String APP_ID = "17539254";
-    public static final String API_KEY = "zFr5OLa3PbMwN2qg9iNdq1GP";
-    public static final String SECRET_KEY = "1pQg3II3RGcr2zi4CGL4dS6BNQtHoUot";
+    public static final String APP_ID = "";
+    public static final String API_KEY = "";
+    public static final String SECRET_KEY = "";
 
     public static void main(String[] args) throws IOException {
 
@@ -30,7 +30,7 @@ public class BaiduFaceExample {
         HashMap<String, String> options = new HashMap<String, String>();
         options.put("max_face_num", "10");
         options.put("match_threshold", "70");
-        options.put("quality_control", "HIGH");
+        options.put("quality_control", "NORMAL");
         options.put("liveness_control", "NONE");
         options.put("max_user_num", "1");
 
