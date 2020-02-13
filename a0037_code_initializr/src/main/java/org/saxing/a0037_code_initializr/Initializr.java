@@ -33,12 +33,12 @@ public class Initializr {
      * see the {@link ProjectList}
      */
     // 待输入
-    public static final String PROJECT_NAME = "statistic";
-    public static final String PROJECT_ROOT_PACKAGE_NAME = "statistic";
+    public static final String PROJECT_NAME = "javaphpcms";
+    public static final String PROJECT_ROOT_PACKAGE_NAME = "javaphpcms";
     public static final String PROJECT_DATASOURCE_NAME = PROJECT_ROOT_PACKAGE_NAME;
-    public static final String PROJECT_DESCRIPTION = "statistic system";
-    public static final String PROJECT_README = "statistic";
-    public static final String PROJECT_APOLLO_APPID = "100016";
+    public static final String PROJECT_DESCRIPTION = "javaphpcms";
+    public static final String PROJECT_README = "javaphpcms";
+    public static final String PROJECT_APOLLO_APPID = "100021";
 
     public static void main(String[] args) {
         getFile(SOURCE_PATH);
