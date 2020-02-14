@@ -2,11 +2,8 @@ package org.saxing.a0036_baidu_face;
 
 import com.baidu.aip.face.AipFace;
 import org.apache.commons.io.FileUtils;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.IOException;
-import java.util.Base64;
 import java.util.HashMap;
 
 public class BaiduFaceExample {
