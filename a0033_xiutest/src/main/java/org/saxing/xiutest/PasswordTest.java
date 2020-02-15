@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class PasswordTest {
 
     public static void main(String[] args) {
-        boolean res = checkPassword("1111111r");
+        boolean res = checkPassword("11111w11r");
         System.out.println(res);
     }
 
