@@ -17,7 +17,6 @@ public class AESEncrypt {
     public AESEncrypt(String password){
         this.password = password;
     }
-
     public byte[] decrypt(byte[] b)throws BadPaddingException {
         try {
             Cipher c = Cipher.getInstance("AES");
