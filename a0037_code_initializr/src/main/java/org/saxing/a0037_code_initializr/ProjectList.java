@@ -27,7 +27,6 @@ public class ProjectList {
     public static final String A100020 = "log";
     public static final String A100021 = "javaphpcms";
 
-
     // MQ list group
     public static final String GID_001_iam = "登录日志表 GID_accesslog_by_iam  登录日志消息  接收者： iam";
     public static final String GID_002_attendance = "GID_workflow_attendance_by_attendance  审批考勤消息  接收者：考勤项目";
