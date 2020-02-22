@@ -19,7 +19,6 @@ public class Initializr {
     public static final String VARIABLE_README_MD = "\\{readme.md\\}";
     public static final String VARIABLE_APOLLO_APPID = "\\{apollo.appid\\}";
 
-
     /**
      * 注意 ：
      * 1. 初始化前先到apollo建立项目
