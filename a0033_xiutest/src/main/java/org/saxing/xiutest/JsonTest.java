@@ -1,9 +1,13 @@
 package org.saxing.xiutest;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * json test
+ *
+ * @author saxing 2020/2/25 23:31
+ */
 public class JsonTest {
 
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
