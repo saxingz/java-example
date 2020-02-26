@@ -1,5 +1,7 @@
 package org.saxing.xiutest;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -13,6 +15,10 @@ public class JsonTest {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public static void main(String[] args) {
+        System.out.println(StringUtils.isBlank(null));
+    }
+
+    public static void main4(String[] args) {
         System.out.println(System.currentTimeMillis());
 
         LocalDateTime start = LocalDateTime.now();
