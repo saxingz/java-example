@@ -32,12 +32,12 @@ public class Initializr {
      * see the {@link ProjectList}
      */
     // 待输入
-    public static final String PROJECT_NAME = "kms";
-    public static final String PROJECT_ROOT_PACKAGE_NAME = "kms";
+    public static final String PROJECT_NAME = "visitor";
+    public static final String PROJECT_ROOT_PACKAGE_NAME = "visitor";
     public static final String PROJECT_DATASOURCE_NAME = PROJECT_ROOT_PACKAGE_NAME;
-    public static final String PROJECT_DESCRIPTION = "kms";
-    public static final String PROJECT_README = "kms";
-    public static final String PROJECT_APOLLO_APPID = "100022";
+    public static final String PROJECT_DESCRIPTION = "visitor";
+    public static final String PROJECT_README = "visitor";
+    public static final String PROJECT_APOLLO_APPID = "100023";
 
     public static void main(String[] args) {
         getFile(SOURCE_PATH);
