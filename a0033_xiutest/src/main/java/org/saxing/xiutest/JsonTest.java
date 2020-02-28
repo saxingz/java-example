@@ -4,6 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 
 /**
  * json test
@@ -16,6 +17,12 @@ public class JsonTest {
 
     public static void main(String[] args) {
         System.out.println(StringUtils.isBlank(null));
+        System.out.println(StringUtils.isEmpty(null));
+
+        String tokenClientType = "null";
+        tokenClientType = Objects.equals("null", tokenClientType) ? "" : tokenClientType;
+        System.out.println(tokenClientType);
+
     }
 
     public static void main4(String[] args) {
