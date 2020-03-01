@@ -18,7 +18,6 @@ public class JsonTest {
     public static void main(String[] args) {
         System.out.println(StringUtils.isBlank(null));
         System.out.println(StringUtils.isEmpty(null));
-
         String tokenClientType = "null";
         tokenClientType = Objects.equals("null", tokenClientType) ? "" : tokenClientType;
         System.out.println(tokenClientType);
