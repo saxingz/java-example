@@ -51,7 +51,6 @@ public class Initializr {
         if (files == null){
             return;
         }
-
         for (File curr : files) {
             if (curr.isFile()) {
                 System.out.println("^^  " + curr.getName());
