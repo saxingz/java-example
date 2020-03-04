@@ -26,7 +26,6 @@ public class JsonTest {
 
     public static void main4(String[] args) {
         System.out.println(System.currentTimeMillis());
-
         LocalDateTime start = LocalDateTime.now();
         String startTimeFormat = start.format(DATE_TIME_FORMATTER);
         System.out.println(startTimeFormat);
