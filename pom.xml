@@ -49,6 +49,7 @@
         <module>a0036_baidu_face</module>
         <module>a0037_code_initializr</module>
         <module>a0038_myvalidtest</module>
+        <module>a0039_alimq</module>
     </modules>
 
     <properties>
