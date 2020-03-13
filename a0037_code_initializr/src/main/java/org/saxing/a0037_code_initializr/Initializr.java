@@ -28,8 +28,10 @@ public class Initializr {
      *
      * 5. 类似 kid-arch项目， 在apollo要手动指定以下
      * spring.datasource.name=kidarch
-     * 6. gitlab 设置 maintainers， master分支只允许合并，不允许提交
+     * 6. gitlab 设置 maintainers， master分支只允许合并，不允许提交.
+     *      -- 又改为master可push了，因为很多人会在本地merge
      * 7. gitlab 设置 develop 分支也不允许提交，只允许合并
+     *      -- 又改为master可push了，因为很多人会在本地merge
      *
      * see the {@link ProjectList}
      */
