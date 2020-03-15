@@ -7,6 +7,12 @@ import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * auto config
+ *
+ * @author saxing 2020/3/15 23:58
+ *
+ */
 @Configuration
 @ConditionalOnClass(GreetingApplicationRunner.class)
 public class GreetingAutoConfiguration  {
