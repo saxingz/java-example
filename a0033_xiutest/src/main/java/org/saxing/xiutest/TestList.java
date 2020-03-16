@@ -17,7 +17,6 @@ public class TestList {
         list.add("c");
         list.add("d");
         list.add("e");
-
         List<String> strings = list.subList(0, 5);
 
         System.out.println(strings);
