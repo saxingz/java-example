@@ -35,7 +35,6 @@ public class TestList {
         list.add("3");
         list.add("4");
         list.add("5");
-
         List<String> list2 = new ArrayList<>();
         list2.add("3");
         list2.add("4");
