@@ -44,7 +44,6 @@ public class TestList {
 
         List<String> l3 = new ArrayList<>(list);
         l3.retainAll(list2);
-
         List<String> l4 = new ArrayList<>(list);
         l4.removeAll(list2);
 
