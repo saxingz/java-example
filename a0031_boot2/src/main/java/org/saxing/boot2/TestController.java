@@ -10,7 +10,6 @@ import java.util.Random;
  * test
  *
  * @author saxing 2020/3/22 22:51
- *
  */
 @RestController
 public class TestController {
