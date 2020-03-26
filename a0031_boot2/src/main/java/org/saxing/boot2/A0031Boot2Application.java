@@ -3,6 +3,12 @@ package org.saxing.boot2;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+
+/**
+ * test
+ *
+ * @author saxing 2020/3/26 23:16
+ */
 @SpringBootApplication
 public class A0031Boot2Application {
 
