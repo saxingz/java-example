@@ -34,7 +34,6 @@ public class ContextHierarchyDemoApplication implements ApplicationRunner {
 		log.info("=============");
 		bean = barContext.getBean("testBeanX", TestBean.class);
 		bean.hello();
-
 		bean = barContext.getBean("testBeanY", TestBean.class);
 		bean.hello();
 	}
