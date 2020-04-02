@@ -17,6 +17,12 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.concurrent.TimeUnit;
 
+/**
+ * okhttp test
+ *
+ * @author saxing 2020/4/2 22:33
+ *
+ */
 public class OkhttpTest {
 
     public static SSLSocketFactory sslSocketFactory() {
