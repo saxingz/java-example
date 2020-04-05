@@ -9,14 +9,18 @@ import java.util.List;
 
 public class DTO {
 
+    public interface add{}
+    public interface update{}
+
     @NotNull(message = "text 不为空")
     String text;
 
-    @Max(value = 10, message = "number 最大值为10", groups = DTOValidGroup.add.class)
-    @Min(value = 10, message = "number 最小值为10", groups = DTOValidGroup.update.class)
+    @Max(value = 10, message = "number 最大值为10", groups = add.class)
+    @Min(value = 10, message = "number 最小值为10", groups = update.class)
     Integer number;
 
-    @NotNull(message = "names 不为空")
+    @NotNull(message = "names add 不为空", groups = add.class)
+    @NotNull(message = "names update 不为空", groups = update.class)
     List<DTO> sons;
 
     DTO pre;

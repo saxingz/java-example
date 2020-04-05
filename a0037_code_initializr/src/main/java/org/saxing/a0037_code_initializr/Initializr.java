@@ -19,7 +19,6 @@ public class Initializr {
     public static final String VARIABLE_README_MD = "\\{readme.md\\}";
     public static final String VARIABLE_APOLLO_APPID = "\\{apollo.appid\\}";
 
-
     /**
      * 注意 ：
      * 1. 初始化前先到apollo建立项目
@@ -29,16 +28,20 @@ public class Initializr {
      *
      * 5. 类似 kid-arch项目， 在apollo要手动指定以下
      * spring.datasource.name=kidarch
+     * 6. gitlab 设置 maintainers， master分支只允许合并，不允许提交.
+     *      -- 又改为master可push了，因为很多人会在本地merge
+     * 7. gitlab 设置 develop 分支也不允许提交，只允许合并
+     *      -- 又改为master可push了，因为很多人会在本地merge
      *
      * see the {@link ProjectList}
      */
     // 待输入
-    public static final String PROJECT_NAME = "file";
-    public static final String PROJECT_ROOT_PACKAGE_NAME = "file";
+    public static final String PROJECT_NAME = "visitor";
+    public static final String PROJECT_ROOT_PACKAGE_NAME = "visitor";
     public static final String PROJECT_DATASOURCE_NAME = PROJECT_ROOT_PACKAGE_NAME;
-    public static final String PROJECT_DESCRIPTION = "file系统";
-    public static final String PROJECT_README = "文件系统";
-    public static final String PROJECT_APOLLO_APPID = "100003";
+    public static final String PROJECT_DESCRIPTION = "visitor";
+    public static final String PROJECT_README = "visitor";
+    public static final String PROJECT_APOLLO_APPID = "100023";
 
     public static void main(String[] args) {
         getFile(SOURCE_PATH);
@@ -51,7 +54,6 @@ public class Initializr {
         if (files == null){
             return;
         }
-
         for (File curr : files) {
             if (curr.isFile()) {
                 System.out.println("^^  " + curr.getName());

@@ -10,6 +10,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+/**
+ * test
+ *
+ * @author saxing 2020/3/28 23:15
+ */
 @SpringBootApplication
 @Slf4j
 public class ContextHierarchyDemoApplication implements ApplicationRunner {
@@ -27,10 +32,8 @@ public class ContextHierarchyDemoApplication implements ApplicationRunner {
 		bean.hello();
 
 		log.info("=============");
-
 		bean = barContext.getBean("testBeanX", TestBean.class);
 		bean.hello();
-
 		bean = barContext.getBean("testBeanY", TestBean.class);
 		bean.hello();
 	}

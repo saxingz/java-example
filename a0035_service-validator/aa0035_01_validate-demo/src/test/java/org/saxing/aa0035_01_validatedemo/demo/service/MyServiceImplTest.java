@@ -2,6 +2,7 @@ package org.saxing.aa0035_01_validatedemo.demo.service;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.saxing.aa0035_01_validatedemo.demo.dto.DO;
 import org.saxing.aa0035_01_validatedemo.demo.dto.DTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -42,6 +43,20 @@ public class MyServiceImplTest {
         dto1.setSons(dto2List);
         dtos.add(dto1);
         myService.test2(dtos);
-
     }
+
+    @Test
+    public void testParam(){
+        DTO dto = new DTO();
+        DO doo = new DO();
+        boolean res = myService.testParam(dto, doo);
+        System.out.println(res);
+    }
+
+    @Test
+    public void testVoid(){
+        boolean res = myService.testVoid();
+        System.out.println(res);
+    }
+
 }

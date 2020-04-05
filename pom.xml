@@ -47,6 +47,9 @@
         <module>a0034_validate</module>
         <module>a0035_service-validator</module>
         <module>a0036_baidu_face</module>
+        <module>a0037_code_initializr</module>
+        <module>a0038_myvalidtest</module>
+        <module>a0039_alimq</module>
     </modules>
 
     <properties>

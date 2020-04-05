@@ -5,6 +5,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  *
@@ -14,7 +16,6 @@ import java.util.Random;
  */
 @RestController
 public class TestController {
-
 
 
     @GetMapping(value = "/api/large_screen/total/get_data", produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -254,10 +255,28 @@ public class TestController {
     }
 
     public static void main(String[] args) {
-        for (int i = 0; i < 100; i++) {
-            System.out.println(new Random().nextInt(10) + 1);
-//            System.out.println(new Random().nextFloat());
-        }
+
+//        String phone = "13888888888";
+        String phone = "13666966669";
+//        System.out.println(phone.matches("^1//d{10}$"));
+//
+//        Pattern pattern = Pattern.compile("^1//d{10}");
+//        Matcher matcher = pattern.matcher(phone);
+//        System.out.println(matcher.matches());
+
+        String regExp = "^(1[0-9])\\d{9}$";
+        Pattern p = Pattern.compile(regExp);
+        Matcher m = p.matcher(phone);
+        System.out.println(m.matches());
+
+        System.out.println(phone.matches(regExp));
+
+
+
+//        for (int i = 0; i < 100; i++) {
+//            System.out.println(new Random().nextInt(57530) + 8000);
+////            System.out.println(new Random().nextFloat());
+//        }
     }
 
     public int getIntRandom(int max){
