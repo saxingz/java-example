@@ -36,12 +36,15 @@ public class Initializr {
      * see the {@link ProjectList}
      */
     // 待输入
-    public static final String PROJECT_NAME = "visitor";
-    public static final String PROJECT_ROOT_PACKAGE_NAME = "visitor";
+    // public static final String[] A100024 = new String[]{"audit", "审计系统", "100024"};
+    static String[] toGenProject =  ProjectList.A100024;
+
+    public static final String PROJECT_NAME = toGenProject[0];
+    public static final String PROJECT_ROOT_PACKAGE_NAME = toGenProject[0];
     public static final String PROJECT_DATASOURCE_NAME = PROJECT_ROOT_PACKAGE_NAME;
-    public static final String PROJECT_DESCRIPTION = "visitor";
-    public static final String PROJECT_README = "visitor";
-    public static final String PROJECT_APOLLO_APPID = "100023";
+    public static final String PROJECT_DESCRIPTION = toGenProject[1];
+    public static final String PROJECT_README = toGenProject[1];
+    public static final String PROJECT_APOLLO_APPID = toGenProject[2];
 
     public static void main(String[] args) {
         getFile(SOURCE_PATH);
