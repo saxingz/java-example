@@ -1,7 +1,8 @@
 package org.saxing.a0040_sensitive;
 
-import com.odianyun.entity.AuditTextDetailDTO;
 import junit.framework.TestCase;
+import org.saxing.a0040_sensitive.entity.AuditTextDetailDTO;
+import org.saxing.a0040_sensitive.util.sensi.SensitiveFilter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class SensitiveFilterTest extends TestCase{
 		// 待过滤的句子
 		String sentence = "然后，市长在婚礼上唱春天在哪里。";
 		// 进行过滤
-//		String filted = filter.filter(sentence, '*');
-		List<AuditTextDetailDTO> filter1 = filter.filter(sentence, '*');
+//		String filted = detect.detect(sentence, '*');
+		List<AuditTextDetailDTO> filter1 = filter.detect(sentence);
 		System.out.println(filter1);
 
 //		// 如果未过滤，则返回输入的String引用
@@ -40,8 +41,9 @@ public class SensitiveFilterTest extends TestCase{
 		filter.put("你好2");
 		filter.put("你好3");
 		filter.put("你好4");
-		
-		System.out.println(filter.filter("你好3天不见", '*'));
+
+		List<AuditTextDetailDTO> filter1 = filter.detect("你好天不见");
+		System.out.println(filter1);
 		
 	}
 	
@@ -75,8 +77,8 @@ public class SensitiveFilterTest extends TestCase{
 		int replaced = 0;
 		
 		for(String sentence: testSuit){
-//			String result = filter.filter(sentence, '*');
-			filter.filter(sentence, '*');
+//			String result = detect.detect(sentence, '*');
+			filter.detect(sentence);
 //			if(result != sentence){
 //				ps.println(sentence);
 //				ps.println(result);
@@ -88,7 +90,7 @@ public class SensitiveFilterTest extends TestCase{
 		
 		long timer = System.currentTimeMillis();
 		for(String line: testSuit){
-			filter.filter(line, '*');
+			filter.detect(line);
 		}
 		timer = System.currentTimeMillis() - timer;
 		System.out.println(String.format("过滤耗时 %1.3f 秒， 速度为 %1.1f字符/毫秒", timer * 1E-3, length / (double) timer));

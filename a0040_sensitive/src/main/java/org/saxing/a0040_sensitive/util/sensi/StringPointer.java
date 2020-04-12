@@ -5,12 +5,11 @@ import java.util.HashMap;
 import java.util.TreeMap;
 
 /**
- * 没有注释的方法与{@link String}类似<br/>
- * <b>注意：</b>没有（数组越界等的）安全检查<br/>
+ * 没有注释的方法与{@link String}类似
+ * 注意：没有（数组越界等的）安全检查
  * 可以作为{@link HashMap}和{@link TreeMap}的key
  * 
- * @author ZhangXiaoye
- * @date 2017年1月5日 下午2:11:56
+ * @author liuhan 2020/4/12 11:16
  */
 public class StringPointer implements Serializable, CharSequence, Comparable<StringPointer>{
 	
@@ -41,8 +40,6 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	 * 
 	 * @param i 从 0 到 length - 2
 	 * @return hash值
-	 * @author ZhangXiaoye
-	 * @date 2017年1月5日 下午2:23:02
 	 */
 	public int nextTwoCharHash(int i){
 		return 31 * value[offset + i] + value[offset + i + 1];
@@ -54,8 +51,6 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	 * 
 	 * @param i 从 0 到 length - 2
 	 * @return int值
-	 * @author ZhangXiaoye
-	 * @date 2017年1月5日 下午2:46:58
 	 */
 	public int nextTwoCharMix(int i){
 		return (value[offset + i] << 16) | value[offset + i + 1];
@@ -67,8 +62,6 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	 * @param i 从 0 到 length - 2
 	 * @param word 词
 	 * @return 是否？
-	 * @author ZhangXiaoye
-	 * @date 2017年1月5日 下午3:13:49
 	 */
 	public boolean nextStartsWith(int i, StringPointer word){
 		// 是否长度超出
@@ -84,20 +77,7 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 		return true;
 	}
 	
-//	/**
-//	 * 填充（替换）
-//	 *
-//	 * @param begin 从此位置开始（含）
-//	 * @param end 到此位置结束（不含）
-//	 * @param fillWith 以此字符填充（替换）
-//	 * @author ZhangXiaoye
-//	 * @date 2017年1月5日 下午3:29:21
-//	 */
-//	public void fill(int begin, int end, char fillWith){
-//		for(int i = begin; i < end; i ++){
-//			value[offset + i] = fillWith;
-//		}
-//	}
+
 	
 	@Override
 	public int length(){

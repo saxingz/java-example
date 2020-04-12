@@ -5,9 +5,8 @@ import java.util.TreeSet;
 
 /**
  * 敏感词节点，每个节点包含了以相同的2个字符开头的所有词
- * 
- * @author ZhangXiaoye
- * @date 2017年1月5日 下午5:06:26
+ *
+ * @author liuhan 2020/4/12 11:16
  */
 public class SensitiveNode implements Serializable{
 	
