@@ -46,7 +46,7 @@ public class StringPointer implements Serializable, CharSequence, Comparable<Str
 	}
 	
 	/**
-	 * 计算该位置后（包含）2个字符和为1个int型的值<br/>
+	 * 计算该位置后（包含）2个字符和为1个int型的值
 	 * int值相同表示2个字符相同
 	 * 
 	 * @param i 从 0 到 length - 2

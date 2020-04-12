@@ -49,9 +49,7 @@ public class SensitiveFilterTest extends TestCase{
 	
 	public void testSpeed() throws Exception{
 		
-		PrintStream ps = new PrintStream("/data/敏感词替换结果.txt");
-		
-		File dir = new File("/data/穿越小说2011-10-14");
+		File dir = new File("E:\\xiaoshuo");
 		
 		List<String> testSuit = new ArrayList<String>(1048576);
 		long length = 0;
@@ -73,29 +71,18 @@ public class SensitiveFilterTest extends TestCase{
 		
 		
 		SensitiveFilter filter = SensitiveFilter.DEFAULT;
-		
-		int replaced = 0;
-		
-		for(String sentence: testSuit){
-//			String result = detect.detect(sentence, '*');
-			filter.detect(sentence);
-//			if(result != sentence){
-//				ps.println(sentence);
-//				ps.println(result);
-//				ps.println();
-//				replaced ++;
-//			}
-		}
-		ps.close();
-		
+		List<AuditTextDetailDTO> allResult = new ArrayList<>();
+
+
 		long timer = System.currentTimeMillis();
 		for(String line: testSuit){
-			filter.detect(line);
+			List<AuditTextDetailDTO> detect = filter.detect(line);
+			allResult.addAll(detect);
 		}
 		timer = System.currentTimeMillis() - timer;
 		System.out.println(String.format("过滤耗时 %1.3f 秒， 速度为 %1.1f字符/毫秒", timer * 1E-3, length / (double) timer));
-		System.out.println(String.format("其中 %d 行有替换", replaced));
-		
+		System.out.println("总检测结果数： " + allResult.size());
+		System.out.println("有问题的结果数 " + allResult.stream().filter(audit -> audit.getFeature().length() > 1).count());
 	}
 
 }
