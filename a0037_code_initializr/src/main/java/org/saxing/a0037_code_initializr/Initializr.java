@@ -32,6 +32,7 @@ public class Initializr {
      *      -- 又改为master可push了，因为很多人会在本地merge
      * 7. gitlab 设置 develop 分支也不允许提交，只允许合并
      *      -- 又改为master可push了，因为很多人会在本地merge
+     * 8. 在 log 的apollo中加入存活检测配置
      *
      * see the {@link ProjectList}
      */
