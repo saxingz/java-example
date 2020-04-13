@@ -1,7 +1,8 @@
 package org.saxing.a0040_sensitive;
 
-import com.odianyun.entity.AuditTextDetailDTO;
 import junit.framework.TestCase;
+import org.saxing.a0040_sensitive.entity.AuditTextDetailDTO;
+import org.saxing.a0040_sensitive.util.sensi.SensitiveFilter;
 
 import java.io.*;
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ public class SensitiveFilterTest extends TestCase{
 		// 待过滤的句子
 		String sentence = "然后，市长在婚礼上唱春天在哪里。";
 		// 进行过滤
-//		String filted = filter.filter(sentence, '*');
-		List<AuditTextDetailDTO> filter1 = filter.filter(sentence, '*');
+//		String filted = detect.detect(sentence, '*');
+		List<AuditTextDetailDTO> filter1 = filter.detect(sentence);
 		System.out.println(filter1);
 
 //		// 如果未过滤，则返回输入的String引用
@@ -40,16 +41,15 @@ public class SensitiveFilterTest extends TestCase{
 		filter.put("你好2");
 		filter.put("你好3");
 		filter.put("你好4");
-		
-		System.out.println(filter.filter("你好3天不见", '*'));
+
+		List<AuditTextDetailDTO> filter1 = filter.detect("你好天不见");
+		System.out.println(filter1);
 		
 	}
 	
 	public void testSpeed() throws Exception{
 		
-		PrintStream ps = new PrintStream("/data/敏感词替换结果.txt");
-		
-		File dir = new File("/data/穿越小说2011-10-14");
+		File dir = new File("E:\\xiaoshuo");
 		
 		List<String> testSuit = new ArrayList<String>(1048576);
 		long length = 0;
@@ -71,29 +71,18 @@ public class SensitiveFilterTest extends TestCase{
 		
 		
 		SensitiveFilter filter = SensitiveFilter.DEFAULT;
-		
-		int replaced = 0;
-		
-		for(String sentence: testSuit){
-//			String result = filter.filter(sentence, '*');
-			filter.filter(sentence, '*');
-//			if(result != sentence){
-//				ps.println(sentence);
-//				ps.println(result);
-//				ps.println();
-//				replaced ++;
-//			}
-		}
-		ps.close();
-		
+		List<AuditTextDetailDTO> allResult = new ArrayList<>();
+
+
 		long timer = System.currentTimeMillis();
 		for(String line: testSuit){
-			filter.filter(line, '*');
+			List<AuditTextDetailDTO> detect = filter.detect(line);
+			allResult.addAll(detect);
 		}
 		timer = System.currentTimeMillis() - timer;
 		System.out.println(String.format("过滤耗时 %1.3f 秒， 速度为 %1.1f字符/毫秒", timer * 1E-3, length / (double) timer));
-		System.out.println(String.format("其中 %d 行有替换", replaced));
-		
+		System.out.println("总检测结果数： " + allResult.size());
+		System.out.println("有问题的结果数 " + allResult.stream().filter(audit -> audit.getFeature().length() > 1).count());
 	}
 
 }
