@@ -1,19 +1,22 @@
 package org.saxing.a0040_sensitive;
 
 import junit.framework.TestCase;
+import org.saxing.a0040_sensitive.entity.AuditLevel;
 import org.saxing.a0040_sensitive.entity.AuditTextDetailDTO;
-import org.saxing.a0040_sensitive.util.sensi.SensitiveFilter;
+import org.saxing.a0040_sensitive.entity.AuditWay;
+import org.saxing.a0040_sensitive.entity.SensitiveType;
+import org.saxing.a0040_sensitive.util.sensi.SensitiveDetect;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SensitiveFilterTest extends TestCase{
+public class SensitiveDetectTest extends TestCase{
 	
 	public void test() throws Exception{
 		
 		// 使用默认单例（加载默认词典）
-		SensitiveFilter filter = SensitiveFilter.DEFAULT;
+		SensitiveDetect filter = SensitiveDetect.DEFAULT;
 		// 向过滤器增加一个词
 		filter.put("婚礼上唱春天在哪里");
 		
@@ -21,7 +24,7 @@ public class SensitiveFilterTest extends TestCase{
 		String sentence = "然后，市长在婚礼上唱春天在哪里。";
 		// 进行过滤
 //		String filted = detect.detect(sentence, '*');
-		List<AuditTextDetailDTO> filter1 = filter.detect(sentence);
+		List<AuditTextDetailDTO> filter1 = filter.detect(sentence, AuditLevel.NORMAL.getCode(), SensitiveType.NORMAL.getCode(), AuditWay.SELF_WORD.getCode());
 		System.out.println(filter1);
 
 //		// 如果未过滤，则返回输入的String引用
@@ -34,7 +37,7 @@ public class SensitiveFilterTest extends TestCase{
 	
 	public void testLogic(){
 		
-		SensitiveFilter filter = new SensitiveFilter();
+		SensitiveDetect filter = new SensitiveDetect();
 		
 		filter.put("你好");
 		filter.put("你好1");
@@ -42,7 +45,7 @@ public class SensitiveFilterTest extends TestCase{
 		filter.put("你好3");
 		filter.put("你好4");
 
-		List<AuditTextDetailDTO> filter1 = filter.detect("你好天不见");
+		List<AuditTextDetailDTO> filter1 = filter.detect("你好天不见", AuditLevel.NORMAL.getCode(), SensitiveType.NORMAL.getCode(), AuditWay.SELF_WORD.getCode());
 		System.out.println(filter1);
 		
 	}
@@ -70,13 +73,13 @@ public class SensitiveFilterTest extends TestCase{
 		System.out.println(String.format("待过滤文本共 %d 行，%d 字符。", testSuit.size(), length));
 		
 		
-		SensitiveFilter filter = SensitiveFilter.DEFAULT;
+		SensitiveDetect filter = SensitiveDetect.DEFAULT;
 		List<AuditTextDetailDTO> allResult = new ArrayList<>();
 
 
 		long timer = System.currentTimeMillis();
 		for(String line: testSuit){
-			List<AuditTextDetailDTO> detect = filter.detect(line);
+			List<AuditTextDetailDTO> detect = filter.detect(line, AuditLevel.NORMAL.getCode(), SensitiveType.NORMAL.getCode(), AuditWay.SELF_WORD.getCode());
 			allResult.addAll(detect);
 		}
 		timer = System.currentTimeMillis() - timer;

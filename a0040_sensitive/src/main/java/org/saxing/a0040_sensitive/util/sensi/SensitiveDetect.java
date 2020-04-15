@@ -1,9 +1,6 @@
 package org.saxing.a0040_sensitive.util.sensi;
 
-import org.saxing.a0040_sensitive.entity.AuditLevel;
 import org.saxing.a0040_sensitive.entity.AuditTextDetailDTO;
-import org.saxing.a0040_sensitive.entity.AuditWay;
-import org.saxing.a0040_sensitive.entity.SensitiveType;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -17,7 +14,6 @@ import java.util.NavigableSet;
 /**
  * 敏感词过滤器，以过滤速度优化为主。
  * 增加一个敏感词：{@link #put(String)}
- * 过滤一个句子：{@link #detect(String)}
  * 获取默认的单例：{@link #DEFAULT}
  *
  * 待过滤文本共 819746 行，43846974 字符。
@@ -27,14 +23,14 @@ import java.util.NavigableSet;
  *
  * @author liuhan 2020/4/12 12:22
  */
-public class SensitiveFilter implements Serializable{
+public class SensitiveDetect implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 默认的单例，使用自带的敏感词库
 	 */
-	public static final SensitiveFilter DEFAULT = new SensitiveFilter(
+	public static final SensitiveDetect DEFAULT = new SensitiveDetect(
 			new BufferedReader(new InputStreamReader(
 					ClassLoader.getSystemResourceAsStream("sensi_words.txt")
 					, StandardCharsets.UTF_8)));
@@ -57,7 +53,7 @@ public class SensitiveFilter implements Serializable{
 	 * 构建一个空的filter
 	 * 
 	 */
-	public SensitiveFilter(){
+	public SensitiveDetect(){
 		
 	}
 	
@@ -69,7 +65,7 @@ public class SensitiveFilter implements Serializable{
 	 * 
 	 * @param reader 
 	 */
-	public SensitiveFilter(BufferedReader reader){
+	public SensitiveDetect(BufferedReader reader){
 		try{
 			for(String line = reader.readLine(); line != null; line = reader.readLine()){
 				put(line);
@@ -137,7 +133,7 @@ public class SensitiveFilter implements Serializable{
 	 * @param sentence 句子
 	 * @return 检测结果
 	 */
-	public List<AuditTextDetailDTO> detect(String sentence){
+	public List<AuditTextDetailDTO> detect(String sentence, Integer auditLevel, Integer sensitiveType, Integer auditWay){
 		List<AuditTextDetailDTO> result = new ArrayList<>();
 
 		// 先转换为StringPointer
@@ -177,9 +173,9 @@ public class SensitiveFilter implements Serializable{
 										.id(1L)
 										.reqId(1L)
 										.feature(word.toString())
-										.level(AuditLevel.NORMAL.getCode())
-										.type(SensitiveType.NORMAL.getCode())
-										.way(AuditWay.SELF_WORD.getCode())
+										.level(auditLevel)
+										.type(sensitiveType)
+										.way(auditWay)
 										.build();
 								result.add(audit);
 								// 跳过已经替代的部分
@@ -197,19 +193,36 @@ public class SensitiveFilter implements Serializable{
 			i += step;
 		}
 		
-		// 如果没有替换，直接返回入参（节约String的构造copy）
-		if(result.size() == 0){
-			AuditTextDetailDTO auditTextDetailDTO = AuditTextDetailDTO.builder()
-					.id(1L)
-					.reqId(1L)
-					.feature("")
-					.level(AuditLevel.NORMAL.getCode())
-					.type(SensitiveType.NORMAL.getCode())
-					.way(AuditWay.SELF_WORD.getCode())
-					.build();
-			result.add(auditTextDetailDTO);
-		}
+//		// 如果没有替换，直接返回入参（节约String的构造copy）
+//		if(result.size() == 0){
+//			AuditTextDetailDTO auditTextDetailDTO = AuditTextDetailDTO.builder()
+//					.id(1L)
+//					.reqId(1L)
+//					.feature("")
+//					.level(auditLevel)
+//					.type(sensitiveType)
+//					.way(auditWay)
+//					.build();
+//			result.add(auditTextDetailDTO);
+//		}
 		return result;
 	}
 
+
+    /**
+     * 获取初始值
+     * @return 初始值
+     */
+    private static int getInitSize(int size){
+        int i = 1;
+        while (i * 2 < size){
+            i = i * 2;
+        }
+        return i * 16;
+    }
+
+    public static void main(String[] args) {
+        int initSize = getInitSize(10000);
+        System.out.println(initSize);
+    }
 }
