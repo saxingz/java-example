@@ -4,6 +4,12 @@ import java.util.LinkedList;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * queue test
+ *
+ * @author saxing 2020/4/26 20:31
+ *
+ */
 public class MyQueue {
 
     private LinkedList<Object> list = new LinkedList<>();
