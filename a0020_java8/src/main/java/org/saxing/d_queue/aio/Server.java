@@ -1,10 +1,11 @@
 package org.saxing.d_queue.aio;
 
+import com.google.common.util.concurrent.ThreadFactoryBuilder;
+
 import java.net.InetSocketAddress;
 import java.nio.channels.AsynchronousChannelGroup;
 import java.nio.channels.AsynchronousServerSocketChannel;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
+import java.util.concurrent.*;
 
 /**
  * Server
@@ -23,9 +24,18 @@ public class Server {
     public Server(int port) {
 
         try {
-            //创建一个缓存池
+            ThreadFactory namedThreadFactory = new ThreadFactoryBuilder()
+                    .setNameFormat("server-pool-%d").build();
+
+//            //创建一个缓存池
+//            executorService = new ThreadPoolExecutor(2, 2,
+//                    0L, TimeUnit.MILLISECONDS,
+//                    new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
+
             executorService = Executors.newCachedThreadPool();
+
             //创建线程组
+//            threadGroup = AsynchronousChannelGroup.withThreadPool(executorService);
             threadGroup = AsynchronousChannelGroup.withCachedThreadPool(executorService, 1);
             //创建服务器通道
             assc = AsynchronousServerSocketChannel.open(threadGroup);

@@ -15,7 +15,7 @@ public class ServerCompletionHandler implements CompletionHandler<AsynchronousSo
     @Override
     public void completed(AsynchronousSocketChannel asc, Server attachment) {
         //当有下一个客户端接入的时候 直接调用Server的accept方法，这样反复执行下去，保证多个客户端都可以阻塞
-        attachment.assc.accept(attachment, this);
+//        attachment.assc.accept(attachment, this);
         read(asc);
     }
 
@@ -26,6 +26,13 @@ public class ServerCompletionHandler implements CompletionHandler<AsynchronousSo
 
             @Override
             public void completed(Integer resultSize, ByteBuffer attachment) {
+
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
                 //进行读取之后,重置标识位
                 attachment.flip();
                 //获得读取的字节数
