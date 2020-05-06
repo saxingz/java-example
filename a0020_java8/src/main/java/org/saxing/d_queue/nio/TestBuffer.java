@@ -11,6 +11,11 @@ public class TestBuffer {
 
 
     public static void main(String[] args) {
+        test2();
+//        test3();
+    }
+
+    public static void test3() {
 
         // 2 wrap方法使用
 
@@ -27,7 +32,7 @@ public class TestBuffer {
 
     }
 
-    public static void main2(String[] args) {
+    public static void test2() {
         IntBuffer buf = IntBuffer.allocate(10);
 
         buf.put(13);// position位置：0 - > 1
@@ -46,9 +51,22 @@ public class TestBuffer {
 
         System.out.println("put(index, change)方法，position位置不变：" + buf);;
 
+        buf.position(buf.limit());
+
+        buf.limit(buf.capacity());
+        System.out.println("bufposition: " + buf);
+
+
+        buf.put(66);
+        buf.put(77);
+        System.out.println(buf);
+
+        buf.flip();
+
+        System.out.println("开始输出内容: ");
         for (int i = 0; i < buf.limit(); i++) {
             //调用get方法会使其缓冲区位置（position）向后递增一位
-            System.out.print(buf.get() + "\t");
+            System.out.print(":" + buf.get() + "\t");
         }
         System.out.println();
         System.out.println("buf对象遍历之后为: " + buf);
