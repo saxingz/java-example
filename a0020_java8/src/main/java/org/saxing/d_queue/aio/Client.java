@@ -5,6 +5,7 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * client
@@ -51,8 +52,11 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-        while (true) {
 
+        try {
+            TimeUnit.SECONDS.sleep(20);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
     }
 
@@ -69,8 +73,6 @@ public class Client implements Runnable {
         new Thread(c1, "c1").start();
         new Thread(c2, "c2").start();
         new Thread(c3, "c3").start();
-
-        Thread.sleep(1000);
 
         c1.write("c1 aaa");
         c2.write("c2 bbbb");

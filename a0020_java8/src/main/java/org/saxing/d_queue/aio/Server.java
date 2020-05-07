@@ -32,11 +32,12 @@ public class Server {
 //                    0L, TimeUnit.MILLISECONDS,
 //                    new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
-            executorService = Executors.newCachedThreadPool();
+//            executorService = Executors.newCachedThreadPool();
+            executorService = Executors.newFixedThreadPool(2);
 
             //创建线程组
-//            threadGroup = AsynchronousChannelGroup.withThreadPool(executorService);
-            threadGroup = AsynchronousChannelGroup.withCachedThreadPool(executorService, 1);
+            threadGroup = AsynchronousChannelGroup.withThreadPool(executorService);
+//            threadGroup = AsynchronousChannelGroup.withCachedThreadPool(executorService, 1);
             //创建服务器通道
             assc = AsynchronousServerSocketChannel.open(threadGroup);
             //进行绑定

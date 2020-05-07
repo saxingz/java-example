@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 import java.nio.channels.AsynchronousSocketChannel;
 import java.nio.channels.CompletionHandler;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 
 /**
  * ServerCompletionHandler
@@ -28,7 +29,7 @@ public class ServerCompletionHandler implements CompletionHandler<AsynchronousSo
             public void completed(Integer resultSize, ByteBuffer attachment) {
 
                 try {
-                    Thread.sleep(5000);
+                    TimeUnit.SECONDS.sleep(5);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -40,6 +41,8 @@ public class ServerCompletionHandler implements CompletionHandler<AsynchronousSo
                 //获取读取的数据
                 String resultData = new String(attachment.array()).trim();
                 System.out.println("Server -> " + "收到客户端的数据信息为:" + resultData);
+                System.out.println("\n");
+
                 String response = "服务器响应, 收到了客户端发来的数据: " + resultData;
                 write(asc, response);
             }
@@ -49,10 +52,16 @@ public class ServerCompletionHandler implements CompletionHandler<AsynchronousSo
                 exc.printStackTrace();
             }
         });
+
+        System.out.println(" 建立连接成功 ..------------------------------> ");
     }
 
     private void write(AsynchronousSocketChannel asc, String response) {
         try {
+
+//            Thread.sleep(5000);
+
+
             ByteBuffer buf = ByteBuffer.allocate(1024);
             buf.put(response.getBytes());
             buf.flip();
