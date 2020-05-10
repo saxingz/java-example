@@ -53,30 +53,76 @@ public class Client implements Runnable {
     @Override
     public void run() {
 
-        try {
-            TimeUnit.SECONDS.sleep(20);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            TimeUnit.SECONDS.sleep(20);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     public static void main(String[] args) throws Exception {
+
+//        for (int i = 0; i < 100; i++) {
+//            Client c = new Client();
+//            c.connect();
+//
+//
+//        }
+
         Client c1 = new Client();
         c1.connect();
-
         Client c2 = new Client();
         c2.connect();
-
         Client c3 = new Client();
         c3.connect();
+        Client c4 = new Client();
+        c4.connect();
+        Client c5 = new Client();
+        c5.connect();
+        Client c6 = new Client();
+        c6.connect();
+        Client c7 = new Client();
+        c7.connect();
+        Client c8 = new Client();
+        c8.connect();
+        Client c9 = new Client();
+        c9.connect();
 
-        new Thread(c1, "c1").start();
-        new Thread(c2, "c2").start();
-        new Thread(c3, "c3").start();
+//        new Thread(c1, "c1").start();
+//        new Thread(c2, "c2").start();
+//        new Thread(c3, "c3").start();
 
-        c1.write("c1 aaa");
-        c2.write("c2 bbbb");
-        c3.write("c3 ccccc");
+        Thread.sleep(1000);
+
+
+
+        new Thread(() -> {
+            c1.write("c1 1");
+        }).start();
+        new Thread(() -> {
+            c2.write("c2 22");
+        }).start();
+        new Thread(() -> {
+            c3.write("c3 333");
+        }).start();
+        new Thread(() -> {
+            c4.write("c4 4444");
+        }).start();
+        new Thread(() -> {
+            c5.write("c 55555");
+        }).start();
+        new Thread(() -> {
+            c6.write("c 666666");
+        }).start();
+        new Thread(() -> {
+            c7.write("c 7777777");
+        }).start();
+        new Thread(() -> {
+            c8.write("c 88888888");
+        }).start();
+        new Thread(() -> {
+            c9.write("c 999999999");
+        }).start();
     }
 
 }

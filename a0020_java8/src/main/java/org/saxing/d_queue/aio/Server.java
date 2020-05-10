@@ -33,7 +33,8 @@ public class Server {
 //                    new LinkedBlockingQueue<>(1024), namedThreadFactory, new ThreadPoolExecutor.AbortPolicy());
 
 //            executorService = Executors.newCachedThreadPool();
-            executorService = Executors.newFixedThreadPool(2);
+            executorService = Executors.newFixedThreadPool(3);
+//            executorService = Executors.newSingleThreadExecutor();
 
             //创建线程组
             threadGroup = AsynchronousChannelGroup.withThreadPool(executorService);
