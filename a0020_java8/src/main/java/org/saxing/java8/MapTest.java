@@ -15,14 +15,14 @@ public class MapTest {
         map.put("c", "c1");
 
         Map<String, String> mapAll = new HashMap<>();
-        map.putAll(map);
+        mapAll.putAll(map);
 
         map = new HashMap<>();
         map.put("a2", "a1");
         map.put("b3", "b1");
         map.put("c4", "c1");
 
-        map.putAll(map);
+        mapAll.putAll(map);
 
         System.out.println(mapAll);
     }
