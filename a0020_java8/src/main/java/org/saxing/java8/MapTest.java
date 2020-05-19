@@ -27,6 +27,11 @@ public class MapTest {
         isAlphanumeric = StringUtils.isAlphanumeric(uuid);
         System.out.println(isAlphanumeric);
 
+        uuid += "F";
+        System.out.println(uuid);
+        isAlphanumeric = StringUtils.isAlphanumeric(uuid);
+        System.out.println(isAlphanumeric);
+
         uuid += " ";
         System.out.println(uuid);
         isAlphanumeric = StringUtils.isAlphanumeric(uuid);
