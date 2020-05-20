@@ -36,6 +36,8 @@ public class MapTest {
         System.out.println(uuid);
         isAlphanumeric = StringUtils.isAlphanumeric(uuid);
         System.out.println(isAlphanumeric);
+
+        System.out.println(System.currentTimeMillis() / 1000);
     }
 
     public static void main2(String[] args) {
