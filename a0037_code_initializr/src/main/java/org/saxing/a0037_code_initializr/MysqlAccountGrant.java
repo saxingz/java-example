@@ -6,13 +6,16 @@ public class MysqlAccountGrant {
 
     public static void main(String[] args) {
         String[] accountGroup = new String[]{
-                "au000068",
+                "syncprogram",
         };
 
-        String shell = "grant all privileges on *.* to '{accountName}'@'%' identified by '{accountPassword}';\n" +
-                "show grants for '{accountName}'@'%';\n" +
-                "revoke super on *.* from '{accountName}'@'%';\n" +
-                "show grants for '{accountName}'@'%';";
+//        String shell = "grant all privileges on *.* to '{accountName}'@'%' identified by '{accountPassword}';\n" +
+//                "show grants for '{accountName}'@'%';\n" +
+//                "revoke super on *.* from '{accountName}'@'%';\n" +
+//                "show grants for '{accountName}'@'%';";
+
+        String shell = "grant delete on *.* to '{accountName}'@'%' identified by '{accountPassword}';\n" +
+                "show grants for '{accountName}'@'%';\n";
 
         Map<String, String> record = new TreeMap<>();
 
