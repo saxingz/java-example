@@ -29,6 +29,8 @@ public class ProjectList {
     public static final String[] A100022 = new String[]{"kms", "密钥管理服务", "100022"};
     public static final String[] A100023 = new String[]{"visitor", "访客系统", "100023"};
     public static final String[] A100024 = new String[]{"audit", "审计系统", "100024"};
+    public static final String[] A100025 = new String[]{"growth", "成长档案", "100025"};
+    public static final String[] A100026 = new String[]{"patrol", "巡检系统", "100026"};
 
     // MQ list group
     public static final String GID_001_iam = "登录日志表 GID_accesslog_by_iam  登录日志消息  接收者： iam";
