@@ -21,7 +21,6 @@ public class LongTest {
             }
         }
 
-
     }
 
     public static void test1(){
