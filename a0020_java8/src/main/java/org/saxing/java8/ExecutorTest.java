@@ -16,7 +16,6 @@ public class ExecutorTest {
             }
             System.out.println("ffffffffff");
         });
-
         System.out.println("aaaaaaaaaaa");
         executorService.shutdown();
         System.out.println("bbbbbbbbbbbbbbbbbbbb");
