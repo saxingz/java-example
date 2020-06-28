@@ -3,6 +3,11 @@ package org.saxing.java8;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+/**
+ * executor test
+ *
+ * @author saxing 2020/6/28 23:36
+ */
 public class ExecutorTest {
 
     public static void main(String[] args) {
