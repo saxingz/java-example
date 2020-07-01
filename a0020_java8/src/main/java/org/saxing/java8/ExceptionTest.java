@@ -1,5 +1,10 @@
 package org.saxing.java8;
 
+/**
+ * exception test
+ *
+ * @author saxing 2020/7/1 22:12
+ */
 public class ExceptionTest {
 
     static class ChildThread implements Runnable {
