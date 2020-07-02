@@ -6,6 +6,11 @@ import org.springframework.util.DigestUtils;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * md5 test
+ *
+ * @author saxing 2020/7/2 23:58
+ */
 public class Md5Test {
 
     public static void main(String[] args) {
