@@ -2,6 +2,11 @@ package org.saxing.java8;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * atomic test
+ *
+ * @author saxing 2020/7/6 23:05
+ */
 public class AtomicTest {
 
     public static void main(String[] args) {
