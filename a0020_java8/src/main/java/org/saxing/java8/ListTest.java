@@ -4,6 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * list test
+ *
+ * @author saxing 2020/7/7 23:41
+ */
 public class ListTest {
 
     public static void main(String[] args) {
