@@ -2,6 +2,11 @@ package org.saxing.java8;
 
 import java.util.Arrays;
 
+/**
+ * stream test
+ *
+ * @author saxing 2020/7/9 23:11
+ */
 public class StreamTest {
 
     public static void main(String[] args) {
