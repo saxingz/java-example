@@ -6,6 +6,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * list to map test
+ *
+ * @author saxing 2020/7/10 23:13
+ */
 public class ListToMapTest {
 
     public static void main(String[] args) {
