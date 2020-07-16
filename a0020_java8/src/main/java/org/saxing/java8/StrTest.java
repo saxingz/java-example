@@ -2,8 +2,6 @@ package org.saxing.java8;
 
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-
 /**
  * STR TEST
  *
