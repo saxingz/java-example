@@ -18,7 +18,9 @@ public class BestTimetoBuyandSellStockIV {
 
     public int maxProfit(int k, int[] prices) {
         int len = prices.length;
-        if (k >= len / 2) return quickSolve(prices);
+        if (k >= len / 2) {
+            return quickSolve(prices);
+        }
 
         int[][]t = new int[k + 1][len];
         for (int i = 1; i <= k; i++) {
