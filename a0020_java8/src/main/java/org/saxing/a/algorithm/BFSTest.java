@@ -7,6 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Queue;
 
+/**
+ * bfs test
+ *
+ * @author saxing 2020/7/19 19:47
+ */
 public class BFSTest {
 
     public static void main(String[] args) {
