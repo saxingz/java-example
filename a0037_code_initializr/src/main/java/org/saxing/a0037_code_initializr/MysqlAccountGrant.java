@@ -6,7 +6,7 @@ public class MysqlAccountGrant {
 
     public static void main(String[] args) {
         String[] accountGroup = new String[]{
-                "au000745",
+                "fatprogram",
         };
 
         String shell = "grant all privileges on *.* to '{accountName}'@'%' identified by '{accountPassword}';\n" +
