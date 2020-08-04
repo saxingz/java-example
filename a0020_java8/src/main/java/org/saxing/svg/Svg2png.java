@@ -9,6 +9,11 @@ import org.apache.batik.transcoder.TranscoderOutput;
 import java.nio.file.Paths;
 import java.nio.file.Path;
 
+/**
+ * svg to png
+ *
+ * @author saxing 2020/8/4 23:50
+ */
 public class Svg2png {
 
     String filePath="";
