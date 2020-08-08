@@ -28,7 +28,6 @@ public class JGitTest {
 
 //        for (Ref branch : branches) {
 //            String branchName = branch.getName();
-//
 //            System.out.println("Commits of branch: " + branch.getName());
 //            System.out.println("-------------------------------------");
 //
