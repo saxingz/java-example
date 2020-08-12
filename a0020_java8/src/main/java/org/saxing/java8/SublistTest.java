@@ -29,7 +29,6 @@ public class SublistTest {
         System.out.println(stra);
         System.out.println(stra.substring(0, 4));
 
-
         String strb = "abc\uD83E\uDDF9\uD83E\uDDF9\uD83E\uDDF912345678";
         System.out.println(strb);
         strb = strb.substring(strb.offsetByCodePoints(0, 0),
