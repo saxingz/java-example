@@ -2,6 +2,11 @@ package org.saxing.reactor;
 
 import java.util.Random;
 
+/**
+ * random int test
+ *
+ * @author saxing 2020/8/18 22:53
+ */
 public class RandomInt {
 
     public static void main(String[] args) {
