@@ -14,7 +14,6 @@ public class CalcNum {
 
     public static void main(String[] args) {
         String[] schoolIds = new String[]{
-
            "86",
            "85",
            "82",
