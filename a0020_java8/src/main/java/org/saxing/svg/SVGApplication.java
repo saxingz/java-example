@@ -25,10 +25,8 @@ public class SVGApplication {
         // Create a new JFrame.
         JFrame f = new JFrame("Batik");
         SVGApplication app = new SVGApplication(f);
-
         // Add components to the frame.
         f.getContentPane().add(app.createComponents());
-
         // Display the frame.
         f.addWindowListener(new WindowAdapter() {
             @Override
