@@ -40,7 +40,6 @@ public class SVGApplication {
 
     // The frame.
     protected JFrame frame;
-
     // The "Load" button, which displays up a file chooser upon clicking.
     protected JButton button = new JButton("Load...");
 
