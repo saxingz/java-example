@@ -42,7 +42,6 @@ public class SVGApplication {
     protected JFrame frame;
     // The "Load" button, which displays up a file chooser upon clicking.
     protected JButton button = new JButton("Load...");
-
     // The status label.
     protected JLabel label = new JLabel();
 
