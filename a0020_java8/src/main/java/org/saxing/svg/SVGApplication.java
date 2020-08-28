@@ -44,7 +44,6 @@ public class SVGApplication {
     protected JButton button = new JButton("Load...");
     // The status label.
     protected JLabel label = new JLabel();
-
     // The SVG canvas.
     protected JSVGCanvas svgCanvas = new JSVGCanvas();
 
