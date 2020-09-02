@@ -101,7 +101,6 @@ public class SVGApplication {
                 frame.pack();
             }
         });
-
         svgCanvas.addGVTTreeRendererListener(new GVTTreeRendererAdapter() {
             @Override
             public void gvtRenderingPrepare(GVTTreeRendererEvent e) {
