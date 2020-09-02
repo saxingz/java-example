@@ -152,6 +152,11 @@
             <version>5.8.1.202007141445-r</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.eclipse.paho</groupId>
+            <artifactId>org.eclipse.paho.client.mqttv3</artifactId>
+            <version>1.2.0</version>
+        </dependency>
 
     </dependencies>
 
