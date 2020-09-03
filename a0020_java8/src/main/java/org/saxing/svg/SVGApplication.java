@@ -111,7 +111,6 @@ public class SVGApplication {
                 label.setText("");
             }
         });
-
         return panel;
     }
 
