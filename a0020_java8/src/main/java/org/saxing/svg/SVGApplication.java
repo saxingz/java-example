@@ -88,7 +88,6 @@ public class SVGApplication {
                 label.setText("Document Loaded.");
             }
         });
-
         svgCanvas.addGVTTreeBuilderListener(new GVTTreeBuilderAdapter() {
             @Override
             public void gvtBuildStarted(GVTTreeBuilderEvent e) {
