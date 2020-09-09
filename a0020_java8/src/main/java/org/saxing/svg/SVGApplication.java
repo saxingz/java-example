@@ -77,6 +77,7 @@ public class SVGApplication {
                 }
             }
         });
+        
         // Set the JSVGCanvas listeners.
         svgCanvas.addSVGDocumentLoaderListener(new SVGDocumentLoaderAdapter() {
             @Override
