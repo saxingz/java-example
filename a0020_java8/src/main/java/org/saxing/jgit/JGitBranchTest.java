@@ -48,7 +48,6 @@ public class JGitBranchTest {
                 put("audit", "D:/code/au/0code-branch-detect/audit/");
                 put("growth", "D:/code/au/0code-branch-detect/growth/");
                 put("patrol", "D:/code/au/0code-branch-detect/patrol/");
-
             }
         };
 
