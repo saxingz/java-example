@@ -52,7 +52,6 @@ public class JGitBranchTest {
         };
 
         Set<String> keySet = projects.keySet();
-
         List<String> result = new ArrayList<>();
 
         keySet.forEach(key -> {
