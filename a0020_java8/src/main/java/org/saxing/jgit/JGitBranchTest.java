@@ -71,7 +71,6 @@ public class JGitBranchTest {
                 branch = branch.replaceAll("refs/remotes/origin/", "");
                 result.add(branch);
             });
-
             result.add("");
             result.add("");
         });
