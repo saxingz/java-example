@@ -53,7 +53,6 @@ public class JGitBranchTest {
 
         Set<String> keySet = projects.keySet();
         List<String> result = new ArrayList<>();
-
         keySet.forEach(key -> {
             String path = projects.get(key);
             System.out.println("项目名：" + key);
