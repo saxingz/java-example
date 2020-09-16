@@ -50,7 +50,6 @@ public class JGitBranchTest {
                 put("patrol", "D:/code/au/0code-branch-detect/patrol/");
             }
         };
-
         Set<String> keySet = projects.keySet();
         List<String> result = new ArrayList<>();
         keySet.forEach(key -> {
