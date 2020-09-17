@@ -72,7 +72,6 @@ public class JGitBranchTest {
             result.add("");
             result.add("");
         });
-
         try {
             FileUtils.writeLines(new File("branch.txt"), result);
         } catch (IOException e) {
