@@ -21,8 +21,6 @@ public class Svg2png {
         this.filePath=filePath;
         createImage();
     }
-
-
     public void createImage() throws Exception{
         String svg_URI_input = new File("d:\\test\\logo2.svg").toURL().toString();
         TranscoderInput input_svg_image = new TranscoderInput(svg_URI_input);
