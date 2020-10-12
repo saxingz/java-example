@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -26,18 +27,21 @@ public class CollectTest {
 
 
     public static void main(String[] args) {
-
         new CollectTest().testAdd();
     }
 
     private void testAdd(){
         List<Book> bookList = new ArrayList<>();
         bookList.add(new Book("The Fellowship of the Ring", 1954, "0395489318"));
-        bookList.add(new Book("The Two Towers", 1958, "0345339711"));
+        bookList.add(new Book("The Two Towers", 1954, "0345339711"));
         bookList.add(new Book("The Return of the King", 1955, "0618129111"));
 
-        Map<Integer, Book> collect = bookList.stream().collect(Collectors.toMap(Book::getReleaseYear, t -> t));
-        System.out.println(collect);
+//        Map<Integer, Book> collect = bookList.stream().collect(Collectors.toMap(Book::getReleaseYear, t -> t));
+//        System.out.println(collect);
+
+        Map<Integer, Book> collect2 = bookList.stream().collect(Collectors.toMap(Book::getReleaseYear,
+                Function.identity(), (o1, o2) -> o1));
+        System.out.println(collect2);
     }
 
 }
