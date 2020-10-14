@@ -26,17 +26,18 @@ public class StringTest {
 
     public static void main(String[] args) {
 
-        String task = "\uD83D\uDE12\uD83D\uDE12\uD83D\uDE12\uD83D\uDE12\uD83D\uDE12\uD83D\uDE12\uD83D\uDE12\uD83D\uDE1212345";
+        String task = "\uD83D\uDE00h\uD83D\uDE00h\uD83D\uDE00h\uD83D\uDE00h";
+        System.out.println(task);
         long count = task.codePoints().count();
         System.out.println(count);
-//        int length = StringUtils.length(task);
-//        System.out.println(length);
-//        System.out.println(task.length());
-//        String taskShort = task.length() > 10
-//                ? StringUtils.substring(task, task.offsetByCodePoints(0, 0),
-//                task.offsetByCodePoints(0, 10)).concat("...")
-//                : task;
-//        System.out.println(taskShort);
+        int length = StringUtils.length(task);
+        System.out.println(length);
+        System.out.println(task.length());
+        String taskShort = task.length() > 20
+                ? StringUtils.substring(task, task.offsetByCodePoints(0, 0),
+                task.offsetByCodePoints(0, 10)).concat("...")
+                : task;
+        System.out.println(taskShort);
 
     }
 
