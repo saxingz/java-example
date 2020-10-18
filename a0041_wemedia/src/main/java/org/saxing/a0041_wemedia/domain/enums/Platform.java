@@ -9,7 +9,11 @@ import lombok.Getter;
  */
 @Getter
 public enum Platform {
-    BILIBILI("bilibili", "哔哩哔哩")
+    BILIBILI("bilibili", "哔哩哔哩"),
+    DOUYU("douyu", "斗鱼"),
+    XIMALAYA("ximalaya", "喜马拉雅"),
+    XIGUASHIPING("xiguashiping", "西瓜视频"),
+    DOUYIN("douyin", "抖音"),
     ;
 
     private final String name;

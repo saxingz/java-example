@@ -27,7 +27,7 @@ import javax.validation.constraints.Min;
  * @since 2020-10-18
  */
 @RestController
-@RequestMapping("/transfer-do")
+@RequestMapping("/transfe")
 @Api(tags = "搬运视频接口")
 @Validated
 public class TransferController {
@@ -43,14 +43,37 @@ public class TransferController {
             @ApiImplicitParam(name = "page", value = "页码", defaultValue = "1"),
             @ApiImplicitParam(name = "pageNum", value = "每页条数", defaultValue = "1")
     })
-    @PostMapping("/list-videos")
-    public Page<TransferDO> listVideos(@RequestBody TransferDO transfer,
+    @PostMapping("/list")
+    public Page<TransferDO> listTransfers(@RequestBody TransferDO transfer,
                                        @RequestParam @Min(value = 1, message = "页码不得少于1")
                                                    Integer page,
                                        @RequestParam @Min(value = 1, message = "每页条数不得少于1")
                                                      @Max(value = 100, message = "每页条数不大于100")
                                                    Integer pageNum ){
         return transferLogic.page(new Page<>(page, pageNum), new QueryWrapper<>(transfer));
+    }
+
+    /**
+     * 增加搬运记录
+     * @param transfer 搬运记录
+     * @return res
+     */
+    @ApiOperation("增加搬运记录")
+    @PostMapping("/add")
+    public Boolean addTransfer(@RequestBody TransferDO transfer){
+        return transferLogic.save(transfer);
+    }
+
+    /**
+     * 删除搬运记录
+     * @param id
+     * @return
+     */
+    @ApiOperation("删除手动记录")
+    @ApiImplicitParam(name = "id", value = "搬运id")
+    @PostMapping("/del")
+    public Boolean deleteTransfer(@RequestParam Long id) {
+        return transferLogic.removeById(id);
     }
 }
 

@@ -48,9 +48,6 @@ public class TransferDO implements Serializable {
     @ApiModelProperty(value = "发布日期")
     private Date publishTime;
 
-    @ApiModelProperty(value = "描述")
-    private String description;
-
     @ApiModelProperty(value = "搬运url")
     private String url;
 
