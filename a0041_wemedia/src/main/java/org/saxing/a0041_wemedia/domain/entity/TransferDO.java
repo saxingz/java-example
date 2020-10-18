@@ -10,8 +10,11 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import java.io.Serializable;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
 
 /**
  * <p>
@@ -25,6 +28,9 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @TableName("transfer")
 @ApiModel(value="TransferDO对象", description="搬运表")
+@AllArgsConstructor
+@NoArgsConstructor
+@Accessors(chain = true)
 public class TransferDO implements Serializable {
 
     private static final long serialVersionUID = 1L;
