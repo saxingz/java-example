@@ -52,4 +52,9 @@ public class CRUDTest {
         transferDOPage.getRecords().forEach(System.out::println);
     }
 
+    @Test
+    public void testDeleteById(){
+        transferMapper.deleteById(1);
+    }
+
 }
