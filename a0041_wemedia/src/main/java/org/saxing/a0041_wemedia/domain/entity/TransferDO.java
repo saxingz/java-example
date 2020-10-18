@@ -39,6 +39,9 @@ public class TransferDO implements Serializable {
     @TableId(value = "id", type = IdType.AUTO)
     private Long id;
 
+    @ApiModelProperty(value = "原视频ID")
+    private Long videoId;
+
     @ApiModelProperty(value = "平台")
     private String platform;
 
