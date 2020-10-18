@@ -117,9 +117,10 @@ public class GenCode {
         strategy.setEntityLombokModel(true);
         strategy.setRestControllerStyle(true);
         strategy.setLogicDeleteFieldName("is_deleted");
-        TableFill createdTime = new TableFill("created_time", FieldFill.INSERT);
-        TableFill updatedTime = new TableFill("updated_time", FieldFill.INSERT_UPDATE);
-        strategy.setTableFillList(Arrays.asList(createdTime, updatedTime));
+        // 用数据库自带的时间更新
+//        TableFill createdTime = new TableFill("created_time", FieldFill.INSERT);
+//        TableFill updatedTime = new TableFill("updated_time", FieldFill.INSERT_UPDATE);
+//        strategy.setTableFillList(Arrays.asList(createdTime, updatedTime));
         // 写于父类中的公共字段
         strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
         strategy.setControllerMappingHyphenStyle(true);
