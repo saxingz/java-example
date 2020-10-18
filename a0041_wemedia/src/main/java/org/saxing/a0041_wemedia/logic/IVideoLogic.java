@@ -3,6 +3,8 @@ package org.saxing.a0041_wemedia.logic;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 /**
  * <p>
  * 原始视频表 服务类
@@ -20,6 +22,6 @@ public interface IVideoLogic extends IService<VideoDO> {
      * @return res
      *
      */
-    public String parseYoutubeJson(String json);
+    public List<VideoDO> parseYoutubeJson(String json);
 
 }

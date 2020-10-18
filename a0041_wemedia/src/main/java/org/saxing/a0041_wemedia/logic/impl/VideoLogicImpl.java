@@ -6,6 +6,8 @@ import org.saxing.a0041_wemedia.logic.IVideoLogic;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * <p>
  * 原始视频表 服务实现类
@@ -18,7 +20,8 @@ import org.springframework.stereotype.Service;
 public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements IVideoLogic {
 
     @Override
-    public String parseYoutubeJson(String json) {
-        return "success";
+    public List<VideoDO> parseYoutubeJson(String json) {
+
+        return null;
     }
 }
