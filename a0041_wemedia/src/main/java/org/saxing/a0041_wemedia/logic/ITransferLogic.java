@@ -11,6 +11,6 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author saxing
  * @since 2020-10-18
  */
-public interface ITransferService extends IService<TransferDO> {
+public interface ITransferLogic extends IService<TransferDO> {
 
 }

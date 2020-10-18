@@ -2,7 +2,7 @@ package org.saxing.a0041_wemedia.logic.impl;
 
 import org.saxing.a0041_wemedia.domain.entity.TransferDO;
 import org.saxing.a0041_wemedia.mapper.TransferMapper;
-import org.saxing.a0041_wemedia.logic.ITransferService;
+import org.saxing.a0041_wemedia.logic.ITransferLogic;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +15,6 @@ import org.springframework.stereotype.Service;
  * @since 2020-10-18
  */
 @Service
-public class TransferServiceImpl extends ServiceImpl<TransferMapper, TransferDO> implements ITransferService {
+public class TransferLogicImpl extends ServiceImpl<TransferMapper, TransferDO> implements ITransferLogic {
 
 }

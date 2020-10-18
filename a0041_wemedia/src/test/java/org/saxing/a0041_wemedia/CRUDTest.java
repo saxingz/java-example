@@ -23,9 +23,8 @@ public class CRUDTest {
     TransferMapper transferMapper;
 
     @Test
-//    @Transactional
+    @Transactional
     public void testInsert(){
-
         TransferDO transferDO = new TransferDO().setVideoId(1L).setDescription("")
                 .setUrl("https://www.baidu.com")
                 .setPublishTime(new Date())
@@ -38,7 +37,7 @@ public class CRUDTest {
     }
 
     @Test
-//    @Transactional
+    @Transactional
     public void testUpdate(){
         TransferDO transferDO = new TransferDO().setId(1L).setDescription("hello description");
         int insert = transferMapper.updateById(transferDO);
@@ -46,6 +45,7 @@ public class CRUDTest {
     }
 
     @Test
+    @Transactional
     public void testPage(){
         Page<TransferDO> transferDOPage = new Page<>(1, 5);
         transferMapper.selectPage(transferDOPage, null);
@@ -53,6 +53,7 @@ public class CRUDTest {
     }
 
     @Test
+    @Transactional
     public void testDeleteById(){
         transferMapper.deleteById(1);
     }

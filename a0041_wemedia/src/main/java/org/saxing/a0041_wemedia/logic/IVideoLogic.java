@@ -11,6 +11,15 @@ import com.baomidou.mybatisplus.extension.service.IService;
  * @author saxing
  * @since 2020-10-18
  */
-public interface IVideoService extends IService<VideoDO> {
+public interface IVideoLogic extends IService<VideoDO> {
+
+    /**
+     * 解析youtube json
+     *
+     * @param json json
+     * @return res
+     *
+     */
+    public String parseYoutubeJson(String json);
 
 }
