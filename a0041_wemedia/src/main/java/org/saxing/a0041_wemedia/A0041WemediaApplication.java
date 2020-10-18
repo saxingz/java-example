@@ -9,7 +9,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author saxing 2020/10/18 13:25
  */
-@MapperScan("org.saxing.a0041_wemedia.dao")
+@MapperScan({"org.saxing.a0041_wemedia.mapper", "org.saxing.a0041_wemedia.logic.impl"})
 @SpringBootApplication
 public class A0041WemediaApplication {
 

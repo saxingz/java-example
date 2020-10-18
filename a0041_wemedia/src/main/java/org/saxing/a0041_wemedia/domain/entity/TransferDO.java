@@ -59,7 +59,6 @@ public class TransferDO implements Serializable {
     private Boolean isDeleted;
 
     @ApiModelProperty(value = "创建时间")
-    @TableField(fill = FieldFill.INSERT)
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")

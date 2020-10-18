@@ -78,6 +78,7 @@ public class VideoDO implements Serializable {
     private Date createdTime;
 
     @ApiModelProperty(value = "修改时间")
+    @TableField(fill = FieldFill.INSERT_UPDATE)
     private Date updatedTime;
 
 

@@ -2,6 +2,7 @@ package org.saxing.a0041_wemedia.mapper;
 
 import org.saxing.a0041_wemedia.domain.entity.TransferDO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import org.springframework.stereotype.Repository;
 
 /**
  * <p>
@@ -11,6 +12,7 @@ import com.baomidou.mybatisplus.core.mapper.BaseMapper;
  * @author saxing
  * @since 2020-10-18
  */
+@Repository
 public interface TransferMapper extends BaseMapper<TransferDO> {
 
 }
