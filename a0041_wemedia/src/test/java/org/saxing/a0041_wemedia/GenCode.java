@@ -13,6 +13,9 @@ import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -20,7 +23,15 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
+@SpringBootTest
 public class GenCode {
+
+    @Value("${spring.datasource.url}")
+    private String jdbcUrl;
+    @Value("${spring.datasource.username}")
+    private String username;
+    @Value("${spring.datasource.wemedia654321}")
+    private String password;
 
     /**
      * <p>
@@ -41,7 +52,8 @@ public class GenCode {
         throw new MybatisPlusException("请输入正确的" + tip + "！");
     }
 
-    public static void main(String[] args) {
+    @Test
+    public void gen() {
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
@@ -61,11 +73,11 @@ public class GenCode {
 
         // 数据源配置
         DataSourceConfig dsc = new DataSourceConfig();
-        dsc.setUrl("jdbc:mysql://127.0.0.1:3500/wemedia?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false");
+        dsc.setUrl(jdbcUrl);
 //         dsc.setSchemaName("public");
         dsc.setDriverName("com.mysql.cj.jdbc.Driver");
-        dsc.setUsername("test");
-        dsc.setPassword("test");
+        dsc.setUsername(username);
+        dsc.setPassword(password);
         dsc.setDbType(DbType.MYSQL);
         mpg.setDataSource(dsc);
 
