@@ -25,7 +25,7 @@ public class CRUDTest {
     @Test
     @Transactional
     public void testInsert(){
-        TransferDO transferDO = new TransferDO().setVideoId(1L).setDescription("")
+        TransferDO transferDO = new TransferDO().setVideoId(1L)
                 .setUrl("https://www.baidu.com")
                 .setPublishTime(new Date())
                 .setPlatform(Platform.BILIBILI.getName());
@@ -39,7 +39,7 @@ public class CRUDTest {
     @Test
     @Transactional
     public void testUpdate(){
-        TransferDO transferDO = new TransferDO().setId(1L).setDescription("hello description");
+        TransferDO transferDO = new TransferDO().setId(1L);
         int insert = transferMapper.updateById(transferDO);
         System.out.println(insert);
     }
