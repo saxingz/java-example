@@ -43,7 +43,7 @@ public class SubRipParser {
 
 
 //        List<String> lines = text.lines().collect(toList());
-        List<String> lines = Arrays.asList(text.split(System.getProperty("line.separator")));
+        List<String> lines = Arrays.asList(text.split("\n"));
         /* We need at least two lines - one should contain a number and the other a time range. */
         if (lines.size() < 2) {
             throw new SubtitleFormatException();

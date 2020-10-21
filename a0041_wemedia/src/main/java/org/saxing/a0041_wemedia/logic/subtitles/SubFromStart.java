@@ -22,9 +22,9 @@ public class SubFromStart {
     private InputSubtitlesInfo lowerSubtitlesInfo;
 
     public static void main(String[] args) throws InterruptedException, IOException {
-        InputSubtitlesInfo up = new SubFromStart().getInputSubtitlesInfo("F:\\temp\\en.srt", InputSubtitlesType.UPPER, FileOrigin.TEXT_FIELD);
-        InputSubtitlesInfo low = new SubFromStart().getInputSubtitlesInfo("F:\\temp\\zh.srt", InputSubtitlesType.LOWER, FileOrigin.TEXT_FIELD);
-        MergedSubtitlesFileInfo mergedSubtitlesFileInfo = getMergedSubtitlesFileInfo("F:\\temp\\mixed.srt", FileOrigin.TEXT_FIELD);
+        InputSubtitlesInfo up = new SubFromStart().getInputSubtitlesInfo("D:\\temp\\temp1\\en.srt", InputSubtitlesType.UPPER, FileOrigin.TEXT_FIELD);
+        InputSubtitlesInfo low = new SubFromStart().getInputSubtitlesInfo("D:\\temp\\temp1\\zh.srt", InputSubtitlesType.LOWER, FileOrigin.TEXT_FIELD);
+        MergedSubtitlesFileInfo mergedSubtitlesFileInfo = getMergedSubtitlesFileInfo("D:\\temp\\temp1\\mixed.srt", FileOrigin.TEXT_FIELD);
 
 
         Subtitles subtitles = SubtitleMerger.mergeSubtitles(
