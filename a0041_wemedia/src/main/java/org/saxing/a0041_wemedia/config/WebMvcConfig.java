@@ -1,9 +1,15 @@
 package org.saxing.a0041_wemedia.config;
 
+import com.google.api.services.youtube.YouTube;
+import org.saxing.a0041_wemedia.platform.youtube.YouTubeApi;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import java.io.IOException;
+import java.security.GeneralSecurityException;
 
 /**
  * web mvc config
@@ -36,5 +42,10 @@ public class WebMvcConfig implements WebMvcConfigurer {
                 .allowedMethods("GET", "PUT", "DELETE", "POST", "OPTIONS").maxAge(3600);
     }
 
+
+    @Bean
+    public YouTube getService() throws GeneralSecurityException, IOException {
+        return new YouTubeApi().getService();
+    }
 
 }
