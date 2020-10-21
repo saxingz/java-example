@@ -38,7 +38,7 @@ public class ApiExample {
     private static final Collection<String> SCOPES =
             Arrays.asList("https://www.googleapis.com/auth/youtube.force-ssl");
 
-    private static final String APPLICATION_NAME = "API code samples";
+    private static final String APPLICATION_NAME = "youtubeapi";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
     /**
@@ -50,6 +50,7 @@ public class ApiExample {
     public static Credential authorize(final NetHttpTransport httpTransport) throws IOException {
         // Load client secrets.
         InputStream in = ApiExample.class.getResourceAsStream(CLIENT_SECRETS);
+
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
         // Build flow and trigger user authorization request.
@@ -83,6 +84,15 @@ public class ApiExample {
      */
     public static void main(String[] args)
             throws GeneralSecurityException, IOException, GoogleJsonResponseException {
+//        System.setProperty("http.proxySet", "true");
+//        System.setProperty("http.proxyHost", "127.0.0.1");
+//        System.setProperty("http.proxyPort", "" + 10808);
+
+// 针对https也开启代理
+//        System.setProperty("https.proxyHost", "127.0.0.1");
+//        System.setProperty("https.proxyPort", "" + 10808);
+
+
         YouTube youtubeService = getService();
         // Define and execute the API request
         YouTube.Search.List request = youtubeService.search()
