@@ -2,6 +2,9 @@ package org.saxing.a0041_wemedia.controller;
 
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
+import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -57,8 +60,9 @@ public class VideoController {
     public Page<VideoDO> listVideos(@RequestBody VideoDO video,
                                     @RequestParam @Min(value = 1, message = "页码不得少于1") Integer page,
                                     @RequestParam @Min(value = 1, message = "每页条数不得少于1")
-                                    @Max(value = 100, message = "每页条数不大于100") Integer pageNum ){
-        return videoLogic.page(new Page<>(page, pageNum), new QueryWrapper<>(video));
+                                    @Max(value = 100, message = "每页条数不大于100") Integer pageNum){
+        return videoLogic.page(new Page<>(page, pageNum), new QueryWrapper<>(video))
+                .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(VideoDO.class).getKeyProperty()));
     }
 
     /**
