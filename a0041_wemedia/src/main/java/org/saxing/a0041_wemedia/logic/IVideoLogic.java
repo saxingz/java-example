@@ -3,6 +3,7 @@ package org.saxing.a0041_wemedia.logic;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -16,4 +17,10 @@ import java.util.List;
 public interface IVideoLogic extends IService<VideoDO> {
 
 
+    /**
+     * 下载视频
+     * @param id id
+     * @return bool
+     */
+    Boolean downloadVideo(Long id) throws IOException;
 }

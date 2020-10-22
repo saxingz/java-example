@@ -17,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -63,6 +64,17 @@ public class VideoController {
     @PostMapping("/update")
     public Boolean updateVideo(@RequestBody VideoDO video){
         return videoLogic.updateById(video);
+    }
+
+    /**
+     * 下载视频
+     * @return
+     */
+    @ApiOperation("下载视频")
+    @ApiImplicitParam(name = "id", value = "视频id")
+    @PostMapping("/download")
+    public Boolean downloadVideo(@RequestParam Long id) throws Exception {
+        return videoLogic.downloadVideo(id);
     }
 
 }
