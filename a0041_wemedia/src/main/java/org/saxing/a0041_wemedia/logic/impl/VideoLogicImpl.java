@@ -19,9 +19,5 @@ import java.util.List;
 @Service
 public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements IVideoLogic {
 
-    @Override
-    public List<VideoDO> parseYoutubeJson(String json) {
 
-        return null;
-    }
 }

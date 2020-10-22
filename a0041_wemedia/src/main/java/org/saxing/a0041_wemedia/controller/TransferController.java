@@ -27,7 +27,7 @@ import javax.validation.constraints.Min;
  * @since 2020-10-18
  */
 @RestController
-@RequestMapping("/transfe")
+@RequestMapping("/v1/transfer")
 @Api(tags = "搬运视频接口")
 @Validated
 public class TransferController {
@@ -50,7 +50,8 @@ public class TransferController {
                                        @RequestParam @Min(value = 1, message = "每页条数不得少于1")
                                                      @Max(value = 100, message = "每页条数不大于100")
                                                    Integer pageNum ){
-        return transferLogic.page(new Page<>(page, pageNum), new QueryWrapper<>(transfer));
+        return transferLogic.page(new Page<>(page, pageNum), new QueryWrapper<>(transfer))
+                .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(TransferDO.class).getKeyProperty()));
     }
 
     /**

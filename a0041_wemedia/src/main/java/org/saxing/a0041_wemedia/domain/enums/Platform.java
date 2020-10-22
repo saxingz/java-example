@@ -9,6 +9,7 @@ import lombok.Getter;
  */
 @Getter
 public enum Platform {
+    YOUTUBE("youtube", "youtube"),
     BILIBILI("bilibili", "哔哩哔哩"),
     DOUYU("douyu", "斗鱼"),
     XIMALAYA("ximalaya", "喜马拉雅"),

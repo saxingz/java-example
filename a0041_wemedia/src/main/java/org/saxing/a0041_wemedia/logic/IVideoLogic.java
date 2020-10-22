@@ -15,13 +15,5 @@ import java.util.List;
  */
 public interface IVideoLogic extends IService<VideoDO> {
 
-    /**
-     * 解析youtube json
-     *
-     * @param json json
-     * @return res
-     *
-     */
-    public List<VideoDO> parseYoutubeJson(String json);
 
 }

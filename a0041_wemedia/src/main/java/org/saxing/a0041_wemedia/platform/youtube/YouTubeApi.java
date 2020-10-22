@@ -31,12 +31,14 @@ import java.util.Collection;
 public class YouTubeApi {
     //https://console.cloud.google.com/iam-admin/ 服务账号中获取
     // https://console.developers.google.com/apis/credentials
-    private static final String CLIENT_SECRETS= "client_secret.json";
+    private static final String CLIENT_SECRETS= "/client_secret.json";
     private static final Collection<String> SCOPES =
             Arrays.asList("https://www.googleapis.com/auth/youtube.force-ssl");
 
     private static final String APPLICATION_NAME = "youtubeapi";
     private static final JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
+
+    public static YouTube youTube;
 
     /**
      * Create an authorized Credential object.
@@ -44,10 +46,9 @@ public class YouTubeApi {
      * @return an authorized Credential object.
      * @throws IOException
      */
-    public Credential authorize(final NetHttpTransport httpTransport) throws IOException {
+    public static Credential authorize(final NetHttpTransport httpTransport) throws IOException {
         // Load client secrets.
         InputStream in = YouTubeApi.class.getResourceAsStream(CLIENT_SECRETS);
-
         GoogleClientSecrets clientSecrets =
                 GoogleClientSecrets.load(JSON_FACTORY, new InputStreamReader(in));
         // Build flow and trigger user authorization request.
@@ -65,12 +66,27 @@ public class YouTubeApi {
      * @return an authorized API client service
      * @throws GeneralSecurityException, IOException
      */
-    public YouTube getService() throws GeneralSecurityException, IOException {
+    public static YouTube getService() throws GeneralSecurityException, IOException {
         final NetHttpTransport httpTransport = GoogleNetHttpTransport.newTrustedTransport();
         Credential credential = authorize(httpTransport);
-        return new YouTube.Builder(httpTransport, JSON_FACTORY, credential)
+        YouTube build = new YouTube.Builder(httpTransport, JSON_FACTORY, credential)
                 .setApplicationName(APPLICATION_NAME)
                 .build();
+        youTube = build;
+        return build;
+    }
+    static {
+        try {
+            System.setProperty("http.proxySet", "true");
+            System.setProperty("http.proxyHost", "127.0.0.1");
+            System.setProperty("http.proxyPort", "" + 10809);
+            System.setProperty("https.proxyHost", "127.0.0.1");
+            System.setProperty("https.proxyPort", "" + 10809);
+            getService();
+            System.setProperty("http.proxySet", "false");
+        } catch (GeneralSecurityException | IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

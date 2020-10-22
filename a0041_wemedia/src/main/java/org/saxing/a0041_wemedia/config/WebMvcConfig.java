@@ -43,9 +43,4 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
 
-    @Bean
-    public YouTube getService() throws GeneralSecurityException, IOException {
-        return new YouTubeApi().getService();
-    }
-
 }

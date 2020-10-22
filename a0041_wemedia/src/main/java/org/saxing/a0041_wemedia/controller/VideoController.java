@@ -36,17 +36,6 @@ public class VideoController {
     @Autowired
     private IVideoLogic videoLogic;
 
-    /**
-     * 解析youtube json
-     * @param json json
-     * @return res
-     */
-    @ApiOperation("解析youtube json")
-    @ApiImplicitParam(name = "json", value = "youtube json内容")
-    @PostMapping("/parse-json")
-    public List<VideoDO> parseYouTubeJson(@RequestParam String json){
-        return videoLogic.parseYoutubeJson(json);
-    }
 
     /**
      * 查看原始视频
@@ -56,7 +45,7 @@ public class VideoController {
             @ApiImplicitParam(name = "page", value = "页码", defaultValue = "1"),
             @ApiImplicitParam(name = "pageNum", value = "每页条数", defaultValue = "1")
     })
-    @PostMapping("/list-video")
+    @PostMapping("/list")
     public Page<VideoDO> listVideos(@RequestBody VideoDO video,
                                     @RequestParam @Min(value = 1, message = "页码不得少于1") Integer page,
                                     @RequestParam @Min(value = 1, message = "每页条数不得少于1")
@@ -71,7 +60,7 @@ public class VideoController {
      * @return res
      */
     @ApiOperation("修改原始视频")
-    @PostMapping("/update-video")
+    @PostMapping("/update")
     public Boolean updateVideo(@RequestBody VideoDO video){
         return videoLogic.updateById(video);
     }
