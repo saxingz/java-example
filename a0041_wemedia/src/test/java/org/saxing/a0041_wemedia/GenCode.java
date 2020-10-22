@@ -30,30 +30,33 @@ public class GenCode {
     private String jdbcUrl;
     @Value("${spring.datasource.username}")
     private String username;
-    @Value("${spring.datasource.wemedia654321}")
+    @Value("${spring.datasource.password}")
     private String password;
 
-    /**
-     * <p>
-     * 读取控制台内容
-     * </p>
-     */
-    public static String scanner(String tip) {
-        Scanner scanner = new Scanner(System.in);
-        StringBuilder help = new StringBuilder();
-        help.append("请输入" + tip + "：");
-        System.out.println(help.toString());
-        if (scanner.hasNext()) {
-            String ipt = scanner.next();
-            if (StringUtils.isNotBlank(ipt)) {
-                return ipt;
-            }
-        }
-        throw new MybatisPlusException("请输入正确的" + tip + "！");
-    }
+//    /**
+//     * <p>
+//     * 读取控制台内容
+//     * </p>
+//     */
+//    public static String scanner(String tip) {
+//        Scanner scanner = new Scanner(System.in);
+//        StringBuilder help = new StringBuilder();
+//        help.append("请输入" + tip + "：");
+//        System.out.println(help.toString());
+//        if (scanner.hasNext()) {
+//            String ipt = scanner.next();
+//            if (StringUtils.isNotBlank(ipt)) {
+//                return ipt;
+//            }
+//        }
+//        throw new MybatisPlusException("请输入正确的" + tip + "！");
+//    }
 
     @Test
     public void gen() {
+        String[] tables = new String[]{"channel"};
+
+
         // 代码生成器
         AutoGenerator mpg = new AutoGenerator();
 
@@ -67,8 +70,8 @@ public class GenCode {
         gc.setIdType(IdType.AUTO);
         gc.setSwagger2(true); // 实体属性 Swagger2 注解
         gc.setDateType(DateType.ONLY_DATE);
-        gc.setEntityName("%sDO");
-        gc.setXmlName("%sMapper");
+//        gc.setEntityName("%sDO");
+//        gc.setXmlName("%sMapper");
         mpg.setGlobalConfig(gc);
 
         // 数据源配置
@@ -83,7 +86,7 @@ public class GenCode {
 
         // 包配置
         PackageConfig pc = new PackageConfig();
-        pc.setModuleName("");
+//        pc.setModuleName("");
         pc.setParent("org.saxing.a0041_wemedia");
         pc.setEntity("domain.entity");
         pc.setService("logic");
@@ -96,6 +99,15 @@ public class GenCode {
             @Override
             public void initMap() {
                 // to do nothing
+                this.getConfig().getTableInfoList().forEach(tableInfo -> {
+                    String entityName = tableInfo.getEntityName();
+                    if (!entityName.endsWith("DO")) {
+                        tableInfo.setConvert(true);     // 实体类和表名不一致
+                        tableInfo.setEntityName(entityName + "DO");
+                        tableInfo.setServiceName("I" + entityName + "Logic");
+                        tableInfo.setServiceImplName(entityName + "Logic");
+                    }
+                });
             }
         };
         // 自定义输出配置
@@ -106,8 +118,13 @@ public class GenCode {
             @Override
             public String outputFile(TableInfo tableInfo) {
                 // 自定义输出文件名 ， 如果你 Entity 设置了前后缀、此处注意 xml 的名称会跟着发生变化！！
-                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
-                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+//                return projectPath + "/src/main/resources/mapper/" + pc.getModuleName()
+//                        + "/" + tableInfo.getEntityName() + "Mapper" + StringPool.DOT_XML;
+                String entityName = tableInfo.getEntityName();
+                entityName = entityName.endsWith("DO") ? entityName.substring(0, entityName.length() - 2) : entityName;
+                return projectPath + "/src/main/resources/mapper/" /*+ pc.getModuleName()*/
+                        + "/" + entityName
+                        + "Mapper" + StringPool.DOT_XML;
             }
         });
         cfg.setFileOutConfigList(focList);
@@ -134,7 +151,7 @@ public class GenCode {
 //        TableFill updatedTime = new TableFill("updated_time", FieldFill.INSERT_UPDATE);
 //        strategy.setTableFillList(Arrays.asList(createdTime, updatedTime));
         // 写于父类中的公共字段
-        strategy.setInclude(scanner("表名，多个英文逗号分割").split(","));
+        strategy.setInclude(tables);
         strategy.setControllerMappingHyphenStyle(true);
 //        strategy.setTablePrefix(pc.getModuleName() + "_");
         mpg.setStrategy(strategy);
