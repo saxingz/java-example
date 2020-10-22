@@ -68,23 +68,29 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         // 原始视频文件
         Path originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
                 .findFirst().orElse(null);
-
+        // 原始音频文件
+        Path originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
+                || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
         // 校验下载项
         if ((Objects.isNull(enVtt)
                 || Objects.isNull(zhHansvtt)
-                || Objects.isNull(originVideoFile))
+                || Objects.isNull(originVideoFile)
+                || Objects.isNull(originAudioFile))
                 && !isFirstNull
         ) {
-            // 删除改名这个文件夹，重新下载
-            new File(videoPathStr).renameTo(new File(videoPathStr + "-" + UUID.fastUUID().toString()));
-            if (!Files.exists(videoPath)) {
-                Files.createDirectories(videoPath);
+            // 如果文件不为空，改名这个文件夹，重新下载
+            if (Files.list(videoPath).count() > 0) {
+                new File(videoPathStr).renameTo(new File(videoPathStr + "-" + UUID.fastUUID().toString()));
+                if (!Files.exists(videoPath)) {
+                    Files.createDirectories(videoPath);
+                }
             }
         }
         // 校验下载项
         if (Objects.isNull(enVtt)
                 || Objects.isNull(zhHansvtt)
                 || Objects.isNull(originVideoFile)
+                || Objects.isNull(originAudioFile)
         ) {
             String outputFile = videoPathStr + "\\%(title)s.%(ext)s";
             // 删除改名这个文件夹，重新下载
@@ -97,6 +103,8 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                             "en,zh-Hans",
                             "--sub-format",
                             "vtt",
+                            "-f",
+                            "\"bestvideo,bestaudio\"",
                             "--no-check-certificate",
                             "-o",
                             "\"" + outputFile + "\"",
@@ -113,6 +121,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         if (Objects.isNull(enVtt)
                 || Objects.isNull(zhHansvtt)
                 || Objects.isNull(originVideoFile)
+                || Objects.isNull(originAudioFile)
         ) {
             // 下载失败，返回
             log.error("下载失败，返回");
@@ -121,23 +130,11 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             log.info("下载成功");
         }
 
-        List<String> arg2 = new ArrayList<>(
-                Arrays.asList(
-                        YOUTUBE_DL_PATH,
-                        "./youtube-dl.exe --write-sub --write-auto-sub --sub-lang en,zh-Hans " +
-                                "--sub-format vtt " +
-                                "--no-check-certificate " +
-                                "--proxy socks5://127.0.0.1:10808/  " +
-                                "https://www.youtube.com/watch?v=jnMfNYNQRUU"
-                )
-        );
-//        ProcessRunner.run(arguments);
     }
 
     private static void youtubeDl(String videoId, MediaType type) throws InterruptedException, ProcessException {
         switch (type) {
             case EN_SUBTITLE:
-
                 break;
             case ZH_SUBTITLE:
                 break;
