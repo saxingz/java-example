@@ -41,6 +41,11 @@ public class ChannelLogic extends ServiceImpl<ChannelMapper, ChannelDO> implemen
 
     @Override
     public void scanChannel(DateTime startDate, DateTime endDate, String channelId) {
+        ChannelDO channelDO = this.lambdaQuery().ge(ChannelDO::getChannelId, channelId).one();
+        if (Objects.isNull(channelDO)) {
+            log.error("没有本频道： channelId: " + channelId);
+            return;
+        }
         List<SearchResult> searchResults = scanResult(startDate, endDate, channelId);
         if (CollectionUtils.isEmpty(searchResults)) {
             return;
@@ -74,6 +79,9 @@ public class ChannelLogic extends ServiceImpl<ChannelMapper, ChannelDO> implemen
             videoLogic.saveOrUpdate(video);
         });
         // 更新channel最后follow时间
+        com.google.api.client.util.DateTime lastPublishedAt = searchResults.get(searchResults.size() - 1).getSnippet().getPublishedAt();
+        channelDO.setFollowTime(new Date(lastPublishedAt.getValue()));
+        this.updateById(channelDO);
     }
 
     private List<SearchResult> scanResult(DateTime startDate, DateTime endDate, String channelId){
