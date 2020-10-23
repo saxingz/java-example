@@ -192,11 +192,14 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             return false;
         }
         // 1. convert to mp3
+        log.info("1. convert to mp3");
         convertToMp3(originAudioFile);
         // 2. subtitle vtt -> srt
+        log.info("2. subtitle vtt -> srt");
         convertToSrt(zhHansvtt, "zh");
         convertToSrt(enVtt, "en");
         // 3. merge subtitle
+        log.info("3. merge subtitle");
         fileList = Files.list(videoPath).collect(Collectors.toList());
         Path enSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.srt"))
                 .findFirst().orElse(null);
@@ -213,11 +216,13 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             log.error("字幕合并失败");
         }
         // 4. merge subtitle watermark video
+        log.info("4. merge subtitle watermark video");
         fileList = Files.list(videoPath).collect(Collectors.toList());
         Path mixedSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("mixed.srt"))
                 .findFirst().orElse(null);
         mergeSubtitleAndVideo(originVideoFile, mixedSrt);
         // 5. merge video audio
+        log.info("5. merge video audio");
         fileList = Files.list(videoPath).collect(Collectors.toList());
         Path subtitleVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("subtitle.mp4"))
                 .findFirst().orElse(null);
@@ -228,10 +233,11 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             return false;
         }
         mergeVideoAndAudio(subtitleVideo, mp3Audio);
-
         // 6. gen ts
+        log.info("6. gen ts");
         genTs(subtitleVideo);
         // 7. merge head and tail
+        log.info("7. merge head and tail");
         fileList = Files.list(videoPath).collect(Collectors.toList());
         Path tsVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("video.ts"))
                 .findFirst().orElse(null);
@@ -239,11 +245,11 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             log.error("tsVideo生成失败");
             return false;
         }
-
         // 8. del ts
+        log.info("8. del ts");
         new File(tsVideo.toUri()).delete();
-
-        // 9. 校验生成视频成功
+        // 9. 校验生成视频
+        log.info("9. 校验生成视频");
         fileList = Files.list(videoPath).collect(Collectors.toList());
         Path finalVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("final.mp4"))
                 .findFirst().orElse(null);
@@ -254,6 +260,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         // 标记生成成功
         videoDO.setRebuildStatus(RebuildStatus.REBUILDED.getCode());
         this.updateById(videoDO);
+        log.info("视频生成成功！！！");
         return true;
     }
 
