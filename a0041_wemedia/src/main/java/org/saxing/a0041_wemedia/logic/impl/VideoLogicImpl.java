@@ -265,12 +265,12 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         return true;
     }
 
-//    public static void main(String[] args) throws IOException, InterruptedException {
-//        Path tsVideo = Paths.get("F:\\premiere_project\\1\\video.ts");
-//        Path head = Paths.get(VIDEO_HEAD_PATH);
-//        Path tail = Paths.get(VIDEO_TAIL_PATH);
-//        mergeHeadTail(tsVideo, head, tail);
-//    }
+    public static void main(String[] args) throws IOException, InterruptedException {
+        Path tsVideo = Paths.get("F:\\premiere_project\\1\\1.ts");
+        Path head = Paths.get(VIDEO_HEAD_PATH);
+        Path tail = Paths.get(VIDEO_TAIL_PATH);
+        mergeHeadTail(tsVideo, head, tail);
+    }
 
     /**
      * 生成ts
@@ -346,19 +346,46 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
      * ./ffmpeg -i three.mp4 -c copy -bsf:v h264_mp4toannexb three1.ts
      *
      * ./ffmpeg -i "concat:head1.ts|1.ts|three1.ts" -c copy -bsf:a aac_adtstoasc out88.mp4
+     *
+     * /ffmpeg -i F:/premiere_project/1/1.ts -i F:/premiere_project/1/2.ts -i F:/premiere_project/1/3.ts -vcodec libx264 -acodec libfdk_aac -map_metadata -1 -map_chapters -1 -movflags faststart -filter_complex [0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[concat_v][concat_a] -map [concat_v] -map [concat_a] -vb 3000k -ab 192k -f mp4 -profile:v high -pix_fmt yuv420p -threads 4 -y F:/premiere_project/1/1_合并版.mp4
      */
     private static void mergeHeadTail(Path video, Path head, Path tail) {
-
-
         List<String> arguments = new ArrayList<>(
                 Arrays.asList(
-                        FFMPEG_PATH,
+                        "D:\\saprogram\\renrenyishijie\\ffmpeg",
                         "-i",
-                        "\"concat:" + head.toString() + "|" + video.toString() + "|" + tail.toString() + "\"",
-                        "-c",
-                        "copy",
-                        "-bsf:a",
-                        "aac_adtstoasc",
+                        head.toString(),
+                        "-i",
+                        video.toString(),
+                        "-i",
+                        tail.toString(),
+                        "-vcodec",
+                        "libx264",
+                        "-acodec",
+                        "libfdk_aac",
+                        "-map_metadata",
+                        "-1",
+                        "-map_chapters",
+                        "-1",
+                        "-movflags",
+                        "faststart",
+                        "-filter_complex",
+                        "[0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[concat_v][concat_a]",
+                        "-map",
+                        "[concat_v]",
+                        "-map",
+                        "[concat_a]",
+                        "-vb",
+                        "3000k",
+                        "-ab",
+                        "192k",
+                        "-f",
+                        "mp4",
+                        "-profile:v",
+                        "high",
+                        "-pix_fmt",
+                        "yuv420p",
+                        "-y",
                         video.getParent().toString() + "\\" + "final.mp4"
                 )
         );
