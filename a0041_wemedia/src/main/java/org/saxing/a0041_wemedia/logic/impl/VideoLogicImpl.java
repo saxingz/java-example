@@ -4,6 +4,7 @@ import cn.hutool.core.lang.UUID;
 import lombok.extern.apachecommons.CommonsLog;
 import org.apache.commons.collections4.CollectionUtils;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
+import org.saxing.a0041_wemedia.domain.enums.DownLoadStatus;
 import org.saxing.a0041_wemedia.mapper.VideoMapper;
 import org.saxing.a0041_wemedia.logic.IVideoLogic;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -32,9 +33,11 @@ import java.util.stream.Stream;
 public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements IVideoLogic {
 
     // base path
-    private static final String BASE_PATH = "F:\\premiere_project\\";
+    private static final String BASE_PATH = "D:\\premiere_project\\";
     // youtube dl path
-    private static final String YOUTUBE_DL_PATH = "F:\\premiere_project\\0youtube-dl\\youtube-dl.exe";
+    private static final String YOUTUBE_DL_PATH = BASE_PATH + "0youtube-dl\\youtube-dl.exe";
+    // ffmpeg path
+    private static final String FFMPEG_PATH = BASE_PATH + "0ffmpeg\\ffmpeg\\bin\\ffmpeg.exe";
 
 
     @Override
@@ -43,14 +46,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         if (Objects.isNull(videoDO)) {
             return false;
         }
-        // 判断目录下是否有数据
-        return true;
-    }
-
-//    F:\premiere_project\0youtube-dl
-    public static void main(String[] args) throws InterruptedException, ProcessException, IOException {
-        Long id = 1L;
-        String videoId = "jnMfNYNQRUU";
+        String videoId = videoDO.getVideoId();
         String videoPathStr = BASE_PATH + id;
         Path videoPath = Paths.get(videoPathStr);
         boolean isFirstNull = false;
@@ -86,14 +82,14 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 }
             }
         }
-        // 校验下载项
+        // 下载
         if (Objects.isNull(enVtt)
                 || Objects.isNull(zhHansvtt)
                 || Objects.isNull(originVideoFile)
                 || Objects.isNull(originAudioFile)
         ) {
             String outputFile = videoPathStr + "\\%(title)s.%(ext)s";
-            // 删除改名这个文件夹，重新下载
+            // 重新下载
             List<String> arguments = new ArrayList<>(
                     Arrays.asList(
                             YOUTUBE_DL_PATH,
@@ -113,8 +109,12 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                             "https://www.youtube.com/watch?v=" + videoId
                     )
             );
-            ProcessRunner.run(arguments);
-            return;
+            try {
+                ProcessRunner.run(arguments);
+            } catch (ProcessException | InterruptedException e) {
+                e.printStackTrace();
+                log.error(e.toString());
+            }
         }
 
         // 校验下载项
@@ -125,24 +125,72 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         ) {
             // 下载失败，返回
             log.error("下载失败，返回");
-            return;
+            return false;
         } else {
             log.info("下载成功");
+            videoDO.setDownloadStatus(DownLoadStatus.DOWNLOADED.getCode());
+            this.saveOrUpdate(videoDO);
+            return true;
         }
-
     }
 
-    private static void youtubeDl(String videoId, MediaType type) throws InterruptedException, ProcessException {
-        switch (type) {
-            case EN_SUBTITLE:
-                break;
-            case ZH_SUBTITLE:
-                break;
-            case VIDEO:
-                break;
-            case AUDIO:
-                break;
-            default:
+    @Override
+    public Boolean rebuild(Long id) throws IOException {
+        VideoDO videoDO = this.getById(id);
+        if (Objects.isNull(videoDO) || !Objects.equals(videoDO.getDownloadStatus(), DownLoadStatus.DOWNLOADED.getCode())) {
+            log.error("视频不存在或未下载, video表id: " + id);
+            return false;
+        }
+        String videoPathStr = BASE_PATH + id;
+        Path videoPath = Paths.get(videoPathStr);
+        if (!Files.exists(videoPath)) {
+            Files.createDirectories(videoPath);
+        }
+        List<Path> fileList = Files.list(videoPath).collect(Collectors.toList());
+        // 英文字幕
+        Path enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
+                .findFirst().orElse(null);
+        // 中文字幕
+        Path zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
+                .findFirst().orElse(null);
+        // 原始视频文件
+        Path originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
+                .findFirst().orElse(null);
+        // 原始音频文件
+        Path originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
+                || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
+        if (Objects.isNull(originAudioFile)) {
+            log.error("没有音频文件");
+            return false;
+        }
+        // 1. convert to mp3
+        convertToMp3(originAudioFile);
+        // 2. merge subtitle
+
+
+        return null;
+    }
+
+    public static void main(String[] args) {
+    }
+
+    public static void convertToMp3(Path mp3Path) {
+        System.out.println(mp3Path);
+        List<String> arguments = new ArrayList<>(
+                Arrays.asList(
+                        FFMPEG_PATH,
+                        "-i",
+                        mp3Path.toString(),
+                        "-acodec",
+                        "libmp3lame",
+                        mp3Path.getParent().toString() + "\\" + mp3Path.getFileName().toString() + ".mp3"
+                )
+        );
+        try {
+            ProcessRunner.run(arguments);
+        } catch (ProcessException | InterruptedException e) {
+            e.printStackTrace();
+            log.error(e.toString());
         }
     }
 

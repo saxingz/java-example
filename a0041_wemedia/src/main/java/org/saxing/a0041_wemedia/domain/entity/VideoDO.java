@@ -63,6 +63,9 @@ public class VideoDO implements Serializable {
     @ApiModelProperty(value = "转存后的url")
     private String downloadedUrl;
 
+    @ApiModelProperty(value = "重建状态")
+    private Integer rebuildDtatus;
+
     @ApiModelProperty(value = "原视频上线时间")
     private Date publishTime;
 

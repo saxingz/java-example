@@ -23,4 +23,11 @@ public interface IVideoLogic extends IService<VideoDO> {
      * @return bool
      */
     Boolean downloadVideo(Long id) throws IOException;
+
+    /**
+     * 重建视频
+     * @param id id
+     * @return
+     */
+    Boolean rebuild(Long id) throws IOException;
 }
