@@ -245,6 +245,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             log.error("tsVideo生成失败");
             return false;
         }
+        mergeHeadTail(tsVideo, Paths.get(VIDEO_HEAD_PATH), Paths.get(VIDEO_TAIL_PATH));
         // 8. del ts
         log.info("8. del ts");
         new File(tsVideo.toUri()).delete();
