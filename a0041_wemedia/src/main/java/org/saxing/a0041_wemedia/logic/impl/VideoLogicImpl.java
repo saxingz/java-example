@@ -234,7 +234,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             return false;
         }
         // 标记生成成功
-        videoDO.setRebuildDtatus(RebuildStatus.REBUILDED.getCode());
+        videoDO.setRebuildStatus(RebuildStatus.REBUILDED.getCode());
         this.updateById(videoDO);
         return true;
     }
