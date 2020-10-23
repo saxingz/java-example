@@ -6,6 +6,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
 import org.saxing.a0041_wemedia.domain.enums.DownLoadStatus;
+import org.saxing.a0041_wemedia.domain.enums.RebuildStatus;
 import org.saxing.a0041_wemedia.logic.subtitles.SubFromStart;
 import org.saxing.a0041_wemedia.logic.subtitles.SubRipWriter;
 import org.saxing.a0041_wemedia.logic.subtitles.SubtitleMerger;
@@ -40,11 +41,18 @@ import java.util.stream.Stream;
 public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements IVideoLogic {
 
     // base path
-    private static final String BASE_PATH = "D:\\premiere_project\\";
+    private static final String BASE_PATH = "F:\\premiere_project\\";
     // youtube dl path
     private static final String YOUTUBE_DL_PATH = BASE_PATH + "0youtube-dl\\youtube-dl.exe";
     // ffmpeg path
     private static final String FFMPEG_PATH = BASE_PATH + "0ffmpeg\\ffmpeg\\bin\\ffmpeg.exe";
+    // water mark path
+    private static final String WATER_LOGO_PATH = BASE_PATH + "0basic\\0watermark\\watermark.png";
+    // video head path
+    private static final String VIDEO_HEAD_PATH = BASE_PATH + "0basic\\0head\\mylogo\\head1.ts";
+    // video tail path
+    private static final String VIDEO_TAIL_PATH = BASE_PATH + "0basic\\0tail\\three.ts";
+
 
 
     @Override
@@ -190,22 +198,230 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             e.printStackTrace();
             log.error("字幕合并失败");
         }
-        //
+        // 4. merge subtitle watermark video
+        Path mixedSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("mixed.srt"))
+                .findFirst().orElse(null);
+        mergeSubtitleAndVideo(originVideoFile, mixedSrt);
+        // 5. merge video audio
+        Path subtitleVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("subtitle.mp4"))
+                .findFirst().orElse(null);
+        Path mp3Audio = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp3"))
+                .findFirst().orElse(null);
+        if (Objects.isNull(subtitleVideo) || Objects.isNull(mp3Audio)) {
+            log.error("subtitleVideo 或 mp3Audio 不存在");
+            return false;
+        }
+        mergeVideoAndAudio(subtitleVideo, mp3Audio);
 
-        return null;
+        // 6. gen ts
+        genTs(subtitleVideo);
+        // 7. merge head and tail
+        Path tsVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("video.ts"))
+                .findFirst().orElse(null);
+        if (Objects.isNull(tsVideo)) {
+            log.error("tsVideo生成失败");
+            return false;
+        }
+
+        // 8. del ts
+        new File(tsVideo.toUri()).delete();
+
+        // 9. 校验生成视频成功
+        Path finalVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("final.mp4"))
+                .findFirst().orElse(null);
+        if (Objects.isNull(finalVideo)) {
+            log.error("视频最后生成失败");
+            return false;
+        }
+        // 标记生成成功
+        videoDO.setRebuildDtatus(RebuildStatus.REBUILDED.getCode());
+        this.updateById(videoDO);
+        return true;
     }
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        Path enVtt = Paths.get("D:\\premiere_project\\1\\en.srt");
-        Path zhVtt = Paths.get("D:\\premiere_project\\1\\zh.srt");
-        mergeSubtitle(enVtt, zhVtt);
+        Path tsVideo = Paths.get("F:\\premiere_project\\1\\video.ts");
+        Path head = Paths.get(VIDEO_HEAD_PATH);
+        Path tail = Paths.get(VIDEO_TAIL_PATH);
+        mergeHeadTail(tsVideo, head, tail);
+    }
+
+    /**
+     * 生成ts
+     * /ffmpeg -i head1.mp4 -c copy -bsf:v h264_mp4toannexb head1.ts
+     */
+    private static void genTs(Path video) {
+        List<String> arguments = new ArrayList<>(
+                Arrays.asList(
+                        FFMPEG_PATH,
+                        "-i",
+                        video.toString(),
+                        "-c",
+                        "copy",
+                        "-bsf:v",
+                        "h264_mp4toannexb",
+                        video.getParent().toString() + "\\" + "video.ts"
+                )
+        );
+        try {
+            ProcessRunner.run(arguments);
+        } catch (ProcessException | InterruptedException e) {
+            e.printStackTrace();
+            log.error(e.toString());
+        }
+    }
+
+    /**
+     * 拼接片头片尾
+     *  //视频尺寸要一致
+     *     ffmpeg -i concat:"1.mpg|2.mpg|3.mpg" -c copy output.mp4
+     *
+     *     ffmpeg -i video1.mp4 -i video2.flv -filter_complex \
+     * "[0:v][0:a][1:v][1:a] concat=n=2:v=1:a=1 [outv] [outa]" \
+     * -map "[outv]" -map "[outa]" out.mp4
+     *
+     *
+     * // use libx265 video and aac audio codec
+     * ffmpeg -i inputFile.avi -c:v libx265 -c:a aac outputFile.mp4
+     * ffmpeg -i inputFile.avi -c:v libx265 -c:a aac -b:v 7000k -b:a 320k outputFile.mp4      // with higher bitrates
+     *
+     * // use vp9 video and mp3 audio codec
+     * ffmpeg -i inputFile.avi -c:v vp9 -c:a libmp3lame outputFile.mp4
+     * ffmpeg -i inputFile.avi -c:v vp9 -c:a libmp3lame -b:v 7000k -b:a 320k outputFile.mp4    // with higher bitrates
+     *
+     * /**
+     *  * -i => Input file
+     *  * -c:v => Video codec to use. (alternatively, use option -vcodec)
+     *  * -c:a => Audio codec to use. (alternatively, use option -acodec)
+     *  * -b:v => Bitrate of the Video codec. [in kbps(k) or mbps(m)]
+     *  * -b:a => Bitrate of the Audio codec. [in kbps(k)]
+     *  https://digitalfortress.tech/tricks/encode-videos-with-ffmpeg/
+     *  Note: Sometimes, this might not work as expected with certain formats (like MP4 files) when the files to be joined have been encoded differently or have a different resolution. In this case, you will be required to convert each input file into an intermediate format and then join those intermediate files together.
+     *
+     * // convert each file
+     * ffmpeg -i file1.mp4 -c copy -bsf:v h264_mp4toannexb temp1.ts
+     * ffmpeg -i file2.mp4 -c copy -bsf:v h264_mp4toannexb temp2.ts
+     * // Then join the intermediate files
+     * ffmpeg -i "concat:temp1.ts|temp2.ts" -c copy -bsf:a aac_adtstoasc output.mp4
+     *
+     *  * -i => Input file
+     *  * -c => codecs (audio+video)
+     *  * -bsf:v => Bitstream filter for video
+     *  * -bsf:a => Bitstream filter for audio
+     *
+     *  ./ffmpeg -i 1.mp4 -i 2.mp4 -i 3.mp4 \
+     * -filter_complex "[0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[outv][outa]" \
+     * -map "[outv]" -map "[outa]" out80.mp4
+     *
+     * http://trac.ffmpeg.org/wiki/Concatenate
+     *
+     * ./ffmpeg -i head1.mp4 -c copy -bsf:v h264_mp4toannexb head1.ts
+     * ./ffmpeg -i 1.mp4 -c copy -bsf:v h264_mp4toannexb 1.ts
+     * ./ffmpeg -i three.mp4 -c copy -bsf:v h264_mp4toannexb three1.ts
+     *
+     * ./ffmpeg -i "concat:head1.ts|1.ts|three1.ts" -c copy -bsf:a aac_adtstoasc out88.mp4
+     */
+    private static void mergeHeadTail(Path video, Path head, Path tail) {
+
+
+        List<String> arguments = new ArrayList<>(
+                Arrays.asList(
+                        FFMPEG_PATH,
+                        "-i",
+                        "\"concat:" + head.toString() + "|" + video.toString() + "|" + tail.toString() + "\"",
+                        "-c",
+                        "copy",
+                        "-bsf:a",
+                        "aac_adtstoasc",
+                        video.getParent().toString() + "\\" + "final.mp4"
+                )
+        );
+        try {
+            ProcessRunner.run(arguments);
+        } catch (ProcessException | InterruptedException e) {
+            e.printStackTrace();
+            log.error(e.toString());
+        }
+    }
+
+    /**
+     * 合并音频
+     * D:/saprogram/ffmpeg -i F:\premiere_project\1\Part1.mp4 -i F:/premiere_project/1/Part1.mp3 -map 0 -map 1 -c:v copy -c:a copy -c:s copy -y F:\premiere_project\1\Part1_封装版.mp4
+     * @param video
+     * @param audio
+     */
+    private static void mergeVideoAndAudio(Path video, Path audio) {
+        List<String> arguments = new ArrayList<>(
+                Arrays.asList(
+                        FFMPEG_PATH,
+                        "-i",
+                        video.toString(),
+                        "-i",
+                        audio.toString(),
+                        "-map",
+                        "0",
+                        "-map",
+                        "1",
+                        "-c:v",
+                        "copy",
+                        "-c:a",
+                        "copy",
+                        "-y",
+                        video.getParent().toString() + "\\" + video.getFileName().toString() + ".audio.mp4"
+                )
+        );
+        try {
+            ProcessRunner.run(arguments);
+        } catch (ProcessException | InterruptedException e) {
+            e.printStackTrace();
+            log.error(e.toString());
+        }
     }
 
     /**
      * 合并字幕和视频
+     * ./ffmpeg -i Part1.mp4 -vf subtitles=zh.srt sub-2.mp4
+     * 加水印
+     * ./ffmpeg -i Part1.mp4 -i watermark.png -filter_complex 'overlay=x=300:y=main_h-overlay_h-300' part1_9.mp4
+     *
+     * 同时水印和字幕
+     * ./ffmpeg -i Part1.mp4 -i watermark.png  -filter_complex "[0:0][1:0]overlay=main_w-overlay_w-300:300,subtitles=zh.srt"  -c:v h264  -c:a copy sub-5.mp4
+     * ./ffmpeg -i Part1.mp4 -i watermark.png  -filter_complex "[0:0][1:0]overlay=x=300:y=main_h-overlay_h-300,subtitles=zh.srt"  -c:v h264  -c:a copy sub-6.mp4
      */
-    public static void mergeSubtitleAndVideo() {
+    public static void mergeSubtitleAndVideo(Path video, Path subtitle) {
+        System.out.println(video);
+        System.out.println(subtitle);
 
+        Path root = subtitle.getRoot();
+        String rootChar = root.toString().substring(0, 1);
+        String backPath = subtitle.toString()
+                .substring(subtitle.toString()
+                        .indexOf(subtitle.getRoot().toString()) + subtitle.getRoot().toString().length() - 1);
+        backPath = backPath.replaceAll("\\\\", "/");
+
+        List<String> arguments = new ArrayList<>(
+                Arrays.asList(
+                        FFMPEG_PATH,
+                        "-i",
+                        video.toString(),
+                        "-i",
+                        WATER_LOGO_PATH,
+                        "-filter_complex",
+//                        "[0:0][1:0]overlay=x=300:y=main_h-overlay_h-300,subtitles='F\\:/premiere_project/1/zh.srt'",
+                        "[0:0][1:0]overlay=x=300:y=main_h-overlay_h-300,subtitles='" + rootChar + "\\:" + backPath + "'",
+                        "-c:v",
+                        "h264",
+                        "-c:a",
+                        "copy",
+                        video.getParent().toString() + "\\" + video.getFileName().toString() + ".subtitle.mp4"
+                )
+        );
+        try {
+            ProcessRunner.run(arguments);
+        } catch (ProcessException | InterruptedException e) {
+            e.printStackTrace();
+            log.error(e.toString());
+        }
     }
 
     /**
