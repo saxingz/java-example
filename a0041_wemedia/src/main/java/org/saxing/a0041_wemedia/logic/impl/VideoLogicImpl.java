@@ -202,6 +202,13 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
     }
 
     /**
+     * 合并字幕和视频
+     */
+    public static void mergeSubtitleAndVideo() {
+
+    }
+
+    /**
      * 转换字幕格式
      */
     public static void convertToSrt(Path origin, String tag) {
