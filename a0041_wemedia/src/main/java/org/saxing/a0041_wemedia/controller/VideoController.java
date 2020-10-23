@@ -77,5 +77,16 @@ public class VideoController {
         return videoLogic.downloadVideo(id);
     }
 
+    /**
+     * 重建视频
+     * @return
+     */
+    @ApiOperation("重建视频")
+    @ApiImplicitParam(name = "id", value = "重建视频")
+    @PostMapping("/rebuild")
+    public Boolean rebuildVideo(@RequestParam Long id) throws Exception {
+        return videoLogic.rebuild(id);
+    }
+
 }
 
