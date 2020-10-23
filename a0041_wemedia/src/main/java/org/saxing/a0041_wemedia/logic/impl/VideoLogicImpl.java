@@ -197,6 +197,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         convertToSrt(zhHansvtt, "zh");
         convertToSrt(enVtt, "en");
         // 3. merge subtitle
+        fileList = Files.list(videoPath).collect(Collectors.toList());
         Path enSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.srt"))
                 .findFirst().orElse(null);
         Path zhSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("zh.srt"))
@@ -212,10 +213,12 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             log.error("字幕合并失败");
         }
         // 4. merge subtitle watermark video
+        fileList = Files.list(videoPath).collect(Collectors.toList());
         Path mixedSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("mixed.srt"))
                 .findFirst().orElse(null);
         mergeSubtitleAndVideo(originVideoFile, mixedSrt);
         // 5. merge video audio
+        fileList = Files.list(videoPath).collect(Collectors.toList());
         Path subtitleVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("subtitle.mp4"))
                 .findFirst().orElse(null);
         Path mp3Audio = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp3"))
@@ -229,6 +232,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         // 6. gen ts
         genTs(subtitleVideo);
         // 7. merge head and tail
+        fileList = Files.list(videoPath).collect(Collectors.toList());
         Path tsVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("video.ts"))
                 .findFirst().orElse(null);
         if (Objects.isNull(tsVideo)) {
@@ -240,6 +244,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         new File(tsVideo.toUri()).delete();
 
         // 9. 校验生成视频成功
+        fileList = Files.list(videoPath).collect(Collectors.toList());
         Path finalVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("final.mp4"))
                 .findFirst().orElse(null);
         if (Objects.isNull(finalVideo)) {
