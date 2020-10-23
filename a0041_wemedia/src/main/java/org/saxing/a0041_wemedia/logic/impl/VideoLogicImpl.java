@@ -132,6 +132,19 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             }
         }
 
+        // 英文字幕
+        enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
+                .findFirst().orElse(null);
+        // 中文字幕
+        zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
+                .findFirst().orElse(null);
+        // 原始视频文件
+        originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
+                .findFirst().orElse(null);
+        // 原始音频文件
+        originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
+                || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
+
         // 校验下载项
         if (Objects.isNull(enVtt)
                 || Objects.isNull(zhHansvtt)
@@ -239,12 +252,12 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         return true;
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        Path tsVideo = Paths.get("F:\\premiere_project\\1\\video.ts");
-        Path head = Paths.get(VIDEO_HEAD_PATH);
-        Path tail = Paths.get(VIDEO_TAIL_PATH);
-        mergeHeadTail(tsVideo, head, tail);
-    }
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        Path tsVideo = Paths.get("F:\\premiere_project\\1\\video.ts");
+//        Path head = Paths.get(VIDEO_HEAD_PATH);
+//        Path tail = Paths.get(VIDEO_TAIL_PATH);
+//        mergeHeadTail(tsVideo, head, tail);
+//    }
 
     /**
      * 生成ts
