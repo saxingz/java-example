@@ -184,18 +184,21 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             log.error("字幕不全");
             return false;
         }
-
-
-
-
+        try {
+            mergeSubtitle(enSrt, zhSrt);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            log.error("字幕合并失败");
+        }
+        //
 
         return null;
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, InterruptedException {
         Path enVtt = Paths.get("D:\\premiere_project\\1\\en.srt");
         Path zhVtt = Paths.get("D:\\premiere_project\\1\\zh.srt");
-
+        mergeSubtitle(enVtt, zhVtt);
     }
 
     /**
@@ -225,13 +228,13 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
      * @throws InterruptedException
      * @throws IOException
      */
-    public static void mergeSubtitle(Path en) throws InterruptedException, IOException {
+    public static void mergeSubtitle(Path en, Path zh) throws InterruptedException, IOException {
         SubFromStart.InputSubtitlesInfo up = new SubFromStart()
-                .getInputSubtitlesInfo("D:\\temp\\temp1\\en.srt", SubFromStart.InputSubtitlesType.UPPER, FileOrigin.TEXT_FIELD);
+                .getInputSubtitlesInfo(en.toString(), SubFromStart.InputSubtitlesType.UPPER, FileOrigin.TEXT_FIELD);
         SubFromStart.InputSubtitlesInfo low = new SubFromStart()
-                .getInputSubtitlesInfo("D:\\temp\\temp1\\zh.srt", SubFromStart.InputSubtitlesType.LOWER, FileOrigin.TEXT_FIELD);
+                .getInputSubtitlesInfo(zh.toString(), SubFromStart.InputSubtitlesType.LOWER, FileOrigin.TEXT_FIELD);
         SubFromStart.MergedSubtitlesFileInfo mergedSubtitlesFileInfo =
-                SubFromStart.getMergedSubtitlesFileInfo("D:\\temp\\temp1\\mixed.srt", FileOrigin.TEXT_FIELD);
+                SubFromStart.getMergedSubtitlesFileInfo(en.getParent() + "\\mixed.srt", FileOrigin.TEXT_FIELD);
 
 
         Subtitles subtitles = SubtitleMerger.mergeSubtitles(
