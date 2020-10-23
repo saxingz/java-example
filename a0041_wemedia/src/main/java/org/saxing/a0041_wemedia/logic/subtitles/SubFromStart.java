@@ -39,7 +39,7 @@ public class SubFromStart {
     }
 
     @Nullable
-    private InputSubtitlesInfo getInputSubtitlesInfo(
+    public InputSubtitlesInfo getInputSubtitlesInfo(
             String path,
             InputSubtitlesType subtitleType,
             FileOrigin fileOrigin
@@ -101,7 +101,7 @@ public class SubFromStart {
     }
 
     @Nullable
-    private static MergedSubtitlesFileInfo getMergedSubtitlesFileInfo(String path, FileOrigin fileOrigin) {
+    public static MergedSubtitlesFileInfo getMergedSubtitlesFileInfo(String path, FileOrigin fileOrigin) {
         OutputFileValidationOptions validationOptions = new OutputFileValidationOptions(
                 SubtitleFormat.SUB_RIP.getExtensions(),
                 true
@@ -121,7 +121,7 @@ public class SubFromStart {
 
     @AllArgsConstructor
     @Getter
-    private static class InputSubtitlesInfo {
+    public static class InputSubtitlesInfo {
         private String path;
 
         private File file;
@@ -137,7 +137,7 @@ public class SubFromStart {
         private SubtitlesAndInput subtitlesAndInput;
 
         @Nullable
-        Subtitles getSubtitles() {
+        public Subtitles getSubtitles() {
             return subtitlesAndInput != null ? subtitlesAndInput.getSubtitles() : null;
         }
 
@@ -153,7 +153,7 @@ public class SubFromStart {
 
     @AllArgsConstructor
     @Getter
-    private enum InputSubtitlesType {
+    public enum InputSubtitlesType {
         UPPER(SubtitleType.UPPER),
 
         LOWER(SubtitleType.LOWER);
@@ -163,7 +163,7 @@ public class SubFromStart {
 
     @AllArgsConstructor
     @Getter
-    private static class MergedSubtitlesFileInfo {
+    public static class MergedSubtitlesFileInfo {
         private String path;
 
         private File file;
