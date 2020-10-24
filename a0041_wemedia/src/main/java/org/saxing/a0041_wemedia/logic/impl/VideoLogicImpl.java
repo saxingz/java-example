@@ -188,6 +188,9 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 log.info("视频不存在");
                 return false;
             }
+            if (Objects.equals(videoDO.getRebuildStatus(), RebuildStatus.REBUILDED.getCode())) {
+                return true;
+            }
 
             String videoPathStr = BASE_PATH + id;
             Path videoPath = Paths.get(videoPathStr);
