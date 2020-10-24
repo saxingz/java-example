@@ -61,6 +61,11 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
     @Override
     public Boolean downloadVideo(Long id) throws IOException {
         synchronized (DOWNLOAD_LOCK) {
+            log.info("downloadVideo: id: " + id);
+            try {
+                Thread.sleep(1500);
+            } catch (InterruptedException ignored) {
+            }
             VideoDO videoDO = this.getById(id);
             if (Objects.isNull(videoDO)) {
                 return false;
@@ -174,6 +179,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
     @Override
     public Boolean rebuild(Long id) throws IOException {
         synchronized (REBUILD_VIDEO_LOCK) {
+            log.info("rebuild: id: " + id);
             VideoDO videoDO = this.getById(id);
             if (Objects.isNull(videoDO)) {
                 log.error("视频不存在, video表id: " + id);
