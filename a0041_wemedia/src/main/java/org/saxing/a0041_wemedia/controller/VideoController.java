@@ -91,6 +91,7 @@ public class VideoController {
     @ApiImplicitParam(name = "id", value = "视频id")
     @PostMapping("/download")
     public Boolean downloadVideo(@RequestParam List<Long> ids) throws Exception {
+        log.info("downloadVideo, ids: " + ids);
         for (Long id : ids){
             new Thread(() -> {
                 try {
@@ -112,6 +113,7 @@ public class VideoController {
     @ApiImplicitParam(name = "id", value = "重建视频")
     @PostMapping("/rebuild")
     public Boolean rebuildVideo(@RequestParam List<Long> ids) throws Exception {
+        log.info("rebuildVideo, ids: " + ids);
         for (Long id : ids){
             new Thread(() -> {
                 try {
