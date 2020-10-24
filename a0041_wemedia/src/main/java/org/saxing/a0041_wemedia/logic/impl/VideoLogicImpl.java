@@ -2,7 +2,6 @@ package org.saxing.a0041_wemedia.logic.impl;
 
 import cn.hutool.core.lang.UUID;
 import lombok.extern.apachecommons.CommonsLog;
-import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
 import org.saxing.a0041_wemedia.domain.enums.DownLoadStatus;
@@ -17,6 +16,7 @@ import org.saxing.a0041_wemedia.logic.IVideoLogic;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.saxing.a0041_wemedia.process.ProcessException;
 import org.saxing.a0041_wemedia.process.ProcessRunner;
+import org.saxing.a0041_wemedia.util.ResourceLock;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
@@ -25,8 +25,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  * <p>
@@ -53,216 +53,237 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
     // video tail path
     private static final String VIDEO_TAIL_PATH = BASE_PATH + "0basic\\0tail\\three.mp4";
 
+    // lock
+    private static final Object DOWNLOAD_LOCK = new Object();
+    private static final Object REBUILD_VIDEO_LOCK = new Object();
 
 
     @Override
     public Boolean downloadVideo(Long id) throws IOException {
-        VideoDO videoDO = this.getById(id);
-        if (Objects.isNull(videoDO)) {
-            return false;
-        }
-        String videoId = videoDO.getVideoId();
-        String videoPathStr = BASE_PATH + id;
-        Path videoPath = Paths.get(videoPathStr);
-        boolean isFirstNull = false;
-        if (!Files.exists(videoPath)) {
-            isFirstNull = true;
-            Files.createDirectories(videoPath);
-        }
-        List<Path> fileList = Files.list(videoPath).collect(Collectors.toList());
-        // 英文字幕
-        Path enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
-                .findFirst().orElse(null);
-        // 中文字幕
-        Path zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
-                .findFirst().orElse(null);
-        // 原始视频文件
-        Path originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
-                .findFirst().orElse(null);
-        // 原始音频文件
-        Path originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
-                || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
-        // 校验下载项
-        if ((Objects.isNull(enVtt)
-                || Objects.isNull(zhHansvtt)
-                || Objects.isNull(originVideoFile)
-                || Objects.isNull(originAudioFile))
-                && !isFirstNull
-        ) {
-            // 如果文件不为空，改名这个文件夹，重新下载
-            if (Files.list(videoPath).count() > 0) {
-                new File(videoPathStr).renameTo(new File(videoPathStr + "-" + UUID.fastUUID().toString()));
-                if (!Files.exists(videoPath)) {
-                    Files.createDirectories(videoPath);
+        synchronized (DOWNLOAD_LOCK) {
+            VideoDO videoDO = this.getById(id);
+            if (Objects.isNull(videoDO)) {
+                return false;
+            }
+            // 判断是否已下载完成
+            if (Objects.equals(videoDO.getDownloadStatus(), DownLoadStatus.DOWNLOADED.getCode())) {
+                return true;
+            }
+            String videoId = videoDO.getVideoId();
+            String videoPathStr = BASE_PATH + id;
+            Path videoPath = Paths.get(videoPathStr);
+            boolean isFirstNull = false;
+            if (!Files.exists(videoPath)) {
+                isFirstNull = true;
+                Files.createDirectories(videoPath);
+            }
+            List<Path> fileList = Files.list(videoPath).collect(Collectors.toList());
+            // 英文字幕
+            Path enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
+                    .findFirst().orElse(null);
+            // 中文字幕
+            Path zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
+                    .findFirst().orElse(null);
+            // 原始视频文件
+            Path originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
+                    .findFirst().orElse(null);
+            // 原始音频文件
+            Path originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
+                    || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
+            // 校验下载项
+            if ((Objects.isNull(enVtt)
+                    || Objects.isNull(zhHansvtt)
+                    || Objects.isNull(originVideoFile)
+                    || Objects.isNull(originAudioFile))
+                    && !isFirstNull
+            ) {
+                // 如果文件不为空，改名这个文件夹，重新下载
+                if (Files.list(videoPath).count() > 0) {
+                    new File(videoPathStr).renameTo(new File(videoPathStr + "-" + UUID.fastUUID().toString()));
+                    if (!Files.exists(videoPath)) {
+                        Files.createDirectories(videoPath);
+                    }
                 }
             }
-        }
-        // 下载
-        if (Objects.isNull(enVtt)
-                || Objects.isNull(zhHansvtt)
-                || Objects.isNull(originVideoFile)
-                || Objects.isNull(originAudioFile)
-        ) {
-            String outputFile = videoPathStr + "\\%(title)s.%(ext)s";
-            // 重新下载
-            List<String> arguments = new ArrayList<>(
-                    Arrays.asList(
-                            YOUTUBE_DL_PATH,
-                            "--write-sub",
-                            "--write-auto-sub",
-                            "--sub-lang",
-                            "en,zh-Hans",
-                            "--sub-format",
-                            "vtt",
-                            "-f",
-                            "\"bestvideo,bestaudio\"",
-                            "--no-check-certificate",
-                            "-o",
-                            "\"" + outputFile + "\"",
-                            "--proxy",
-                            "socks5://127.0.0.1:10808/",
-                            "https://www.youtube.com/watch?v=" + videoId
-                    )
-            );
-            try {
-                ProcessRunner.run(arguments);
-            } catch (ProcessException | InterruptedException e) {
-                e.printStackTrace();
-                log.error(e.toString());
+            // 下载
+            if (Objects.isNull(enVtt)
+                    || Objects.isNull(zhHansvtt)
+                    || Objects.isNull(originVideoFile)
+                    || Objects.isNull(originAudioFile)
+            ) {
+                String outputFile = videoPathStr + "\\%(title)s.%(ext)s";
+                // 重新下载
+                List<String> arguments = new ArrayList<>(
+                        Arrays.asList(
+                                YOUTUBE_DL_PATH,
+                                "--write-sub",
+                                "--write-auto-sub",
+                                "--sub-lang",
+                                "en,zh-Hans",
+                                "--sub-format",
+                                "vtt",
+                                "-f",
+                                "\"bestvideo,bestaudio\"",
+                                "--no-check-certificate",
+                                "-o",
+                                "\"" + outputFile + "\"",
+                                "--proxy",
+                                "socks5://127.0.0.1:10808/",
+                                "https://www.youtube.com/watch?v=" + videoId
+                        )
+                );
+                try {
+                    ProcessRunner.run(arguments);
+                } catch (ProcessException | InterruptedException e) {
+                    e.printStackTrace();
+                    log.error(e.toString());
+                }
             }
-        }
 
-        // 英文字幕
-        enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
-                .findFirst().orElse(null);
-        // 中文字幕
-        zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
-                .findFirst().orElse(null);
-        // 原始视频文件
-        originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
-                .findFirst().orElse(null);
-        // 原始音频文件
-        originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
-                || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
+            // 英文字幕
+            enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
+                    .findFirst().orElse(null);
+            // 中文字幕
+            zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
+                    .findFirst().orElse(null);
+            // 原始视频文件
+            originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
+                    .findFirst().orElse(null);
+            // 原始音频文件
+            originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
+                    || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
 
-        // 校验下载项
-        if (Objects.isNull(enVtt)
-                || Objects.isNull(zhHansvtt)
-                || Objects.isNull(originVideoFile)
-                || Objects.isNull(originAudioFile)
-        ) {
-            // 下载失败，返回
-            log.error("下载失败，返回");
-            return false;
-        } else {
-            log.info("下载成功");
-            videoDO.setDownloadStatus(DownLoadStatus.DOWNLOADED.getCode());
-            this.saveOrUpdate(videoDO);
-            return true;
+            // 校验下载项
+            if (Objects.isNull(enVtt)
+                    || Objects.isNull(zhHansvtt)
+                    || Objects.isNull(originVideoFile)
+                    || Objects.isNull(originAudioFile)
+            ) {
+                // 下载失败，返回
+                log.error("下载失败，返回");
+                return false;
+            } else {
+                log.info("下载成功");
+                videoDO.setDownloadStatus(DownLoadStatus.DOWNLOADED.getCode());
+                this.saveOrUpdate(videoDO);
+                return true;
+            }
         }
     }
 
     @Override
     public Boolean rebuild(Long id) throws IOException {
-        VideoDO videoDO = this.getById(id);
-        if (Objects.isNull(videoDO) || !Objects.equals(videoDO.getDownloadStatus(), DownLoadStatus.DOWNLOADED.getCode())) {
-            log.error("视频不存在或未下载, video表id: " + id);
-            return false;
+        synchronized (REBUILD_VIDEO_LOCK) {
+            VideoDO videoDO = this.getById(id);
+            if (Objects.isNull(videoDO)) {
+                log.error("视频不存在, video表id: " + id);
+                return false;
+            }
+            if (!Objects.equals(videoDO.getDownloadStatus(), DownLoadStatus.DOWNLOADED.getCode())) {
+                log.info("视频未下载，开始下载");
+                downloadVideo(id);
+            }
+            videoDO = this.getById(id);
+            if (!Objects.equals(videoDO.getDownloadStatus(), DownLoadStatus.DOWNLOADED.getCode())) {
+                log.info("视频不存在");
+                return false;
+            }
+
+            String videoPathStr = BASE_PATH + id;
+            Path videoPath = Paths.get(videoPathStr);
+            if (!Files.exists(videoPath)) {
+                Files.createDirectories(videoPath);
+            }
+            List<Path> fileList = Files.list(videoPath).collect(Collectors.toList());
+            // 英文字幕
+            Path enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
+                    .findFirst().orElse(null);
+            // 中文字幕
+            Path zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
+                    .findFirst().orElse(null);
+            // 原始视频文件
+            Path originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
+                    .findFirst().orElse(null);
+            // 原始音频文件
+            Path originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
+                    || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
+            if (Objects.isNull(originAudioFile)) {
+                log.error("没有音频文件");
+                return false;
+            }
+            // 1. convert to mp3
+            log.info("1. convert to mp3");
+            convertToMp3(originAudioFile);
+            // 2. subtitle vtt -> srt
+            log.info("2. subtitle vtt -> srt");
+            convertToSrt(zhHansvtt, "zh");
+            convertToSrt(enVtt, "en");
+            // 3. merge subtitle
+            log.info("3. merge subtitle");
+            fileList = Files.list(videoPath).collect(Collectors.toList());
+            Path enSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.srt"))
+                    .findFirst().orElse(null);
+            Path zhSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("zh.srt"))
+                    .findFirst().orElse(null);
+            if (Objects.isNull(enSrt) || Objects.isNull(zhSrt)) {
+                log.error("字幕不全");
+                return false;
+            }
+            try {
+                mergeSubtitle(enSrt, zhSrt);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+                log.error("字幕合并失败");
+            }
+            // 4. merge subtitle watermark video
+            log.info("4. merge subtitle watermark video");
+            fileList = Files.list(videoPath).collect(Collectors.toList());
+            Path mixedSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("mixed.srt"))
+                    .findFirst().orElse(null);
+            mergeSubtitleAndVideo(originVideoFile, mixedSrt);
+            // 5. merge video audio
+            log.info("5. merge video audio");
+            fileList = Files.list(videoPath).collect(Collectors.toList());
+            Path subtitleVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("subtitle.mp4"))
+                    .findFirst().orElse(null);
+            Path mp3Audio = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp3"))
+                    .findFirst().orElse(null);
+            if (Objects.isNull(subtitleVideo) || Objects.isNull(mp3Audio)) {
+                log.error("subtitleVideo 或 mp3Audio 不存在");
+                return false;
+            }
+            mergeVideoAndAudio(subtitleVideo, mp3Audio);
+            // 6. gen ts
+            log.info("6. gen ts");
+            genTs(subtitleVideo);
+            // 7. merge head and tail
+            log.info("7. merge head and tail");
+            fileList = Files.list(videoPath).collect(Collectors.toList());
+            Path tsVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("video.ts"))
+                    .findFirst().orElse(null);
+            if (Objects.isNull(tsVideo)) {
+                log.error("tsVideo生成失败");
+                return false;
+            }
+            mergeHeadTail(tsVideo, Paths.get(VIDEO_HEAD_PATH), Paths.get(VIDEO_TAIL_PATH));
+            // 8. del ts
+            log.info("8. del ts");
+            new File(tsVideo.toUri()).delete();
+            // 9. 校验生成视频
+            log.info("9. 校验生成视频");
+            fileList = Files.list(videoPath).collect(Collectors.toList());
+            Path finalVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("final.mp4"))
+                    .findFirst().orElse(null);
+            if (Objects.isNull(finalVideo)) {
+                log.error("视频最后生成失败");
+                return false;
+            }
+            // 标记生成成功
+            videoDO.setRebuildStatus(RebuildStatus.REBUILDED.getCode());
+            this.updateById(videoDO);
+            log.info("视频生成成功！！！");
+            return true;
         }
-        String videoPathStr = BASE_PATH + id;
-        Path videoPath = Paths.get(videoPathStr);
-        if (!Files.exists(videoPath)) {
-            Files.createDirectories(videoPath);
-        }
-        List<Path> fileList = Files.list(videoPath).collect(Collectors.toList());
-        // 英文字幕
-        Path enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
-                .findFirst().orElse(null);
-        // 中文字幕
-        Path zhHansvtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".zh-Hans.vtt"))
-                .findFirst().orElse(null);
-        // 原始视频文件
-        Path originVideoFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp4"))
-                .findFirst().orElse(null);
-        // 原始音频文件
-        Path originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
-                || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
-        if (Objects.isNull(originAudioFile)) {
-            log.error("没有音频文件");
-            return false;
-        }
-        // 1. convert to mp3
-        log.info("1. convert to mp3");
-        convertToMp3(originAudioFile);
-        // 2. subtitle vtt -> srt
-        log.info("2. subtitle vtt -> srt");
-        convertToSrt(zhHansvtt, "zh");
-        convertToSrt(enVtt, "en");
-        // 3. merge subtitle
-        log.info("3. merge subtitle");
-        fileList = Files.list(videoPath).collect(Collectors.toList());
-        Path enSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.srt"))
-                .findFirst().orElse(null);
-        Path zhSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("zh.srt"))
-                .findFirst().orElse(null);
-        if (Objects.isNull(enSrt) || Objects.isNull(zhSrt)) {
-            log.error("字幕不全");
-            return false;
-        }
-        try {
-            mergeSubtitle(enSrt, zhSrt);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            log.error("字幕合并失败");
-        }
-        // 4. merge subtitle watermark video
-        log.info("4. merge subtitle watermark video");
-        fileList = Files.list(videoPath).collect(Collectors.toList());
-        Path mixedSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("mixed.srt"))
-                .findFirst().orElse(null);
-        mergeSubtitleAndVideo(originVideoFile, mixedSrt);
-        // 5. merge video audio
-        log.info("5. merge video audio");
-        fileList = Files.list(videoPath).collect(Collectors.toList());
-        Path subtitleVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("subtitle.mp4"))
-                .findFirst().orElse(null);
-        Path mp3Audio = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp3"))
-                .findFirst().orElse(null);
-        if (Objects.isNull(subtitleVideo) || Objects.isNull(mp3Audio)) {
-            log.error("subtitleVideo 或 mp3Audio 不存在");
-            return false;
-        }
-        mergeVideoAndAudio(subtitleVideo, mp3Audio);
-        // 6. gen ts
-        log.info("6. gen ts");
-        genTs(subtitleVideo);
-        // 7. merge head and tail
-        log.info("7. merge head and tail");
-        fileList = Files.list(videoPath).collect(Collectors.toList());
-        Path tsVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("video.ts"))
-                .findFirst().orElse(null);
-        if (Objects.isNull(tsVideo)) {
-            log.error("tsVideo生成失败");
-            return false;
-        }
-        mergeHeadTail(tsVideo, Paths.get(VIDEO_HEAD_PATH), Paths.get(VIDEO_TAIL_PATH));
-        // 8. del ts
-        log.info("8. del ts");
-        new File(tsVideo.toUri()).delete();
-        // 9. 校验生成视频
-        log.info("9. 校验生成视频");
-        fileList = Files.list(videoPath).collect(Collectors.toList());
-        Path finalVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("final.mp4"))
-                .findFirst().orElse(null);
-        if (Objects.isNull(finalVideo)) {
-            log.error("视频最后生成失败");
-            return false;
-        }
-        // 标记生成成功
-        videoDO.setRebuildStatus(RebuildStatus.REBUILDED.getCode());
-        this.updateById(videoDO);
-        log.info("视频生成成功！！！");
-        return true;
     }
 
 //    public static void main(String[] args) throws IOException, InterruptedException {

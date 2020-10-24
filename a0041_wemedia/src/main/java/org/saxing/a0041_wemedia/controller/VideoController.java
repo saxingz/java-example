@@ -10,6 +10,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.apachecommons.CommonsLog;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
 import org.saxing.a0041_wemedia.logic.IVideoLogic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,6 +33,7 @@ import java.util.List;
 @RequestMapping("/v1/video")
 @Api(tags = "原始视频接口")
 @Validated
+@CommonsLog
 public class VideoController {
 
     @Autowired
@@ -74,7 +76,15 @@ public class VideoController {
     @ApiImplicitParam(name = "id", value = "视频id")
     @PostMapping("/download")
     public Boolean downloadVideo(@RequestParam Long id) throws Exception {
-        return videoLogic.downloadVideo(id);
+        new Thread(() -> {
+            try {
+                videoLogic.downloadVideo(id);
+            } catch (IOException e) {
+                log.error(e.toString());
+                e.printStackTrace();
+            }
+        }).start();
+        return true;
     }
 
     /**
@@ -85,7 +95,15 @@ public class VideoController {
     @ApiImplicitParam(name = "id", value = "重建视频")
     @PostMapping("/rebuild")
     public Boolean rebuildVideo(@RequestParam Long id) throws Exception {
-        return videoLogic.rebuild(id);
+        new Thread(() -> {
+            try {
+                videoLogic.rebuild(id);
+            } catch (IOException e) {
+                log.error(e.toString());
+                e.printStackTrace();
+            }
+        }).start();
+        return true;
     }
 
 }
