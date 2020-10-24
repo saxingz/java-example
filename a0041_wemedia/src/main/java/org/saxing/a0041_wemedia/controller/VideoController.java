@@ -59,12 +59,15 @@ public class VideoController {
                                     @RequestParam @Min(value = 1, message = "每页条数不得少于1")
                                     @Max(value = 100, message = "每页条数不大于100") Integer pageNum){
         LambdaQueryWrapper<VideoDO> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.setEntity(video);
         queryWrapper.like(StringUtils.isNotBlank(video.getChannelId()), VideoDO::getChannelId, video.getChannelId());
         queryWrapper.like(StringUtils.isNotBlank(video.getChannelTitle()), VideoDO::getChannelTitle, video.getChannelTitle());
         queryWrapper.like(StringUtils.isNotBlank(video.getVideoId()), VideoDO::getVideoId, video.getVideoId());
         queryWrapper.like(StringUtils.isNotBlank(video.getVideoTitle()), VideoDO::getVideoTitle, video.getVideoTitle());
         queryWrapper.like(StringUtils.isNotBlank(video.getDescription()), VideoDO::getDescription, video.getDescription());
         queryWrapper.like(StringUtils.isNotBlank(video.getDownloadedUrl()), VideoDO::getDownloadedUrl, video.getDownloadedUrl());
+        video.setChannelId(null).setChannelTitle(null).setVideoId(null)
+                .setVideoTitle(null).setDescription(null).setDownloadedUrl(null);
         return videoLogic.page(new Page<>(page, pageNum), queryWrapper)
                 .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(VideoDO.class).getKeyProperty()));
     }

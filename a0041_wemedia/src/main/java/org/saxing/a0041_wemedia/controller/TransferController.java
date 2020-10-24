@@ -57,7 +57,9 @@ public class TransferController {
                                                      @Max(value = 100, message = "每页条数不大于100")
                                                    Integer pageNum ){
         LambdaQueryWrapper<TransferDO> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.setEntity(transfer);
         queryWrapper.like(StringUtils.isNotEmpty(transfer.getUrl()), TransferDO::getUrl, transfer.getUrl());
+        transfer.setUrl(null);
         return transferLogic.page(new Page<>(page, pageNum), queryWrapper)
                 .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(TransferDO.class).getKeyProperty()));
     }

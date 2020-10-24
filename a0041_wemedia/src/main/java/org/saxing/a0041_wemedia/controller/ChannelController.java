@@ -98,10 +98,12 @@ public class ChannelController {
                                 @Max(value = 100, message = "每页条数不大于100") Integer pageNum){
 
         LambdaQueryWrapper<ChannelDO> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.setEntity(channelDO);
         queryWrapper.like(StringUtils.isNotEmpty(channelDO.getChannelTitle()),
                 ChannelDO::getChannelTitle, channelDO.getChannelTitle());
         queryWrapper.like(StringUtils.isNotEmpty(channelDO.getChannelId()),
                 ChannelDO::getChannelId, channelDO.getChannelId());
+        channelDO.setChannelTitle(null).setChannelId(null);
         return channelLogic.page(new Page<>(page, pageNum), queryWrapper)
                 .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(ChannelDO.class).getKeyProperty()));
     }
