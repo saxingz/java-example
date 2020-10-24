@@ -2,14 +2,17 @@ package org.saxing.a0041_wemedia;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.jupiter.api.Test;
+import org.saxing.a0041_wemedia.domain.entity.ChannelDO;
 import org.saxing.a0041_wemedia.domain.entity.TransferDO;
 import org.saxing.a0041_wemedia.domain.enums.Platform;
+import org.saxing.a0041_wemedia.logic.IChannelLogic;
 import org.saxing.a0041_wemedia.mapper.TransferMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
+import java.util.UUID;
 
 /**
  * crud test
@@ -21,6 +24,8 @@ public class CRUDTest {
 
     @Autowired
     TransferMapper transferMapper;
+    @Autowired
+    IChannelLogic channelLogic;
 
     @Test
     @Transactional
@@ -56,6 +61,20 @@ public class CRUDTest {
     @Transactional
     public void testDeleteById(){
         transferMapper.deleteById(1);
+    }
+
+    @Test
+    @Transactional
+    public void testChannel() {
+        for (int i = 0; i < 400; i++) {
+            ChannelDO channelDO = new ChannelDO()
+                    .setChannelId(i + UUID.randomUUID().toString())
+                    .setChannelTitle("title " + i + UUID.randomUUID().toString())
+                    .setFollowTime(new Date())
+                    .setStartTime(new Date())
+                    ;
+            channelLogic.save(channelDO);
+        }
     }
 
 }
