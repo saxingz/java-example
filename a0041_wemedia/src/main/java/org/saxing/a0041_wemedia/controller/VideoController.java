@@ -90,15 +90,17 @@ public class VideoController {
     @ApiOperation("下载视频")
     @ApiImplicitParam(name = "id", value = "视频id")
     @PostMapping("/download")
-    public Boolean downloadVideo(@RequestParam Long id) throws Exception {
-        new Thread(() -> {
-            try {
-                videoLogic.downloadVideo(id);
-            } catch (IOException e) {
-                log.error(e.toString());
-                e.printStackTrace();
-            }
-        }).start();
+    public Boolean downloadVideo(@RequestParam List<Long> ids) throws Exception {
+        for (Long id : ids){
+            new Thread(() -> {
+                try {
+                    videoLogic.downloadVideo(id);
+                } catch (IOException e) {
+                    log.error(e.toString());
+                    e.printStackTrace();
+                }
+            }).start();
+        }
         return true;
     }
 
@@ -109,15 +111,17 @@ public class VideoController {
     @ApiOperation("重建视频")
     @ApiImplicitParam(name = "id", value = "重建视频")
     @PostMapping("/rebuild")
-    public Boolean rebuildVideo(@RequestParam Long id) throws Exception {
-        new Thread(() -> {
-            try {
-                videoLogic.rebuild(id);
-            } catch (IOException e) {
-                log.error(e.toString());
-                e.printStackTrace();
-            }
-        }).start();
+    public Boolean rebuildVideo(@RequestParam List<Long> ids) throws Exception {
+        for (Long id : ids){
+            new Thread(() -> {
+                try {
+                    videoLogic.rebuild(id);
+                } catch (IOException e) {
+                    log.error(e.toString());
+                    e.printStackTrace();
+                }
+            }).start();
+        }
         return true;
     }
 
