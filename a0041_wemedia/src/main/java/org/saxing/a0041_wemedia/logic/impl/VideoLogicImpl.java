@@ -49,9 +49,9 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
     // water mark path
     private static final String WATER_LOGO_PATH = BASE_PATH + "0basic\\0watermark\\watermark.png";
     // video head path
-    private static final String VIDEO_HEAD_PATH = BASE_PATH + "0basic\\0head\\mylogo\\head1.ts";
+    private static final String VIDEO_HEAD_PATH = BASE_PATH + "0basic\\0head\\mylogo\\head1.mp4";
     // video tail path
-    private static final String VIDEO_TAIL_PATH = BASE_PATH + "0basic\\0tail\\three.ts";
+    private static final String VIDEO_TAIL_PATH = BASE_PATH + "0basic\\0tail\\three.mp4";
 
 
 
@@ -265,12 +265,12 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         return true;
     }
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        Path tsVideo = Paths.get("F:\\premiere_project\\1\\1.ts");
-        Path head = Paths.get(VIDEO_HEAD_PATH);
-        Path tail = Paths.get(VIDEO_TAIL_PATH);
-        mergeHeadTail(tsVideo, head, tail);
-    }
+//    public static void main(String[] args) throws IOException, InterruptedException {
+//        Path tsVideo = Paths.get("F:\\premiere_project\\1\\1.mp4");
+//        Path head = Paths.get(VIDEO_HEAD_PATH);
+//        Path tail = Paths.get(VIDEO_TAIL_PATH);
+//        mergeHeadTail(tsVideo, head, tail);
+//    }
 
     /**
      * 生成ts
@@ -348,44 +348,65 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
      * ./ffmpeg -i "concat:head1.ts|1.ts|three1.ts" -c copy -bsf:a aac_adtstoasc out88.mp4
      *
      * /ffmpeg -i F:/premiere_project/1/1.ts -i F:/premiere_project/1/2.ts -i F:/premiere_project/1/3.ts -vcodec libx264 -acodec libfdk_aac -map_metadata -1 -map_chapters -1 -movflags faststart -filter_complex [0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[concat_v][concat_a] -map [concat_v] -map [concat_a] -vb 3000k -ab 192k -f mp4 -profile:v high -pix_fmt yuv420p -threads 4 -y F:/premiere_project/1/1_合并版.mp4
+     *
+     * =============
+     * 拼接ts没有声音，要先将ts加一个声音
+     * ./ffmpeg -f lavfi \
+     * -i anullsrc=channel_layout=stereo:sample_rate=44100 \
+     * -i three.mp4 \
+     * -shortest -c:v copy -c:a aac three2.mp4
+     *
+     *
+     * ./ffmpeg -i three2.mp4 -c copy -bsf:v h264_mp4toannexb three2.ts
+     * 再拼接ts
+     *
+     * =====================================
+     *
+     * ./ffmpeg -i head1.mp4 -i 1.mp4 -i three.mp4 -t 0.1 -f lavfi -i anullsrc=channel_layout=stereo:sample_rate=48000 -filter_complex \
+     * "[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1,setsar=1,fps=30,format=yuv420p[v0];
+     *  [1:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1,setsar=1,fps=30,format=yuv420p[v1];
+     *  [2:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1,setsar=1,fps=30,format=yuv420p[v2];
+     *  [0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0];
+     *  [1:a]aformat=sample_rates=48000:channel_layouts=stereo[a1];
+     *  [2:a]aformat=sample_rates=48000:channel_layouts=stereo[a2];
+     *  [v0][a0][v1][a1][v2][a2]concat=n=3:v=1:a=1[v][a]" \
+     * -map "[v]" -map "[a]" -c:v libx264 -c:a aac -movflags +faststart output94.mp4
+     *
      */
     private static void mergeHeadTail(Path video, Path head, Path tail) {
         List<String> arguments = new ArrayList<>(
                 Arrays.asList(
-                        "D:\\saprogram\\renrenyishijie\\ffmpeg",
+                        FFMPEG_PATH,
                         "-i",
                         head.toString(),
                         "-i",
                         video.toString(),
                         "-i",
                         tail.toString(),
-                        "-vcodec",
-                        "libx264",
-                        "-acodec",
-                        "libfdk_aac",
-                        "-map_metadata",
-                        "-1",
-                        "-map_chapters",
-                        "-1",
-                        "-movflags",
-                        "faststart",
-                        "-filter_complex",
-                        "[0:v:0][0:a:0][1:v:0][1:a:0][2:v:0][2:a:0]concat=n=3:v=1:a=1[concat_v][concat_a]",
-                        "-map",
-                        "[concat_v]",
-                        "-map",
-                        "[concat_a]",
-                        "-vb",
-                        "3000k",
-                        "-ab",
-                        "192k",
+                        "-t",
+                        "0.1",
                         "-f",
-                        "mp4",
-                        "-profile:v",
-                        "high",
-                        "-pix_fmt",
-                        "yuv420p",
-                        "-y",
+                        "lavfi",
+                        "-i",
+                        "anullsrc=channel_layout=stereo:sample_rate=48000",
+                        "-filter_complex",
+                        "\"[0:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1,setsar=1,fps=30,format=yuv420p[v0];" +
+                        "[1:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1,setsar=1,fps=30,format=yuv420p[v1];" +
+                        "[2:v]scale=1920:1080:force_original_aspect_ratio=decrease,pad=1920:1080:-1:-1,setsar=1,fps=30,format=yuv420p[v2];" +
+                        "[0:a]aformat=sample_rates=48000:channel_layouts=stereo[a0];" +
+                        "[1:a]aformat=sample_rates=48000:channel_layouts=stereo[a1];" +
+                        "[2:a]aformat=sample_rates=48000:channel_layouts=stereo[a2];" +
+                        "[v0][a0][v1][a1][v2][a2]concat=n=3:v=1:a=1[v][a]\"",
+                        "-map",
+                        "\"[v]\"",
+                        "-map",
+                        "\"[a]\"",
+                        "-c:v",
+                        "libx264",
+                        "-c:a",
+                        "aac",
+                        "-movflags",
+                        "+faststart",
                         video.getParent().toString() + "\\" + "final.mp4"
                 )
         );
