@@ -262,24 +262,18 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 return false;
             }
             mergeVideoAndAudio(subtitleVideo, mp3Audio);
-            // 6. gen ts
-            log.info("6. gen ts");
-            genTs(subtitleVideo);
-            // 7. merge head and tail
-            log.info("7. merge head and tail");
+            // 6. merge head and tail
+            log.info("6. merge head and tail");
             fileList = Files.list(videoPath).collect(Collectors.toList());
-            Path tsVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("video.ts"))
+            Path audioVideoMp4 = fileList.stream().filter(p -> p.getFileName().toString().endsWith("audio.mp4"))
                     .findFirst().orElse(null);
-            if (Objects.isNull(tsVideo)) {
-                log.error("tsVideo生成失败");
+            if (Objects.isNull(audioVideoMp4)) {
+                log.error("audioVideo生成失败");
                 return false;
             }
-            mergeHeadTail(tsVideo, Paths.get(VIDEO_HEAD_PATH), Paths.get(VIDEO_TAIL_PATH));
-            // 8. del ts
-            log.info("8. del ts");
-            new File(tsVideo.toUri()).delete();
+            mergeHeadTail(audioVideoMp4, Paths.get(VIDEO_HEAD_PATH), Paths.get(VIDEO_TAIL_PATH));
             // 9. 校验生成视频
-            log.info("9. 校验生成视频");
+            log.info("7. 校验生成视频");
             fileList = Files.list(videoPath).collect(Collectors.toList());
             Path finalVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("final.mp4"))
                     .findFirst().orElse(null);
