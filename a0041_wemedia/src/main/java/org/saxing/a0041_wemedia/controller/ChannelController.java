@@ -5,9 +5,11 @@ import cn.hutool.core.date.DateBetween;
 import cn.hutool.core.date.DateTime;
 import cn.hutool.core.date.DateUnit;
 import cn.hutool.core.date.DateUtil;
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
+import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
@@ -94,12 +96,13 @@ public class ChannelController {
                                 @RequestParam @Min(value = 1, message = "页码不得少于1") Integer page,
                                 @RequestParam @Min(value = 1, message = "每页条数不得少于1")
                                 @Max(value = 100, message = "每页条数不大于100") Integer pageNum){
-        LambdaQueryChainWrapper<ChannelDO> queryChainWrapper = channelLogic.lambdaQuery();
-        queryChainWrapper.like(StringUtils.isNotEmpty(channelDO.getChannelTitle()),
+
+        LambdaQueryWrapper<ChannelDO> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.like(StringUtils.isNotEmpty(channelDO.getChannelTitle()),
                 ChannelDO::getChannelTitle, channelDO.getChannelTitle());
-        queryChainWrapper.like(StringUtils.isNotEmpty(channelDO.getChannelId()),
+        queryWrapper.like(StringUtils.isNotEmpty(channelDO.getChannelId()),
                 ChannelDO::getChannelId, channelDO.getChannelId());
-        return channelLogic.page(new Page<>(page, pageNum), queryChainWrapper)
+        return channelLogic.page(new Page<>(page, pageNum), queryWrapper)
                 .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(ChannelDO.class).getKeyProperty()));
     }
 
