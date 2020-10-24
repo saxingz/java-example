@@ -15,12 +15,19 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.apachecommons.CommonsLog;
+import ma.glasnost.orika.metadata.TypeBuilder;
+import org.saxing.a0041_wemedia.domain.BeanMapper;
 import org.saxing.a0041_wemedia.domain.entity.ChannelDO;
+import org.saxing.a0041_wemedia.domain.entity.TransferDO;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
+import org.saxing.a0041_wemedia.domain.vo.VideoVO;
+import org.saxing.a0041_wemedia.logic.ITransferLogic;
 import org.saxing.a0041_wemedia.logic.IVideoLogic;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import java.io.IOException;
@@ -43,7 +50,10 @@ public class VideoController {
 
     @Autowired
     private IVideoLogic videoLogic;
-
+    @Resource
+    private BeanMapper beanMapper;
+    @Autowired
+    private ITransferLogic transferLogic;
 
     /**
      * 查看原始视频
@@ -54,7 +64,7 @@ public class VideoController {
             @ApiImplicitParam(name = "pageNum", value = "每页条数", defaultValue = "1")
     })
     @PostMapping("/list")
-    public Page<VideoDO> listVideos(@RequestBody VideoDO video,
+    public Page<VideoVO> listVideos(@RequestBody VideoDO video,
                                     @RequestParam @Min(value = 1, message = "页码不得少于1") Integer page,
                                     @RequestParam @Min(value = 1, message = "每页条数不得少于1")
                                     @Max(value = 100, message = "每页条数不大于100") Integer pageNum){
@@ -68,8 +78,16 @@ public class VideoController {
         queryWrapper.like(StringUtils.isNotBlank(video.getDownloadedUrl()), VideoDO::getDownloadedUrl, video.getDownloadedUrl());
         video.setChannelId(null).setChannelTitle(null).setVideoId(null)
                 .setVideoTitle(null).setDescription(null).setDownloadedUrl(null);
-        return videoLogic.page(new Page<>(page, pageNum), queryWrapper)
+        Page<VideoDO> videoDOPage = videoLogic.page(new Page<>(page, pageNum), queryWrapper)
                 .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(VideoDO.class).getKeyProperty()));
+        Page<VideoVO> result = beanMapper.map(videoDOPage, new TypeBuilder<Page<VideoDO>>(){}.build(),
+                new TypeBuilder<Page<VideoVO>>(){}.build());
+        if (result.getSize() > 0) {
+            result.getRecords().forEach(
+                    r -> r.setTransferList(
+                            transferLogic.list(new QueryWrapper<>(new TransferDO().setVideoId(r.getId())))));
+        }
+        return result;
     }
 
     /**
