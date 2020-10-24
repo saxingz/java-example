@@ -63,7 +63,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
         synchronized (DOWNLOAD_LOCK) {
             log.info("downloadVideo: id: " + id);
             try {
-                Thread.sleep(1500);
+                Thread.sleep(500 + new Random().nextInt(1000));
             } catch (InterruptedException ignored) {
             }
             VideoDO videoDO = this.getById(id);
