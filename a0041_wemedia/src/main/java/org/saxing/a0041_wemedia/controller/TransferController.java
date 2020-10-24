@@ -4,11 +4,14 @@ package org.saxing.a0041_wemedia.controller;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.OrderItem;
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
+import com.baomidou.mybatisplus.extension.conditions.query.LambdaQueryChainWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
+import org.apache.commons.lang3.StringUtils;
+import org.saxing.a0041_wemedia.domain.entity.ChannelDO;
 import org.saxing.a0041_wemedia.domain.entity.TransferDO;
 import org.saxing.a0041_wemedia.logic.ITransferLogic;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,7 +53,9 @@ public class TransferController {
                                        @RequestParam @Min(value = 1, message = "每页条数不得少于1")
                                                      @Max(value = 100, message = "每页条数不大于100")
                                                    Integer pageNum ){
-        return transferLogic.page(new Page<>(page, pageNum), new QueryWrapper<>(transfer))
+        LambdaQueryChainWrapper<TransferDO> queryChainWrapper = transferLogic.lambdaQuery();
+        queryChainWrapper.like(StringUtils.isNotEmpty(transfer.getUrl()), TransferDO::getUrl, transfer.getUrl());
+        return transferLogic.page(new Page<>(page, pageNum), queryChainWrapper)
                 .addOrder(OrderItem.desc(TableInfoHelper.getTableInfo(TransferDO.class).getKeyProperty()));
     }
 
