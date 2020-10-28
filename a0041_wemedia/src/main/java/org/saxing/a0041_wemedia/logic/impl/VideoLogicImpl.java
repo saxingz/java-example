@@ -144,7 +144,8 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                     log.error(e.toString());
                 }
             }
-
+            // 刷新列表
+            fileList = Files.list(videoPath).collect(Collectors.toList());
             // 英文字幕
             enVtt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.vtt"))
                     .findFirst().orElse(null);
