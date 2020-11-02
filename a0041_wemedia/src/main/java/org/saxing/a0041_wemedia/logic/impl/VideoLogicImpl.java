@@ -20,10 +20,12 @@ import org.saxing.a0041_wemedia.util.ResourceLock;
 import org.springframework.stereotype.Service;
 
 import java.io.*;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -140,10 +142,10 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 try {
                     ProcessRunner.run(arguments);
                     String videoTitle = videoDO.getVideoTitle();
-                    String titleFile = videoPathStr + "\\" + videoTitle + ".txt";
+                    String titleFile = videoPathStr + "\\" + id + "-title.txt";
                     Path titleFilePath = Paths.get(titleFile);
                     if (!Files.exists(titleFilePath)) {
-                        Files.createDirectory(titleFilePath);
+                        Files.write(titleFilePath, videoTitle.getBytes(), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
                     }
                 } catch (ProcessException | InterruptedException e) {
                     e.printStackTrace();
@@ -295,6 +297,15 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             return true;
         }
     }
+
+//    public static void main(String[] args) throws IOException {
+//        String videoTitle = "hello title";
+//        String titleFile = "F:\\premiere_project\\" + 1000 + "-title.txt";
+//        Path titleFilePath = Paths.get(titleFile);
+//        if (!Files.exists(titleFilePath)) {
+//            Files.write(titleFilePath, videoTitle.getBytes(), StandardOpenOption.WRITE, StandardOpenOption.CREATE);
+//        }
+//    }
 
 //    public static void main(String[] args) throws IOException, InterruptedException {
 //        Path tsVideo = Paths.get("F:\\premiere_project\\1\\1.mp4");
