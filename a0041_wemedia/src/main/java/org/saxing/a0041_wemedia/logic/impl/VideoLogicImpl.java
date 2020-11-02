@@ -116,7 +116,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                     || Objects.isNull(originVideoFile)
                     || Objects.isNull(originAudioFile)
             ) {
-                String outputFile = videoPathStr + "\\%(title)s.%(ext)s";
+                String outputFile = videoPathStr + "\\" + id + ".%(ext)s";
                 // 重新下载
                 List<String> arguments = new ArrayList<>(
                         Arrays.asList(
@@ -139,6 +139,12 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 );
                 try {
                     ProcessRunner.run(arguments);
+                    String videoTitle = videoDO.getVideoTitle();
+                    String titleFile = videoPathStr + "\\" + videoTitle + ".txt";
+                    Path titleFilePath = Paths.get(titleFile);
+                    if (!Files.exists(titleFilePath)) {
+                        Files.createDirectory(titleFilePath);
+                    }
                 } catch (ProcessException | InterruptedException e) {
                     e.printStackTrace();
                     log.error(e.toString());
