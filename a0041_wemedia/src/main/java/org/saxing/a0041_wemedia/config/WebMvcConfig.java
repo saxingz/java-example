@@ -55,4 +55,13 @@ public class WebMvcConfig implements WebMvcConfigurer {
     }
 
 
+    @Bean
+    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
+        return factory -> {
+            ErrorPage error404Page = new ErrorPage(HttpStatus.NOT_FOUND, "/index.html");
+            factory.addErrorPages(error404Page);
+        };
+    }
+
+
 }
