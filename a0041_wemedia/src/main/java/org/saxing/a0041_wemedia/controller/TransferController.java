@@ -80,7 +80,7 @@ public class TransferController {
      * @param id
      * @return
      */
-    @ApiOperation("删除手动记录")
+    @ApiOperation("删除搬运记录")
     @ApiImplicitParam(name = "id", value = "搬运id")
     @PostMapping("/del")
     public Boolean deleteTransfer(@RequestParam Long id) {
