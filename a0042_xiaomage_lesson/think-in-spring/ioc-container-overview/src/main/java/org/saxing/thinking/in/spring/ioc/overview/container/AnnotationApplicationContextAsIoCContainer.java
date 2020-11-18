@@ -5,25 +5,32 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.Map;
 
 /**
- * IoCContainer
+ * AnnotationApplicationContextAsIoCContainer
  *
  * @author saxing 2020/11/18 22:41
  */
-public class IoCContainer {
+public class AnnotationApplicationContextAsIoCContainer {
 
     public static void main(String[] args) {
-        DefaultListableBeanFactory beanFactory = new DefaultListableBeanFactory();
-        XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(beanFactory);
+        AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
+        applicationContext.register(AnnotationApplicationContextAsIoCContainer.class);
+        applicationContext.refresh();
+        lookupCollectionByType(applicationContext);
+    }
 
-        String location = "classpath:/META-INF/dependency-lookup-context.xml";
-        int beanDefinitionCount = reader.loadBeanDefinitions(location);
-        System.out.println("bean account: " + beanDefinitionCount);
-
-        lookupCollectionByType(beanFactory);
+    @Bean
+    public User user() {
+        User user = new User();
+        user.setId(2L);
+        user.setName("saxing");
+        return user;
     }
 
 
