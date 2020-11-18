@@ -6,6 +6,7 @@ import org.saxing.thinking.in.spring.ioc.overview.repository.UserRepository;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Map;
@@ -27,7 +28,15 @@ public class DependencyInjectionDemo {
 //        System.out.println(userRepository.getBeanFactory() == beanFactory);
 
         System.out.println(userRepository.getBeanFactory());
-        System.out.println(beanFactory.getBean(BeanFactory.class));
+//        System.out.println(beanFactory.getBean(BeanFactory.class));
+
+
+//        ObjectFactory userFactory = userRepository.getUserObjectFactory();
+//        System.out.println(userFactory.getObject());
+
+        ObjectFactory objectFactory = userRepository.getObjectFactory();
+        System.out.println(objectFactory.getObject());
+        System.out.println(objectFactory.getObject() == beanFactory);
 
     }
 
