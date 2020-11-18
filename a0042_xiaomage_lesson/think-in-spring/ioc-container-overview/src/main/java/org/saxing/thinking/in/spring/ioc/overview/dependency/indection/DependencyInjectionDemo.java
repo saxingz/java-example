@@ -22,7 +22,12 @@ public class DependencyInjectionDemo {
 
         UserRepository userRepository = beanFactory.getBean("userRepository", UserRepository.class);
 
-        System.out.println(userRepository.getUsers());
+//        System.out.println(userRepository.getUsers());
+
+//        System.out.println(userRepository.getBeanFactory() == beanFactory);
+
+        System.out.println(userRepository.getBeanFactory());
+        System.out.println(beanFactory.getBean(BeanFactory.class));
 
     }
 
