@@ -9,6 +9,10 @@
         <property name="name" value="saxing" />
     </bean>
 
+    <bean id="superUser" class="org.saxing.thinking.in.spring.ioc.overview.domain.SuperUser" parent="user" primary="true" >
+        <property name="address" value="杭州" />
+    </bean>
+
     <bean id="objectFactory" class="org.springframework.beans.factory.config.ObjectFactoryCreatingFactoryBean">
         <property name="targetBeanName" value="user" />
     </bean>
