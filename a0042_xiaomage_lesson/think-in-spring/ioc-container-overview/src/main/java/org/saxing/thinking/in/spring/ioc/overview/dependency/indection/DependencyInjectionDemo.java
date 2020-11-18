@@ -8,6 +8,7 @@ import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.core.env.Environment;
 
 import java.util.Map;
 
@@ -20,6 +21,7 @@ public class DependencyInjectionDemo {
 
     public static void main(String[] args) {
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-injection-context.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/META-INF/dependency-injection-context.xml");
 
         UserRepository userRepository = beanFactory.getBean("userRepository", UserRepository.class);
 
@@ -38,6 +40,8 @@ public class DependencyInjectionDemo {
         System.out.println(objectFactory.getObject());
         System.out.println(objectFactory.getObject() == beanFactory);
 
+        Environment environment = beanFactory.getBean(Environment.class);
+        System.out.println("environment bean: " + environment);
     }
 
 
