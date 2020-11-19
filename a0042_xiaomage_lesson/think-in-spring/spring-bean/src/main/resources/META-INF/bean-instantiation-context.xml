@@ -4,7 +4,12 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
+    <!-- 静态方法 -->
     <bean id="user-by-static-method" class="org.saxing.thinking.in.spring.ioc.overview.domain.User"
           factory-method="createUser" />
+
+    <!-- 实例方法 -->
+    <bean id="user-by-instance-method" factory-bean="userFactory" factory-method="createUser" />
+    <bean id="userFactory" class="org.saxing.thinking.in.spring.bean.factory.DefaultUserFactory" />
 
 </beans>
