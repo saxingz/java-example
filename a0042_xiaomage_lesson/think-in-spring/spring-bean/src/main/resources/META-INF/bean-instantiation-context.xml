@@ -12,4 +12,6 @@
     <bean id="user-by-instance-method" factory-bean="userFactory" factory-method="createUser" />
     <bean id="userFactory" class="org.saxing.thinking.in.spring.bean.factory.DefaultUserFactory" />
 
+    <bean id="user-by-factory-bean" class="org.saxing.thinking.in.spring.bean.factory.UserFactoryBean" />
+
 </beans>
