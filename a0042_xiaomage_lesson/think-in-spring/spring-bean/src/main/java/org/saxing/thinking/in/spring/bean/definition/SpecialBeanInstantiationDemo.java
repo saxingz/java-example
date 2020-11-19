@@ -17,12 +17,22 @@ public class SpecialBeanInstantiationDemo {
 
     public static void main(String[] args) {
         BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/special-bean-instantiation-context.xml");
+        ServiceLoader<UserFactory> serviceLoader = beanFactory.getBean("userFactoryServiceLoader", ServiceLoader.class);
 
+        displayServiceLoader(serviceLoader);
         demoServiceLoader();
     }
 
     public static void demoServiceLoader() {
         ServiceLoader<UserFactory> serviceLoader = ServiceLoader.load(UserFactory.class, Thread.currentThread().getContextClassLoader());
+        Iterator<UserFactory> iterator = serviceLoader.iterator();
+        while (iterator.hasNext()) {
+            UserFactory userFactory = iterator.next();
+            System.out.println(userFactory.createUser());
+        }
+    }
+
+    private static void displayServiceLoader(ServiceLoader<UserFactory> serviceLoader) {
         Iterator<UserFactory> iterator = serviceLoader.iterator();
         while (iterator.hasNext()) {
             UserFactory userFactory = iterator.next();

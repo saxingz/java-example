@@ -4,6 +4,8 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         https://www.springframework.org/schema/beans/spring-beans.xsd">
 
-
+    <bean id="userFactoryServiceLoader" class="org.springframework.beans.factory.serviceloader.ServiceLoaderFactoryBean" >
+        <property name="serviceType" value="org.saxing.thinking.in.spring.bean.factory.UserFactory" />
+    </bean>
 
 </beans>
