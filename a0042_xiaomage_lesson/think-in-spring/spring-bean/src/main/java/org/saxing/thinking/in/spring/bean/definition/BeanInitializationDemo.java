@@ -25,7 +25,7 @@ public class BeanInitializationDemo {
     }
 
 
-    @Bean
+    @Bean(initMethod = "initUserFactory")
     public UserFactory userFactory() {
         return new DefaultUserFactory();
     }
