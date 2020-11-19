@@ -1,8 +1,11 @@
 package org.saxing.thinking.in.spring.bean.definition;
 
+import org.saxing.thinking.in.spring.bean.factory.DefaultUserFactory;
 import org.saxing.thinking.in.spring.bean.factory.UserFactory;
 import org.saxing.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.Iterator;
@@ -16,11 +19,20 @@ import java.util.ServiceLoader;
 public class SpecialBeanInstantiationDemo {
 
     public static void main(String[] args) {
-        BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/special-bean-instantiation-context.xml");
+//        BeanFactory beanFactory = new ClassPathXmlApplicationContext("classpath:/META-INF/special-bean-instantiation-context.xml");
+//        ServiceLoader<UserFactory> serviceLoader = beanFactory.getBean("userFactoryServiceLoader", ServiceLoader.class);
+//
+//        displayServiceLoader(serviceLoader);
+//        demoServiceLoader();
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("classpath:/META-INF/special-bean-instantiation-context.xml");
+        AutowireCapableBeanFactory beanFactory = applicationContext.getAutowireCapableBeanFactory();
         ServiceLoader<UserFactory> serviceLoader = beanFactory.getBean("userFactoryServiceLoader", ServiceLoader.class);
 
         displayServiceLoader(serviceLoader);
-        demoServiceLoader();
+
+        UserFactory userFactory = beanFactory.createBean(DefaultUserFactory.class);
+        System.out.println(userFactory.createUser());
+
     }
 
     public static void demoServiceLoader() {
