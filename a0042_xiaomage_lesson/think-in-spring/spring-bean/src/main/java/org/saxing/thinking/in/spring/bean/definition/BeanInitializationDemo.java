@@ -5,6 +5,7 @@ import org.saxing.thinking.in.spring.bean.factory.UserFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Lazy;
 
 /**
  * BeanInitializationDemo
@@ -18,14 +19,16 @@ public class BeanInitializationDemo {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
         applicationContext.register(BeanInitializationDemo.class);
         applicationContext.refresh();
+        System.out.println("spring 应用上下文已启动...");
 
         UserFactory userFactory = applicationContext.getBean(UserFactory.class);
-
+        System.out.println(userFactory);
         applicationContext.close();
     }
 
 
     @Bean(initMethod = "initUserFactory")
+    @Lazy(value = false)
     public UserFactory userFactory() {
         return new DefaultUserFactory();
     }
