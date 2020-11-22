@@ -6,7 +6,7 @@
 
     <import resource="classpath:/META-INF/dependency-lookup-context.xml" />
 
-    <bean class="org.saxing.thinking.in.spring.ioc.dependency.injection.UserHolder" autowire="byName">
+    <bean class="org.saxing.thinking.in.spring.ioc.dependency.injection.UserHolder" autowire="byType">
 <!--        <property name="user" ref="superUser" /> 替换成autowiring模式 -->
     </bean>
 
