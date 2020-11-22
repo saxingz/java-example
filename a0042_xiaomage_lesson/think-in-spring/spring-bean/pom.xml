@@ -12,8 +12,6 @@
     <artifactId>spring-bean</artifactId>
 
     <dependencies>
-
-
         <dependency>
             <groupId>${groupId}</groupId>
             <artifactId>ioc-container-overview</artifactId>
