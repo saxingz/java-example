@@ -9,7 +9,13 @@
         <property name="name" value="saxing" />
         <property name="city" value="BEIJING" />
         <property name="workCities" value="BEIJING,HANGZHOU" />
-        <property name="lifeCities" value="HANGZHOU,SHANGHAI" />
+<!--        <property name="lifeCities" value="HANGZHOU,SHANGHAI" />-->
+        <property name="lifeCities">
+            <list>
+                <value>BEIJING</value>
+                <value>SHANGHAI</value>
+            </list>
+        </property>
         <property name="configFileLocation" value="classpath:/META-INF/user-config.properties" />
     </bean>
 
