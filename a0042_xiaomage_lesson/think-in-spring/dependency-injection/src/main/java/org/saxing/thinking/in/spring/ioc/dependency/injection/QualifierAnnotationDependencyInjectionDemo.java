@@ -1,5 +1,6 @@
 package org.saxing.thinking.in.spring.ioc.dependency.injection;
 
+import org.saxing.thinking.in.spring.ioc.dependency.injection.annotation.UserGroup;
 import org.saxing.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,17 +27,13 @@ public class QualifierAnnotationDependencyInjectionDemo {
     @Bean
     @Qualifier // 进行逻辑分组
     public User user1() {
-        User user = new User();
-        user.setId(7L);
-        return user;
+        return createUser(7L);
     }
 
     @Bean
     @Qualifier  // 进行逻辑分组
     public User user2() {
-        User user = new User();
-        user.setId(8L);
-        return user;
+        return createUser(8L);
     }
 
     @Autowired
@@ -46,6 +43,27 @@ public class QualifierAnnotationDependencyInjectionDemo {
     @Qualifier
     private Collection<User> qualifiedUsers; //2 beans = user1 + user2
 
+    @Autowired
+    @UserGroup
+    private Collection<User> groupedUsers;
+
+    @Bean
+    @UserGroup
+    public User user3() {
+        return createUser(9L);
+    }
+
+    @Bean
+    @UserGroup
+    public User user4() {
+        return createUser(10L);
+    }
+
+    private static User createUser(Long id) {
+        User user = new User();
+        user.setId(id);
+        return user;
+    }
 
 
     public static void main(String[] args) {
@@ -62,6 +80,7 @@ public class QualifierAnnotationDependencyInjectionDemo {
         System.out.println("demo.namedUser = " + demo.namedUser);
         System.out.println("demo.allUsers = " + demo.allUsers);
         System.out.println("demo.qualifiedUsers = " + demo.qualifiedUsers);
+        System.out.println("demo.groupedUsers = " + demo.groupedUsers);
 
 
         applicationContext.close();
