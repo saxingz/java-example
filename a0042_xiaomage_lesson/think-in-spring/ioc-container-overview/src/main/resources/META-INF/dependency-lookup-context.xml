@@ -8,6 +8,7 @@
         <property name="id" value="1"/>
         <property name="name" value="saxing" />
         <property name="city" value="BEIJING" />
+        <property name="configFileLocation" value="classpath:/META-INF/user-config.properties" />
     </bean>
 
     <bean id="superUser" class="org.saxing.thinking.in.spring.ioc.overview.domain.SuperUser" parent="user"
