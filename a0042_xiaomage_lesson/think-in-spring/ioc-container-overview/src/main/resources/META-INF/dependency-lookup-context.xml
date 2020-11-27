@@ -8,6 +8,7 @@
         <property name="id" value="1"/>
         <property name="name" value="saxing" />
         <property name="city" value="BEIJING" />
+        <property name="workCities" value="BEIJING,HANGZHOU" />
         <property name="configFileLocation" value="classpath:/META-INF/user-config.properties" />
     </bean>
 

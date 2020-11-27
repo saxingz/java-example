@@ -3,6 +3,8 @@ package org.saxing.thinking.in.spring.ioc.overview.domain;
 import org.saxing.thinking.in.spring.ioc.overview.enums.City;
 import org.springframework.core.io.Resource;
 
+import java.util.Arrays;
+
 /**
  * user
  *
@@ -15,6 +17,8 @@ public class User {
     private String name;
 
     private City city;
+
+    private City[] workCities;
 
     private Resource configFileLocation;
 
@@ -50,6 +54,13 @@ public class User {
         this.name = name;
     }
 
+    public City[] getWorkCities() {
+        return workCities;
+    }
+
+    public void setWorkCities(City[] workCities) {
+        this.workCities = workCities;
+    }
 
     @Override
     public String toString() {
@@ -57,6 +68,7 @@ public class User {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", city=" + city +
+                ", workCities=" + Arrays.toString(workCities) +
                 ", configFileLocation=" + configFileLocation +
                 '}';
     }
