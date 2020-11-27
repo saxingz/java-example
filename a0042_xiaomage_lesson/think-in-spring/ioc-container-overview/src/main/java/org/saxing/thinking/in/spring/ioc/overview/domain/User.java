@@ -4,6 +4,7 @@ import org.saxing.thinking.in.spring.ioc.overview.enums.City;
 import org.springframework.core.io.Resource;
 
 import java.util.Arrays;
+import java.util.List;
 
 /**
  * user
@@ -19,6 +20,8 @@ public class User {
     private City city;
 
     private City[] workCities;
+
+    private List<City> lifeCities;
 
     private Resource configFileLocation;
 
@@ -62,6 +65,14 @@ public class User {
         this.workCities = workCities;
     }
 
+    public List<City> getLifeCities() {
+        return lifeCities;
+    }
+
+    public void setLifeCities(List<City> lifeCities) {
+        this.lifeCities = lifeCities;
+    }
+
     @Override
     public String toString() {
         return "User{" +
@@ -69,6 +80,7 @@ public class User {
                 ", name='" + name + '\'' +
                 ", city=" + city +
                 ", workCities=" + Arrays.toString(workCities) +
+                ", lifeCities=" + lifeCities +
                 ", configFileLocation=" + configFileLocation +
                 '}';
     }
