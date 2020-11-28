@@ -29,6 +29,8 @@ public class AnnotationDependencyInjectionResolutionDemo {
     private Map<String, User> users;
     @Autowired
     private Optional<User> userOptional;
+    @Autowired
+    private User injectedUser;
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
@@ -43,6 +45,7 @@ public class AnnotationDependencyInjectionResolutionDemo {
         System.out.println("demo.user = " + demo.user);
         System.out.println("demo.users = " + demo.users);
         System.out.println("demo.userOptional = " + demo.userOptional);
+        System.out.println("demo.injectedUser = " + demo.injectedUser);
 
 
         applicationContext.close();
