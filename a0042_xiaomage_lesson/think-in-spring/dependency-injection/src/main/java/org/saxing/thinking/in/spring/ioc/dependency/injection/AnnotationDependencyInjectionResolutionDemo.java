@@ -1,12 +1,15 @@
 package org.saxing.thinking.in.spring.ioc.dependency.injection;
 
+import org.saxing.thinking.in.spring.ioc.dependency.injection.annotation.InjectedUser;
 import org.saxing.thinking.in.spring.ioc.dependency.injection.annotation.MyAutowired;
 import org.saxing.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Lazy;
 
 import java.util.Collection;
@@ -33,6 +36,15 @@ public class AnnotationDependencyInjectionResolutionDemo {
     @Autowired
     private User injectedUser;
 
+    @InjectedUser
+    private User myInjectedUser;
+
+    @Bean(name = "InjectedUserAnnotationBeanPostProcessor")
+    public static AutowiredAnnotationBeanPostProcessor beanPostProcessor() {
+        AutowiredAnnotationBeanPostProcessor beanPostProcessor = new AutowiredAnnotationBeanPostProcessor();
+        beanPostProcessor.setAutowiredAnnotationType(InjectedUser.class);
+        return beanPostProcessor;
+    }
 
 
     public static void main(String[] args) {
@@ -49,6 +61,7 @@ public class AnnotationDependencyInjectionResolutionDemo {
         System.out.println("demo.users = " + demo.users);
         System.out.println("demo.userOptional = " + demo.userOptional);
         System.out.println("demo.injectedUser = " + demo.injectedUser);
+        System.out.println("demo.myInjectedUser = " + demo.myInjectedUser);
 
 
         applicationContext.close();
