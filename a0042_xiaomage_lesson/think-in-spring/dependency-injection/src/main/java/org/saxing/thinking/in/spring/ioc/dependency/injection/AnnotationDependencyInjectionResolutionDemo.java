@@ -1,5 +1,6 @@
 package org.saxing.thinking.in.spring.ioc.dependency.injection;
 
+import org.saxing.thinking.in.spring.ioc.dependency.injection.annotation.MyAutowired;
 import org.saxing.thinking.in.spring.ioc.overview.domain.User;
 import org.springframework.beans.factory.ObjectFactory;
 import org.springframework.beans.factory.ObjectProvider;
@@ -27,10 +28,12 @@ public class AnnotationDependencyInjectionResolutionDemo {
     private User user;
     @Autowired
     private Map<String, User> users;
-    @Autowired
+    @MyAutowired
     private Optional<User> userOptional;
     @Autowired
     private User injectedUser;
+
+
 
     public static void main(String[] args) {
         AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
