@@ -25,10 +25,10 @@ public class SyncProducer {
             SendStatus status = result.getSendStatus();
             String msgId = result.getMsgId();
             int queueId = result.getMessageQueue().getQueueId();
-            System.out.print(" \n result: " + result);
-            System.out.print("msgId: " + msgId);
-            System.out.print("status: " + status);
-            System.out.print("queueId: " + queueId);
+            System.out.print(" \n 【result】: " + result);
+            System.out.print("  【msgId】: " + msgId);
+            System.out.print("  【status】: " + status);
+            System.out.print("  【queueId】: " + queueId);
         }
         producer.shutdown();
     }
