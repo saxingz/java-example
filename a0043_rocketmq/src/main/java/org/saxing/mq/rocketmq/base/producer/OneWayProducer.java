@@ -20,7 +20,7 @@ public class OneWayProducer {
         producer.setNamesrvAddr("192.168.50.47:9876;192.168.50.47:9877");
         producer.start();
         for (int i = 0; i < 100000; i++) {
-            Message msg = new Message("base", "Tag1", ("Hello world " + i).getBytes());
+            Message msg = new Message("base", "Tag3", ("Hello world " + i).getBytes());
             producer.sendOneway(msg);
         }
         System.out.println("发送完成");
