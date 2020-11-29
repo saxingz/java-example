@@ -30,6 +30,7 @@ public class SyncProducer {
             System.out.print("  【status】: " + status);
             System.out.print("  【queueId】: " + queueId);
         }
+        System.out.println("发送完成");
         producer.shutdown();
     }
 
