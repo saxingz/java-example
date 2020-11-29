@@ -16,11 +16,11 @@ import org.apache.rocketmq.remoting.exception.RemotingException;
 public class SyncProducer {
 
     public static void main(String[] args) throws MQClientException, RemotingException, InterruptedException, MQBrokerException {
-        DefaultMQProducer producer = new DefaultMQProducer("group2");
+        DefaultMQProducer producer = new DefaultMQProducer("group1");
         producer.setNamesrvAddr("192.168.50.47:9876;192.168.50.47:9877");
         producer.start();
         for (int i = 0; i < 100000; i++) {
-            Message msg = new Message("base", "Tag1", ("Hello world " + i).getBytes());
+            Message msg = new Message("base", "Tag2", ("Hello world " + i).getBytes());
             SendResult result = producer.send(msg);
             SendStatus status = result.getSendStatus();
             String msgId = result.getMsgId();
