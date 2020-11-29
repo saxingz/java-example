@@ -7,6 +7,7 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.message.Message;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.apache.rocketmq.common.protocol.heartbeat.MessageModel;
 
 import java.util.List;
 
@@ -20,7 +21,9 @@ public class Consumer {
     public static void main(String[] args) throws MQClientException {
         DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("group1");
         consumer.setNamesrvAddr("192.168.50.47:9876;192.168.50.47:9877");
-        consumer.subscribe("base", "");
+        consumer.subscribe("base", "*");
+        //默认负载
+        consumer.setMessageModel(MessageModel.CLUSTERING);
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
             public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
