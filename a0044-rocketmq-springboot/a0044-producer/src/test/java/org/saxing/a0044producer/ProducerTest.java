@@ -16,7 +16,9 @@ public class ProducerTest {
 
     @Test
     public void testSendMsg() {
-        rocketMQTemplate.convertAndSend("base", "test hello");
+        for (int i = 0; i < 10000; i++) {
+            rocketMQTemplate.convertAndSend("base", "test hello " + i);
+        }
     }
 
 }
