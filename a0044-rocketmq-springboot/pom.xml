@@ -18,6 +18,7 @@
     <modules>
         <module>a0044-producer</module>
         <module>a0044-consumer</module>
+        <module>a0044-mqttv3</module>
     </modules>
 
     <properties>
