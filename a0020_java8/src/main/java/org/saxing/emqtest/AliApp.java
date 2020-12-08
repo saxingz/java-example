@@ -32,8 +32,8 @@ public class AliApp {
 
             // MQTT 连接选项
             MqttConnectOptions connOpts = new MqttConnectOptions();
-            connOpts.setUserName("LTAI4GH9DWpQ4xkogaioiZJn");
-            connOpts.setPassword("9w47bXj4A86pwxdSSyjO9FVAt3hAVR".toCharArray());
+            connOpts.setUserName("");
+            connOpts.setPassword("".toCharArray());
             // 保留会话
             connOpts.setCleanSession(true);
 
