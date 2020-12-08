@@ -30,7 +30,7 @@ public class AliApp {
         try {
             MqttClient client = new MqttClient(broker, clientId, persistence);
 
-            // MQTT 连接选项
+            // MQTT 连接选项2
             MqttConnectOptions connOpts = new MqttConnectOptions();
             connOpts.setUserName("");
             connOpts.setPassword("".toCharArray());
