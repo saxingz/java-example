@@ -1,0 +1,5 @@
+<kmodule xmlns="http://www.drools.org/xsd/kmodule">
+    <kbase name="myKbasel" packages="rules" default="true">
+        <ksession name="ksession-rule" default="true" />
+    </kbase>
+</kmodule>
