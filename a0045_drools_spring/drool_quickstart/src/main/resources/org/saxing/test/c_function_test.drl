@@ -1,0 +1,15 @@
+package org.saxing.test;
+
+import org.saxing.drools.entity.Student
+
+function String sayHello2(String name) {
+    return "hello " + name;
+}
+
+rule "c_function_test_1"
+    when
+        $s:Student(age > 60)
+    then
+        String res = sayHello2($s.getName());
+        System.out.println("c_function_test_1 res : " + res);
+end

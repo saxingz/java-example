@@ -1,6 +1,7 @@
 package org.saxing.test;
 
 import org.drools.core.base.RuleNameEqualsAgendaFilter;
+import org.drools.core.base.RuleNameMatchesAgendaFilter;
 import org.drools.core.base.RuleNameStartsWithAgendaFilter;
 import org.junit.Test;
 import org.kie.api.KieServices;
@@ -127,7 +128,7 @@ public class DroolsTest {
         s1.setAge(50);
         kieSession.insert(s1);
         Student s2 = new Student();
-        s2.setAge(50);
+        s2.setAge(80);
         s2.setName("lisi");
         kieSession.insert(s2);
 
@@ -149,8 +150,32 @@ public class DroolsTest {
             System.out.println(s);
         }
 
-
         kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("a_"));
+        kieSession.dispose();
+    }
+
+    @Test
+    public void testFunction() throws InterruptedException {
+        System.setProperty("drools.dateformat", "yyyy-MM-dd HH:mm");
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession();
+
+        Student s1 = new Student();
+        s1.setAge(50);
+        kieSession.insert(s1);
+        Student s2 = new Student();
+        s2.setAge(80);
+        s2.setName("lisi");
+        kieSession.insert(s2);
+
+//        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("b_"));
+        // ^(d_|b_|c_).*$
+        // (?=d_|b_|c_)[^']*
+        // (d_|b_|c_)[^']*
+//        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("^(d_|b_|c_).*$"));
+//        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("(?=d_|b_|c_)[^']*"));
+        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("(d_|b_|c_)[^']*"));
         kieSession.dispose();
     }
 
