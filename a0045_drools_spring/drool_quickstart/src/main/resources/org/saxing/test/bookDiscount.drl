@@ -1,0 +1,47 @@
+package org.saxing.test
+
+import org.saxing.drools.entity.Order
+
+// book_discount_1
+rule "book_discount_1"
+    when
+        $order:Order(originalPrice < 100)
+    then
+        System.out.println("成功匹配book_discount_1");
+        $order.setRealPrice($order.getOriginalPrice());
+        System.out.println("成功匹配book_discount_1");
+end
+
+// book_discount_2
+rule "book_discount_2"
+    when
+        $order:Order(originalPrice >= 100 && originalPrice < 200)
+    then
+        $order.setRealPrice($order.getOriginalPrice() - 20);
+        System.out.println("成功匹配book_discount_2");
+end
+
+// book_discount_3
+rule "book_discount_3"
+    when
+        $order:Order(originalPrice >= 200 && originalPrice < 300)
+    then
+        $order.setRealPrice($order.getOriginalPrice() - 50);
+        System.out.println("成功匹配book_discount_3");
+end
+
+
+// book_discount_4
+rule "book_discount_4"
+    when
+        $order:Order(originalPrice >= 300)
+    then
+        $order.setRealPrice($order.getOriginalPrice() - 100);
+        System.out.println("成功匹配book_discount_4");
+end
+
+
+
+
+
+
