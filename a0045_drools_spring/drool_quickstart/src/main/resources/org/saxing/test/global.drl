@@ -1,0 +1,17 @@
+package org.saxing.test;
+
+global java.lang.Integer count
+
+
+rule "global_1"
+    when
+    then
+        count += 10;
+        System.out.println("global_1 trigger count = " + count);
+end
+
+rule "global_2"
+    when
+    then
+        System.out.println("global_2 trigger count = " + count);
+end
