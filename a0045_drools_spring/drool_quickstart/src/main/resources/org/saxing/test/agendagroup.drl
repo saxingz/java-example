@@ -24,6 +24,7 @@ end
 // agendagroup_4
 rule "agendagroup_4"
     agenda-group "agendagroup_2"
+//    auto-focus true
     when
     then
         System.out.println("agendagroup_4");
