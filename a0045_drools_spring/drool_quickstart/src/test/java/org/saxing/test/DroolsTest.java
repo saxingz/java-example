@@ -135,7 +135,7 @@ public class DroolsTest {
         System.out.println(size);
 
         for (QueryResultsRow row : results1) {
-            Object s = row.get("$s");
+            Student s = (Student) row.get("$s");
             System.out.println(s);
         }
 
