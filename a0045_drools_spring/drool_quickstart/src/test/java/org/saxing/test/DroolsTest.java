@@ -1,12 +1,17 @@
 package org.saxing.test;
 
+import org.drools.core.base.RuleNameEqualsAgendaFilter;
+import org.drools.core.base.RuleNameStartsWithAgendaFilter;
 import org.junit.Test;
 import org.kie.api.KieServices;
 import org.kie.api.event.rule.RuleRuntimeEventListener;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
+import org.kie.api.runtime.rule.QueryResults;
+import org.kie.api.runtime.rule.QueryResultsRow;
 import org.saxing.drools.entity.Order;
 import org.saxing.drools.entity.Student;
+import org.saxing.drools.service.UserService;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -105,7 +110,36 @@ public class DroolsTest {
         list.add("init");
         kieSession.setGlobal("gList", list);
 
+        kieSession.setGlobal("userService", new UserService());
+
         kieSession.fireAllRules();
+        kieSession.dispose();
+    }
+
+    @Test
+    public void testQuery() throws InterruptedException {
+        System.setProperty("drools.dateformat", "yyyy-MM-dd HH:mm");
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession();
+
+        Student s1 = new Student();
+        s1.setAge(50);
+        kieSession.insert(s1);
+        Student s2 = new Student();
+        s2.setAge(50);
+        kieSession.insert(s2);
+
+        QueryResults results1 = kieSession.getQueryResults("query_1");
+        int size = results1.size();
+        System.out.println(size);
+
+        for (QueryResultsRow row : results1) {
+            Object s = row.get("$s");
+            System.out.println(s);
+        }
+
+        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("a_"));
         kieSession.dispose();
     }
 

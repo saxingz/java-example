@@ -1,7 +1,10 @@
 package org.saxing.test;
 
+import org.saxing.drools.service.UserService
+
 global java.lang.Integer count
 global java.util.List gList
+global UserService userService
 
 
 rule "global_1"
@@ -11,6 +14,7 @@ rule "global_1"
         System.out.println("global_1 trigger count = " + count);
         gList.add("test-list");
         System.out.println("global_1  gList.size(): " + gList.size());
+        userService.save();
 end
 
 rule "global_2"
@@ -18,4 +22,5 @@ rule "global_2"
     then
         System.out.println("global_2 trigger count = " + count);
         System.out.println("global_2  gList.size(): " + gList.size());
+        userService.save();
 end

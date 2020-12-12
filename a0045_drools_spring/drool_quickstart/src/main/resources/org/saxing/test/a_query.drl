@@ -1,0 +1,7 @@
+package org.saxing.test;
+
+import org.saxing.drools.entity.Student
+
+query "query_1"
+        $s:Student(age == 50)
+end
