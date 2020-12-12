@@ -1,5 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" ?>
 <kmodule xmlns="http://www.drools.org/xsd/kmodule">
-    <kbase name="myKbasel" packages="rules" default="true">
+
+    <kbase name="myKbasel" packages="org.saxing.test" default="true">
         <ksession name="ksession-rule" default="true" />
     </kbase>
 </kmodule>
