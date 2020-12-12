@@ -2,6 +2,7 @@ package org.saxing.test;
 
 rule "dateEffective_1"
     date-effective "2020-12-12 10:00"
+    date-expires "2021-12-12 10:00"
     when
     then
         System.out.println("dateEffective_1");
