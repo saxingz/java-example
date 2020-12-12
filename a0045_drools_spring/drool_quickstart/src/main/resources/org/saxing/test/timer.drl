@@ -1,0 +1,8 @@
+package org.saxing.test;
+
+rule "timer_1"
+    timer (3s 2s)
+    when
+    then
+        System.out.println("timer_1");
+end

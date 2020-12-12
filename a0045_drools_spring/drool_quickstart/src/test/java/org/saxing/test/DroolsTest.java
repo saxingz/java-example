@@ -9,6 +9,7 @@ import org.saxing.drools.entity.Order;
 import org.saxing.drools.entity.Student;
 
 import java.util.Collection;
+import java.util.concurrent.TimeUnit;
 
 /**
  * test
@@ -60,6 +61,20 @@ public class DroolsTest {
         kieSession.getAgenda().getAgendaGroup("agendagroup_2").setFocus();
 
         kieSession.fireAllRules();
+        kieSession.dispose();
+    }
+
+    @Test
+    public void testTimer() throws InterruptedException {
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession();
+
+        new Thread(kieSession::fireUntilHalt).start();
+
+        Thread.sleep(10000L);
+
+        kieSession.halt();
         kieSession.dispose();
     }
 
