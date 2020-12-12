@@ -174,7 +174,7 @@ public class DroolsTest {
         // ^(d_|b_|c_).*
         // (?=d_|b_|c_)[^']*
         // (d_|b_|c_)[^']*
-        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("^(d_|b_|c_).*"));
+        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("^(d_|b_|c_).*$"));
 //        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("(?=d_|b_|c_)[^']*"));
 //        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("(d_|b_|c_)[^']*"));
         kieSession.dispose();
