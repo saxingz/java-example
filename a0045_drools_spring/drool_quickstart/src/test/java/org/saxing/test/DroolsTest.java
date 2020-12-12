@@ -8,7 +8,9 @@ import org.kie.api.runtime.KieSession;
 import org.saxing.drools.entity.Order;
 import org.saxing.drools.entity.Student;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -98,6 +100,10 @@ public class DroolsTest {
         KieSession kieSession = kieContainer.newKieSession();
 
         kieSession.setGlobal("count", 5);
+
+        List<String> list = new ArrayList<>();
+        list.add("init");
+        kieSession.setGlobal("gList", list);
 
         kieSession.fireAllRules();
         kieSession.dispose();

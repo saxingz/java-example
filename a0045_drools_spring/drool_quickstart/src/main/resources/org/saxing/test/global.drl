@@ -1,6 +1,7 @@
 package org.saxing.test;
 
 global java.lang.Integer count
+global java.util.List gList
 
 
 rule "global_1"
@@ -8,10 +9,13 @@ rule "global_1"
     then
         count += 10;
         System.out.println("global_1 trigger count = " + count);
+        gList.add("test-list");
+        System.out.println("global_1  gList.size(): " + gList.size());
 end
 
 rule "global_2"
     when
     then
         System.out.println("global_2 trigger count = " + count);
+        System.out.println("global_2  gList.size(): " + gList.size());
 end
