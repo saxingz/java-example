@@ -78,4 +78,16 @@ public class DroolsTest {
         kieSession.dispose();
     }
 
+    @Test
+    public void testDateeffective() throws InterruptedException {
+        System.setProperty("drools.dateformat", "yyyy-MM-dd HH:mm");
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession();
+
+        kieSession.fireAllRules();
+
+        kieSession.dispose();
+    }
+
 }
