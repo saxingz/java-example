@@ -171,11 +171,12 @@ public class DroolsTest {
 
 //        kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("b_"));
         // ^(d_|b_|c_).*$
+        // ^(d_|b_|c_).*
         // (?=d_|b_|c_)[^']*
         // (d_|b_|c_)[^']*
-//        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("^(d_|b_|c_).*$"));
+        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("^(d_|b_|c_).*"));
 //        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("(?=d_|b_|c_)[^']*"));
-        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("(d_|b_|c_)[^']*"));
+//        kieSession.fireAllRules(new RuleNameMatchesAgendaFilter("(d_|b_|c_)[^']*"));
         kieSession.dispose();
     }
 
