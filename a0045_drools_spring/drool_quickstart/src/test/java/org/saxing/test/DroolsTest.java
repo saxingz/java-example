@@ -128,6 +128,7 @@ public class DroolsTest {
         kieSession.insert(s1);
         Student s2 = new Student();
         s2.setAge(50);
+        s2.setName("lisi");
         kieSession.insert(s2);
 
         QueryResults results1 = kieSession.getQueryResults("query_1");
@@ -138,6 +139,16 @@ public class DroolsTest {
             Student s = (Student) row.get("$s");
             System.out.println(s);
         }
+
+        QueryResults results2 = kieSession.getQueryResults("query_2", "lisi");
+        int size2 = results2.size();
+        System.out.println("query_2 result.size: " + size2);
+
+        for (QueryResultsRow row : results2) {
+            Student s = (Student) row.get("$s");
+            System.out.println(s);
+        }
+
 
         kieSession.fireAllRules(new RuleNameStartsWithAgendaFilter("a_"));
         kieSession.dispose();
