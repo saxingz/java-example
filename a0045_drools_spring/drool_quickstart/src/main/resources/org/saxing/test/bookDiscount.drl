@@ -7,7 +7,6 @@ rule "book_discount_1"
     when
         $order:Order(originalPrice < 100)
     then
-        System.out.println("成功匹配book_discount_1");
         $order.setRealPrice($order.getOriginalPrice());
         System.out.println("成功匹配book_discount_1");
 end
