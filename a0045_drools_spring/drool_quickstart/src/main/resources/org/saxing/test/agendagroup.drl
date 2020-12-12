@@ -1,0 +1,30 @@
+package org.saxing.test;
+
+// agendagroup_1
+rule "agendagroup_1"
+    agenda-group "agendagroup_1"
+    when
+    then
+        System.out.println("agendagroup_1");
+end
+// agendagroup_2
+rule "agendagroup_2"
+    agenda-group "agendagroup_1"
+    when
+    then
+        System.out.println("agendagroup_2");
+end
+// agendagroup_3
+rule "agendagroup_3"
+    agenda-group "agendagroup_2"
+    when
+    then
+        System.out.println("agendagroup_3");
+end
+// agendagroup_4
+rule "agendagroup_4"
+    agenda-group "agendagroup_2"
+    when
+    then
+        System.out.println("agendagroup_4");
+end

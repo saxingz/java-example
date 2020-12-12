@@ -51,4 +51,16 @@ public class DroolsTest {
         kieSession.dispose();
     }
 
+    @Test
+    public void testAgendaGroup() {
+        KieServices kieServices = KieServices.Factory.get();
+        KieContainer kieContainer = kieServices.newKieClasspathContainer();
+        KieSession kieSession = kieContainer.newKieSession();
+
+        kieSession.getAgenda().getAgendaGroup("agendagroup_2").setFocus();
+
+        kieSession.fireAllRules();
+        kieSession.dispose();
+    }
+
 }
