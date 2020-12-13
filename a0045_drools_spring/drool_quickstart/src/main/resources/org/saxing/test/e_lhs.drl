@@ -1,0 +1,20 @@
+package org.saxing.test;
+
+import org.saxing.drools.entity.Student
+
+rule "e_lhs_1"
+    when
+        // 多个对象，只触发一次
+        exists Student()
+    then
+        System.out.println("e_lhs_1 多个对象，只触发一次");
+end
+
+
+rule "e_lhs_2"
+    when
+        // 多个对象，触发多次次
+        Student()
+    then
+        System.out.println("e_lhs_2 多个对象，触发多次次");
+end
