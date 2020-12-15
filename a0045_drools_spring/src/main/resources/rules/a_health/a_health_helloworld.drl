@@ -1,0 +1,8 @@
+package rules.a_health;
+
+rule "a_health_helloworld"
+    when
+        eval(true)
+    then
+        System.out.println("a_health_helloworld...");
+end
