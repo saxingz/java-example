@@ -18,3 +18,21 @@ rule "e_lhs_2"
     then
         System.out.println("e_lhs_2 多个对象，触发多次次");
 end
+
+
+rule "e_lhs_6"
+    when
+        // 多个对象，触发多次次
+        $s6:Student(age > 10)
+    then
+        System.out.println("e_lhs_6: " + $s6);
+end
+
+rule "e_lhs_7" extends "e_lhs_6"
+    when
+        // 多个对象，触发多次次
+        $s7:Student(age < 100)
+    then
+        System.out.println("e_lhs_7: " + $s7);
+
+end
