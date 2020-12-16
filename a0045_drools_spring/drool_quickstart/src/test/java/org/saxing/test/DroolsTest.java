@@ -56,6 +56,8 @@ public class DroolsTest {
         KieSession kieSession = kieContainer.newKieSession();
 
         kieSession.insert(student);
+
+
         kieSession.fireAllRules();
         kieSession.dispose();
     }
