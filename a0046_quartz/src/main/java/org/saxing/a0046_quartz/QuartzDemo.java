@@ -9,6 +9,7 @@ import org.saxing.a0046_quartz.job.MyJob;
  *
  * @author saxing 2020/12/19 17:58
  */
+@DisallowConcurrentExecution
 public class QuartzDemo {
 
     public static void main(String[] args) throws SchedulerException, InterruptedException {
