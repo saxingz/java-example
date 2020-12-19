@@ -18,6 +18,8 @@ public class QuartzDemo {
         JobDetail jobDetail = JobBuilder
                 .newJob(MyJob.class)
                 .withIdentity("jobDetail1", "group1")
+                .usingJobData("name", "saxing")
+                .usingJobData("address", "my-address")
                 .build();
         Trigger trigger = TriggerBuilder.newTrigger()
                 .startNow()
