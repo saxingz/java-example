@@ -3,6 +3,7 @@ package org.saxing.a0046_quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 import org.saxing.a0046_quartz.job.MyJob;
+import org.saxing.a0046_quartz.listener.MyTriggerListener;
 
 import java.util.Random;
 
@@ -47,7 +48,8 @@ public class QuartzDemo {
                 .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?")
                         .withMisfireHandlingInstructionFireAndProceed())
                 .build();
-        scheduler.scheduleJob(jobDetail1, trigger2);
+        scheduler.getListenerManager().addTriggerListener(new MyTriggerListener());
+        scheduler.scheduleJob(jobDetail1, trigger1);
         scheduler.scheduleJob(jobDetail2, trigger2);
         Thread.sleep(60000);
         scheduler.shutdown();
