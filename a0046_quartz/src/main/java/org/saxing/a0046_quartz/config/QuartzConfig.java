@@ -3,6 +3,7 @@ package org.saxing.a0046_quartz.config;
 
 import org.quartz.*;
 import org.saxing.a0046_quartz.job.MyBootJob;
+import org.saxing.a0046_quartz.listener.MyTriggerListener;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -31,6 +32,11 @@ public class QuartzConfig {
                 .withSchedule(SimpleScheduleBuilder.simpleSchedule()
                         .withIntervalInSeconds(5).repeatForever())
                 .build();
+    }
+
+    @Bean
+    public TriggerListener myTriggerListener() {
+        return new MyTriggerListener();
     }
 
 }
