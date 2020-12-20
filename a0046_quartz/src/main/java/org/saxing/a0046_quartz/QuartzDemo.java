@@ -20,21 +20,35 @@ public class QuartzDemo {
 
         int count = new Random().nextInt(10);
 
-        JobDetail jobDetail = JobBuilder
+        JobDetail jobDetail1 = JobBuilder
                 .newJob(MyJob.class)
                 .withIdentity("jobDetail1", "group1")
                 .usingJobData("name", "saxing")
                 .usingJobData("address", "my-address")
                 .usingJobData("count", count)
                 .build();
-        Trigger trigger = TriggerBuilder.newTrigger()
+        Trigger trigger1 = TriggerBuilder.newTrigger()
                 .startNow()
                 .withSchedule(SimpleScheduleBuilder
                         .simpleSchedule()
                         .withIntervalInSeconds(1)
                         .repeatForever())
                 .build();
-        scheduler.scheduleJob(jobDetail, trigger);
+
+        JobDetail jobDetail2 = JobBuilder
+                .newJob(MyJob.class)
+                .withIdentity("jobDetail2", "group1")
+                .usingJobData("name", "saxing")
+                .usingJobData("address", "my-address")
+                .usingJobData("count", count)
+                .build();
+        Trigger trigger2 = TriggerBuilder.newTrigger()
+                .startNow()
+                .withSchedule(CronScheduleBuilder.cronSchedule("0/5 * * * * ?")
+                        .withMisfireHandlingInstructionFireAndProceed())
+                .build();
+        scheduler.scheduleJob(jobDetail1, trigger2);
+        scheduler.scheduleJob(jobDetail2, trigger2);
         Thread.sleep(60000);
         scheduler.shutdown();
     }
