@@ -135,7 +135,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                                 "-o",
                                 "\"" + outputFile + "\"",
                                 "--proxy",
-                                "socks5://127.0.0.1:10808/",
+                                "socks5://127.0.0.1:51837/",
                                 "https://www.youtube.com/watch?v=" + videoId
                         )
                 );
