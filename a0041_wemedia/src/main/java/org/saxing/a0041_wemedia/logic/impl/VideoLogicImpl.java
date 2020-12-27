@@ -106,12 +106,13 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                     && !isFirstNull
             ) {
                 // 如果文件不为空，改名这个文件夹，重新下载
-                if (Files.list(videoPath).count() > 0) {
-                    new File(videoPathStr).renameTo(new File(videoPathStr + "-" + UUID.fastUUID().toString()));
-                    if (!Files.exists(videoPath)) {
-                        Files.createDirectories(videoPath);
-                    }
-                }
+                // 如果不支持断点续传了，再把这个注释解开
+//                if (Files.list(videoPath).count() > 0) {
+//                    new File(videoPathStr).renameTo(new File(videoPathStr + "-" + UUID.fastUUID().toString()));
+//                    if (!Files.exists(videoPath)) {
+//                        Files.createDirectories(videoPath);
+//                    }
+//                }
             }
             // 下载
             if (Objects.isNull(enVtt)
