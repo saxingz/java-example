@@ -177,7 +177,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 log.error("下载失败，返回 videoId: " + id);
                 return false;
             } else {
-                log.info("下载成功");
+                log.info("下载成功 videoId: " + id);
                 videoDO.setDownloadStatus(DownLoadStatus.DOWNLOADED.getCode());
                 this.saveOrUpdate(videoDO);
                 return true;
@@ -195,12 +195,12 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 return false;
             }
             if (!Objects.equals(videoDO.getDownloadStatus(), DownLoadStatus.DOWNLOADED.getCode())) {
-                log.info("视频未下载，开始下载");
+                log.info("视频未下载，开始下载 videoId: " + id);
                 downloadVideo(id);
             }
             videoDO = this.getById(id);
             if (!Objects.equals(videoDO.getDownloadStatus(), DownLoadStatus.DOWNLOADED.getCode())) {
-                log.info("视频不存在");
+                log.info("视频不存在 videoId: " + id);
                 return false;
             }
             if (Objects.equals(videoDO.getRebuildStatus(), RebuildStatus.REBUILDED.getCode())) {
