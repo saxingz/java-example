@@ -2,6 +2,7 @@ package org.saxing.a0041_wemedia.logic.impl;
 
 import cn.hutool.core.lang.UUID;
 import lombok.extern.apachecommons.CommonsLog;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 import org.saxing.a0041_wemedia.domain.entity.VideoDO;
 import org.saxing.a0041_wemedia.domain.enums.DownLoadStatus;
@@ -130,7 +131,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                                 "--sub-format",
                                 "vtt",
                                 "-f",
-                                "\"bestvideo,bestaudio\"",
+                                "\"bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best\"",
                                 "--no-check-certificate",
                                 "-o",
                                 "\"" + outputFile + "\"",
@@ -140,6 +141,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                         )
                 );
                 try {
+                    log.info("arguments: " + String.join(" ", arguments));
                     ProcessRunner.run(arguments);
                     String videoTitle = videoDO.getVideoTitle();
                     String titleFile = videoPathStr + "\\" + id + "-title.txt";
@@ -332,6 +334,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 )
         );
         try {
+            log.info("arguments: " + String.join(" ", arguments));
             ProcessRunner.run(arguments);
         } catch (ProcessException | InterruptedException e) {
             e.printStackTrace();
@@ -453,6 +456,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 )
         );
         try {
+            log.info("arguments: " + String.join(" ", arguments));
             ProcessRunner.run(arguments);
         } catch (ProcessException | InterruptedException e) {
             e.printStackTrace();
@@ -487,6 +491,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 )
         );
         try {
+            log.info("arguments: " + String.join(" ", arguments));
             ProcessRunner.run(arguments);
         } catch (ProcessException | InterruptedException e) {
             e.printStackTrace();
@@ -533,6 +538,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 )
         );
         try {
+            log.info("arguments: " + String.join(" ", arguments));
             ProcessRunner.run(arguments);
         } catch (ProcessException | InterruptedException e) {
             e.printStackTrace();
@@ -554,6 +560,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 )
         );
         try {
+            log.info("arguments: " + String.join(" ", arguments));
             ProcessRunner.run(arguments);
         } catch (ProcessException | InterruptedException e) {
             e.printStackTrace();
@@ -604,6 +611,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                 )
         );
         try {
+            log.info("arguments: " + String.join(" ", arguments));
             ProcessRunner.run(arguments);
         } catch (ProcessException | InterruptedException e) {
             e.printStackTrace();
