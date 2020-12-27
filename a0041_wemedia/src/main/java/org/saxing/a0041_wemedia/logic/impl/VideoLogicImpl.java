@@ -174,7 +174,7 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
                     || Objects.isNull(originAudioFile)
             ) {
                 // 下载失败，返回
-                log.error("下载失败，返回");
+                log.error("下载失败，返回 videoId: " + id);
                 return false;
             } else {
                 log.info("下载成功");
@@ -226,74 +226,74 @@ public class VideoLogicImpl extends ServiceImpl<VideoMapper, VideoDO> implements
             Path originAudioFile = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".webm")
                     || p.getFileName().toString().endsWith(".m4a")).findFirst().orElse(null);
             if (Objects.isNull(originAudioFile)) {
-                log.error("没有音频文件");
+                log.error("没有音频文件 videoId: " + id);
                 return false;
             }
             // 1. convert to mp3
-            log.info("1. convert to mp3");
+            log.info("1. convert to mp3， videoId: " + id);
             convertToMp3(originAudioFile);
             // 2. subtitle vtt -> srt
-            log.info("2. subtitle vtt -> srt");
+            log.info("2. subtitle vtt -> srt， videoId: " + id);
             convertToSrt(zhHansvtt, "zh");
             convertToSrt(enVtt, "en");
             // 3. merge subtitle
-            log.info("3. merge subtitle");
+            log.info("3. merge subtitle， videoId: " + id);
             fileList = Files.list(videoPath).collect(Collectors.toList());
             Path enSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("en.srt"))
                     .findFirst().orElse(null);
             Path zhSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("zh.srt"))
                     .findFirst().orElse(null);
             if (Objects.isNull(enSrt) || Objects.isNull(zhSrt)) {
-                log.error("字幕不全");
+                log.error("字幕不全， videoId: " + id);
                 return false;
             }
             try {
                 mergeSubtitle(enSrt, zhSrt);
             } catch (InterruptedException e) {
                 e.printStackTrace();
-                log.error("字幕合并失败");
+                log.error("字幕合并失败， videoId: " + id);
             }
             // 4. merge subtitle watermark video
-            log.info("4. merge subtitle watermark video");
+            log.info("4. merge subtitle watermark video， videoId: " + id);
             fileList = Files.list(videoPath).collect(Collectors.toList());
             Path mixedSrt = fileList.stream().filter(p -> p.getFileName().toString().endsWith("mixed.srt"))
                     .findFirst().orElse(null);
             mergeSubtitleAndVideo(originVideoFile, mixedSrt);
             // 5. merge video audio
-            log.info("5. merge video audio");
+            log.info("5. merge video audio， videoId: " + id);
             fileList = Files.list(videoPath).collect(Collectors.toList());
             Path subtitleVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("subtitle.mp4"))
                     .findFirst().orElse(null);
             Path mp3Audio = fileList.stream().filter(p -> p.getFileName().toString().endsWith(".mp3"))
                     .findFirst().orElse(null);
             if (Objects.isNull(subtitleVideo) || Objects.isNull(mp3Audio)) {
-                log.error("subtitleVideo 或 mp3Audio 不存在");
+                log.error("subtitleVideo 或 mp3Audio 不存在， videoId: " + id);
                 return false;
             }
             mergeVideoAndAudio(subtitleVideo, mp3Audio);
             // 6. merge head and tail
-            log.info("6. merge head and tail");
+            log.info("6. merge head and tail， videoId: " + id);
             fileList = Files.list(videoPath).collect(Collectors.toList());
             Path audioVideoMp4 = fileList.stream().filter(p -> p.getFileName().toString().endsWith("audio.mp4"))
                     .findFirst().orElse(null);
             if (Objects.isNull(audioVideoMp4)) {
-                log.error("audioVideo生成失败");
+                log.error("audioVideo生成失败， videoId: " + id);
                 return false;
             }
             mergeHeadTail(audioVideoMp4, Paths.get(VIDEO_HEAD_PATH), Paths.get(VIDEO_TAIL_PATH));
             // 9. 校验生成视频
-            log.info("7. 校验生成视频");
+            log.info("7. 校验生成视频， videoId: " + id);
             fileList = Files.list(videoPath).collect(Collectors.toList());
             Path finalVideo = fileList.stream().filter(p -> p.getFileName().toString().endsWith("final.mp4"))
                     .findFirst().orElse(null);
             if (Objects.isNull(finalVideo)) {
-                log.error("视频最后生成失败");
+                log.error("视频最后生成失败， videoId: " + id);
                 return false;
             }
             // 标记生成成功
             videoDO.setRebuildStatus(RebuildStatus.REBUILDED.getCode());
             this.updateById(videoDO);
-            log.info("视频生成成功！！！");
+            log.info("视频生成成功！！！， videoId: " + id);
             return true;
         }
     }
