@@ -79,9 +79,9 @@ public class YouTubeApi {
         try {
             System.setProperty("http.proxySet", "true");
             System.setProperty("http.proxyHost", "127.0.0.1");
-            System.setProperty("http.proxyPort", "" + 10809);
+            System.setProperty("http.proxyPort", "" + 51837);
             System.setProperty("https.proxyHost", "127.0.0.1");
-            System.setProperty("https.proxyPort", "" + 10809);
+            System.setProperty("https.proxyPort", "" + 51837);
             getService();
             System.setProperty("http.proxySet", "false");
         } catch (GeneralSecurityException | IOException e) {
