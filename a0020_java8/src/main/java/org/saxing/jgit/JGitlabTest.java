@@ -1,7 +1,6 @@
 package org.saxing.jgit;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.reflect.TypeToken;
 import okhttp3.*;
 import org.apache.commons.collections4.CollectionUtils;
