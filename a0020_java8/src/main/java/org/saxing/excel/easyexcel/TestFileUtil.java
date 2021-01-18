@@ -1,4 +1,4 @@
-package org.saxing.easyexcel;
+package org.saxing.excel.easyexcel;
 
 import java.io.File;
 import java.io.InputStream;

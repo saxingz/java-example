@@ -1,6 +1,5 @@
-package org.saxing.easyexcel;
+package org.saxing.excel.easyexcel;
 
-import com.alibaba.excel.EasyExcel;
 import com.alibaba.excel.write.merge.LoopMergeStrategy;
 
 public class EasyExcelTest {
