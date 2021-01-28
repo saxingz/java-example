@@ -25,6 +25,11 @@ public class CompletableFutureTest {
                 .thenApply((str) -> "\"" + str + "\"")
                 .thenAccept(System.out::println);
         fu.get();
+
+        CompletableFuture<Void> future = CompletableFuture.supplyAsync(() -> calc(50))
+                .thenCompose((i) -> CompletableFuture.supplyAsync(() -> calc(i)))
+                .thenApply((str) -> "\"" + str + "\"").thenAccept(System.out::println);
+        future.get();
     }
 
 }
