@@ -29,7 +29,6 @@ public class AtomicIntegerFieldUpdaterDemo {
             });
             t[i].start();
         }
-
         for (int i = 0; i < 10000; i++) {
             t[i].join();
         }
