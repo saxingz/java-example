@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.saxing.a0041_wemedia.mapper.AccessLogMapper">
+
+    <select id="queryByPath" resultType="org.saxing.a0041_wemedia.domain.entity.AccessLogDO">
+            select * from ${tableName}
+            where is_deleted = 0
+            and `path` like CONCAT(#{path}, '%')
+            limit 1000;
+    </select>
+</mapper>
