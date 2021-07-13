@@ -27,10 +27,13 @@ public class JGitBranchTest {
      * @param args
      */
     public static void main(String[] args) {
+        CredentialsProvider cp = new UsernamePasswordCredentialsProvider("xxxxx", "xxxxx");
+
         Map<String, String> projects = new HashMap<String, String>() {
             private static final long serialVersionUID = -8852265700453513109L;
 
             {
+                // java
                 put("demo", "D:/code/au/0code-branch-detect/demo/");
                 put("demob", "D:/code/au/0code-branch-detect/demob/");
                 put("gateway", "D:/code/au/0code-branch-detect/gateway/");
@@ -55,29 +58,46 @@ public class JGitBranchTest {
                 put("growth", "D:/code/au/0code-branch-detect/growth/");
                 put("patrol", "D:/code/au/0code-branch-detect/patrol/");
                 put("moralism", "D:/code/au/0code-branch-detect/moralism/");
+                put("workflow", "D:/code/au/0code-branch-detect/workflow/");
+
+                // web
+
+
+                // android
+
+
+                // ios
             }
         };
         Set<String> keySet = projects.keySet();
         List<String> result = new ArrayList<>();
+
+
+
+
         keySet.forEach(key -> {
             String path = projects.get(key);
             System.out.println("项目名：" + key);
-            result.add("项目名：" + key);
-            List<String> remoteBranch = getRemoteBranch(path);
+            List<String> remoteBranch = getRemoteBranch(path, cp);
             remoteBranch.forEach(System.out::println);
+            final Integer[] num = {0};
             remoteBranch.forEach(branch -> {
                 if (branch.startsWith("refs/remotes/origin/HEAD")
-                        || branch.startsWith("refs/remotes/origin/develop")
-                        || branch.startsWith("refs/remotes/origin/master")
+                        || branch.startsWith("refs/heads/develop")
+                        || branch.startsWith("refs/heads/master")
 
                 ) {
                     return;
                 }
                 branch = branch.replaceAll("refs/remotes/origin/", "");
                 result.add(branch);
+                num[0]++;
             });
-            result.add("");
-            result.add("");
+            if (num[0] > 0) {
+                result.add("项目名：" + key);
+                result.add("");
+                result.add("");
+            }
         });
         try {
             FileUtils.writeLines(new File("branch.txt"), result);
@@ -90,10 +110,10 @@ public class JGitBranchTest {
 
 
 
-    public static List<String> getRemoteBranch(String path)  {
+    public static List<String> getRemoteBranch(String path, CredentialsProvider cp)  {
         try {
 
-            CredentialsProvider cp = new UsernamePasswordCredentialsProvider("xxxxx", "xxxxx");
+
 
             Repository repo = new FileRepository(path + ".git");
             Git git = new Git(repo);
