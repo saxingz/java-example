@@ -1,0 +1,10 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+spring:
+  datasource:
+    username: root
+    password: au12345678
+    url: jdbc:mysql://192.168.50.8:3305/testdb2?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&nullCatalogMeansCurrent=true
+
