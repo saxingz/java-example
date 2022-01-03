@@ -38,7 +38,7 @@ public class Initializr {
      */
     // 待输入
     // public static final String[] A100024 = new String[]{"audit", "审计系统", "100024"};
-    static String[] toGenProject =  ProjectList.A100026;
+    static String[] toGenProject =  ProjectList.A100027;
 
     public static final String PROJECT_NAME = toGenProject[0];
     public static final String PROJECT_ROOT_PACKAGE_NAME = toGenProject[0];
