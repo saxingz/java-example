@@ -27,46 +27,160 @@ public class JGitBranchTest {
      * @param args
      */
     public static void main(String[] args) {
-        CredentialsProvider cp = new UsernamePasswordCredentialsProvider("xxxxx", "xxxxx");
+        CredentialsProvider cp = new UsernamePasswordCredentialsProvider("xxx", "xxx!");
 
         Map<String, String> projects = new HashMap<String, String>() {
             private static final long serialVersionUID = -8852265700453513109L;
 
             {
-                // java
-                put("demo", "D:/code/au/0code-branch-detect/demo/");
-                put("demob", "D:/code/au/0code-branch-detect/demob/");
-                put("gateway", "D:/code/au/0code-branch-detect/gateway/");
-                put("user", "D:/code/au/0code-branch-detect/user/");
-                put("message", "D:/code/au/0code-branch-detect/message/");
-                put("kid-arch", "D:/code/au/0code-branch-detect/kid-arch/");
-                put("attendance", "D:/code/au/0code-branch-detect/attendance/");
-                put("garden", "D:/code/au/0code-branch-detect/garden/");
-                put("album", "D:/code/au/0code-branch-detect/album/");
-                put("file", "D:/code/au/0code-branch-detect/file/");
-                put("iam", "D:/code/au/0code-branch-detect/iam/");
-                put("test", "D:/code/au/0code-branch-detect/test/");
-                put("moment", "D:/code/au/0code-branch-detect/moment/");
-                put("statistic", "D:/code/au/0code-branch-detect/statistic/");
-                put("boss", "D:/code/au/0code-branch-detect/boss/");
-                put("finance", "D:/code/au/0code-branch-detect/finance/");
-                put("log", "D:/code/au/0code-branch-detect/log/");
-                put("javaphpcms", "D:/code/au/0code-branch-detect/javaphpcms/");
-                put("kms", "D:/code/au/0code-branch-detect/kms/");
-                put("visitor", "D:/code/au/0code-branch-detect/visitor/");
-                put("audit", "D:/code/au/0code-branch-detect/audit/");
-                put("growth", "D:/code/au/0code-branch-detect/growth/");
-                put("patrol", "D:/code/au/0code-branch-detect/patrol/");
-                put("moralism", "D:/code/au/0code-branch-detect/moralism/");
-                put("workflow", "D:/code/au/0code-branch-detect/workflow/");
+                /******************
+                 * java
+                 *****************/
+                // demo项目
+                put("java-demo", "D:/code/au/0code-branch-detect/java/demo/");
+                // demob项目
+                put("java-demob", "D:/code/au/0code-branch-detect/java/demob/");
+                // 网关项目
+                put("java-gateway", "D:/code/au/0code-branch-detect/java/gateway/");
+                // 用户中心
+                put("java-user", "D:/code/au/0code-branch-detect/java/user/");
+                // 消息中心
+                put("java-message", "D:/code/au/0code-branch-detect/java/message/");
+                // 7kid基础体系
+                put("java-kid-arch", "D:/code/au/0code-branch-dejava/tect/kid-arch/");
+                // 考勤健康
+                put("java-attendance", "D:/code/au/0code-branch-detect/java/attendance/");
+                // 园务系统
+                put("java-garden", "D:/code/au/0code-branch-detect/java/garden/");
+                // 智能相册
+                put("java-album", "D:/code/au/0code-branch-detect/java/album/");
+                // 文件系统
+                put("java-file", "D:/code/au/0code-branch-detect/java/file/");
+                // 鉴权中心
+                put("java-iam", "D:/code/au/0code-branch-detect/java/iam/");
+                // 内测项目
+                put("java-test", "D:/code/au/0code-branch-detect/java/test/");
+                // 班级圈
+                put("java-moment", "D:/code/au/0code-branch-detect/java/moment/");
+                // 统计项目
+                put("java-statistic", "D:/code/au/0code-branch-detect/java/statistic/");
+                // 运营后台
+                put("java-boss", "D:/code/au/0code-branch-detect/java/boss/");
+                // 财务系统
+                put("java-finance", "D:/code/au/0code-branch-detect/java/finance/");
+                // 日志系统
+                put("java-log", "D:/code/au/0code-branch-detect/java/log/");
+                // php cms系统
+                put("java-javaphpcms", "D:/code/au/0code-branch-detect/java/javaphpcms/");
+                // 密钥系统
+                put("java-kms", "D:/code/au/0code-branch-detect/java/kms/");
+                // 访客系统
+                put("java-visitor", "D:/code/au/0code-branch-detect/java/visitor/");
+                // 审计系统
+                put("java-audit", "D:/code/au/0code-branch-detect/java/audit/");
+                // 成长档案
+                put("java-growth", "D:/code/au/0code-branch-detect/java/growth/");
+                // 巡检系统
+                put("java-patrol", "D:/code/au/0code-branch-detect/java/patrol/");
+                // 德育中心
+                put("java-moralism", "D:/code/au/0code-branch-detect/java/moralism/");
+                // 工作流系统
+                put("java-workflow", "D:/code/au/0code-branch-detect/java/workflow/");
+                // 第三方对接平台
+                put("java-third", "D:/code/au/0code-branch-detect/java/third/");
+                // 数据模拟系统
+                put("java-faker", "D:/code/au/0code-branch-detect/java/faker/");
+                // MQ消息队列平台
+                put("java-mq", "D:/code/au/0code-branch-detect/java/mq/");
 
-                // web
+                /******************
+                 * web
+                 *****************/
+                // 阿优宝宝
+                put("web-7kid_aubaby", "D:/code/au/0code-branch-detect/web/7kid_aubaby/");
+                // 班牌
+                put("web-7kid_classboard", "D:/code/au/0code-branch-detect/web/7kid_classboard/");
+                // 企web-业后台
+                put("7kid_company", "D:/code/au/0code-branch-detect/web/7kid_company/");
+                // 移动端项目
+                put("web-7kid_h5", "D:/code/au/0code-branch-detect/web/7kid_h5/");
+                // 内嵌网页
+                put("web-7kid_hybrid", "D:/code/au/0code-branch-detect/web/7kid_hybrid/");
+                // 园所后台
+                put("web-7kid_manager", "D:/code/au/0code-branch-detect/web/7kid_manager/");
+                // 运营后台
+                put("web-7kid_operation", "D:/code/au/0code-branch-detect/web/7kid_operation/");
+                // 监管后台
+                put("web-7kid_regulation", "D:/code/au/0code-branch-detect/web/7kid_regulation/");
+                // 静态页面
+                put("web-staticpages", "D:/code/au/0code-branch-detect/web/staticpages/");
+                // 统一登录页面
+                put("iamweb", "D:/code/au/0code-branch-detect/web/staticpages/");
 
 
-                // android
+                /******************
+                 * android
+                 *****************/
+                // 在线教育
+                put("android-androidonlineteaching", "D:/code/au/0code-branch-detect/android/androidonlineteaching/");
+                // 家长端
+                put("android-androidparent", "D:/code/au/0code-branch-detect/android/androidparent/");
+                // 教师端
+                put("android-androidteacher", "D:/code/au/0code-branch-detect/android/androidteacher/");
+                // 工具类
+                put("android-androidutils", "D:/code/au/0code-branch-detect/android/androidutils/");
+                // core project
+                put("android-aucoreproject", "D:/code/au/0code-branch-detect/android/aucoreproject/");
+                // basedata
+                put("android-basedata", "D:/code/au/0code-branch-detect/android/basedata/");
+                // EasyPhotos
+                put("android-EasyPhotos", "D:/code/au/0code-branch-detect/android/EasyPhotos/");
+                // eshop
+                put("android-eshop", "D:/code/au/0code-branch-detect/android/eshop/");
+                // hardwareau
+                put("android-hardwareau", "D:/code/au/0code-branch-detect/android/hardwareau/");
+                // httputil
+                put("android-httputil", "D:/code/au/0code-branch-detect/android/httputil/");
+                // lzyimagepicker
+                put("android-lzyimagepicker", "D:/code/au/0code-branch-detect/android/lzyimagepicker/");
+                // MPAndroidChart
+                put("android-MPAndroidChart", "D:/code/au/0code-branch-detect/android/MPAndroidChart/");
+                // shortvideo
+                put("android-shortvideo", "D:/code/au/0code-branch-detect/android/shortvideo/");
+                // zxing
+                put("android-zxing", "D:/code/au/0code-branch-detect/android/zxing/");
 
 
-                // ios
+                /******************
+                 * ios
+                 *****************/
+                // 家长端
+                put("ios-7kidiosparent", "D:/code/au/0code-branch-detect/ios/7kidiosparent/");
+                // 通用工具
+                put("ios-aucommontools", "D:/code/au/0code-branch-detect/ios/aucommontools/");
+                // aucommonviews
+                put("ios-aucommonviews", "D:/code/au/0code-branch-detect/ios/aucommonviews/");
+                // auextension
+                put("ios-auextension", "D:/code/au/0code-branch-detect/ios/auextension/");
+                // auimuikit
+                put("ios-auimuikit", "D:/code/au/0code-branch-detect/ios/auimuikit/");
+                // aurespos
+                put("ios-aurespos", "D:/code/au/0code-branch-detect/ios/aurespos/");
+                // ausharesdk
+                put("ios-ausharesdk", "D:/code/au/0code-branch-detect/ios/ausharesdk/");
+                // authirdloginsdk
+                put("ios-authirdloginsdk", "D:/code/au/0code-branch-detect/ios/authirdloginsdk/");
+                // AUWebpLib
+                put("ios-AUWebpLib", "D:/code/au/0code-branch-detect/ios/AUWebpLib/");
+                // inapppurchases
+                put("ios-inapppurchases", "D:/code/au/0code-branch-detect/ios/inapppurchases/");
+                // iosonlineteach
+                put("ios-iosonlineteach", "D:/code/au/0code-branch-detect/ios/iosonlineteach/");
+                // iosteacher
+                put("ios-iosteacher", "D:/code/au/0code-branch-detect/ios/iosteacher/");
+                // schoolshop
+                put("ios-schoolshop", "D:/code/au/0code-branch-detect/ios/schoolshop/");
+
             }
         };
         Set<String> keySet = projects.keySet();

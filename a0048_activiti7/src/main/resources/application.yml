@@ -5,6 +5,13 @@ server:
 spring:
   datasource:
     username: root
-    password: au12345678
+    password: xxxx
     url: jdbc:mysql://192.168.50.8:3305/testdb2?serverTimezone=GMT%2B8&useUnicode=true&characterEncoding=utf-8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true&nullCatalogMeansCurrent=true
+# Activiti7历史表创建
+  activiti:
+    history-level: full
+    db-history-used: true
+    check-process-definitions: false
+# 关闭 SpringAutoDeployment
+    deployment-mode: never-fail
 
