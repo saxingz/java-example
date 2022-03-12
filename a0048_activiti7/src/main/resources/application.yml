@@ -12,6 +12,6 @@ spring:
     history-level: full
     db-history-used: true
     check-process-definitions: false
-# 关闭 SpringAutoDeployment
+    # 关闭 SpringAutoDeployment
     deployment-mode: never-fail
 

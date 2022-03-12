@@ -1,0 +1,21 @@
+
+
+如果是windows，使用git bash，不要使用powershell
+
+可以用yarn，执行以下命令行：
+npm install --global yarn
+yarn
+yarn dev
+
+
+
+
+其他Spring Activiti7项目：
+https://gitee.com/zhijiantianya/ruoyi-vue-pro
+分成多种内置功能：
+系统功能
+工作流程
+支付系统
+商城系统
+基础设施
+研发工具

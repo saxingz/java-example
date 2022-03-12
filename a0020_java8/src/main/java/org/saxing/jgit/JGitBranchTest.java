@@ -27,7 +27,7 @@ public class JGitBranchTest {
      * @param args
      */
     public static void main(String[] args) {
-        CredentialsProvider cp = new UsernamePasswordCredentialsProvider("xxx", "xxx!");
+        CredentialsProvider cp = new UsernamePasswordCredentialsProvider("au000748", "Saxing123!");
 
         Map<String, String> projects = new HashMap<String, String>() {
             private static final long serialVersionUID = -8852265700453513109L;
