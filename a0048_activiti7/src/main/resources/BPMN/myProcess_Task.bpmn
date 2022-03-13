@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" id="sample-diagram" targetNamespace="http://activiti.org/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="myProcess_Task" name="报销流程" isExecutable="true">
+    <bpmn2:startEvent id="Event_1ekq6ja">
+      <bpmn2:outgoing>Flow_19s88e5</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:endEvent id="Event_16018ns">
+      <bpmn2:incoming>Flow_00tt283</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:userTask id="Activity_120ccdd" name="发起报销" activiti:assignee="1" activiti:candidateUsers="">
+      <bpmn2:incoming>Flow_19s88e5</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_0mws7fr</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:userTask id="Activity_08rove0" name="审核报销" activiti:assignee="2" activiti:candidateUsers="">
+      <bpmn2:incoming>Flow_0mws7fr</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_00tt283</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_19s88e5" sourceRef="Event_1ekq6ja" targetRef="Activity_120ccdd" />
+    <bpmn2:sequenceFlow id="Flow_0mws7fr" sourceRef="Activity_120ccdd" targetRef="Activity_08rove0" />
+    <bpmn2:sequenceFlow id="Flow_00tt283" sourceRef="Activity_08rove0" targetRef="Event_16018ns" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="myProcess_Task">
+      <bpmndi:BPMNEdge id="Flow_19s88e5_di" bpmnElement="Flow_19s88e5">
+        <di:waypoint x="520" y="138" />
+        <di:waypoint x="520" y="230" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_0mws7fr_di" bpmnElement="Flow_0mws7fr">
+        <di:waypoint x="520" y="310" />
+        <di:waypoint x="520" y="430" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_00tt283_di" bpmnElement="Flow_00tt283">
+        <di:waypoint x="520" y="510" />
+        <di:waypoint x="520" y="672" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_1ekq6ja_di" bpmnElement="Event_1ekq6ja">
+        <dc:Bounds x="502" y="102" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_16018ns_di" bpmnElement="Event_16018ns">
+        <dc:Bounds x="502" y="672" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_1fodt74_di" bpmnElement="Activity_120ccdd">
+        <dc:Bounds x="470" y="230" width="100" height="80" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u9a8w4_di" bpmnElement="Activity_08rove0">
+        <dc:Bounds x="470" y="430" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
