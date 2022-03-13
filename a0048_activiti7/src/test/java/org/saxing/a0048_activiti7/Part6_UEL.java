@@ -54,14 +54,29 @@ public class Part6_UEL {
      */
     @Test
     public void initProcessInstanceWithClassArgs() {
+        UEL_POJO uel_pojo = new UEL_POJO();
+        uel_pojo.setZhixingren("1");
 
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("uelpojo", uel_pojo);
+
+        ProcessInstance processInstance =
+                runtimeService.startProcessInstanceByKey("myProcess_uel_v3", "bkey003", variables);
+        System.out.println("流程实例id: " + processInstance.getProcessDefinitionId());
     }
 
     /**
-     * 启动实例流程实例带参数，指定多个候选人
+     * 任务完成环节带参数，指定多个候选人
      */
     @Test
     public void initProcessInstanceWithCandidateArgs() {
+//        getId: b928e4d9-a2e8-11ec-a704-00ff2d5aa8a1
+//        getName: 实体类任务
+//        getAssignee: 1
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("houxuanren", "2,3");
+        taskService.complete("b928e4d9-a2e8-11ec-a704-00ff2d5aa8a1", variables);
+        System.out.println("完成任务");
 
     }
 
@@ -70,14 +85,20 @@ public class Part6_UEL {
      */
     @Test
     public void otherArgs() {
-
+        runtimeService.setVariable("b928e4d9-a2e8-11ec-a704-00ff2d5aa8a1", "pay", "101");
+//        runtimeService.setVariables();
+//        taskService.setVariable();
+//        taskService.setVariables();
     }
     /**
      * 局部变量
      */
     @Test
     public void otherLocalArgs() {
-
+        runtimeService.setVariableLocal("b928e4d9-a2e8-11ec-a704-00ff2d5aa8a1", "pay", "101");
+//        runtimeService.setVariableLocal();
+//        taskService.setVariableLocal();
+//        taskService.setVariablesLocal();
     }
 
 
