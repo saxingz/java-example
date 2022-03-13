@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpmn2:definitions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:bpmn2="http://www.omg.org/spec/BPMN/20100524/MODEL" xmlns:bpmndi="http://www.omg.org/spec/BPMN/20100524/DI" xmlns:dc="http://www.omg.org/spec/DD/20100524/DC" xmlns:di="http://www.omg.org/spec/DD/20100524/DI" xmlns:activiti="http://activiti.org/bpmn" id="sample-diagram" targetNamespace="http://activiti.org/bpmn" xsi:schemaLocation="http://www.omg.org/spec/BPMN/20100524/MODEL BPMN20.xsd">
+  <bpmn2:process id="myProcess_UEL_V1" name="启动流程给任务赋值" isExecutable="true">
+    <bpmn2:startEvent id="Event_0zco7ik">
+      <bpmn2:outgoing>Flow_0xol55n</bpmn2:outgoing>
+    </bpmn2:startEvent>
+    <bpmn2:endEvent id="Event_17buvq8">
+      <bpmn2:incoming>Flow_1cl6d00</bpmn2:incoming>
+    </bpmn2:endEvent>
+    <bpmn2:userTask id="Activity_1e5gm24" name="UEL任务节点" activiti:assignee="${ZhiXingRen}" activiti:candidateUsers="">
+      <bpmn2:incoming>Flow_0xol55n</bpmn2:incoming>
+      <bpmn2:outgoing>Flow_1cl6d00</bpmn2:outgoing>
+    </bpmn2:userTask>
+    <bpmn2:sequenceFlow id="Flow_0xol55n" sourceRef="Event_0zco7ik" targetRef="Activity_1e5gm24" />
+    <bpmn2:sequenceFlow id="Flow_1cl6d00" sourceRef="Activity_1e5gm24" targetRef="Event_17buvq8" />
+  </bpmn2:process>
+  <bpmndi:BPMNDiagram id="BPMNDiagram_1">
+    <bpmndi:BPMNPlane id="BPMNPlane_1" bpmnElement="myProcess_UEL_V1">
+      <bpmndi:BPMNEdge id="Flow_0xol55n_di" bpmnElement="Flow_0xol55n">
+        <di:waypoint x="530" y="218" />
+        <di:waypoint x="530" y="390" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNEdge id="Flow_1cl6d00_di" bpmnElement="Flow_1cl6d00">
+        <di:waypoint x="530" y="470" />
+        <di:waypoint x="530" y="672" />
+      </bpmndi:BPMNEdge>
+      <bpmndi:BPMNShape id="Event_0zco7ik_di" bpmnElement="Event_0zco7ik">
+        <dc:Bounds x="512" y="182" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Event_17buvq8_di" bpmnElement="Event_17buvq8">
+        <dc:Bounds x="512" y="672" width="36" height="36" />
+      </bpmndi:BPMNShape>
+      <bpmndi:BPMNShape id="Activity_0u8zqf9_di" bpmnElement="Activity_1e5gm24">
+        <dc:Bounds x="480" y="390" width="100" height="80" />
+      </bpmndi:BPMNShape>
+    </bpmndi:BPMNPlane>
+  </bpmndi:BPMNDiagram>
+</bpmn2:definitions>
