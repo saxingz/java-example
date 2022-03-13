@@ -43,7 +43,10 @@ public class Part6_UEL {
      */
     @Test
     public void completeTaskWithArgs() {
-
+        Map<String, Object> variables = new HashMap<>();
+        variables.put("pay", "101");
+        taskService.complete("19398e55-a2e7-11ec-998c-00ff2d5aa8a1", variables);
+        System.out.println("完成任务");
     }
 
     /**

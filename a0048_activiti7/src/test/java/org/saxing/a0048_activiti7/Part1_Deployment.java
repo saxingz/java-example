@@ -26,12 +26,12 @@ class Part1_Deployment {
      */
     @Test
     public void initDeploymentBPMN() {
-        String filename = "BPMN/Part6_UEL_V1.bpmn";
+        String filename = "BPMN/Part6_UEL_V2.bpmn";
 //        String pngName = "BPMN/myProcess_Part1.png";
         Deployment deployment = repositoryService.createDeployment()
                 .addClasspathResource(filename)
 //                .addClasspathResource(pngName)
-                .name("流程部署测试UELV1").deploy();
+                .name("流程部署测试UELV2").deploy();
         System.out.println(deployment.getName());
     }
 
