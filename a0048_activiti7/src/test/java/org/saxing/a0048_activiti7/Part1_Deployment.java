@@ -16,7 +16,7 @@ import java.util.zip.ZipInputStream;
  *
  */
 @SpringBootTest
-class A0048Activiti7ApplicationTests {
+class Part1_Deployment {
 
     @Autowired
     private RepositoryService repositoryService;
