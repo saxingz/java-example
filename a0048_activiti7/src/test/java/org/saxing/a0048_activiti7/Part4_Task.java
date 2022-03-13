@@ -62,7 +62,21 @@ public class Part4_Task {
      */
     @Test
     public void claimTask(){
+//        List<Task> list = taskService.createTaskQuery().taskCandidateUser("1").list();
 
+        taskService.claim("386dc226-a2aa-11ec-8edd-00ff2d5aa8a1", "1");
+    }
+
+    /**
+     * 归还与交办任务
+     */
+    @Test
+    public void setAssignTask() {
+        Task task = taskService.createTaskQuery().taskId("386dc226-a2aa-11ec-8edd-00ff2d5aa8a1").singleResult();
+        // 归还任务
+        taskService.setAssignee("386dc226-a2aa-11ec-8edd-00ff2d5aa8a1", "null");
+        // 交办任务
+        taskService.setAssignee("386dc226-a2aa-11ec-8edd-00ff2d5aa8a1", "2");
     }
 
 }
