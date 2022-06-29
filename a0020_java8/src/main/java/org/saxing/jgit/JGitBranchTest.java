@@ -27,7 +27,7 @@ public class JGitBranchTest {
      * @param args
      */
     public static void main(String[] args) {
-        CredentialsProvider cp = new UsernamePasswordCredentialsProvider("au000748", "Saxing123!");
+        CredentialsProvider cp = new UsernamePasswordCredentialsProvider("au000748", "xxxx");
 
         Map<String, String> projects = new HashMap<String, String>() {
             private static final long serialVersionUID = -8852265700453513109L;
@@ -116,6 +116,14 @@ public class JGitBranchTest {
                 put("web-staticpages", "D:/code/au/0code-branch-detect/web/staticpages/");
                 // 统一登录页面
                 put("iamweb", "D:/code/au/0code-branch-detect/web/staticpages/");
+                // 7kid 基于 vue-cli 5.0.1 的基础项目模板
+                put("7kid_web_template ", "D:/code/au/0code-branch-detect/web/7kid_base/");
+                // 7kid web 家长端
+                put("7kid_web_parent", "D:/code/au/0code-branch-detect/web/7kid_web_parent/");
+                // 7kid web 教师端
+                put("7kid_web_teacher", "D:/code/au/0code-branch-detect/web/7kid_web_teacher/");
+                // 7kid web 硬件端
+                put("7kid_web_device", "D:/code/au/0code-branch-detect/web/7kid_web_device/");
 
 
                 /******************
